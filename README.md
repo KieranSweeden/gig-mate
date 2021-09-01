@@ -9,10 +9,9 @@ This project was developed for the Interactive Front End Development module with
 # Contents
 
 1. [UX](#UX)
-
-    - [Strategy](#Strategy)
-        - [Project Goals](#Project-Goals)    
-        - [User Stories](#User-Stories)    
+    - [Project Goals](#Project-Goals)    
+    - [User Stories](#User-Stories)  
+    - [Strategy](#Strategy)  
     - [Scope](#Scope)
     - [Structure](#Structure)
     - [Skeleton](#Skeleton)
@@ -32,6 +31,12 @@ This project was developed for the Interactive Front End Development module with
 6. [Credits](#Credits)
 
 # UX
+
+## Project Goals
+
+[Return to Contents](#contents)
+
+## User Stories
 
 [Return to Contents](#contents)
 
