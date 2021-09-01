@@ -40,11 +40,9 @@ This project was developed for the Interactive Front End Development module with
 
 The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring information relevant to events they're either organising or providing a service within.
  
-GigMate has two target audiences in mind, professional musicians and clients who wish to book a singer/band for their event.
-
-### Professional Musician Goals
-
-### Client Goals
+GigMate has two target audiences in mind, professional musicians and clients who wish to book a singer/band for their event. Both of which would have goals including:
+- 
+- 
 
 [Return to Contents](#contents)
 
@@ -52,7 +50,7 @@ GigMate has two target audiences in mind, professional musicians and clients who
 
 ### Professional Musician Stories
 
-As a professional musician, my personal goals with GigMate is for it to:
+As a professional musician, I want GigMate to:
 - Provide me a template document structure, that I can easily edit for each gig respectively.
 - Function on multiple screens, so I can view/edit gig information at home on desktop, on the go on mobile and whilst performing on tablet/mobile.
 - Save the edits I make, so they'll always be there when I re-visit them on that particular device.
@@ -60,7 +58,7 @@ As a professional musician, my personal goals with GigMate is for it to:
 
 ### Client Stories
 
-As a client looking to book a singer/band, my personal goals with GigMate is for it to:
+As a client looking to book a singer/band, I want GigMate to:
 - Present me with the set list of a particular singer/band, giving me the functionality to create a new setlist for my event from the original setlist written by the singer/band.
 - Filter through a setlist by track and artist name, enabling me to quickly query whether a band knows a song or songs by a particular artist.
 - Allow me to drag and drop tracks up & down, to create a structure of tracks I'm happy with.
