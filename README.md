@@ -73,7 +73,7 @@ This project was developed for the Interactive Front End Development module with
 
 # Testing
 
-To view the testing procedures undertook for this project, click [here]().
+To view the testing procedures undertook for this project, click [here](TESTING.md).
 
 [Return to Contents](#contents)
 
