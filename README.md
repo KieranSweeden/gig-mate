@@ -36,15 +36,22 @@ This project was developed for the Interactive Front End Development module with
 
 ### Project Goals
 
-The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring information relevant to events they're either organising or providing a service within.
+The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring their personal repertoire of songs, for use on stage and at home.
+
+GigMate is targeting music professionals as a target audience, who are often performing in various bands and entertainment agencies. Being involved with various acts can often bring organisational challenges related to scheduling, attire and various nuances regarding particular tracks in the setlist.
+
+GigMate's sole purpose is to contain all the information relating to various gigs in one place, saving the user from deep diving into various messaging threads and asking fellow band members, which will lead to unprofessional impressions from their peers. This aids in not only providing the user with peace of mind, but also helps the user in maintaining a professional presence amongst their peers, which'll likely bring more work in the future.
 
 ### User Stories
 
 As a professional musician, I want GigMate to:
-- Provide me a template document structure, that I can easily edit for each gig respectively.
-- Function on multiple screens, so I can view/edit gig information at home on desktop, on the go on mobile and whilst performing on tablet/mobile.
+- Provide me with a template document-like structure, that I can easily edit for each gig respectively.
+- Work well on multiple screens, so I can view/edit gig information at home on desktop, on the go on mobile and whilst performing on tablet/mobile.
 - Save the edits I make, so they'll always be there when I re-visit them on that particular device.
-- Have an interface that's simple to use, that's consistent across multiple devices.
+- Give me the ability to write notes relating to a particular song.
+- Display my gigs immediately when opening the application.
+- Display my setlist for live use, making full use of the screen on my device.
+- Have dark mode functionality, making it easier to read in dark environments.
 
 [Return to Contents 🡡](#contents)
 
