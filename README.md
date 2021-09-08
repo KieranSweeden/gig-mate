@@ -9,7 +9,7 @@ This project was developed for the Interactive Front End Development module with
 # Contents
 
 1. [UX](#UX)
-    - [Strategy](#Strategy)  
+    - [Strategy](#Strategy)
         - [Project Goals](#Project-Goals)
         - [User Stories](#User-Stories) 
     - [Scope](#Scope)
@@ -98,6 +98,20 @@ Drag n Drop is an interface that users are familiar with, making it easy to lear
 [Return to Contents 🡡](#contents)
 
 ## Structure
+
+GigMate is effectively replacing the handwritten setlist that a professional musician creates prior to a performance. These handwritten setlists are created due to their simplicity and readability, which GigMate should re-create where possible to make the transition to GigMate easy for the user. This should also be represented within the overall structure of GigMate, where it should be consistent, predictable, learnable and also provides useful and intuitive feedback to it's users. With this in mind, GigMate should leverage as many website & application navigational conventions as it can to make the learning experience more user friendly.
+
+The architecture of GigMate will follow a nested list style, consisting of linear paths to greater detail surrounding certain sections of the website. An example to demonstrate this would be the following:
+
+- LIST - Setlists (Clicking this takes the user to their list of setlists)
+    - SUB-LIST - Wedding Pop (Clicking this would take the user to a setlist they created called "Wedding Pop)
+        - NESTED LIST - Set 1 (Clicking this would take the user to a list of tracks contained within Set 1)
+            - CONTENT - The list of tracks in Set 1 of the Wedding Pop setlist being displayed to the user.
+
+A nested list is the most suitable for GigMate as an informational archiecture, as it's suitable for mobile devices, reduces complexity given it's linear pathways and the list nature of the architecture fits the list oriented nature of GigMate.
+
+Despite the positives of using the nested list architecture for GigMate, it does run the risk of preventing exploration throughout the application. With this in mind, a burger icon for mobile/tablet and horizontal navigation bars for desktop will be utilised not only for exploration, but to reduce the amount of clicks a user has to make in order to navigate to a different section of the site.
+
 
 [Return to Contents 🡡](#contents)
 
