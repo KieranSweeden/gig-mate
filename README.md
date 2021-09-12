@@ -145,6 +145,34 @@ Despite the positives of using the nested list architecture for GigMate, it does
 
 </details>
 
+<details>
+<summary>setlists.html</summary>
+
+![Setlist list for mobile screen sizes](documentation/wireframes/mobile/setlists.html-mobile.png)
+
+![New setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-list-new-setlist-mobile.png)
+
+![View setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-setlist-view-mobile.png)
+
+![Edit setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-setlist-edit-mobile.png)
+
+![Add track to setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-add-track-mobile.png)
+
+![Edit track in setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-add-track-mobile.png)
+
+</details>
+
+<details>
+<summary>repertoire.html</summary>
+
+![Repertoire view for mobile screen sizes](documentation/wireframes/mobile/repertoire.html-view-mobile.png)
+
+![Edit track in repertoire for mobile screen sizes](documentation/wireframes/mobile/repertoire.html-track-edit-mobile.png)
+
+![Add track to repertoire for mobile screen sizes](documentation/wireframes/mobile/repertoire.html-add-track-mobile.png)
+
+</details>
+
 ### Tablet Wireframes
 
 ### Desktop Wireframes
