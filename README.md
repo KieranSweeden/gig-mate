@@ -117,6 +117,38 @@ Despite the positives of using the nested list architecture for GigMate, it does
 
 ## Skeleton
 
+### Mobile Wireframes
+
+<details>
+<summary>index.html</summary>
+
+![Index page for mobile screen sizes](documentation/wireframes/mobile/index.html-mobile.png)
+
+</details>
+
+<details>
+<summary>gigs.html</summary>
+
+![Gig list for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-list-mobile.png)
+
+![New gig for mobile screen sizes](documentation/wireframes/mobile/gigs.html-new-gig-mobile.png)
+
+![Gig info for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-info-mobile.png)
+
+![Gig set for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-set-mobile.png)
+
+![Gig list edit for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-list-edit-mobile.png)
+
+![Gig add track for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-add-track-mobile.png)
+
+![Gig live mode for mobile screen sizes](documentation/wireframes/mobile/gigs.html-live-mode-mobile.png)
+
+</details>
+
+### Tablet Wireframes
+
+### Desktop Wireframes
+
 [Return to Contents 🡡](#contents)
 
 ## Surface
