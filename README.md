@@ -122,7 +122,7 @@ Despite the positives of using the nested list architecture for GigMate, it does
 <details>
 <summary>index.html</summary>
 
-![Index page for mobile screen sizes](documentation/wireframes/mobile/index.html-mobile.png)
+![Index page for tablet screen sizes](documentation/wireframes/mobile/index.html-mobile.png)
 
 </details>
 
@@ -175,7 +175,115 @@ Despite the positives of using the nested list architecture for GigMate, it does
 
 ### Tablet Wireframes
 
+<details>
+<summary>index.html</summary>
+
+![Index page for tablet screen sizes](documentation/wireframes/tablet/index.html-tablet.png)
+
+</details>
+
+<details>
+<summary>gigs.html</summary>
+
+![Gig list for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-list-tablet.png)
+
+![New gig for tablet screen sizes](documentation/wireframes/tablet/gigs.html-new-gig-tablet.png)
+
+![Gig info for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-info-tablet.png)
+
+![Gig set for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-set-tablet.png)
+
+![Gig list edit for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-list-edit-tablet.png)
+
+![Gig add track for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-add-track-tablet.png)
+
+![Gig live mode for tablet screen sizes](documentation/wireframes/tablet/gigs.html-set-live-mode-tablet.png)
+
+</details>
+
+<details>
+<summary>setlists.html</summary>
+
+![Setlist list for tablet screen sizes](documentation/wireframes/tablet/setlists.html-tablet.png)
+
+![New setlist for tablet screen sizes](documentation/wireframes/tablet/setlists.html-new-setlist-tablet.png)
+
+![View setlist for tablet screen sizes](documentation/wireframes/tablet/setlists.html-setlist-view-tablet.png)
+
+![Edit setlist for tablet screen sizes](documentation/wireframes/tablet/setlists.html-setlist-edit-tablet.png)
+
+![Add track to setlist for tablet screen sizes](documentation/wireframes/tablet/setlists.html-add-track-tablet.png)
+
+![Edit track in setlist for tablet screen sizes](documentation/wireframes/tablet/setlists.html-track-edit-tablet.png)
+
+</details>
+
+<details>
+<summary>repertoire.html</summary>
+
+![Repertoire view for tablet screen sizes](documentation/wireframes/tablet/repertoire.html-view-tablet.png)
+
+![Edit track in repertoire for tablet screen sizes](documentation/wireframes/tablet/repertoire.html-track-edit-tablet.png)
+
+![Add track to repertoire for tablet screen sizes](documentation/wireframes/tablet/repertoire.html-add-track-tablet.png)
+
+</details>
+
 ### Desktop Wireframes
+
+<details>
+<summary>index.html</summary>
+
+![Index page for desktop screen sizes](documentation/wireframes/desktop/index.html-desktop.png)
+
+</details>
+
+<details>
+<summary>gigs.html</summary>
+
+![Gig list for desktop screen sizes](documentation/wireframes/desktop/gigs.html-list-desktop.png)
+
+![New gig for desktop screen sizes](documentation/wireframes/desktop/gigs.html-new-gig-desktop.png)
+
+![Gig info for desktop screen sizes](documentation/wireframes/desktop/gigs.html-gig-info-desktop.png)
+
+![Gig set for desktop screen sizes](documentation/wireframes/desktop/gigs.html-gig-set-desktop.png)
+
+![Gig list edit for desktop screen sizes](documentation/wireframes/desktop/gigs.html-gig-list-edit-desktop.png)
+
+![Gig add track for desktop screen sizes](documentation/wireframes/desktop/gigs.html-gig-add-track-desktop.png)
+
+![Gig live mode for desktop screen sizes](documentation/wireframes/desktop/gigs.html-set-live-mode-desktop.png)
+
+</details>
+
+<details>
+<summary>setlists.html</summary>
+
+![Setlist list for desktop screen sizes](documentation/wireframes/desktop/setlists.html-desktop.png)
+
+![New setlist for desktop screen sizes](documentation/wireframes/desktop/setlists.html-new-setlist-desktop.png)
+
+![View setlist for desktop screen sizes](documentation/wireframes/desktop/setlists.html-setlist-view-desktop.png)
+
+![Edit setlist for desktop screen sizes](documentation/wireframes/desktop/setlists.html-setlist-edit-desktop.png)
+
+![Add track to setlist for desktop screen sizes](documentation/wireframes/desktop/setlists.html-add-track-desktop.png)
+
+![Edit track in setlist for desktop screen sizes](documentation/wireframes/desktop/setlists.html-track-edit-desktop.png)
+
+</details>
+
+<details>
+<summary>repertoire.html</summary>
+
+![Repertoire view for desktop screen sizes](documentation/wireframes/desktop/repertoire.html-view-desktop.png)
+
+![Edit track in repertoire for desktop screen sizes](documentation/wireframes/desktop/repertoire.html-track-edit-desktop.png)
+
+![Add track to repertoire for desktop screen sizes](documentation/wireframes/desktop/repertoire.html-add-track-desktop.png)
+
+</details>
 
 [Return to Contents 🡡](#contents)
 
