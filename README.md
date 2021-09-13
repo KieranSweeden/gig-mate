@@ -158,7 +158,7 @@ Despite the positives of using the nested list architecture for GigMate, it does
 
 ![Add track to setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-add-track-mobile.png)
 
-![Edit track in setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-add-track-mobile.png)
+![Edit track in setlist for mobile screen sizes](documentation/wireframes/mobile/setlists.html-track-edit-mobile.png)
 
 </details>
 
