@@ -15,6 +15,9 @@ This project was developed for the Interactive Front End Development module with
     - [Scope](#Scope)
     - [Structure](#Structure)
     - [Skeleton](#Skeleton)
+        - [Mobile Wireframes](#Mobile-Wireframes)
+        - [Tablet Wireframes](#Tablet-Wireframes)
+        - [Desktop Wireframes](#Desktop-Wireframes)
     - [Surface](#Surface)
 
 2. [Features](#Features)
