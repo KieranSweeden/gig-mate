@@ -292,6 +292,36 @@ Despite the positives of using the nested list architecture for GigMate, it does
 
 ## Surface
 
+### Colour Palette
+
+An integral part of GigMate's design is simplicity. To further communicate this to the user, the colour palette will feature a black, white and a feature colour. The black & white will both feature slightly dimmed shading & lightness respectively, for a less intense feel & for readability purposes.
+
+After reading [this article](https://thelogocompany.net/psychology-of-color-in-logo-design/) on colour pyschology, I decided the feature colour should be on the fine line between blue & purple. Blue provides the emotion of trust & dependability and purple gives the emotion of imagination & creativity. Mixing the two colours together correlates directly to the message GigMate is trying to communicate to it's potential users. Providing dependability on the gig and allowing the user to be creative with their setlists.
+
+The finished colour palette is as follows, containing the less intense black & white along with the feature purple color.
+
+![The GigMate Colour Palette](documentation/surface/gigmate-palette.png)
+
+### Typography
+
+With a similar goal as the colour palette, the typography needs to remain simple and easy to read. With this in mind, I've decided to go with only one typeface to be used throughout the application, that being the [Manrope](https://fonts.google.com/specimen/Manrope?preview.text=Valerie&preview.text_type=custom&category=Sans+Serif&stylecount=6#standard-styles) typeface.
+
+Manrope is a clean and minimal sans-serif typeface with various weights in it's family. I intend on making use of these weights, to communicate an order of importance to the user when using the application.
+
+Combining the colour palette along with the Manrope typeface, provided a simple logo as shown:
+
+![GigMate font and colour combined](documentation/surface/gigmate-font-and-colour.png)
+
+### Design
+
+The design will be inspired by the likes of Apple & Google, for their simple & minimal design. At the time of writing, both companies' design generally follows a square, block-like design for their layouts and rounded corners for elements that entice user interaction such as buttons, alert pop-ups etc. This style of design will be incorporated into GigMate.
+
+Taking inspiration from Google's productivity suite, I came up with a small icon that will act as GigMate's logo icon throughout the suite.
+
+![GigMate logo](documentation/surface/gigmate-colour-bg.png)
+
+The icon represents a setlist whilst also incorporating GigMate's focus in simplicity and minimalist design.
+
 [Return to Contents 🡡](#contents)
 
 # Features
