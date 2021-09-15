@@ -3,19 +3,21 @@
 /* CSS Variables */
 
 :root {
-    --gigmate-primary: hsla(245, 44, 49, 1);
-    --gigmate-black: hsla(0, 0, 13, 1);
-    --gigmate-white: hsla(0, 0, 98, 1);
-}
-
-*,
-*::before,
-*::after {
-    box-sizing: border-box;
+    --gigmate-primary: hsla(245, 44%, 49%, 1);
+    --gigmate-black: hsla(0, 0%, 13%, 1);
+    --gigmate-white: hsla(0, 0%, 98%, 1);
 }
 
 body {
      font-family: 'Manrope', sans-serif;
+}
+
+.navbar-brand {
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+}
+
+.navbar-brand:hover {
+    color: var(--gigmate-primary);
 }
 
 .navbar a {
@@ -29,7 +31,10 @@ body {
     font-size: 1.5rem;
 }
 
-
 .navbar-toggler {
     border: 1px solid var(--gigmate-primary);
+}
+
+.nav-link:focus, .nav-link:hover {
+    color: var(--gigmate-primary);
 }
