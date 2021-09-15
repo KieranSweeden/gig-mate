@@ -320,7 +320,7 @@ Taking inspiration from Google's productivity suite, I came up with a small icon
 
 ![GigMate logo](documentation/surface/gigmate-colour-bg.png)
 
-The icon represents a setlist whilst also incorporating GigMate's focus in simplicity and minimalist design.
+The icon represents a setlist whilst also incorporating GigMate's focus in simplicity and minimalist design, with rectangular shapes representing text and rounded corners.
 
 [Return to Contents 🡡](#contents)
 
