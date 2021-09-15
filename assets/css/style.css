@@ -31,10 +31,12 @@ body {
     font-size: 1.5rem;
 }
 
-.navbar-toggler {
-    border: 1px solid var(--gigmate-primary);
-}
-
 .nav-link:focus, .nav-link:hover {
     color: var(--gigmate-primary);
+}
+
+.navbar-toggler:focus,
+.navbar-toggler:active,
+.navbar-toggler-icon:focus {
+    box-shadow: none;
 }
