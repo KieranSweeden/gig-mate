@@ -65,10 +65,3 @@ body {
 #main-container {
     height: 85vh;
 }
-
-/* Footer styles */
-
-#main-footer {
-    height: 5vh;
-    background-color: var(--gigmate-black);
-}
