@@ -17,7 +17,7 @@ body {
 
 .navbar {
     background-color: var(--gigmate-white);
-    height: 7.5vh;
+    height: 10vh;
 }
 
 .navbar-brand {
@@ -55,8 +55,20 @@ body {
     text-decoration: underline;
 }
 
+.navbar-collapse {
+    z-index: 2;
+    background-color: var(--gigmate-white);
+}
+
 /* Index.html */
 
-#home-container {
+#main-container {
     height: 85vh;
+}
+
+/* Footer styles */
+
+#main-footer {
+    height: 5vh;
+    background-color: var(--gigmate-black);
 }
