@@ -21,6 +21,17 @@ To return to the original README file, [click here](README.md).
 
 # Bugs
 
+1. Navbar dropdown appearing behind main content
+    - When clicking on the hamburger icon to open the dropdown navbar menu, the menu would appear behind the main content on the page.
+    - This was promptly solved by addressing the z-index of the element with the class of "navbar-collapse". Giving this element the z-index value of 1 meant the dropdown would always appear above the content underneath the navbar.
+    ```
+    .navbar-collapse {
+        z-index: 1;
+        background-color: var(--gigmate-white);
+    }
+    ```
+
+
 ## Fixed Bugs
 
 [Return to Contents 🡡](#contents)
