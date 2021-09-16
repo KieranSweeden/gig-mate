@@ -21,14 +21,22 @@ To return to the original README file, [click here](README.md).
 
 # Bugs
 
-## Fixed-Bugs
+## Fixed Bugs
 
-
+[Return to Contents 🡡](#contents)
 
 # User Stories Testing
 
+[Return to Contents 🡡](#contents)
+
 # Manual Testing
+
+[Return to Contents 🡡](#contents)
 
 # Validation Testing
 
+[Return to Contents 🡡](#contents)
+
 # Performance Testing
+
+[Return to Contents 🡡](#contents)
