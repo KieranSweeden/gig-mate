@@ -18,6 +18,7 @@ body {
 .navbar {
     background-color: var(--gigmate-white);
     height: 10vh;
+    box-shadow: 0 0px 10px 0 var(--gigmate-primary);
 }
 
 .navbar-brand {
