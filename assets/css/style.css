@@ -94,6 +94,8 @@ body {
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    transition: transform 0.25s ease-in-out;
+    border: none;
 }
 
 #main-container .card::before {
@@ -101,6 +103,14 @@ body {
     position: absolute;
     inset: 0 0 0 0;
     background-color: var(--gigmate-primary-overlay);
+}
+
+#main-container .card:hover, 
+#main-container .card:active,
+#main-container .card:focus,
+#main-container .card:focus-visible,
+#main-container .card:focus-within       {
+    transform: scale(102.5%, 102.5%);
 }
 
 #main-container .card a {
