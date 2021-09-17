@@ -338,6 +338,28 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 
 # Technologies
 
+## Languages
+
+- HTML5
+- CSS3
+- JavaScipt
+
+## Frameworks & Libraries
+
+- [Bootstrap 5](https://getbootstrap.com/)
+    - Bootstrap 5 was utilised to create responsive layouts and use it's onboard components.
+
+- [Google Fonts](https://fonts.google.com/)
+    - Google fonts enabled the use of importing the 'Manrope' typeface into the application.
+
+- [Font Awesome](https://fontawesome.com/)
+    - The use of font awesome's icons were used throughout the application.
+
+## Applications
+
+- [Balsamiq](https://balsamiq.com/)
+    - The balsamiq application was utilised to create wireframes for the main html pages featured within the application.
+
 [Return to Contents 🡡](#contents)
 
 # Testing
@@ -358,7 +380,7 @@ To view the testing procedures undertook for this project, click [here](TESTING.
 
 - The [image of a female writing on a notepad](https://www.pexels.com/photo/ethnic-female-employee-writing-list-in-notepad-5999834/) within index.html was sourced from [Ono Kokusi](https://www.pexels.com/@ono-kosuki) via [Pexels](pexels.com).
 
-- The [image of a man playing guitar]() within index.html was sourced from [Clam Ho](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
+- The [image of a man playing guitar]() within index.html was sourced from [Clam Lo](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
 
 [Return to Contents 🡡](#contents)
 
