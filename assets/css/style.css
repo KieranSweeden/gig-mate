@@ -4,6 +4,7 @@
 
 :root {
     --gigmate-primary: hsla(245, 44%, 49%, 1);
+    --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
     --gigmate-black: hsla(0, 0%, 13%, 1);
     --gigmate-black-shadow: hsla(0, 0%, 13%, 0.2);
     --gigmate-white: hsla(0, 0%, 98%, 1);
@@ -80,3 +81,47 @@ body {
 
 /* Index.html */
 
+#main-container {
+    height: 85vh;
+    width: 100%;
+}
+
+#main-container .card {
+    width: 75%;
+    height: 20%;
+    margin: 1rem;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+}
+
+#main-container .card::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 0 0;
+    background-color: var(--gigmate-primary-overlay);
+}
+
+/* Shows link titles */
+#main-container .card::after {
+    content: attr(data-link);
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--gigmate-white);
+    letter-spacing: .1rem;
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+#main-container .card a {
+    height: 100%;
+    width: 100%;
+}
+
+#main-container .card a img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
