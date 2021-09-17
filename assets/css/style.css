@@ -5,6 +5,7 @@
 :root {
     --gigmate-primary: hsla(245, 44%, 49%, 1);
     --gigmate-black: hsla(0, 0%, 13%, 1);
+    --gigmate-black-shadow: hsla(0, 0%, 13%, 0.2);
     --gigmate-white: hsla(0, 0%, 98%, 1);
 }
 
@@ -18,7 +19,7 @@ body {
 .navbar {
     background-color: var(--gigmate-white);
     height: 10vh;
-    box-shadow: 0 0px 10px 0 var(--gigmate-primary);
+    box-shadow: 0 0px 10px 0 var(--gigmate-black-shadow);
 }
 
 .navbar-brand {
