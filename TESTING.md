@@ -32,6 +32,20 @@ To return to the original README file, [click here](README.md).
         background-color: var(--gigmate-white);
     }
     ```
+2. Navbar moving upwards when uncollapsing the dropdown menu
+    - When clicking on the hamburger icon, the dropdown navigation menu would appear and push the navbar upwards, making the navbar appear broken.
+    - This was solved by giving the container within the navbar a positional value of fixed with adjustments to centre the navigation, with the parent having a positional value of relative.
+    - Although this is appropriate for mobile & tablet screen sizes, it negatively affected the desktop navbar design. To counteract this, I applied these changes within a media query for screen sizes below 992px.
+    ```
+    @media (max-width: 992px) {
+        .navbar-collapse {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        }
+    }
+    ```
 
 [Return to Contents 🡡](#contents)
 
