@@ -95,6 +95,7 @@ header {
 
 #main-container .card {
     width: 50%;
+    min-width: 250px;
     height: 20%;
     margin: 1rem;
     border-radius: 10px;
