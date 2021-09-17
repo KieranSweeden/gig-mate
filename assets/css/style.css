@@ -129,6 +129,11 @@ body {
     z-index: 2;
 }
 
+#main-container .card.opposite a h2 {
+    left: auto;
+    right: 25px;
+}
+
 #main-container .card a img {
     height: 100%;
     width: 100%;
