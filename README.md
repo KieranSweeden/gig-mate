@@ -352,5 +352,13 @@ To view the testing procedures undertook for this project, click [here](TESTING.
 
 # Credits
 
+## Media
+
+- The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
+
+- The [image of a female writing on a notepad](https://www.pexels.com/photo/ethnic-female-employee-writing-list-in-notepad-5999834/) within index.html was sourced from [Ono Kokusi](https://www.pexels.com/@ono-kosuki) via [Pexels](pexels.com).
+
+- The [image of a man playing guitar]() within index.html was sourced from [Clam Ho](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
+
 [Return to Contents 🡡](#contents)
 
