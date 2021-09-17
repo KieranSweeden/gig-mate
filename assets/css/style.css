@@ -128,3 +128,12 @@ body {
     width: 100%;
     object-fit: cover;
 }
+
+/* Footer styling */
+
+#main-footer {
+    height: 5vh;
+    font-weight: 300;
+    background-color: var(--gigmate-black);
+    color: var(--gigmate-white);
+}
