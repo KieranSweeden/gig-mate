@@ -31,6 +31,7 @@ body {
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
     height: 80%;
+    box-shadow: 0 0 50px 0 #fafafa inset;
 }
 
 .list-container::-webkit-scrollbar {
@@ -200,6 +201,15 @@ header {
     object-fit: cover;
     z-index: 1;
     mix-blend-mode: multiply;
+}
+
+/* Setlists.html styling */
+
+.accordion {
+    width: 100%;
+    height: min-content;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    border: none;
 }
 
 /* Footer styling */
