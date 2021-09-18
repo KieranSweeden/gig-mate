@@ -355,10 +355,16 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 - [Font Awesome](https://fontawesome.com/)
     - The use of font awesome's icons were used throughout the application.
 
+- [Animate.css](https://animate.style/)
+    - Animate.css was used to prompty attach appropriate animations to elements throughout the application.
+
 ## Applications
 
 - [Balsamiq](https://balsamiq.com/)
-    - The balsamiq application was utilised to create wireframes for the main html pages featured within the application.
+    - The Balsamiq application was utilised to create wireframes for the main html pages featured within the application.
+
+- [Real Favicon Generator](https://realfavicongenerator.net/)
+    - The Real Favicon Generator was used to create favicons for browsers and various devices.
 
 [Return to Contents 🡡](#contents)
 
