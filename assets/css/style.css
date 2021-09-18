@@ -21,6 +21,29 @@ body {
     background-color: var(--gigmate-primary);
 }
 
+.rounded-corners {
+    border-radius: 10px;
+}
+
+.list-container {
+    overflow: scroll;
+    overflow-x: hidden;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+    height: 90%;
+}
+
+.list-container::-webkit-scrollbar {
+    display: none;
+}
+
+.list-group {
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    border: none;
+}
+
+
+
 /* Navbar Styles */
 
 .navbar {
@@ -97,6 +120,7 @@ header {
 #main-container {
     height: 75vh;
     width: 100%;
+    overflow: hidden;
 }
 
 #main-container .card {
