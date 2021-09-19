@@ -212,6 +212,23 @@ header {
     border: none;
 }
 
+/* Repertoire.html styling */
+
+.repertoire-card .card-body button {
+    border: none;
+    background-color: transparent;
+}
+
+.repertoire-card .card-body button:hover,
+.repertoire-card .card-body button:focus,
+.repertoire-card .card-body button:focus-visible,
+.repertoire-card .card-body button:focus-within,
+.repertoire-card .card-body button:active {
+    color: var(--gigmate-primary);
+}
+
+
+
 /* Footer styling */
 
 #main-footer {
