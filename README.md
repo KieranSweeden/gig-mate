@@ -376,6 +376,60 @@ To view the testing procedures undertook for this project, click [here](TESTING.
 
 # Deployment
 
+GigMate was developed using the [GitPod IDE](https://www.gitpod.io/), regularly committed & pushed to GitHub using Git and deployed using GitHub Pages.
+
+## Deploying via GitHub Pages
+
+The following steps were undertaken to deploy GigMate via GitHub Pages:
+
+1. Log into [GitHub](https://github.com/).
+2. Locate this [GitHub Repository](https://github.com/KieranSweeden/gig-mate).
+3. Click the 'Settings' tab at the top of the repository.
+4. Click the 'Pages' option at the bottom of the left aside menu.
+5. Click the source dropdown button with a default value of 'none' and select the 'main' branch.
+6. Click the 'Save' button.
+7. After a few minutes, GitHub will inform you that GigMate has been deployed via GitHub Pages.
+8. Click the URL link given by GitHub to view the deployment of GigMate within your browser.
+
+## Forking the Repository
+
+Forking this repository will allow you to have your own personal copy of this GigMate repository within your GitHub account, providing you the opportunity to make your own adjustments to GitMate without affecting the original copy. To do this:
+
+1. Log into [GitHub](https://github.com/).
+2. Locate this [GitHub Repository](https://github.com/KieranSweeden/gig-mate).
+3. Click the 'Fork' button at the top right of the page.
+4. GitHub should then provide you with your own personal copy of GigMate and relocate you to the location of that copy.
+
+## Cloning the Repository
+
+To get your own local copy of GigMate:
+
+### Using GitPod
+
+1. Make sure the [GitPod browser extension](https://chrome.google.com/webstore/detail/gitpod-always-ready-to-co/dodmmooeoklaejobgleioelladacbeki) is installed within your browser. If recently installed, restart your browser.
+2. Log into [GitHub](https://github.com/).
+3. Locate this [GitHub Repository](https://github.com/KieranSweeden/gig-mate).
+4. Click the green 'GitPod' button that's found at the top of this repository.
+5. You should now be relocated to a new GitPod workspace with a copy of this repository, allowing you edit a copy of GitMate locally.
+
+### Using a local IDE
+
+1. Log into [GitHub](https://github.com/).
+2. Locate this [GitHub Repository](https://github.com/KieranSweeden/gig-mate).
+3. Click the 'Code' dropdown button at the top of the repository.
+4. Copy the HTTPS link provided to your clipboard.
+5. Open your IDE of choice.
+6. Open the terminal within your IDE. Make sure you have Git installed.
+7. Make sure the directory in which your currently located, is the one in which you'd like your local clone of GigMate to be located.
+8. Within the terminal, type:
+    ```
+    git clone https://github.com/KieranSweeden/gig-mate.git
+    ```
+9. Press enter.
+10. You should now have a local clone of GigMate within your current working directory.
+
+
+
 [Return to Contents 🡡](#contents)
 
 # Credits
