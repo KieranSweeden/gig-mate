@@ -21,7 +21,6 @@ This project was developed for the Interactive Front End Development module with
     - [Surface](#Surface)
 
 2. [Features](#Features)
-
     - [Current Features](#Current-Features)
     - [Future Features](#Future-Features)
 
@@ -30,6 +29,11 @@ This project was developed for the Interactive Front End Development module with
 4. [Testing](#Testing)
 
 5. [Deployment](#Deployment)
+    - [Deploying via GitHub Pages](#Deploying-via-GitHub-Pages)
+    - [Forking the Repository](#Forking-the-Repository)
+    - [Cloning the Repository](#Cloning-the-Repository)
+        - [Using GitPod](#Using-GitPod)
+        - [Using a Local IDE](#Using-a-Local-IDE)
 
 6. [Credits](#Credits)
 
@@ -412,7 +416,7 @@ To get your own local copy of GigMate:
 4. Click the green 'GitPod' button that's found at the top of this repository.
 5. You should now be relocated to a new GitPod workspace with a copy of this repository, allowing you edit a copy of GitMate locally.
 
-### Using a local IDE
+### Using a Local IDE
 
 1. Log into [GitHub](https://github.com/).
 2. Locate this [GitHub Repository](https://github.com/KieranSweeden/gig-mate).
