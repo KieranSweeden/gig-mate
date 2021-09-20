@@ -6,7 +6,7 @@
     --gigmate-primary: hsla(245, 44%, 49%, 1);
     --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
     --gigmate-black: hsla(0, 0%, 13%, 1);
-    --gigmate-black-shadow: hsla(0, 0%, 13%, 0.2);
+    --gigmate-black-shadow: hsla(0, 0%, 60%, 0.2);
     --gigmate-grey: hsla(0, 0%, 75%, 1);
     --gigmate-light-grey: hsla(0, 0%, 85%, 1);
     --gigmate-white: hsla(0, 0%, 98%, 1);
@@ -258,6 +258,12 @@ header {
 .rep-container section {
     height: 72.5vh;
     overflow: overlay;
+    scroll-behavior: smooth;
+}
+
+.repertoire-card {
+    border: none;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
 
 .repertoire-card .card-body button {
