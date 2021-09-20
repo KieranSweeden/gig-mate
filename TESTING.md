@@ -46,6 +46,15 @@ To return to the original README file, [click here](README.md).
         }
     }
     ```
+3. Container not scrolling when using overflow:scroll
+    - Despite applying the value of scroll to the property of overflow that's attached to a container filled with content, the container was not scrolling.
+    - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/17295219/overflow-scroll-css-is-not-working-in-the-div) and reading [Ionică Bizău](https://stackoverflow.com/users/1420197/ionic%c4%83-biz%c4%83u)'s answer, I recognised this was because the container I was attempting to add a scroll functionality did not have a declared height. After adding a height property & value, this issue was resolved.
+    ```
+    .rep-container section {
+    height: 72.5vh;
+    overflow: scroll;
+    }
+    ```
 
 [Return to Contents 🡡](#contents)
 
