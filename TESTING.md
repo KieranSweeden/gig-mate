@@ -55,7 +55,15 @@ To return to the original README file, [click here](README.md).
     overflow: scroll;
     }
     ```
-
+4. Scrollbar moving content within container, resulting in an asymmetrical design
+    - Although the scrollbar functionality worked as intended, it took up space within the container which pushed the content to the left, resulting in an asymmetrical design which wasn't intended.
+    - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/24671317/scrollbar-above-content?rq=1) and reading [Forex](https://stackoverflow.com/users/1384493/forex)'s answer, I realised that instead of scroll, the value of overflow needed to be overlay, which adds scroll functionality and renders the scrollbar above the content rather than within.
+    ```
+    .rep-container section {
+    height: 72.5vh;
+    overflow: overlay;
+    }
+    ```
 [Return to Contents 🡡](#contents)
 
 # User Stories Testing

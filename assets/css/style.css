@@ -16,6 +16,7 @@ body {
      font-family: 'Manrope', sans-serif;
      background-color: var(--gigmate-white);
      overflow: hidden;
+
 }
 
 /* Scrollbar styling */
@@ -256,7 +257,7 @@ header {
 
 .rep-container section {
     height: 72.5vh;
-    overflow: scroll;
+    overflow: overlay;
 }
 
 .repertoire-card .card-body button {
