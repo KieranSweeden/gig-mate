@@ -159,8 +159,8 @@ header {
 #main-container .card::before {
     content: '';
     position: absolute;
-    inset: 0 0 0 0;
-    background-color: var(--gigmate-primary-overlay);
+    inset: 0 0;
+    background-color: hsla(0, 0%, 13%, 0.5);
 }
 
 #main-container .card:hover,
