@@ -13,6 +13,7 @@
 body {
      font-family: 'Manrope', sans-serif;
      background-color: var(--gigmate-white);
+     overflow: hidden;
 }
 
 /* Utility Styles */
@@ -215,9 +216,7 @@ header {
 /* Repertoire.html styling */
 
 .rep-container {
-    overflow: scroll;
     height: 90vh;
-    overflow-x: hidden;
     position: relative;
 }
 
@@ -226,13 +225,19 @@ header {
     top: 0;
     left: 0;
     z-index: 1;
-    height: 20vh;
+    height: 17.5vh;
     background-color: var(--gigmate-white);
     box-shadow: 1px 2px 3px rgba(0,0,0,.1);
 }
 
 .rep-container header input {
-    max-width: 75%;
+    width: 500px;
+    max-width: 80%;
+}
+
+.rep-container section {
+    height: 72.5vh;
+    overflow: scroll;
 }
 
 .repertoire-card .card-body button {
@@ -247,7 +252,6 @@ header {
 .repertoire-card .card-body button:active {
     color: var(--gigmate-primary);
 }
-
 
 
 /* Footer styling */
