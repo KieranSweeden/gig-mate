@@ -36,6 +36,8 @@ This project was developed for the Interactive Front End Development module with
         - [Using a Local IDE](#Using-a-Local-IDE)
 
 6. [Credits](#Credits)
+    - [Media](#Media)
+    - [Resources](#Resources)
 
 # UX
 
