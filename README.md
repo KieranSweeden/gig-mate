@@ -446,5 +446,11 @@ To get your own local copy of GigMate:
 
 - The [image of a man playing guitar]() within index.html was sourced from [Clam Lo](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
 
+## Resources
+
+Here contains a list of websites that I found tremendously resourceful during the development of GigMate:
+- [Stack Overflow](https://stackoverflow.com/)
+- [MDN Web Docs](https://developer.mozilla.org/en-US/)
+
 [Return to Contents 🡡](#contents)
 
