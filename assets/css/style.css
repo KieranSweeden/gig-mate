@@ -84,6 +84,10 @@ body {
     color: var(--gigmate-primary)
 }
 
+.card-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
 
 /* Navbar Styles */
 
@@ -226,17 +230,15 @@ header {
 
 /* Setlists.html styling */
 
-.accordion {
-    width: 100%;
-    height: min-content;
-    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
-    border: none;
+#setlistAccordion {
+    align-self: center;
+    justify-self: center;
 }
 
 /* Repertoire.html styling */
 
 .content-container {
-    height: 85vh;
+    height: 90vh;
     position: relative;
     padding: 0;
 }
@@ -246,9 +248,16 @@ header {
     top: 0;
     left: 0;
     z-index: 1;
-    height: 17.5vh;
     background-color: var(--gigmate-white);
     box-shadow: 1px 2px 3px rgba(0,0,0,.1);
+}
+
+.content-container > .with-search {
+    height: 17.5vh;
+}
+
+.content-container > .without-search {
+    height: 12.5vh;
 }
 
 .content-container header input {
