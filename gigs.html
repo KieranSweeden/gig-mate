@@ -13,6 +13,7 @@
   <meta name="theme-color" content="#fafafa">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
   <link rel="stylesheet" href="assets/css/style.css">
   <title>GigMate | Gigs</title>
 </head>
@@ -46,92 +47,93 @@
     </div>
   </nav>
 
-  <header class="d-flex justify-content-center align-items-end p-1">
-    <h1 class="m-0">Gigs</h1>
-  </header>
+  <!-- Container Start -->
+  <main class="container-fluid p-0 content-container">
+    <!-- Header Start-->
+    <header id="header-section" class="d-flex justify-content-around align-items-center flex-column p-4 animate__animated animate__fadeInDown without-search">
+      <h1 class="fs-3">Gigs</h1>
+    </header>
+  <!-- Header End -->
 
-  <main id="main-container" class="container d-flex justify-content-center align-items-center flex-column">
-    <!-- Gig List -->
-    <div class="list-container container p-2 d-flex justify-content-center">
-      <div class="list-group rounded-corners">
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
-        <a href="#" class="list-group-item list-group-item-action p-3">
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1">The Royal Oak</h5>
-            <time class="badge bg-purple lh-base">10/12/21</time>
-          </div>
-          <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
-        </a>
+  <!-- Content Start-->
+  <section id="content-section" class="container-fluid p-2">
+    <div class="container-lg">
+      <div class="row animate__animated animate__fadeInUp">
+        <div class="list-group rounded-corners">
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action p-3">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1">The Royal Oak</h5>
+              <time class="badge bg-purple lh-base">10/12/21</time>
+            </div>
+            <address class="mb-1">1 Some Street, Somewhere, AB12 CDE</address>
+          </a>
+        </div>
+        <!-- Content End -->
       </div>
     </div>
-
-    <div class="btn-container container d-flex justify-content-center align-items-center">
-      <button class="btn-clear m-3"><i class="far fa-arrow-alt-circle-left"></i></button>
-      <button class="btn-clear invisible m-3"><i class="far fa-arrow-alt-circle-left"></i></button>
-      <button class="btn-clear m-3"><i class="fas fa-plus-circle"></i></button>
-    </div>
-  </main>
-  
-  <footer id="main-footer" class="d-flex justify-content-center align-items-center">
-    <p class="m-0">&copy; 2021 GigMate</p>
-  </footer>
+  </section>
+</main>
+<!-- Container End -->
 
   <!-- Bootstrap 5 JavaScript -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+  <!-- JavaScript Files -->
+  <script src="assets/js/main.js"></script>
 </body>
 </html>
