@@ -257,7 +257,7 @@ header {
 }
 
 .content-container > .without-search {
-    height: 12.5vh;
+    height: 10vh;
 }
 
 .content-container header input {
