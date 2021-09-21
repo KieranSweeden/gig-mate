@@ -265,8 +265,8 @@ header {
     max-width: 80%;
 }
 
-.content-container section {
-    height: 72.5vh;
+.content-container #content-section {
+    height: 80vh;
     overflow: overlay;
     scroll-behavior: smooth;
 }
