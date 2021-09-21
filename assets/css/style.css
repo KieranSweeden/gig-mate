@@ -294,9 +294,9 @@ header {
 
 #main-footer {
     height: 5vh;
-    font-weight: 300;
+    font-weight: 500;
     font-size: .9rem;
-    background-color: var(--gigmate-primary);
-    color: var(--gigmate-white);
+    background-color: var(--gigmate-white);
+    color: var(--gigmate-black);
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
