@@ -16,13 +16,15 @@ body {
     font-family: 'Manrope', sans-serif;
     background-color: var(--gigmate-white);
     overflow: hidden;
-    height: calc(100vh - calc(100vh - 100%))
-}
-
-/* html {
+    height: calc(100vh - calc(100vh - 100%));
     min-height: 100vh;
     height: -webkit-fill-available;
-} */
+}
+
+html {
+    min-height: 100vh;
+    height: -webkit-fill-available;
+}
 
 /* Scrollbar styling */
 ::-webkit-scrollbar {
