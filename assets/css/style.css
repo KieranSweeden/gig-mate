@@ -8,7 +8,7 @@
     --gigmate-primary: hsla(245, 44%, 49%, 1);
     --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
     --gigmate-black: hsla(0, 0%, 13%, 1);
-    --gigmate-black-shadow: hsla(0, 0%, 60%, 0.2);
+    --gigmate-black-shadow: hsla(0, 0%, 50%, 0.2);
     --gigmate-grey: hsla(0, 0%, 75%, 1);
     --gigmate-light-grey: hsla(0, 0%, 85%, 1);
     --gigmate-white: hsla(0, 0%, 98%, 1);
@@ -277,7 +277,7 @@ header {
 }
 
 .content-container #content-section {
-    height: 90%;
+    height: 80%;
     overflow: overlay;
     scroll-behavior: smooth;
 }
@@ -295,6 +295,11 @@ header {
 .btn-card:hover, 
 .btn-card:focus {
     transform: scale(102.5%, 102.5%);
+}
+
+.btn-card:focus-visible {
+    outline-offset: 0.5rem;
+    outline-color: var(--gigmate-black);
 }
 
 .btn-card:active {
@@ -345,6 +350,26 @@ header {
 .card .card-body button:focus-visible,
 .card .card-body button:focus-within,
 .card .card-body button:active {
+    color: var(--gigmate-primary);
+}
+
+#btn-section {
+    height: 10%;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    background-color: var(--gigmate-white);
+}
+
+#btn-section .btn-bottom {
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    color: var(--gigmate-grey);
+    transition: color .15s ease-in-out, transform .15s ease-in-out;
+}
+
+#btn-section .btn-bottom:hover,
+#btn-section .btn-bottom:focus {
+    transform: scale(110%, 110%);
     color: var(--gigmate-primary);
 }
 
