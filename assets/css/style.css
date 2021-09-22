@@ -17,7 +17,7 @@
     --app-height: 100%;
 }
 
-body {
+html, body {
     font-family: 'Manrope', sans-serif;
     background-color: var(--gigmate-white);
     overflow: hidden;
@@ -100,7 +100,7 @@ body {
 
 .navbar {
     background-color: var(--gigmate-white);
-    height: 10vh;
+    height: 10%;
     box-shadow: 0 0px 10px 0 var(--gigmate-black-shadow);
     position: relative;
 }
@@ -163,14 +163,14 @@ body {
 /* Header styling */
 
 header {
-    height: 10vh;
+    height: 10%;
     width: 100%;
 }
 
 /* Index.html */
 
 #main-container {
-    height: 75vh;
+    height: 75%;
     width: 100%;
     overflow: hidden;
 }
@@ -245,7 +245,7 @@ header {
 /* Repertoire.html styling */
 
 .content-container {
-    height: 90vh;
+    height: 90%;
     position: relative;
     padding: 0;
 }
@@ -260,11 +260,11 @@ header {
 }
 
 .content-container > .with-search {
-    height: 17.5vh;
+    height: 17.5%;
 }
 
 .content-container > .without-search {
-    height: 10vh;
+    height: 10%;
 }
 
 .content-container header input {
@@ -273,7 +273,7 @@ header {
 }
 
 .content-container #content-section {
-    height: 80vh;
+    height: 100%;
     overflow: overlay;
     scroll-behavior: smooth;
 }
@@ -300,7 +300,7 @@ header {
 /* Footer styling */
 
 #main-footer {
-    height: 5vh;
+    height: 5%;
     font-weight: 500;
     font-size: .9rem;
     background-color: var(--gigmate-white);
