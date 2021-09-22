@@ -25,6 +25,7 @@ html, body {
     overflow: hidden;
     width: 100vw;
     height: var(--app-height);
+    position: relative;
 }
 
 /* Scrollbar styling */
@@ -135,8 +136,16 @@ html, body {
     font-size: 1.5rem;
 }
 
+.nav-link {
+    border-radius: var(--gigmate-border-radius);
+    background-color: transparent;
+    transition: background-color .25s ease-in-out;
+    margin: .5rem;
+}
+
 .nav-link:focus, .nav-link:hover {
-    color: var(--gigmate-primary);
+    color: var(--gigmate-white);
+    background-color: var(--gigmate-primary);
 }
 
 .navbar-toggler:focus,
@@ -146,8 +155,8 @@ html, body {
 }
 
 .nav-link.active {
-    color: var(--gigmate-primary);
-    font-weight: 700;
+    color: var(--gigmate-white);
+    background-color: var(--gigmate-primary);
 }
 
 .navbar-collapse {
@@ -385,4 +394,26 @@ header {
     background-color: var(--gigmate-white);
     color: var(--gigmate-black);
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    isolation: isolate;
+}
+
+.custom-shape-divider-bottom-1632318604 {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    transform: rotate(180deg);
+}
+
+.custom-shape-divider-bottom-1632318604 svg {
+    position: relative;
+    display: block;
+    width: calc(232% + 1.3px);
+    height: 350px;
+}
+
+.custom-shape-divider-bottom-1632318604 .shape-fill {
+    fill: #4F46B3;
 }
