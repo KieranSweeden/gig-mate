@@ -64,6 +64,10 @@ To return to the original README file, [click here](README.md).
     overflow: overlay;
     }
     ```
+## Unfixed Bugs
+
+1. 100vh is not being rendered as expected on mobile & tablet devices using the Safari & Chrome browser.
+
 [Return to Contents 🡡](#contents)
 
 # User Stories Testing
