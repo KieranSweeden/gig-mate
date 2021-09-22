@@ -440,6 +440,10 @@ To get your own local copy of GigMate:
 
 # Credits
 
+## Code
+
+- Code to solve viewport height issue with Chrome & Safari mobile browsers was taken from [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by [Maciej Trzciński](https://dev.to/maciejtrzcinski).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).

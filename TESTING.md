@@ -64,9 +64,28 @@ To return to the original README file, [click here](README.md).
     overflow: overlay;
     }
     ```
+5. Presence of UI in Safari & Chrome mobile browsers shortening the viewport window
+    - As clearly demonstrated in [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by Maciej Trzciński, there's an unfortunate problem in Safari (& Chrome in my experience) on mobile devices, where the browsers calculate the top bar, document window and bottom bar together in their implementation of viewport heights. This created an issue where the window was far larger than expected, which caused elements at the bottom of the window such as the footer, to disappear beneath the browser UI.
+    - To fix this, I used the example provided in the article linked above. The fix takes a CSS variable and changes the value of it by obtaining the documentElement value and applying that value to the CSS variable. When applying the CSS variable to a height property within the html & body elements, the window height will adjust to the documentElement value, providing the intented result of having all elements fitting within the page.
+    ```
+    *style.css*
+
+    :root {
+        --app-height: 100%;
+    }
+    ```
+    ```
+    *main.js*
+
+    const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+    }
+    window.addEventListener('resize', appHeight);
+    appHeight();
+    ```
 ## Unfixed Bugs
 
-1. 100vh is not being rendered as expected on mobile & tablet devices using the Safari & Chrome browser.
 
 [Return to Contents 🡡](#contents)
 

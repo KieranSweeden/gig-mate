@@ -14,6 +14,7 @@
     --gigmate-white: hsla(0, 0%, 98%, 1);
 
     /* Utility Variables */
+    /* credit: code to adjust viewport height for Safari & Chrome mobile browsers. Fix found from: https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9 */
     --app-height: 100%;
 }
 
@@ -22,7 +23,6 @@ html, body {
     background-color: var(--gigmate-white);
     overflow: hidden;
     width: 100vw;
-    height: 100vh;
     height: var(--app-height);
 }
 
