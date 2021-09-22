@@ -287,13 +287,13 @@ header {
     border: none;
     border-radius: var(--gigmate-border-radius);
     transition: transform 0.15s ease-in-out;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    padding: 0;
+    min-width: 18rem;
+    width: 40rem;
 }
 
-.btn-card:hover {
+.btn-card:hover, 
+.btn-card:focus {
     transform: scale(102.5%, 102.5%);
 }
 
@@ -306,14 +306,12 @@ header {
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
 
-.gig-card {
-    min-width: 18rem;
-    width: 50%;
-}
-
-
 .card-title {
     margin: 0;
+}
+
+.gig-card {
+    padding: 1rem 1rem;
 }
 
 .gig-card .gig-venue h3 {
@@ -329,6 +327,10 @@ header {
 
 .gig-card .gig-date p {
     background-color: var(--gigmate-primary);
+}
+
+.card .card-body {
+    padding: 0;
 }
 
 .card .card-body button {
