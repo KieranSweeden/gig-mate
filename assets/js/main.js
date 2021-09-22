@@ -18,7 +18,7 @@ function determineContentHeight () {
     
     // if the search element is present, adjust the height of the content section
     if (headerHasSearchInput){
-        contentSection.style.height = '82.5%';
+        contentSection.style.height = '72.5%';
     }
 }
 
