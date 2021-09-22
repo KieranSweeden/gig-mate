@@ -372,6 +372,9 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 - [Real Favicon Generator](https://realfavicongenerator.net/)
     - The Real Favicon Generator was used to create favicons for browsers and various devices.
 
+- [Shape Divider](https://www.shapedivider.app/)
+    - The Shape Divider App was utilised to generate a wave SVG image, to use as a background for GigMate
+
 [Return to Contents 🡡](#contents)
 
 # Testing
