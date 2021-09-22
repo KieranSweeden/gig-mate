@@ -361,10 +361,12 @@ header {
 
 #btn-section .btn-bottom {
     border: none;
+    width: 2rem;
     background-color: transparent;
     font-size: 1.5rem;
     color: var(--gigmate-grey);
     transition: color .15s ease-in-out, transform .15s ease-in-out;
+    text-align: center;
 }
 
 #btn-section .btn-bottom:hover,
