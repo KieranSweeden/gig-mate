@@ -16,6 +16,7 @@
     /* Utility Variables */
     /* credit: code to adjust viewport height for Safari & Chrome mobile browsers. Fix found from: https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9 */
     --app-height: 100%;
+    --gigmate-border-radius: 10px;
 }
 
 html, body {
@@ -50,7 +51,8 @@ html, body {
 }
 
 .rounded-corners {
-    border-radius: 10px;
+    border-radius: var(--gigmate-border-radius);
+    border: none;
 }
 
 .list-container {
@@ -95,6 +97,8 @@ html, body {
     font-size: 1.2rem;
     font-weight: bold;
 }
+
+
 
 /* Navbar Styles */
 
@@ -180,11 +184,11 @@ header {
     min-width: 250px;
     height: 20%;
     margin: 1rem;
-    border-radius: 10px;
+    border-radius: var(--gigmate-border-radius);
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
-    transition: transform 0.25s ease-in-out;
+    transition: transform 0.15s ease-in-out;
     border: none;
 }
 
@@ -273,26 +277,72 @@ header {
 }
 
 .content-container #content-section {
-    height: 100%;
+    height: 90%;
     overflow: overlay;
     scroll-behavior: smooth;
 }
 
-.repertoire-card {
+.btn-card {
+    background-color: var(--gigmate-white);
+    border: none;
+    border-radius: var(--gigmate-border-radius);
+    transition: transform 0.15s ease-in-out;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-card:hover {
+    transform: scale(102.5%, 102.5%);
+}
+
+.btn-card:active {
+    transform: scale(100%, 100%);
+}
+
+.card {
     border: none;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
 
-.repertoire-card .card-body button {
-    border: none;
-    background-color: transparent;
+.gig-card {
+    min-width: 18rem;
+    width: 50%;
 }
 
-.repertoire-card .card-body button:hover,
-.repertoire-card .card-body button:focus,
-.repertoire-card .card-body button:focus-visible,
-.repertoire-card .card-body button:focus-within,
-.repertoire-card .card-body button:active {
+
+.card-title {
+    margin: 0;
+}
+
+.gig-card .gig-venue h3 {
+    color: var(--gigmate-primary);
+    text-align: start;
+}
+
+.gig-card .gig-artist p {
+    color: var(--gigmate-black);
+    font-style: italic;
+    text-align: start;
+}
+
+.gig-card .gig-date p {
+    background-color: var(--gigmate-primary);
+}
+
+.card .card-body button {
+    border: none;
+    color: var(--gigmate-grey);
+    background-color: transparent;
+    transition: color .15s ease-in-out;
+}
+
+.card .card-body button:hover,
+.card .card-body button:focus,
+.card .card-body button:focus-visible,
+.card .card-body button:focus-within,
+.card .card-body button:active {
     color: var(--gigmate-primary);
 }
 
