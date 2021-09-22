@@ -1,4 +1,14 @@
 /**
+ * Adjust app height to stop content appearing outside the viewport
+ */
+const appHeight = () => {
+    const doc = document.documentElement
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+}
+window.addEventListener('resize', appHeight);
+appHeight();
+
+/**
  * Determine content section height based on presence of search input in header
  */
 function determineContentHeight () {
