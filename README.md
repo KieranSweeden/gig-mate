@@ -450,6 +450,8 @@ To get your own local copy of GigMate:
 
 - Code to find the URL of the page the user previously visited was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/5788108/how-to-get-the-previous-page-url-using-javascript) by [Ammu](https://stackoverflow.com/users/701813/ammu).
 
+- Code to convert a HTML collection to an array was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array) by [Harpo](https://stackoverflow.com/users/4525/harpo).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).

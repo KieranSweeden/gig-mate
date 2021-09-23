@@ -50,6 +50,7 @@ function addIconHoverState () {
     cards = document.getElementsByClassName('btn-card');
 
     // Convert the HTML collection into an array
+    // Credit: method to convert HTML collection into an array was found at: https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
     let cardsArray = [].slice.call(cards);
 
     // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
@@ -63,6 +64,7 @@ function addIconHoverState () {
     })
 }
 
+// Toggle between classes to paint icon
 function paintIcon (card) {
     let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
     icon.classList.toggle("icon-hover");
