@@ -392,6 +392,7 @@ header {
     color: var(--gigmate-grey);
     transition: color .15s ease-in-out, transform .15s ease-in-out;
     text-align: center;
+    text-shadow: 0 0 10px var(--gigmate-black-shadow);
 }
 
 #btn-section .btn-bottom:hover,
