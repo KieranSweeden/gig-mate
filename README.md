@@ -36,6 +36,7 @@ This project was developed for the Interactive Front End Development module with
         - [Using a Local IDE](#Using-a-Local-IDE)
 
 6. [Credits](#Credits)
+    - [Code](#Code)
     - [Media](#Media)
     - [Resources](#Resources)
 
@@ -446,6 +447,8 @@ To get your own local copy of GigMate:
 ## Code
 
 - Code to solve viewport height issue with Chrome & Safari mobile browsers was taken from [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by [Maciej Trzciński](https://dev.to/maciejtrzcinski).
+
+- Code to find the URL of the page the user previously visited was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/5788108/how-to-get-the-previous-page-url-using-javascript) by [Ammu](https://stackoverflow.com/users/701813/ammu).
 
 ## Media
 
