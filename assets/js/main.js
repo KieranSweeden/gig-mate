@@ -42,3 +42,31 @@ function determineContentHeight () {
 }
 
 determineContentHeight();
+
+// Change color of card open icon to represent hovered state
+function addIconHoverState () {
+    // Gather a HTML collection of cards
+    let cards = [];
+    cards = document.getElementsByClassName('btn-card');
+
+    // Convert the HTML collection into an array
+    let cardsArray = [].slice.call(cards);
+
+    // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
+    cardsArray.forEach(card => {
+        card.addEventListener('mouseenter', function(){
+            paintIcon(card)
+        });
+        card.addEventListener('mouseleave', function(){
+            paintIcon(card)
+        });
+    })
+}
+
+function paintIcon (card) {
+    let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+    icon.classList.toggle("icon-hover");
+}
+
+
+addIconHoverState();

@@ -9,8 +9,9 @@
     --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
     --gigmate-black: hsla(0, 0%, 13%, 1);
     --gigmate-black-shadow: hsla(0, 0%, 50%, 0.2);
+    --gigmate-dark-grey: hsla(0, 0%, 40%, 1);
     --gigmate-grey: hsla(0, 0%, 75%, 1);
-    --gigmate-light-grey: hsla(0, 0%, 85%, 1);
+    --gigmate-light-grey: rgb(27, 21, 21);
     --gigmate-white: hsla(0, 0%, 98%, 1);
 
     /* Utility Variables */
@@ -38,7 +39,7 @@ html, body {
 }
   
 ::-webkit-scrollbar-thumb {
-    background-color: var(--gigmate-light-grey);
+    background-color: var(--gigmate-grey);
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -323,7 +324,7 @@ header {
 
 .card {
     border: none;
-    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    box-shadow: 0 10px 10px 0 var(--gigmate-black-shadow);
 }
 
 .card-title {
@@ -335,12 +336,12 @@ header {
 }
 
 .gig-card .gig-venue h3 {
-    color: var(--gigmate-primary);
+    color: var(--gigmate-black);
     text-align: start;
 }
 
 .gig-card .gig-artist p {
-    color: var(--gigmate-black);
+    color: var(--gigmate-dark-grey);
     font-style: italic;
     text-align: start;
 }
@@ -365,6 +366,15 @@ header {
 .card .card-body button:focus-visible,
 .card .card-body button:focus-within,
 .card .card-body button:active {
+    color: var(--gigmate-primary);
+}
+
+.rep-icon {
+    color: var(--gigmate-black-shadow);
+    transition: color .15s ease-in-out;
+}
+
+.icon-hover {
     color: var(--gigmate-primary);
 }
 
