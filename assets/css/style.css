@@ -6,6 +6,7 @@
 
     /* Colour Variables */
     --gigmate-primary: hsla(245, 44%, 49%, 1);
+    --gigmate-primary-shadow: hsla(245, 44%, 49%, 0.5);
     --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
     --gigmate-black: hsla(0, 0%, 13%, 1);
     --gigmate-black-shadow: hsla(0, 0%, 50%, 0.2);
@@ -287,10 +288,28 @@ header {
     height: 10%;
 }
 
-.content-container header input {
+#search-input {
     width: 500px;
     max-width: 80%;
+    border-radius: var(--gigmate-border-radius);
+    outline: transparent;
+    border: transparent;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
+
+#search-input:focus,
+#search-input:hover,
+#search-input:focus-visible,
+#search-input:focus-within {
+    border-color: transparent;
+    outline: transparent;
+    box-shadow: 0 0 0 0.25rem var(--gigmate-primary-shadow);
+}
+
+input[type="search"]::-webkit-search-decoration,
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-results-button,
+input[type="search"]::-webkit-search-results-decoration { background-color: var(--gigmate-primary); }
 
 .content-container #content-section {
     height: 80%;
@@ -324,7 +343,7 @@ header {
 
 .card {
     border: none;
-    box-shadow: 0 10px 10px 0 var(--gigmate-black-shadow);
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
 
 .card-title {
