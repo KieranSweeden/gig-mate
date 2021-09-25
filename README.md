@@ -465,6 +465,7 @@ To get your own local copy of GigMate:
 Here contains a list of websites that I found tremendously resourceful during the development of GigMate:
 - [Stack Overflow](https://stackoverflow.com/)
 - [MDN Web Docs](https://developer.mozilla.org/en-US/)
+- This ["how to get all of an element's siblings with vanilla JS"](https://gomakethings.com/how-to-get-all-of-an-elements-siblings-with-vanilla-js/) post was inspirational for my own use case in retrieving a card's sibling in GigMate.
 
 [Return to Contents 🡡](#contents)
 
