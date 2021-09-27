@@ -1,34 +1,38 @@
-// Event listeners
-let cards = [];
-cards = document.getElementsByClassName('btn-card');
-let cardsArray = [].slice.call(cards);
-
-console.log(cardsArray);
-
-cardsArray.forEach(card => {
-    card.addEventListener('click', function(){
-        openCard(card);
-    });
+window.addEventListener('DOMContentLoaded', () => {
+    // Init an empty array, retrieve the cards and store them in the array
+    let cards = [];
+    cards = document.getElementsByClassName('btn-card');
+    let cardsArray = [].slice.call(cards);
+    
+    // Add a click event for each card that calls a function that opens the clicked card
+    cardsArray.forEach(card => {
+        card.addEventListener('click', function(){
+            openCard(card);
+        });
+    })
 })
 
 function openCard(card) {
+    // To open the card, we must first remove it's siblings
     removeSiblingCards(card);
+    // When the siblings are removed, enlarge the card
     enlargeCard(card);
 }
 
 function enlargeCard(card) {
 
+    // Retrive the card's container & row parents
     let cardContainer = card.parentNode.parentNode.parentNode;
     let cardRow = card.parentNode.parentNode;
 
+    // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
     cardContainer.classList.toggle("enlarge");
     cardRow.classList.toggle("enlarge");
     card.classList.toggle("enlarge");
-
-    console.log(card.parentNode.parentNode);
 }
 
 function removeSiblingCards(card) {
+    // Store siblings of the clicked card in a variable
     let siblings = getCardSiblings(card);
 
     // Remove siblings from the page 
