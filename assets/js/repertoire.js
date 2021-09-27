@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+
+    fillWithInitialRepertoire();
     // Init an empty array, retrieve the cards and store them in the array
     let cards = [];
     cards = document.getElementsByClassName('btn-card');
@@ -59,4 +61,54 @@ function getCardSiblings(card) {
     }
 // Return the card siblings array
 return cardSiblings;
+}
+
+async function fillWithInitialRepertoire() {
+    // Store the location of the JSON within a variable
+    let tracks = await fetchInitialJSON('assets/json/initRepertoire.json');
+    console.log(tracks);
+
+    tracks.forEach(track => createCard(track));
+}
+
+
+async function fetchInitialJSON(url) {
+    let response = await fetch(url);
+    return response.json();
+}
+
+function createCard(track) {
+    console.log(track);
+    // Create list element
+    let card = document.createElement("li");
+
+    // Add classes to list element
+    card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1");
+
+    // Add inner HTML within each card
+    card.innerHTML = 
+    `<button class="btn-card">
+    <div class="card gig-card rounded-corners">
+      <div class="card-body row">
+        <div class="col-10 gig-venue">
+          <h3 class="card-title">${track.name}</h3>
+        </div>
+        <div class="col-2 text-end">
+          <i class="fas fa-external-link-alt rep-icon"></i>
+        </div>
+        <div class="col-8 gig-artist">
+          <p class="m-0">${track.artist}</p>
+        </div>
+        <div class="col-4 gig-date text-end">
+          <p class="m-0 badge">${track.key}</p>
+        </div>
+      </div>
+    </div>
+  </button>`;
+
+    // Retrieve the unordered list element (the container/parent)
+    let cardContainer = document.getElementById("list-container");
+
+    // Append card into the container
+    cardContainer.appendChild(card);
 }

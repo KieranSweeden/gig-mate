@@ -1,36 +1,36 @@
 [
     {
-        "track": "Valerie",
+        "name": "Valerie",
         "artist": "Amy Winehouse",
         "key": "Eb Major",
         "bpm": 140
     },
     {
-        "track": "Crazy",
+        "name": "Crazy",
         "artist": "Gnarles Barkley",
         "key": "C Minor",
         "bpm": 115
     },
     {
-        "track": "Walking On Sunshine",
+        "name": "Walking On Sunshine",
         "artist": "Katrina & The Waves",
         "key": "Bb Major",
         "bpm": 162
     },
     {
-        "track": "Proud Mary",
+        "name": "Proud Mary",
         "artist": "Tina Turner",
         "key": "D Major",
         "bpm": 130
     },
     {
-        "track": "Sir Duke",
+        "name": "Sir Duke",
         "artist": "Stevie Wonder",
         "key": "Bb Major",
         "bpm": 156
     },
     {
-        "track": "Treasure",
+        "name": "Treasure",
         "artist": "Bruno Mars",
         "key": "D Minor",
         "bpm": 134
