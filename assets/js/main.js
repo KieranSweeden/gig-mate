@@ -1,3 +1,14 @@
+window.addEventListener("DOMContentLoaded", () => {
+
+    appHeight();
+    
+    determineContentHeight();
+    
+    determineBackButton();
+
+    // addIconHoverState();
+})
+
 // Replaces the href within the back button with the URL of the previous page
 function determineBackButton () {
     // Retrieve the back button
@@ -15,15 +26,12 @@ function determineBackButton () {
     }
 }
 
-determineBackButton();
-
 // Credit: code to adjust viewport height for Safari & Chrome mobile browsers. Fix found from: https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9
 const appHeight = () => {
     const doc = document.documentElement
     doc.style.setProperty('--app-height', `${window.innerHeight}px`)
 }
 window.addEventListener('resize', appHeight);
-appHeight();
 
 /**
  * Determine content section height based on presence of search input in header
@@ -41,34 +49,30 @@ function determineContentHeight () {
     }
 }
 
-determineContentHeight();
+// // Change color of card open icon to represent hovered state
+// function addIconHoverState () {
+//     // Gather a HTML collection of cards
+//     let cards = [];
+//     cards = document.getElementsByClassName('btn-card');
 
-// Change color of card open icon to represent hovered state
-function addIconHoverState () {
-    // Gather a HTML collection of cards
-    let cards = [];
-    cards = document.getElementsByClassName('btn-card');
+//     // Convert the HTML collection into an array
+//     // Credit: method to convert HTML collection into an array was found at: https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+//     let cardsArray = [].slice.call(cards);
 
-    // Convert the HTML collection into an array
-    // Credit: method to convert HTML collection into an array was found at: https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-    let cardsArray = [].slice.call(cards);
+//     // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
+//     cardsArray.forEach(card => {
+//         card.addEventListener('mouseenter', function(){
+//             paintIcon(card)
+//         });
+//         card.addEventListener('mouseleave', function(){
+//             paintIcon(card)
+//         });
+//     })
+//     console.log(cards);
+// }
 
-    // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
-    cardsArray.forEach(card => {
-        card.addEventListener('mouseenter', function(){
-            paintIcon(card)
-        });
-        card.addEventListener('mouseleave', function(){
-            paintIcon(card)
-        });
-    })
-}
-
-// Toggle between classes to paint icon
-function paintIcon (card) {
-    let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
-    icon.classList.toggle("icon-hover");
-}
-
-
-addIconHoverState();
+// // Toggle between classes to paint icon
+// function paintIcon (card) {
+//     let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+//     icon.classList.toggle("icon-hover");
+// }

@@ -66,9 +66,11 @@ return cardSiblings;
 async function fillWithInitialRepertoire() {
     // Store the location of the JSON within a variable
     let tracks = await fetchInitialJSON('assets/json/initRepertoire.json');
-    console.log(tracks);
 
-    tracks.forEach(track => createCard(track));
+    // Create a card for each track
+    tracks.forEach(track => {
+      createCard(track)
+    });
 }
 
 
@@ -78,7 +80,6 @@ async function fetchInitialJSON(url) {
 }
 
 function createCard(track) {
-    console.log(track);
     // Create list element
     let card = document.createElement("li");
 
@@ -106,9 +107,41 @@ function createCard(track) {
     </div>
   </button>`;
 
-    // Retrieve the unordered list element (the container/parent)
-    let cardContainer = document.getElementById("list-container");
+  addIconHoverState(card);
 
-    // Append card into the container
-    cardContainer.appendChild(card);
+  // Retrieve the unordered list element (the container/parent)
+  let cardContainer = document.getElementById("list-container");
+
+  // Append card into the container
+  cardContainer.appendChild(card);
 }
+
+// Change color of card open icon to represent hovered state
+function addIconHoverState () {
+  // Gather a HTML collection of cards
+  let cards = [];
+  cards = document.getElementsByClassName('btn-card');
+
+  // Convert the HTML collection into an array
+  // Credit: method to convert HTML collection into an array was found at: https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
+  let cardsArray = [].slice.call(cards);
+
+  // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
+  cardsArray.forEach(card => {
+      card.addEventListener('mouseenter', function(){
+          paintIcon(card)
+      });
+      card.addEventListener('mouseleave', function(){
+          paintIcon(card)
+      });
+  })
+  console.log(cards);
+}
+
+// Toggle between classes to paint icon
+function paintIcon (card) {
+  let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+  icon.classList.toggle("icon-hover");
+}
+
+
