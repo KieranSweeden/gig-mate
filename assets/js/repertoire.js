@@ -17,7 +17,15 @@ function openCard(card) {
 }
 
 function enlargeCard(card) {
-    console.log(card);
+
+    let cardContainer = card.parentNode.parentNode.parentNode;
+    let cardRow = card.parentNode.parentNode;
+
+    cardContainer.classList.toggle("enlarge");
+    cardRow.classList.toggle("enlarge");
+    card.classList.toggle("enlarge");
+
+    console.log(card.parentNode.parentNode);
 }
 
 function removeSiblingCards(card) {
@@ -25,7 +33,7 @@ function removeSiblingCards(card) {
 
     // Remove siblings from the page 
     siblings.forEach(sibling => {
-        sibling.style.display = "none";
+        sibling.style.display = 'none';
         sibling.classList.toggle('d-flex');
     })
 }

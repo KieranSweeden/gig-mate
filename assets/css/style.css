@@ -306,6 +306,7 @@ header {
     box-shadow: 0 0 0 0.25rem var(--gigmate-primary-shadow);
 }
 
+/* Style X that appears in search input after a few key presses */
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
@@ -317,6 +318,14 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     scroll-behavior: smooth;
 }
 
+#content-section .container-lg.enlarge {
+    height: 100%;
+}
+
+#content-section .container-lg.enlarge .row.enlarge {
+    height: 100%;
+}
+
 .btn-card {
     background-color: var(--gigmate-white);
     border: none;
@@ -325,6 +334,10 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     padding: 0;
     min-width: 18rem;
     width: 40rem;
+}
+
+.btn-card.enlarge {
+    height: 100%;
 }
 
 .btn-card:hover, 
@@ -343,6 +356,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .card {
     border: none;
+    height: 100%;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
 
@@ -367,6 +381,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .gig-card .gig-date p {
     background-color: var(--gigmate-primary);
+    width: 4rem;
 }
 
 .card .card-body {
