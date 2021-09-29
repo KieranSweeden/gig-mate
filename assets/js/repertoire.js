@@ -1,24 +1,24 @@
+// When all DOM content is loaded...
 window.addEventListener('DOMContentLoaded', () => {
-
-    fillWithInitialRepertoire();
-    // Init an empty array, retrieve the cards and store them in the array
+  // ... fill the unordered list with cards
+  fillWithInitialRepertoire();
 })
 
 function addButtonEnlarge(card) {
+  // When the card is clicked, trigger the necessary functions to enlarge it, filling the content section
   card.addEventListener('click', function(){
     openCard(card);
   })
 }
 
 function openCard(card) {
-    // To open the card, we must first remove it's siblings
+    // To open the card, we must first remove it's siblings to provide screen space
     removeSiblingCards(card);
-    // When the siblings are removed, enlarge the card
+    // When the siblings are removed, enlarge the card, it's row & container
     enlargeCard(card);
 }
 
 function enlargeCard(card) {
-
     // Retrieve the card's container & row parents
     let cardContainer = card.parentNode.parentNode;
     let cardRow = card.parentNode;
@@ -70,10 +70,12 @@ async function fillWithInitialRepertoire() {
     });
 }
 
-
+// A utility function that can be used to fetch local JSON files
 async function fetchInitialJSON(url) {
-    let response = await fetch(url);
-    return response.json();
+  // Fetch the JSON with a provided URL and store the promise reponse within a variable
+  let response = await fetch(url);
+  // Return the promise as a JavaScript object using .json()
+  return response.json();
 }
 
 function createCard(track) {
@@ -104,9 +106,10 @@ function createCard(track) {
     </div>
   </button>`;
 
+  // Add the click listener to enlarge to the card
   addButtonEnlarge(card);
 
-  // Add a hover state to the button within the card
+  // Add a hover state to the card
   addIconHover(card.firstElementChild);
 
   // Retrieve the unordered list element (the container/parent)
@@ -118,20 +121,26 @@ function createCard(track) {
 
 // Change color of card open icon to represent hovered state
 function addIconHover (card) {
+  // When hovering over the button area, the icon will turn purple
   card.addEventListener('mouseenter', function(){
     paintIcon(card)
   })
+  // When leaving the button area, the icon will revert to grey
   card.addEventListener('mouseleave', function(){
     paintIcon(card)
   })
 }
 
-// Toggle between classes to paint icon
+// Toggle a class to paint the edit icon
 function paintIcon (card) {
+  // Grab the icon within the card
   let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+  // Check if the icon has a class of icon-hover
   if (icon.classList.contains("icon-hover")){
+    // If so, remove the class to revert back to the grey color
     icon.classList.remove("icon-hover")
   } else {
+    // If not, add the class to turn the icon color to purple
     icon.classList.add("icon-hover");
   }
 }
