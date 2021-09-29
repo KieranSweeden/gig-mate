@@ -34,5 +34,53 @@
         "artist": "Bruno Mars",
         "key": "D Minor",
         "bpm": 134
+    },
+    {
+        "name": "Isn't She Lovely",
+        "artist": "Stevie Wonder",
+        "key": "E Major",
+        "bpm": 145
+    },
+    {
+        "name": "Forget You",
+        "artist": "CeeLo Green",
+        "key": "C Major",
+        "bpm": 126
+    },
+    {
+        "name": "I Got You (I Feel Good)",
+        "artist": "James Brown",
+        "key": "D Major",
+        "bpm": 135
+    },
+    {
+        "name": "Stand By Me",
+        "artist": "Ben E. King",
+        "key": "A Major",
+        "bpm": 113
+    },
+    {
+        "name": "Locked Out Of Heaven",
+        "artist": "Bruno Mars",
+        "key": "D Minor",
+        "bpm": 142
+    },
+    {
+        "name": "Chelsea Dagger",
+        "artist": "The Fratellis",
+        "key": "G Major",
+        "bpm": 153
+    },
+    {
+        "name": "Mr. Brightside",
+        "artist": "The Killers",
+        "key": "D Major",
+        "bpm": 116
+    },
+    {
+        "name": "Blame It On The Boogie",
+        "artist": "Michael Jackson",
+        "key": "Eb Major",
+        "bpm": 147
     }
 ]
