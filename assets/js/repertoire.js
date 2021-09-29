@@ -2,17 +2,13 @@ window.addEventListener('DOMContentLoaded', () => {
 
     fillWithInitialRepertoire();
     // Init an empty array, retrieve the cards and store them in the array
-    let cards = [];
-    cards = document.getElementsByClassName('btn-card');
-    let cardsArray = [].slice.call(cards);
-    
-    // Add a click event for each card that calls a function that opens the clicked card
-    cardsArray.forEach(card => {
-        card.addEventListener('click', function(){
-            openCard(card);
-        });
-    })
 })
+
+function addButtonEnlarge(card) {
+  card.addEventListener('click', function(){
+    openCard(card);
+  })
+}
 
 function openCard(card) {
     // To open the card, we must first remove it's siblings
@@ -23,14 +19,14 @@ function openCard(card) {
 
 function enlargeCard(card) {
 
-    // Retrive the card's container & row parents
-    let cardContainer = card.parentNode.parentNode.parentNode;
-    let cardRow = card.parentNode.parentNode;
+    // Retrieve the card's container & row parents
+    let cardContainer = card.parentNode.parentNode;
+    let cardRow = card.parentNode;
 
     // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
     cardContainer.classList.toggle("enlarge");
     cardRow.classList.toggle("enlarge");
-    card.classList.toggle("enlarge");
+    card.firstElementChild.classList.toggle("enlarge");
 }
 
 function removeSiblingCards(card) {
@@ -48,11 +44,12 @@ function getCardSiblings(card) {
     // An empty array ready to contain siblings
     let cardSiblings = [];
     // Retrieve the first sibling
-    let sibling = card.parentNode.parentNode.firstChild;
+    let sibling = card.parentNode.firstChild;
+
     // Loop through & push each sibling
     while (sibling) {
         // If sibling is an element (nodeType = 1) & is not the original element
-        if (sibling.nodeType === 1 && sibling !== card.parentNode) {
+        if (sibling.nodeType === 1 && sibling !== card) {
             // Push this element to the siblings array
             cardSiblings.push(sibling);
         }
@@ -107,8 +104,10 @@ function createCard(track) {
     </div>
   </button>`;
 
+  addButtonEnlarge(card);
+
   // Add a hover state to the button within the card
-  addIconHoverState(card.firstElementChild);
+  addIconHover(card.firstElementChild);
 
   // Retrieve the unordered list element (the container/parent)
   let cardContainer = document.getElementById("list-container");
@@ -118,7 +117,7 @@ function createCard(track) {
 }
 
 // Change color of card open icon to represent hovered state
-function addIconHoverState (card) {
+function addIconHover (card) {
   card.addEventListener('mouseenter', function(){
     paintIcon(card)
   })
