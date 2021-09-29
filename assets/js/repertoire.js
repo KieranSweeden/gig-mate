@@ -107,7 +107,8 @@ function createCard(track) {
     </div>
   </button>`;
 
-  addIconHoverState(card);
+  // Add a hover state to the button within the card
+  addIconHoverState(card.firstElementChild);
 
   // Retrieve the unordered list element (the container/parent)
   let cardContainer = document.getElementById("list-container");
@@ -117,31 +118,23 @@ function createCard(track) {
 }
 
 // Change color of card open icon to represent hovered state
-function addIconHoverState () {
-  // Gather a HTML collection of cards
-  let cards = [];
-  cards = document.getElementsByClassName('btn-card');
-
-  // Convert the HTML collection into an array
-  // Credit: method to convert HTML collection into an array was found at: https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array
-  let cardsArray = [].slice.call(cards);
-
-  // Add an eventlistener to each card button, which waits for a mouseenter and mouseleave
-  cardsArray.forEach(card => {
-      card.addEventListener('mouseenter', function(){
-          paintIcon(card)
-      });
-      card.addEventListener('mouseleave', function(){
-          paintIcon(card)
-      });
+function addIconHoverState (card) {
+  card.addEventListener('mouseenter', function(){
+    paintIcon(card)
   })
-  console.log(cards);
+  card.addEventListener('mouseleave', function(){
+    paintIcon(card)
+  })
 }
 
 // Toggle between classes to paint icon
 function paintIcon (card) {
   let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
-  icon.classList.toggle("icon-hover");
+  if (icon.classList.contains("icon-hover")){
+    icon.classList.remove("icon-hover")
+  } else {
+    icon.classList.add("icon-hover");
+  }
 }
 
 
