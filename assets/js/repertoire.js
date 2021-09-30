@@ -1,10 +1,29 @@
 // When all DOM content is loaded...
 window.addEventListener('DOMContentLoaded', () => {
+  fillContentSection();
   // ... fill the unordered list with cards
   fillWithInitialRepertoire();
   // ... initialise the footer state
   footerState("viewingRepertoire");
+
+  addJSONToLocalStorage();
 })
+
+function fillContentSection() {
+  let storage = window.localStorage;
+
+  checkLocalStorage(storage);
+}
+
+function checkLocalStorage(storage) {
+  
+}
+
+async function addJSONToLocalStorage() {
+  let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+
+  localStorage.setItem('repertoire', JSON.stringify(repertoire));
+}
 
 async function fillWithInitialRepertoire() {
   // Store the location of the JSON within a variable
@@ -256,6 +275,6 @@ function addSaveBtnListener(saveBtn){
 }
 
 function addAddBtnListener(addBtn){
-  
+
 }
 
