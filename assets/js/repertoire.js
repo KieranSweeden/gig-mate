@@ -33,7 +33,7 @@ function createCard(track) {
 
   // Add inner HTML within each card
   card.innerHTML = 
-  `<button class="btn-card">
+  `<button class="btn-card animate__animated animate__fadeInUp">
     <div class="card gig-card rounded-corners">
       <div class="card-body row">
         <div class="col-10 gig-venue">
@@ -67,7 +67,7 @@ cardContainer.appendChild(card);
 
 function addCardEnlarge(card, track) {
   // When the card is clicked, trigger the necessary functions to enlarge it, filling the content section
-  card.addEventListener('click', function(){
+  card.firstElementChild.addEventListener('click', function(){
     openCard(card, track);
   }, { once: true });
 }
@@ -118,9 +118,9 @@ function enlargeCard(card, track) {
     let cardRow = card.parentNode;
 
     // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
-    cardContainer.classList.toggle("enlarge");
-    cardRow.classList.toggle("enlarge");
-    card.firstElementChild.classList.toggle("enlarge");
+    cardContainer.classList.add("enlarge");
+    cardRow.classList.add("enlarge");
+    card.firstElementChild.classList.add("enlarge");
 
     styleLargeCard(card, track);
 }
@@ -137,15 +137,15 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-12">
       <label for="track-name">Track:</label>
-      <input id="track-name" type="text" placeholder="${track.name}" disabled>
+      <input id="track-name" type="text" placeholder="${track.name}">
     </div>
     <div class="col-12">
       <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" placeholder="${track.artist}" disabled>
+      <input id="track-artist" type="text" placeholder="${track.artist}">
     </div>
     <div class="col-6">
       <label for="track-key">Key:</label>
-      <select name="keys" id="track-key" disabled>
+      <select name="keys" id="track-key">
           <option value="A">A</option>
           <option value="B">B</option>
           <option value="C">C</option>
@@ -157,7 +157,7 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-6">
       <label for="track-tonality">Key:</label>
-      <select name="keys" id="track-tonality" disabled>
+      <select name="keys" id="track-tonality">
           <option value="Major">Major</option>
           <option value="Minor">Minor</option>
       </select>
@@ -192,7 +192,7 @@ function paintIcon (card) {
   if (icon.classList.contains("icon-hover")){
     // If so, remove the class to revert back to the grey color
     icon.classList.remove("icon-hover")
-  } else {
+  }  else {
     // If not, add the class to turn the icon color to purple
     icon.classList.add("icon-hover");
   }
@@ -203,18 +203,59 @@ function footerState(currentState) {
   // Retrieve the footer container
   let btnContainer = document.getElementById("btn-footer-container");
   // Clear the contents within the footer container
-  btnContainer.innerHTML = '';
-
+  btnContainer.innerHTML = "";
+  // If the user is...
   if (currentState === "viewingRepertoire") {
+    // ...viewing the track repertoire, display the back & add buttons
     btnContainer.innerHTML = `
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
-    <button class="btn-bottom"><i class="fas fa-plus"></i></button>
+    <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>
     `;
   } else if (currentState === "editingTrack") {
+    // ...editing a track, display the back & tick buttons
     btnContainer.innerHTML = `
-    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
-    <button class="btn-bottom"><i class="fas fa-check"></i></button>
+    <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>
     `;
   }
+  addButtonListeners(currentState);
+}
+
+function addButtonListeners(currentState){
+  // Retrieve all possible buttons
+  let backBtn = document.getElementById("btn-back");
+  let addBtn = document.getElementById("btn-add");
+  let saveBtn = document.getElementById("btn-save");
+
+
+  if (currentState === "viewingRepertoire") {
+    addAddBtnListener(addBtn);
+  } else if (currentState === "editingTrack") {
+    addSaveBtnListener(saveBtn);
+  }
+}
+
+function clearContentSection () {
+  let contentSection = document.getElementById("list-container");
+  contentSection.innerHTML = "";
+}
+
+function addSaveBtnListener(saveBtn){
+  saveBtn.addEventListener("click", function(){
+    // Save input values into object
+
+    // Remove enlarge classes
+    document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
+    document.getElementById("list-container").classList.remove("enlarge");
+    // Clear the content section
+    clearContentSection();
+    // Fill with repertoire
+    fillWithInitialRepertoire();
+    // Revert buttons to viewing repertoire state
+    footerState("viewingRepertoire");
+  });
+}
+
+function addAddBtnListener(addBtn){
+  
 }
 
