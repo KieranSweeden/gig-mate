@@ -1,38 +1,35 @@
 // When all DOM content is loaded...
 window.addEventListener('DOMContentLoaded', () => {
-  fillContentSection();
+  checkLocalStorage();
   // ... fill the unordered list with cards
-  fillWithInitialRepertoire();
   // ... initialise the footer state
   footerState("viewingRepertoire");
-
-  addJSONToLocalStorage();
 })
 
-function fillContentSection() {
-  let storage = window.localStorage;
-
-  checkLocalStorage(storage);
+function checkLocalStorage() {
+  if (!localStorage.getItem('repertoire')){
+    addJSONToLocalStorage("repertoire");
+  } else {
+    fillWithLocalStorage("repertoire");
+  }
 }
 
-function checkLocalStorage(storage) {
-  
-}
+function fillWithLocalStorage(data){
+  let storageData = localStorage.getItem(data);
 
-async function addJSONToLocalStorage() {
-  let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+  let storageArray = JSON.parse(storageData);
 
-  localStorage.setItem('repertoire', JSON.stringify(repertoire));
-}
-
-async function fillWithInitialRepertoire() {
-  // Store the location of the JSON within a variable
-  let tracks = await fetchInitialJSON('assets/json/initRepertoire.json');
-
-  // Create a card for each track
-  tracks.forEach(track => {
-    createCard(track)
+  storageArray.forEach(element => {
+    createCard(element);
   });
+}
+
+async function addJSONToLocalStorage(data) {
+  if (data === "repertoire") {
+    let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+  
+    localStorage.setItem('repertoire', JSON.stringify(repertoire));
+  }
 }
 
 // A utility function that can be used to fetch local JSON files
@@ -41,7 +38,9 @@ async function fetchInitialJSON(url) {
   let response = await fetch(url);
   // Return the promise as a JavaScript object using .json()
   return response.json();
-  }
+}
+
+
 
 function createCard(track) {
   // Create list element
@@ -268,7 +267,7 @@ function addSaveBtnListener(saveBtn){
     // Clear the content section
     clearContentSection();
     // Fill with repertoire
-    fillWithInitialRepertoire();
+    checkLocalStorage();
     // Revert buttons to viewing repertoire state
     footerState("viewingRepertoire");
   });
