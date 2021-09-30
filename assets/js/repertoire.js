@@ -2,6 +2,8 @@
 window.addEventListener('DOMContentLoaded', () => {
   // ... fill the unordered list with cards
   fillWithInitialRepertoire();
+  // ... initialise the footer state
+  footerState("viewingRepertoire");
 })
 
 async function fillWithInitialRepertoire() {
@@ -67,7 +69,7 @@ function addCardEnlarge(card, track) {
   // When the card is clicked, trigger the necessary functions to enlarge it, filling the content section
   card.addEventListener('click', function(){
     openCard(card, track);
-  }, { once: true })
+  }, { once: true });
 }
 
 function openCard(card, track) {
@@ -75,6 +77,8 @@ function openCard(card, track) {
     removeSiblingCards(card);
     // When the siblings are removed, enlarge the card, it's row & container
     enlargeCard(card, track);
+    // Change the footer state to editing track
+    footerState("editingTrack");
 }
 
 function removeSiblingCards(card) {
@@ -127,7 +131,7 @@ function styleLargeCard(card, track) {
   cardBody.className = 'card-body d-flex justify-content-center align-items-center';
 
   cardBody.innerHTML = `
-  <form class="row justify-content-around align-items-center flex-column h-100">
+  <form class="row justify-content-center align-items-center h-100 w-100">
     <div class="col-12">
       <h3>Edit Track</h3>
     </div>
@@ -158,10 +162,6 @@ function styleLargeCard(card, track) {
           <option value="Minor">Minor</option>
       </select>
     </div>
-    <div class="col-12">
-      <button id="edit-enlarged-btn">Edit</button>
-      <button class="close-enlarged-btn">Back</button>
-    </div>
   </form>
   `;
 
@@ -170,16 +170,6 @@ function styleLargeCard(card, track) {
   let trackArtist = document.getElementById('track-artist');
   let trackKey = document.getElementById('track-key');
   let trackTonality = document.getElementById('track-tonality');
-  let editBtn = document.getElementById('edit-enlarged-btn');
-  let backBtn = document.getElementById('close-enlarged-btn');
-
-  editBtn.addEventListener('click', function(event){
-    event.preventDefault();
-    trackName.toggleAttribute('disabled');
-    trackArtist.toggleAttribute('disabled');
-    trackKey.toggleAttribute('disabled');
-    trackTonality.toggleAttribute('disabled');
-  });
 }
 
 // Change color of card open icon to represent hovered state
@@ -205,6 +195,26 @@ function paintIcon (card) {
   } else {
     // If not, add the class to turn the icon color to purple
     icon.classList.add("icon-hover");
+  }
+}
+
+// Change the buttons within the footer
+function footerState(currentState) {
+  // Retrieve the footer container
+  let btnContainer = document.getElementById("btn-footer-container");
+  // Clear the contents within the footer container
+  btnContainer.innerHTML = '';
+
+  if (currentState === "viewingRepertoire") {
+    btnContainer.innerHTML = `
+    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
+    <button class="btn-bottom"><i class="fas fa-plus"></i></button>
+    `;
+  } else if (currentState === "editingTrack") {
+    btnContainer.innerHTML = `
+    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
+    <button class="btn-bottom"><i class="fas fa-check"></i></button>
+    `;
   }
 }
 
