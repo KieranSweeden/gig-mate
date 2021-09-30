@@ -6,6 +6,7 @@ window.addEventListener('DOMContentLoaded', () => {
   footerState("viewingRepertoire");
 })
 
+// Check the user's local storage, to determine if initial repertoire is needed
 function checkLocalStorage() {
   if (!localStorage.getItem('repertoire')){
     addJSONToLocalStorage("repertoire");
@@ -155,11 +156,11 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-12">
       <label for="track-name">Track:</label>
-      <input id="track-name" type="text" placeholder="${track.name}">
+      <input id="track-name" type="text" value="${track.name}">
     </div>
     <div class="col-12">
       <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" placeholder="${track.artist}">
+      <input id="track-artist" type="text" value="${track.artist}">
     </div>
     <div class="col-6">
       <label for="track-key">Key:</label>
@@ -182,12 +183,6 @@ function styleLargeCard(card, track) {
     </div>
   </form>
   `;
-
-  // Retrieve form elements
-  let trackName = document.getElementById('track-name');
-  let trackArtist = document.getElementById('track-artist');
-  let trackKey = document.getElementById('track-key');
-  let trackTonality = document.getElementById('track-tonality');
 }
 
 // Change color of card open icon to represent hovered state
@@ -259,8 +254,8 @@ function clearContentSection () {
 
 function addSaveBtnListener(saveBtn){
   saveBtn.addEventListener("click", function(){
-    // Save input values into object
-
+    // Get input values
+    getInputValues();
     // Remove enlarge classes
     document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
     document.getElementById("list-container").classList.remove("enlarge");
@@ -271,6 +266,23 @@ function addSaveBtnListener(saveBtn){
     // Revert buttons to viewing repertoire state
     footerState("viewingRepertoire");
   });
+}
+
+function getInputValues() {
+  let openedCard = document.getElementsByClassName("btn-card animate__animated animate__fadeInUp enlarge")[0];
+  let cardForm = openedCard.firstElementChild.firstElementChild.firstElementChild;
+
+  let newTrackName = cardForm.children[1].children[1].value;
+  let newTrackArtist = cardForm.children[2].children[1].value;
+  let newTrackKey = cardForm.children[3].children[1].value;
+  let newTrackTonality = cardForm.children[4].children[1].value;
+
+
+  console.log(newTrackName);
+  console.log(newTrackArtist);
+  console.log(newTrackKey);
+  console.log(newTrackTonality);
+  
 }
 
 function addAddBtnListener(addBtn){
