@@ -1,15 +1,15 @@
 // When all DOM content is loaded...
 window.addEventListener('DOMContentLoaded', () => {
+
   checkLocalStorage();
-  // ... fill the unordered list with cards
   // ... initialise the footer state
   footerState("viewingRepertoire");
 })
 
 // Check the user's local storage, to determine if initial repertoire is needed
-function checkLocalStorage() {
+async function checkLocalStorage() {
   if (!localStorage.getItem('repertoire')){
-    addJSONToLocalStorage("repertoire");
+    await addJSONToLocalStorage("repertoire");
   } else {
     fillWithLocalStorage("repertoire");
   }
@@ -65,7 +65,7 @@ function createCard(track) {
           <p class="m-0">${track.artist}</p>
         </div>
         <div class="col-4 gig-date text-end">
-          <p class="m-0 badge">${track.key}</p>
+          <p class="m-0 badge">${track.key} ${track.tonality}</p>
         </div>
       </div>
     </div>
@@ -165,13 +165,14 @@ function styleLargeCard(card, track) {
     <div class="col-6">
       <label for="track-key">Key:</label>
       <select name="keys" id="track-key">
-          <option value="A">A</option>
-          <option value="B">B</option>
-          <option value="C">C</option>
-          <option value="D">D</option>
-          <option value="E">E</option>
-          <option value="F">F</option>
-          <option value="G">G</option>
+          <option value="${track.key}" selected hidden></option>
+          <option class="key-option" value="A">A</option>
+          <option class="key-option" value="B">B</option>
+          <option class="key-option" value="C">C</option>
+          <option class="key-option" value="D">D</option>
+          <option class="key-option" value="E">E</option>
+          <option class="key-option" value="F">F</option>
+          <option class="key-option" value="G">G</option>
       </select>
     </div>
     <div class="col-6">
@@ -183,6 +184,19 @@ function styleLargeCard(card, track) {
     </div>
   </form>
   `;
+
+  displaySavedKeyAndTonality(card, track);
+}
+
+function displaySavedKeyAndTonality(card, track){
+  let keyOptions = Array.from(document.getElementsByClassName("key-option"));
+
+  // keyOptions.forEach(keyOption => {
+
+  // });
+
+  console.log(keyOptions);
+
 }
 
 // Change color of card open icon to represent hovered state
@@ -278,10 +292,10 @@ function getInputValues() {
   let newTrackTonality = cardForm.children[4].children[1].value;
 
 
-  console.log(newTrackName);
-  console.log(newTrackArtist);
-  console.log(newTrackKey);
-  console.log(newTrackTonality);
+  // console.log(newTrackName);
+  // console.log(newTrackArtist);
+  // console.log(newTrackKey);
+  // console.log(newTrackTonality);
   
 }
 

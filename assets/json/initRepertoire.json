@@ -2,85 +2,99 @@
     {
         "name": "Valerie",
         "artist": "Amy Winehouse",
-        "key": "Eb Major",
+        "key": "Eb",
+        "tonality": "Major",
         "bpm": 140
     },
     {
         "name": "Crazy",
         "artist": "Gnarles Barkley",
-        "key": "C Minor",
+        "key": "C",
+        "tonality": "Minor",
         "bpm": 115
     },
     {
         "name": "Walking On Sunshine",
         "artist": "Katrina & The Waves",
-        "key": "Bb Major",
+        "key": "Bb",
+        "tonality": "Major",
         "bpm": 162
     },
     {
         "name": "Proud Mary",
         "artist": "Tina Turner",
-        "key": "D Major",
+        "key": "D",
+        "tonality": "Major",
         "bpm": 130
     },
     {
         "name": "Sir Duke",
         "artist": "Stevie Wonder",
-        "key": "Bb Major",
+        "key": "Bb",
+        "tonality": "Major",
         "bpm": 156
     },
     {
         "name": "Treasure",
         "artist": "Bruno Mars",
-        "key": "D Minor",
+        "key": "D",
+        "tonality": "Minor",
         "bpm": 134
     },
     {
         "name": "Isn't She Lovely",
         "artist": "Stevie Wonder",
-        "key": "E Major",
+        "key": "E",
+        "tonality": "Major",
         "bpm": 145
     },
     {
         "name": "Forget You",
         "artist": "CeeLo Green",
-        "key": "C Major",
+        "key": "C",
+        "tonality": "Major",
         "bpm": 126
     },
     {
         "name": "I Got You (I Feel Good)",
         "artist": "James Brown",
-        "key": "D Major",
+        "key": "D",
+        "tonality": "Major",
         "bpm": 135
     },
     {
         "name": "Stand By Me",
         "artist": "Ben E. King",
-        "key": "A Major",
+        "key": "A",
+        "tonality": "Major",
         "bpm": 113
     },
     {
         "name": "Locked Out Of Heaven",
         "artist": "Bruno Mars",
-        "key": "D Minor",
+        "key": "D",
+        "tonality": "Minor",
         "bpm": 142
     },
     {
         "name": "Chelsea Dagger",
         "artist": "The Fratellis",
-        "key": "G Major",
+        "key": "G",
+        "tonality": "Major",
         "bpm": 153
     },
     {
         "name": "Mr. Brightside",
         "artist": "The Killers",
-        "key": "D Major",
+        "key": "D",
+        "tonality": "Major",
         "bpm": 116
     },
     {
         "name": "Blame It On The Boogie",
         "artist": "Michael Jackson",
-        "key": "Eb Major",
+        "key": "Eb",
+        "tonality": "Major",
         "bpm": 147
     }
 ]
