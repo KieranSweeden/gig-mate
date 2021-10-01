@@ -10,6 +10,7 @@ To return to the original README file, [click here](README.md).
 
 1. [Bugs](#Bugs)
     - [Fixed Bugs](#Fixed-Bugs)
+    - [Unfixed Bugs](#Unfixed-Bugs)
 
 2. [User Stories Testing](#User-Stories-Testing)
 
@@ -32,6 +33,8 @@ To return to the original README file, [click here](README.md).
         background-color: var(--gigmate-white);
     }
     ```
+<hr>
+
 2. Navbar moving upwards when uncollapsing the dropdown menu
     - When clicking on the hamburger icon, the dropdown navigation menu would appear and push the navbar upwards, making the navbar appear broken.
     - This was solved by giving the container within the navbar a positional value of fixed with adjustments to centre the navigation, with the parent having a positional value of relative.
@@ -46,6 +49,8 @@ To return to the original README file, [click here](README.md).
         }
     }
     ```
+<hr>
+
 3. Container not scrolling when using overflow:scroll
     - Despite applying the value of scroll to the property of overflow that's attached to a container filled with content, the container was not scrolling.
     - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/17295219/overflow-scroll-css-is-not-working-in-the-div) and reading [Ionică Bizău](https://stackoverflow.com/users/1420197/ionic%c4%83-biz%c4%83u)'s answer, I recognised this was because the container I was attempting to add a scroll functionality did not have a declared height. After adding a height property & value, this issue was resolved.
@@ -55,6 +60,8 @@ To return to the original README file, [click here](README.md).
     overflow: scroll;
     }
     ```
+<hr>
+
 4. Scrollbar moving content within container, resulting in an asymmetrical design
     - Although the scrollbar functionality worked as intended, it took up space within the container which pushed the content to the left, resulting in an asymmetrical design which wasn't intended.
     - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/24671317/scrollbar-above-content?rq=1) and reading [Forex](https://stackoverflow.com/users/1384493/forex)'s answer, I realised that instead of scroll, the value of overflow needed to be overlay, which adds scroll functionality and renders the scrollbar above the content rather than within.
@@ -64,6 +71,8 @@ To return to the original README file, [click here](README.md).
     overflow: overlay;
     }
     ```
+<hr>
+
 5. Presence of UI in Safari & Chrome mobile browsers shortening the viewport window
     - As clearly demonstrated in [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by Maciej Trzciński, there's an unfortunate problem in Safari (& Chrome in my experience) on mobile devices, where the browsers calculate the top bar, document window and bottom bar together in their implementation of viewport heights. This created an issue where the window was far larger than expected, which caused elements at the bottom of the window such as the footer, to disappear beneath the browser UI.
     - To fix this, I used the example provided in the article linked above. The fix takes a CSS variable and changes the value of it by obtaining the documentElement value and applying that value to the CSS variable. When applying the CSS variable to a height property within the html & body elements, the window height will adjust to the documentElement value, providing the intented result of having all elements fitting within the page.
@@ -84,6 +93,8 @@ To return to the original README file, [click here](README.md).
     window.addEventListener('resize', appHeight);
     appHeight();
     ```
+<hr>
+
 6. On initial load with no local storage stored, the webpage would store the local JSON files in local storage, however it would not display the intended elements.
     - The webpage contains a function which on DOM load, accesses whether local storage is present within the browser. If there is no presence of local storage, the function pushes stringified JSON to the user's local storage.
     - An issue appeared however, where on initial load the browser would take in the stringified JSON but would not display the contents as intended unless the user refreshes the page. The refreshing of the page solves the issue, but this is obviously not acceptable as a user experience.
