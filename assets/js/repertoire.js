@@ -149,6 +149,23 @@ function getCardSiblings(card) {
 return cardSiblings;
 }
 
+// To create a new track we need to...
+
+// ... remove all cards currently displayed on screen
+
+// ... open up a form that allows the user to create a new track
+
+// ... when the values are entered and the user presses save...
+
+// ... a new object is created using the values given within the form
+
+
+
+
+
+
+
+
 function enlargeCard(card, track) {
     // Retrieve the card's container & row parents
     let cardContainer = card.parentNode.parentNode;

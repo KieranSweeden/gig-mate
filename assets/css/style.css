@@ -343,7 +343,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #enlarged-card {
     max-width: 300px;
-    max-height: 400px;
+    max-height: 300px;
 }
 
 .btn-card:hover, 
