@@ -15,16 +15,6 @@ async function checkLocalStorage() {
   }
 }
 
-function fillWithLocalStorage(data){
-  let storageData = localStorage.getItem(data);
-
-  let storageArray = JSON.parse(storageData);
-
-    storageArray.forEach(element => {
-    createCard(element);
-  });
-}
-
 async function addJSONToLocalStorage(data) {
   if (data === "repertoire") {
     let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
@@ -32,6 +22,30 @@ async function addJSONToLocalStorage(data) {
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
   fillWithLocalStorage(data);
+}
+
+function fillWithLocalStorage(data){
+  let storageData = localStorage.getItem(data);
+
+  let storageArray = JSON.parse(storageData);
+
+  console.log(storageArray);
+
+  storageArray.sort(sortByName);
+
+    storageArray.forEach(element => {
+    createCard(element);
+  });
+}
+
+function sortByName( a, b ) {
+  if ( a.name < b.name ){
+    return -1;
+  }
+  if ( a.name > b.name ){
+    return 1;
+  }
+  return 0;
 }
 
 function getJSONFromLocalStorage(data) {
