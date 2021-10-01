@@ -157,15 +157,30 @@ function createNewTrack() {
   removeAllListItems(cards);
   // ... open up a form that allows the user to create a new track
   openForm("newTrack", cardContainer);
-  // ... when the values are entered and the user presses save...
-  
-  // ... a new object is created using the values given within the form
+  // ... when the values are entered and the user presses save, a new object is created using the values given within the form
   
   // ... we then retrieve the current repertoire stored in local storage in object form
   
   // ... push the new object track into the array retrieved from local storage
   
   // ... push the array with a new track contained within to local storage
+}
+
+function getFormValues(type){
+
+  if (type === "newTrack"){
+    let newTrackValues = {};
+
+    newTrackValues.name = document.getElementById('track-name').value;
+    newTrackValues.artist = document.getElementById('track-artist').value;
+    newTrackValues.key = document.getElementById('track-key').value;
+    newTrackValues.tonality = document.getElementById('track-tonality').value;
+
+    return newTrackValues;
+  }
+
+  console.log(newTrackValues);
+  return newTrackValues;
 }
 
 function removeAllListItems(list){
@@ -199,7 +214,7 @@ function openForm(type, parent){
               <input id="track-artist" type="text" value="" class="rounded-corners">
             </div>
             <div class="col-6">
-              <label for="track-key">Key:</label>
+              <label class="d-block" for="track-key">Key:</label>
               <select name="keys" id="track-key" class="rounded-corners">
                   <option value="" selected="" hidden=""></option>
                   <option class="key-option" value="A">A</option>
@@ -217,7 +232,7 @@ function openForm(type, parent){
               </select>
             </div>
             <div class="col-6">
-              <label for="track-tonality">Key:</label>
+              <label for="track-tonality">Tonality:</label>
               <select name="keys" id="track-tonality" class="rounded-corners">
                   <option value="" selected="" hidden=""></option>
                   <option value="Major">Major</option>
@@ -230,22 +245,16 @@ function openForm(type, parent){
     </button>
   `;
 
-  
-  footerState("addingTrack");
-
   parent.appendChild(newForm);
 
-  formTitle = document.getElementById('form-title');
-  formName = document.getElementById('track-name');
-  formArtist = document.getElementById('track-artist');
-  formKey = document.getElementById('track-key');
-  formTonality = document.getElementById('track-tonality');
-  
-  if(type === "newTrack"){
-    formTitle.textContent = 'New Track';
-    formName.placeholder = 'Enter track name...';
-    formArtist.placeholder = 'Enter track artist...';
+  if (type === "newTrack"){
+    document.getElementById('form-title').textContent = 'New Track';
+    document.getElementById('track-name').placeholder = 'Enter track name...';
+    document.getElementById('track-artist').placeholder = 'Enter track artist...';
   }
+
+
+  footerState("addingTrack");
 }
 
 
@@ -355,9 +364,10 @@ function footerState(currentState, card, track) {
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
     <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>
     `;
-  } else if (currentState === "editingTrack" || "addingTrack") {
-    // ...editing a track, display the back & tick buttons
+  } else if (currentState === "editingTrack" || currentState === "addingTrack") {
+    // ...editing or adding a track, display the back & tick buttons
     btnContainer.innerHTML = `
+    <button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>
     `;
   }
@@ -368,13 +378,17 @@ function addButtonListeners(currentState, card, track){
   // Retrieve all possible buttons
   let backBtn = document.getElementById("btn-back");
   let addBtn = document.getElementById("btn-add");
+  let deleteBtn = document.getElementById("btn-delete");
   let saveBtn = document.getElementById("btn-save");
 
 
   if (currentState === "viewingRepertoire") {
     addAddBtnListener(addBtn);
   } else if (currentState === "editingTrack") {
-    addSaveBtnListener(saveBtn, card, track);
+    addSaveBtnListener(saveBtn, card, track, currentState);
+    addDeleteBtnListener(deleteBtn, card, track, currentState);
+  } else if (currentState === "addingTrack") {
+    addSaveBtnListener(saveBtn, card, track, currentState);
   }
 }
 
@@ -383,11 +397,10 @@ function clearContentSection () {
   contentSection.innerHTML = "";
 }
 
-function addSaveBtnListener(saveBtn, card, track){
-  // Add a click event to the save button
-  saveBtn.addEventListener("click", function(){
-    // Get input values
-    getInputValues(card, track);
+function addDeleteBtnListener(deleteBtn, card, track, currentState) {
+  deleteBtn.addEventListener("click", function(){
+    deleteObject(card, track, currentState)
+
     // Remove enlarge classes
     document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
     document.getElementById("list-container").classList.remove("enlarge");
@@ -398,6 +411,70 @@ function addSaveBtnListener(saveBtn, card, track){
     // Revert buttons to viewing repertoire state
     footerState("viewingRepertoire");
   });
+}
+
+function deleteObject(card, track){
+  console.log(card);
+  console.log(track);
+
+  // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
+  let repertoireArray = getJSONFromLocalStorage("repertoire");
+      
+  // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
+  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
+
+  console.log(trackIndex);
+
+  repertoireArray.splice(trackIndex, 1);
+
+  updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
+}
+
+function addSaveBtnListener(saveBtn, card, track, currentState){
+  // Add a click event to the save button
+  saveBtn.addEventListener("click", function(){
+      if(currentState === "editingTrack"){
+        // Get input values
+        getInputValues(card, track);
+        // Remove enlarge classes
+        document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
+        document.getElementById("list-container").classList.remove("enlarge");
+        // Clear the content section
+        clearContentSection();
+        // Fill with repertoire
+        checkLocalStorage();
+        // Revert buttons to viewing repertoire state
+        footerState("viewingRepertoire");
+      } 
+      
+      else if(currentState === "addingTrack"){
+        // Get input values
+        let formValues = getFormValues("newTrack");
+        // Push input values to local storage
+        pushToLocalStorage("track", formValues);
+        // Clear content section
+        clearContentSection();
+        // Fill with repertoire
+        checkLocalStorage();
+        // Revert buttons to viewing repertoire state
+        footerState("viewingRepertoire");
+      }
+  });
+}
+
+function pushToLocalStorage(type, data){
+
+  // If the data type is track data...
+  if(type === "track"){
+    // ... get the repertoire stored in local storage
+    let repertoireArray = getJSONFromLocalStorage("repertoire");
+    // ... create a new array from the stored repertoire array
+    let newArray = [...repertoireArray];
+    // ... push the new object into the repertoire array
+    newArray.push(data);
+    // ...then update the array in local storage with the new one containing a new object
+    updateLocalStorage("repertoire", JSON.stringify(newArray));
+  }
 }
 
 function getInputValues(card, track) {
@@ -413,7 +490,7 @@ function getInputValues(card, track) {
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
-  trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
+  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
 
   // Update the matching track within the array's values with the ones passed in through the form
   repertoireArray[trackIndex].name = newTrackName;
@@ -428,11 +505,6 @@ function getInputValues(card, track) {
 function updateLocalStorage(key, data) {
   localStorage.setItem(key, data);
 }
-
-
-
-
-
 
 function addAddBtnListener(addBtn){
   addBtn.addEventListener('click', createNewTrack);
