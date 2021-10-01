@@ -452,6 +452,8 @@ To get your own local copy of GigMate:
 
 - Code to convert a HTML collection to an array was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/222841/most-efficient-way-to-convert-an-htmlcollection-to-an-array) by [Harpo](https://stackoverflow.com/users/4525/harpo).
 
+- Code to sort an array of objects by their property values was taken from [this Stack Overflow answer](https://stackoverflow.com/a/1129270/15607265) by [Wogan](https://stackoverflow.com/users/137902/wogan).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).

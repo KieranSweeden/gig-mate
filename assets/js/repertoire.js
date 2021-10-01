@@ -29,8 +29,6 @@ function fillWithLocalStorage(data){
 
   let storageArray = JSON.parse(storageData);
 
-  console.log(storageArray);
-
   storageArray.sort(sortByName);
 
     storageArray.forEach(element => {
@@ -38,6 +36,7 @@ function fillWithLocalStorage(data){
   });
 }
 
+// Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 function sortByName( a, b ) {
   if ( a.name < b.name ){
     return -1;
