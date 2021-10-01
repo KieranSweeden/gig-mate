@@ -124,8 +124,7 @@ function removeSiblingCards(card) {
 
   // Remove siblings from the page 
   siblings.forEach(sibling => {
-      sibling.style.display = 'none';
-      sibling.classList.toggle('d-flex');
+      sibling.remove();
   })
 }
 
@@ -149,16 +148,105 @@ function getCardSiblings(card) {
 return cardSiblings;
 }
 
-// To create a new track we need to...
+function createNewTrack() {
+  // To create a new track we need to...
+  // ... get the container of the cards & the cards themselves
+  let cardContainer = document.getElementById('list-container');
+  let cards = [...cardContainer.children];
+  // ... remove all cards within the container
+  removeAllListItems(cards);
+  // ... open up a form that allows the user to create a new track
+  openForm("newTrack", cardContainer);
+  // ... when the values are entered and the user presses save...
+  
+  // ... a new object is created using the values given within the form
+  
+  // ... we then retrieve the current repertoire stored in local storage in object form
+  
+  // ... push the new object track into the array retrieved from local storage
+  
+  // ... push the array with a new track contained within to local storage
+}
 
-// ... remove all cards currently displayed on screen
+function removeAllListItems(list){
+  list.forEach(listItem => {
+    listItem.remove();
+  })
+}
 
-// ... open up a form that allows the user to create a new track
+function openForm(type, parent){
+  let newForm = document.createElement('li');
 
-// ... when the values are entered and the user presses save...
+  newForm.className = "col-12 d-flex justify-content-center align-items-center my-1";
 
-// ... a new object is created using the values given within the form
+  parent.classList.add('enlarge');
+  parent.parentNode.classList.add('enlarge');
 
+  newForm.innerHTML = `
+    <button class="btn-card animate__animated animate__fadeInUp enlarge">
+      <div class="card gig-card rounded-corners">
+        <div class="card-body d-flex justify-content-center align-items-center">
+          <form id="enlarged-card" class="row justify-content-center align-items-center h-100 w-100">
+            <div class="col-12">
+              <h3 id="form-title"></h3>
+            </div>
+            <div class="col-12">
+              <label for="track-name">Track:</label>
+              <input id="track-name" type="text" value="" class="rounded-corners">
+            </div>
+            <div class="col-12">
+              <label for="track-artist">Artist:</label>
+              <input id="track-artist" type="text" value="" class="rounded-corners">
+            </div>
+            <div class="col-6">
+              <label for="track-key">Key:</label>
+              <select name="keys" id="track-key" class="rounded-corners">
+                  <option value="" selected="" hidden=""></option>
+                  <option class="key-option" value="A">A</option>
+                  <option class="key-option" value="Bb">Bb</option>
+                  <option class="key-option" value="B">B</option>
+                  <option class="key-option" value="C">C</option>
+                  <option class="key-option" value="Db">Db</option>
+                  <option class="key-option" value="D">D</option>
+                  <option class="key-option" value="Eb">Eb</option>
+                  <option class="key-option" value="E">E</option>
+                  <option class="key-option" value="F">F</option>
+                  <option class="key-option" value="Gb">Gb</option>
+                  <option class="key-option" value="G">G</option>
+                  <option class="key-option" value="Ab">Ab</option>
+              </select>
+            </div>
+            <div class="col-6">
+              <label for="track-tonality">Key:</label>
+              <select name="keys" id="track-tonality" class="rounded-corners">
+                  <option value="" selected="" hidden=""></option>
+                  <option value="Major">Major</option>
+                  <option value="Minor">Minor</option>
+              </select>
+            </div>
+          </form>
+        </div>
+      </div>
+    </button>
+  `;
+
+  
+  footerState("addingTrack");
+
+  parent.appendChild(newForm);
+
+  formTitle = document.getElementById('form-title');
+  formName = document.getElementById('track-name');
+  formArtist = document.getElementById('track-artist');
+  formKey = document.getElementById('track-key');
+  formTonality = document.getElementById('track-tonality');
+  
+  if(type === "newTrack"){
+    formTitle.textContent = 'New Track';
+    formName.placeholder = 'Enter track name...';
+    formArtist.placeholder = 'Enter track artist...';
+  }
+}
 
 
 
@@ -267,7 +355,7 @@ function footerState(currentState, card, track) {
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
     <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>
     `;
-  } else if (currentState === "editingTrack") {
+  } else if (currentState === "editingTrack" || "addingTrack") {
     // ...editing a track, display the back & tick buttons
     btnContainer.innerHTML = `
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>
@@ -347,6 +435,6 @@ function updateLocalStorage(key, data) {
 
 
 function addAddBtnListener(addBtn){
-
+  addBtn.addEventListener('click', createNewTrack);
 }
 
