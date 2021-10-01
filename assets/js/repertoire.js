@@ -33,6 +33,12 @@ async function addJSONToLocalStorage(data) {
   }
 }
 
+function getJSONFromLocalStorage(data) {
+  if (data === "repertoire") { 
+    return JSON.parse(localStorage.getItem('repertoire'));
+  }
+}
+
 // A utility function that can be used to fetch local JSON files
 async function fetchInitialJSON(url) {
   // Fetch the JSON with a provided URL and store the promise reponse within a variable
@@ -40,8 +46,6 @@ async function fetchInitialJSON(url) {
   // Return the promise as a JavaScript object using .json()
   return response.json();
 }
-
-
 
 function createCard(track) {
   // Create list element
@@ -97,7 +101,7 @@ function openCard(card, track) {
     // When the siblings are removed, enlarge the card, it's row & container
     enlargeCard(card, track);
     // Change the footer state to editing track
-    footerState("editingTrack");
+    footerState("editingTrack", card, track);
 }
 
 function removeSiblingCards(card) {
@@ -156,11 +160,11 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-12">
       <label for="track-name">Track:</label>
-      <input id="track-name" type="text" value=${track.name}>
+      <input id="track-name" type="text" value="${track.name}">
     </div>
     <div class="col-12">
       <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" value=${track.artist}>
+      <input id="track-artist" type="text" value="${track.artist}">
     </div>
     <div class="col-6">
       <label for="track-key">Key:</label>
@@ -190,20 +194,8 @@ function styleLargeCard(card, track) {
     </div>
   </form>
   `;
-
-  displaySavedKeyAndTonality(card, track);
 }
 
-function displaySavedKeyAndTonality(card, track){
-  let keyOptions = Array.from(document.getElementsByClassName("key-option"));
-
-  // keyOptions.forEach(keyOption => {
-
-  // });
-
-  console.log(keyOptions);
-
-}
 
 // Change color of card open icon to represent hovered state
 function addIconHover (card) {
@@ -232,7 +224,7 @@ function paintIcon (card) {
 }
 
 // Change the buttons within the footer
-function footerState(currentState) {
+function footerState(currentState, card, track) {
   // Retrieve the footer container
   let btnContainer = document.getElementById("btn-footer-container");
   // Clear the contents within the footer container
@@ -250,10 +242,10 @@ function footerState(currentState) {
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>
     `;
   }
-  addButtonListeners(currentState);
+  addButtonListeners(currentState, card, track);
 }
 
-function addButtonListeners(currentState){
+function addButtonListeners(currentState, card, track){
   // Retrieve all possible buttons
   let backBtn = document.getElementById("btn-back");
   let addBtn = document.getElementById("btn-add");
@@ -263,7 +255,7 @@ function addButtonListeners(currentState){
   if (currentState === "viewingRepertoire") {
     addAddBtnListener(addBtn);
   } else if (currentState === "editingTrack") {
-    addSaveBtnListener(saveBtn);
+    addSaveBtnListener(saveBtn, card, track);
   }
 }
 
@@ -272,10 +264,11 @@ function clearContentSection () {
   contentSection.innerHTML = "";
 }
 
-function addSaveBtnListener(saveBtn){
+function addSaveBtnListener(saveBtn, card, track){
+  // Add a click event to the save button
   saveBtn.addEventListener("click", function(){
     // Get input values
-    getInputValues();
+    getInputValues(card, track);
     // Remove enlarge classes
     document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
     document.getElementById("list-container").classList.remove("enlarge");
@@ -288,22 +281,38 @@ function addSaveBtnListener(saveBtn){
   });
 }
 
-function getInputValues() {
-  let openedCard = document.getElementsByClassName("btn-card animate__animated animate__fadeInUp enlarge")[0];
-  let cardForm = openedCard.firstElementChild.firstElementChild.firstElementChild;
+function getInputValues(card, track) {
 
+  // Retrieve the values contained within the form elements
+  let cardForm = card.firstElementChild.firstElementChild.firstElementChild.firstElementChild;
   let newTrackName = cardForm.children[1].children[1].value;
   let newTrackArtist = cardForm.children[2].children[1].value;
   let newTrackKey = cardForm.children[3].children[1].value;
   let newTrackTonality = cardForm.children[4].children[1].value;
 
+  // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
+  let repertoireArray = getJSONFromLocalStorage("repertoire");
+      
+  // Find the index of the track in local storage that has the same name as the saved one, store that index in a variable
+  trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === newTrackName));
 
-  // console.log(newTrackName);
-  // console.log(newTrackArtist);
-  // console.log(newTrackKey);
-  // console.log(newTrackTonality);
-  
+  // Update the matching track within the array's values with the ones passed in through the form
+  repertoireArray[trackIndex].artist = newTrackArtist;
+  repertoireArray[trackIndex].key = newTrackKey;
+  repertoireArray[trackIndex].tonality = newTrackTonality;
+
+  // Update local storage with the new array containing the updated track information
+  updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
 }
+
+function updateLocalStorage(key, data) {
+  localStorage.setItem(key, data);
+}
+
+
+
+
+
 
 function addAddBtnListener(addBtn){
 
