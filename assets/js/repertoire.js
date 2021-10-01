@@ -31,6 +31,7 @@ async function addJSONToLocalStorage(data) {
   
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
+  fillWithLocalStorage("repertoire");
 }
 
 function getJSONFromLocalStorage(data) {
@@ -293,10 +294,11 @@ function getInputValues(card, track) {
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
-  // Find the index of the track in local storage that has the same name as the saved one, store that index in a variable
-  trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === newTrackName));
+  // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
+  trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
 
   // Update the matching track within the array's values with the ones passed in through the form
+  repertoireArray[trackIndex].name = newTrackName;
   repertoireArray[trackIndex].artist = newTrackArtist;
   repertoireArray[trackIndex].key = newTrackKey;
   repertoireArray[trackIndex].tonality = newTrackTonality;
