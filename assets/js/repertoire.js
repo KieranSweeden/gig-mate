@@ -31,7 +31,7 @@ async function addJSONToLocalStorage(data) {
   
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
-  fillWithLocalStorage("repertoire");
+  fillWithLocalStorage(data);
 }
 
 function getJSONFromLocalStorage(data) {

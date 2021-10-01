@@ -84,6 +84,31 @@ To return to the original README file, [click here](README.md).
     window.addEventListener('resize', appHeight);
     appHeight();
     ```
+6. On initial load with no local storage stored, the webpage would store the local JSON files in local storage, however it would not display the intended elements.
+    - The webpage contains a function which on DOM load, accesses whether local storage is present within the browser. If there is no presence of local storage, the function pushes stringified JSON to the user's local storage.
+    - An issue appeared however, where on initial load the browser would take in the stringified JSON but would not display the contents as intended unless the user refreshes the page. The refreshing of the page solves the issue, but this is obviously not acceptable as a user experience.
+    - The bug was promptly fixed as I had realised the fillWithLocalStorage function was only working when presence of local storage was found. Applying the function after the addJSONToLocalStorage function promptly fixed the issue.
+    ```
+    *repertoire.js*
+
+    async function checkLocalStorage() {
+        if (!localStorage.getItem('repertoire')){
+            addJSONToLocalStorage("repertoire");
+        } else {
+            fillWithLocalStorage("repertoire");
+        }
+    }
+
+    async function addJSONToLocalStorage(data) {
+        if (data === "repertoire") {
+            let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+            localStorage.setItem('repertoire', JSON.stringify(repertoire));
+        }
+        fillWithLocalStorage(data);
+    }   
+    ```
+
+
 ## Unfixed Bugs
 
 
