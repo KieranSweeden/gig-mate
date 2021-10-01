@@ -168,21 +168,21 @@ function styleLargeCard(card, track) {
   cardBody.className = 'card-body d-flex justify-content-center align-items-center';
 
   cardBody.innerHTML = `
-  <form class="row justify-content-center align-items-center h-100 w-100">
+  <form id="enlarged-card" class="row justify-content-center align-items-center h-100 w-100">
     <div class="col-12">
       <h3>Edit Track</h3>
     </div>
     <div class="col-12">
       <label for="track-name">Track:</label>
-      <input id="track-name" type="text" value="${track.name}">
+      <input id="track-name" type="text" value="${track.name}" class="rounded-corners">
     </div>
     <div class="col-12">
       <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" value="${track.artist}">
+      <input id="track-artist" type="text" value="${track.artist}" class="rounded-corners">
     </div>
     <div class="col-6">
       <label for="track-key">Key:</label>
-      <select name="keys" id="track-key">
+      <select name="keys" id="track-key" class="rounded-corners">
           <option value="${track.key}" selected hidden>${track.key}</option>
           <option class="key-option" value="A">A</option>
           <option class="key-option" value="Bb">Bb</option>
@@ -200,7 +200,7 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-6">
       <label for="track-tonality">Key:</label>
-      <select name="keys" id="track-tonality">
+      <select name="keys" id="track-tonality" class="rounded-corners">
           <option value="${track.tonality}" selected hidden>${track.tonality}</option>
           <option value="Major">Major</option>
           <option value="Minor">Minor</option>
