@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 // Check the user's local storage, to determine if initial repertoire is needed
 async function checkLocalStorage() {
   if (!localStorage.getItem('repertoire')){
-    await addJSONToLocalStorage("repertoire");
+    addJSONToLocalStorage("repertoire");
   } else {
     fillWithLocalStorage("repertoire");
   }
@@ -20,7 +20,7 @@ function fillWithLocalStorage(data){
 
   let storageArray = JSON.parse(storageData);
 
-  storageArray.forEach(element => {
+    storageArray.forEach(element => {
     createCard(element);
   });
 }
@@ -156,28 +156,34 @@ function styleLargeCard(card, track) {
     </div>
     <div class="col-12">
       <label for="track-name">Track:</label>
-      <input id="track-name" type="text" value="${track.name}">
+      <input id="track-name" type="text" value=${track.name}>
     </div>
     <div class="col-12">
       <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" value="${track.artist}">
+      <input id="track-artist" type="text" value=${track.artist}>
     </div>
     <div class="col-6">
       <label for="track-key">Key:</label>
       <select name="keys" id="track-key">
-          <option value="${track.key}" selected hidden></option>
+          <option value="${track.key}" selected hidden>${track.key}</option>
           <option class="key-option" value="A">A</option>
+          <option class="key-option" value="Bb">Bb</option>
           <option class="key-option" value="B">B</option>
           <option class="key-option" value="C">C</option>
+          <option class="key-option" value="Db">Db</option>
           <option class="key-option" value="D">D</option>
+          <option class="key-option" value="Eb">Eb</option>
           <option class="key-option" value="E">E</option>
           <option class="key-option" value="F">F</option>
+          <option class="key-option" value="Gb">Gb</option>
           <option class="key-option" value="G">G</option>
+          <option class="key-option" value="Ab">Ab</option>
       </select>
     </div>
     <div class="col-6">
       <label for="track-tonality">Key:</label>
       <select name="keys" id="track-tonality">
+          <option value="${track.tonality}" selected hidden>${track.tonality}</option>
           <option value="Major">Major</option>
           <option value="Minor">Minor</option>
       </select>
