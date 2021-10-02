@@ -26,12 +26,14 @@ function determineContentType() {
     return contentType;
 }
 
-function startGigMate(contentType) {
+async function startGigMate(contentType) {
     // Firstly, start local storage functionality to determine what data items GigMate will be working with
-    startLocalStorage(contentType);
+    let contentData = await collectLocalStorage(contentType);
+
+    console.log(contentData);
 }
 
-async function startLocalStorage(contentType) {
+async function collectLocalStorage(contentType) {
     // Check if there is already data present within local storage
     let hasLocalStorage = checkLocalStorage(contentType);
 
@@ -41,13 +43,14 @@ async function startLocalStorage(contentType) {
     // If there is...
     if (hasLocalStorage === true) {
         // ...local storage, retrieve the data from local storage
-        contentData = retrieveLocalStorageData(contentType);
+        contentData = getLocalStorageData(contentType);
     } else if (hasLocalStorage === false) {
         // ...no local storage, start GigMate with the appropriate initialised json file
         await addInitialisedJSONToLocalStorage(contentType);
         // Once the data has been added, retrieve the data from local storage
-        contentData = retrieveLocalStorageData(contentType);
+        contentData = getLocalStorageData(contentType);
     }
+    return contentData;
 }
 
 function checkLocalStorage(contentType) {
@@ -55,7 +58,7 @@ function checkLocalStorage(contentType) {
     return (localStorage.hasOwnProperty(contentType)) ? true : false;
 }
 
-function retrieveLocalStorageData(contentType) {
+function getLocalStorageData(contentType) {
     // Parse the stringified JSON recieved from local storage & return it
     return JSON.parse(localStorage.getItem(contentType));
 }

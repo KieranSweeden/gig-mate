@@ -118,6 +118,20 @@ To return to the original README file, [click here](README.md).
         fillWithLocalStorage(data);
     }   
     ```
+<hr>
+
+7. Retrieving local storage data using async/await returns promise instead of the intended data.
+    - When the DOM loads, a bunch of functions are called to retrieve data from local storage, this was doing using async/await.
+    - However when attempting to store returned values from an asynchronous function into a variable (called *contentData* in this case), the variable would store a promise instead of the data.
+    - After viewing [this Stack Overflow answer](https://stackoverflow.com/a/43422983/15607265) however, I realised that every async function returns a promise object. Adding await before function solved this problem.
+    ```
+    *setlists.js"
+
+    async function startGigMate(contentType) {
+        // Firstly, start local storage functionality to determine what data items GigMate will be working with
+        let contentData = await collectLocalStorage(contentType);
+    }
+    ```
 
 
 ## Unfixed Bugs
