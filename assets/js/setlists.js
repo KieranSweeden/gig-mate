@@ -32,17 +32,22 @@ function startGigMate(contentType) {
     startLocalStorage(contentType);
 }
 
-function startLocalStorage(contentType) {
+async function startLocalStorage(contentType) {
     // Check if there is already data present within local storage
     let hasLocalStorage = checkLocalStorage(contentType);
+
+    // Initialise a variable that will store the recieved parsed JSON file data
+    let contentData;
 
     // If there is...
     if (hasLocalStorage === true) {
         // ...local storage, retrieve the data from local storage
-        retrieveLocalStorageData(contentType);
+        contentData = retrieveLocalStorageData(contentType);
     } else if (hasLocalStorage === false) {
         // ...no local storage, start GigMate with the appropriate initialised json file
-        addInitialisedJSONToLocalStorage(contentType);
+        await addInitialisedJSONToLocalStorage(contentType);
+        // Once the data has been added, retrieve the data from local storage
+        contentData = retrieveLocalStorageData(contentType);
     }
 }
 
@@ -52,7 +57,7 @@ function checkLocalStorage(contentType) {
 }
 
 function retrieveLocalStorageData(contentType) {
-
+    return JSON.parse(localStorage.getItem(contentType));
 }
 
 async function addInitialisedJSONToLocalStorage(contentType) {
