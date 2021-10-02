@@ -54,6 +54,12 @@
         "tonality": "Major"
     },
     {
+        "name": "Uptown Funk",
+        "artist": "Bruno Mars",
+        "key": "D",
+        "tonality": "Major"
+    },
+    {
         "name": "Stand By Me",
         "artist": "Ben E. King",
         "key": "A",
@@ -66,6 +72,30 @@
         "tonality": "Minor"
     },
     {
+        "name": "Happy",
+        "artist": "Pharrell Williams",
+        "key": "F",
+        "tonality": "Major"
+    },
+    {
+        "name": "Mustang Sally",
+        "artist": "Wilson Pickett",
+        "key": "C",
+        "tonality": "Major"
+    },
+    {
+        "name": "Sweet Child O'Mine",
+        "artist": "Guns N' Roses",
+        "key": "D",
+        "tonality": "Major"
+    },
+    {
+        "name": "Dancing In The Street",
+        "artist": "Martha And The Vandellas",
+        "key": "D",
+        "tonality": "Major"
+    },
+    {
         "name": "Chelsea Dagger",
         "artist": "The Fratellis",
         "key": "G",
@@ -75,6 +105,114 @@
         "name": "Mr. Brightside",
         "artist": "The Killers",
         "key": "D",
+        "tonality": "Major"
+    },
+    {
+        "name": "Get Lucky",
+        "artist": "Daft Punk",
+        "key": "Gb",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Wonderwall",
+        "artist": "Oasis",
+        "key": "Gb",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Message In A Bottle",
+        "artist": "The Police",
+        "key": "Db",
+        "tonality": "Minor"
+    },
+    {
+        "name": "September",
+        "artist": "Earth, Wind & Fire",
+        "key": "A",
+        "tonality": "Major"
+    },
+    {
+        "name": "Dance With Somebody",
+        "artist": "Whitney Houston",
+        "key": "Gb",
+        "tonality": "Major"
+    },
+    {
+        "name": "I Kissed A Girl",
+        "artist": "Katy Perry",
+        "key": "A",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Get Lucky",
+        "artist": "Daft Punk",
+        "key": "Gb",
+        "tonality": "Minor"
+    },
+    {
+        "name": "The Best",
+        "artist": "Tina Turner",
+        "key": "E",
+        "tonality": "Major"
+    },
+    {
+        "name": "Respect",
+        "artist": "Arethra Franklin",
+        "key": "Bb",
+        "tonality": "Major"
+    },
+    {
+        "name": "Hot N Cold",
+        "artist": "Katy Perry",
+        "key": "C",
+        "tonality": "Major"
+    },
+    {
+        "name": "Just The Way You Are",
+        "artist": "Bruno Mars",
+        "key": "F",
+        "tonality": "Major"
+    },
+    {
+        "name": "Don't Start Now",
+        "artist": "Dua Lipa",
+        "key": "B",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Go Your Own Way",
+        "artist": "Fleetwood Mac",
+        "key": "F",
+        "tonality": "Major"
+    },
+    {
+        "name": "Crazy Little Thing Called Love",
+        "artist": "Queen",
+        "key": "D",
+        "tonality": "Major"
+    },
+    {
+        "name": "I Bet You Look Good On The Dancefloor",
+        "artist": "Arctic Monkeys",
+        "key": "Gb",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Take Me Out",
+        "artist": "Franz Ferdinand",
+        "key": "E",
+        "tonality": "Minor"
+    },
+    {
+        "name": "Use Somebody",
+        "artist": "Kings Of Leon",
+        "key": "C",
+        "tonality": "Major"
+    },
+    {
+        "name": "Sex On Fire",
+        "artist": "Kings Of Leon",
+        "key": "E",
         "tonality": "Major"
     },
     {
