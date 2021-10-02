@@ -22,7 +22,6 @@ function determineContentType() {
     } else if (currentPage === "/gigs.html") {
         contentType = "gigs";
     }
-
     // Return the content type variable
     return contentType;
 }
@@ -57,6 +56,7 @@ function checkLocalStorage(contentType) {
 }
 
 function retrieveLocalStorageData(contentType) {
+    // Parse the stringified JSON recieved from local storage & return it
     return JSON.parse(localStorage.getItem(contentType));
 }
 
