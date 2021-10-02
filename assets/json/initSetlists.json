@@ -1,0 +1,256 @@
+[
+    {
+        "setlistName": "Soul & Pop",
+        "set1": [
+            {
+                "name": "Treasure",
+                "artist": "Bruno Mars",
+                "key": "D",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Isn't She Lovely",
+                "artist": "Stevie Wonder",
+                "key": "E",
+                "tonality": "Major"
+            },
+            {
+                "name": "Forget You",
+                "artist": "CeeLo Green",
+                "key": "C",
+                "tonality": "Major"
+            },
+            {
+                "name": "I Got You (I Feel Good)",
+                "artist": "James Brown",
+                "key": "D",
+                "tonality": "Major"
+            },
+            {
+                "name": "Stand By Me",
+                "artist": "Ben E. King",
+                "key": "A",
+                "tonality": "Major"
+            },
+            {
+                "name": "Mustang Sally",
+                "artist": "Wilson Pickett",
+                "key": "C",
+                "tonality": "Major"
+            },
+            {
+                "name": "Dancing In The Street",
+                "artist": "Martha And The Vandellas",
+                "key": "D",
+                "tonality": "Major"
+            },
+            {
+                "name": "Get Lucky",
+                "artist": "Daft Punk",
+                "key": "Gb",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Respect",
+                "artist": "Arethra Franklin",
+                "key": "Bb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Crazy Little Thing Called Love",
+                "artist": "Queen",
+                "key": "D",
+                "tonality": "Major"
+            }
+        ],
+        "set2": [
+            {
+                "name": "Dance With Somebody",
+                "artist": "Whitney Houston",
+                "key": "Gb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Happy",
+                "artist": "Pharrell Williams",
+                "key": "F",
+                "tonality": "Major"
+            },
+            {
+                "name": "Locked Out Of Heaven",
+                "artist": "Bruno Mars",
+                "key": "D",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Walking On Sunshine",
+                "artist": "Katrina & The Waves",
+                "key": "Bb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Valerie",
+                "artist": "Amy Winehouse",
+                "key": "Eb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Sir Duke",
+                "artist": "Stevie Wonder",
+                "key": "Bb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Blame It On The Boogie",
+                "artist": "Michael Jackson",
+                "key": "Eb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Don't Start Now",
+                "artist": "Dua Lipa",
+                "key": "B",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Proud Mary",
+                "artist": "Tina Turner",
+                "key": "D",
+                "tonality": "Major"
+            },
+            {
+                "name": "The Best",
+                "artist": "Tina Turner",
+                "key": "E",
+                "tonality": "Major"
+            }
+        ]
+    },
+    {
+        "setlistName": "Pop & Rock",
+        "set1": [
+            {
+                "name": "Treasure",
+                "artist": "Bruno Mars",
+                "key": "D",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Isn't She Lovely",
+                "artist": "Stevie Wonder",
+                "key": "E",
+                "tonality": "Major"
+            },
+            {
+                "name": "Forget You",
+                "artist": "CeeLo Green",
+                "key": "C",
+                "tonality": "Major"
+            },
+            {
+                "name": "Happy",
+                "artist": "Pharrell Williams",
+                "key": "F",
+                "tonality": "Major"
+            },
+            {
+                "name": "Don't Start Now",
+                "artist": "Dua Lipa",
+                "key": "B",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Locked Out Of Heaven",
+                "artist": "Bruno Mars",
+                "key": "D",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Blame It On The Boogie",
+                "artist": "Michael Jackson",
+                "key": "Eb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Get Lucky",
+                "artist": "Daft Punk",
+                "key": "Gb",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Valerie",
+                "artist": "Amy Winehouse",
+                "key": "Eb",
+                "tonality": "Major"
+            },
+            {
+                "name": "Crazy Little Thing Called Love",
+                "artist": "Queen",
+                "key": "D",
+                "tonality": "Major"
+            }
+        ],
+        "set2": [
+            {
+                "name": "Message In A Bottle",
+                "artist": "The Police",
+                "key": "Db",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Wonderwall",
+                "artist": "Oasis",
+                "key": "Gb",
+                "tonality": "Minor"
+            },
+            {
+                "name": "I Bet You Look Good On The Dancefloor",
+                "artist": "Arctic Monkeys",
+                "key": "Gb",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Go Your Own Way",
+                "artist": "Fleetwood Mac",
+                "key": "F",
+                "tonality": "Major"
+            },
+            {
+                "name": "Chelsea Dagger",
+                "artist": "The Fratellis",
+                "key": "G",
+                "tonality": "Major"
+            },
+            {
+                "name": "Take Me Out",
+                "artist": "Franz Ferdinand",
+                "key": "E",
+                "tonality": "Minor"
+            },
+            {
+                "name": "Sex On Fire",
+                "artist": "Kings Of Leon",
+                "key": "E",
+                "tonality": "Major"
+            },
+            {
+                "name": "Sweet Child O'Mine",
+                "artist": "Guns N' Roses",
+                "key": "D",
+                "tonality": "Major"
+            },
+            {
+                "name": "Use Somebody",
+                "artist": "Kings Of Leon",
+                "key": "C",
+                "tonality": "Major"
+            },
+            {
+                "name": "Mr. Brightside",
+                "artist": "The Killers",
+                "key": "D",
+                "tonality": "Major"
+            }
+        ]
+    }
+]
