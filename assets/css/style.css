@@ -264,6 +264,10 @@ header {
     justify-self: center;
 }
 
+.accordion-item {
+    list-style: none;
+}
+
 /* Repertoire.html styling */
 
 .content-container {

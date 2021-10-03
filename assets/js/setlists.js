@@ -30,7 +30,11 @@ async function startGigMate(contentType) {
     // Firstly, start local storage functionality to determine what data items GigMate will be working with
     let contentData = await collectLocalStorage(contentType);
 
-    console.log(contentData);
+    // If the content type is...
+    if(contentType = "setlists") {
+        // ... setlists, create setlists
+        createSetlists(contentData);
+    }
 }
 
 async function collectLocalStorage(contentType) {
@@ -86,6 +90,7 @@ async function addInitialisedJSONToLocalStorage(contentType) {
 async function getJSONData(pathToJSONFile) {
     // Fetch & store the data contained within the JSON file
     let fileData = await fetch(pathToJSONFile);
+
     // Collect the json within the fileData promise and return it
     return fileData.json();
 }
@@ -93,4 +98,61 @@ async function getJSONData(pathToJSONFile) {
 function pushToLocalStorage(contentType, localJSONData) {
     // Push the contentType(key) & localJSONData(value) to local storage
     localStorage.setItem(contentType, JSON.stringify(localJSONData));
+}
+
+function createSetlists(setlists){
+    // To create a setlist...
+
+    setlists.forEach(setlist => {
+        console.log(setlist);
+        let accordion = contentTemplates("setlistAccordion", setlist);
+        console.log(accordion);
+    })
+
+}
+
+function contentTemplates(request, contentData){
+    // This function contains all templates that are used within GigMate
+
+    // Initialise a variable to store the template
+    let template;
+
+    // If the request is...
+    if(request === "setlistAccordion"){
+        // ... a setlist accordion, create a reference of the setlistname without spaces so the accordion can function properly
+        let reference = removeSpaces(contentData.setlistName);
+
+        // ... then assign the template variable to the setlist template with data & references attached
+        template = 
+        `
+        <li class="accordion-item">
+            <h2 class="accordion-header" id="heading${reference}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${reference}" aria-expanded="false" aria-controls="collapse${reference}">
+                ${contentData.setlistName}
+              </button>
+            </h2>
+            <div id="collapse${reference}" class="accordion-collapse collapse" aria-labelledby="heading${reference}" data-bs-parent="#setlistAccordion">
+              <div class="accordion-body p-0">
+                <ul class="list-group list-group-flush">
+                  <button type="button" class="list-group-item list-group-item-action">
+                    Set 1
+                  </button>
+                  <button type="button" class="list-group-item list-group-item-action">Set 2</button>
+                  <button type="button" class="list-group-item list-group-item-action">Set 3</button>
+                </ul>
+              </div>
+            </div>
+          </li>
+        `;
+
+        // ... then return the template variable containing the completed setlist element
+        return template;
+    }
+    return template;
+}
+
+// Credit: the code below that removes spaces within strings was found from: https://stackoverflow.com/a/51321865/15607265
+function removeSpaces(string){
+    // Return the received string without spaces
+    return string.replace(/ /g, '');
 }
