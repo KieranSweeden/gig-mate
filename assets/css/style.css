@@ -259,13 +259,29 @@ header {
 
 /* Setlists.html styling */
 
+#content-section .container-lg .row {
+    justify-content: center;
+}
+
 #setlistAccordion {
-    align-self: center;
-    justify-self: center;
+    max-width: 40rem;
 }
 
 .accordion-item {
     list-style: none;
+}
+
+.list-group-item {
+    padding: 0;
+}
+
+.list-group-btn {
+    height: 100%;
+    width: 100%;
+    border: none;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    background-color: var(--gigmate-white);
 }
 
 /* Repertoire.html styling */
