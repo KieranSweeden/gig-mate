@@ -132,18 +132,12 @@ function contentTemplates(request, contentData){
               </button>
             </h2>
             <div id="collapse${reference}" class="accordion-collapse collapse" aria-labelledby="heading${reference}" data-bs-parent="#setlistAccordion">
-              <div class="accordion-body p-0">
-                <ul class="list-group list-group-flush">
-                  <button type="button" class="list-group-item list-group-item-action">
-                    Set 1
-                  </button>
-                  <button type="button" class="list-group-item list-group-item-action">Set 2</button>
-                  <button type="button" class="list-group-item list-group-item-action">Set 3</button>
-                </ul>
-              </div>
+              <div class="accordion-body p-0"></div>
             </div>
           </li>
         `;
+
+        let sets = insertSets(contentData);
 
         // ... then return the template variable containing the completed setlist element
         return template;
@@ -155,4 +149,18 @@ function contentTemplates(request, contentData){
 function removeSpaces(string){
     // Return the received string without spaces
     return string.replace(/ /g, '');
+}
+
+function insertSets(setlist){
+
+    let setListItemTemplate = 
+    `
+    <li class="list-group-item list-group-item-action">
+        <button type="button" class="list-group-btn">Set 1</button>
+    </li>
+    `;
+
+    if (setlist.hasOwnProperty("set1")){
+        
+    }
 }

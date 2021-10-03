@@ -265,10 +265,19 @@ header {
 
 #setlistAccordion {
     max-width: 40rem;
+    padding: 0;
+    margin: 0;
+    border: none;
+    overflow: hidden;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    border-radius: var(--gigmate-border-radius);
 }
 
 .accordion-item {
     list-style: none;
+    border: none;
+    border-bottom: 5px solid var(--gigmate-primary-white);
+    overflow: hidden;
 }
 
 .list-group-item {
