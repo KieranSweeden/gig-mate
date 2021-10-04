@@ -33,8 +33,11 @@ async function startGigMate(contentType) {
     // If the content type is...
     if(contentType = "setlists") {
         // ... setlists, create setlists
-        createSetlists(contentData);
+        displaySetlists(contentData);
     }
+
+    // Determing what footer buttons should be present
+    determineFooterButtons(contentType, "viewing", contentData);
 }
 
 async function collectLocalStorage(contentType) {
@@ -100,16 +103,82 @@ function pushToLocalStorage(contentType, localJSONData) {
     localStorage.setItem(contentType, JSON.stringify(localJSONData));
 }
 
-function createSetlists(setlists){
+function displaySetlists(setlists){
     // To create a setlist...
+    // Get content container
+    let contentContainer = document.getElementById("content-container");
 
+    // Get accordion body
+    accordionBody = contentTemplates("setlistAccordionBody");
+
+    console.log(accordionBody);
+
+    // insert accordion body to content container
+    contentContainer.innerHTML = accordionBody;
+
+    // Insert accordion 
     setlists.forEach(setlist => {
-        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordion", setlist);
+        // ... retrieve the accordion template containing content respective to this setlist
+        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
 
+        // ... display the setlist with the template, set buttons & reference
         displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
-    })
 
+        // ... add event listeners to the respective buttons
+
+    })
 }
+
+function determineFooterButtons(contentType, currentState, contentData){
+    // Before we touch any buttons, we must first retrieve the container
+    let btnContainer = document.getElementById("btn-footer-container");
+
+    // And we must make sure before making any changes, that it's clear of content
+    btnContainer.innerHTML = "";
+
+    // If the user is...
+    if(contentType === "setlists" && currentState === "viewing"){
+        // ... viewing setlists, display the back & add buttons
+        btnContainer.innerHTML = insertButton("back");
+        btnContainer.innerHTML += insertButton("add");
+    }
+
+    insertButtonEventListeners(contentType, currentState, contentData)
+}
+
+
+function insertButton(type){
+    // Initialise a variable to store the button
+    let button;
+    // If the button type is...
+    if(type === "back"){
+        button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>';
+    } else if (type === "add"){
+        button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
+    }
+    return button;
+}
+
+function insertButtonEventListeners(contentType, currentState, contentData){
+    // Retrieve all possible buttons
+    let backButton = document.getElementById("btn-back");
+    let addButton = document.getElementById("btn-add");
+    let deleteButton = document.getElementById("btn-delete");
+    let saveButton = document.getElementById("btn-save");
+
+
+    if(contentType === "setlists" && currentState === "viewing"){
+        addButton.addEventListener('click', function(){
+            createNewItem("setlist");
+        });
+    }
+}
+
+function createNewItem(type){
+    clearContentSection();
+}
+
+
 
 function displayItems(contentType, contentItems, reference){
     // If the content type is...
@@ -126,15 +195,23 @@ function contentTemplates(request, contentData){
     // This function contains all templates that are used within GigMate
 
     // Initialise a variable to store the template
-    let setlistTemplate;
+    let template;
 
     // If the request is...
-    if(request === "setlistAccordion"){
+    if (request === "setlistAccordionBody"){
+        template = document.createElement("ul");
+
+        template.className = "accordion";
+
+        template.id = "setlistAccordion";
+        return template.outerHTML;
+    }
+    if(request === "setlistAccordionItem"){
         // ... a setlist accordion, create a reference of the setlistname without spaces so the accordion can function properly
         let reference = removeSpaces(contentData.setlistName);
 
         // ... then assign the template variable to the setlist template with data & references attached
-        setlistTemplate = 
+        template = 
         `
         <li class="accordion-item">
             <h2 class="accordion-header" id="heading${reference}">
@@ -154,10 +231,10 @@ function contentTemplates(request, contentData){
         // ... evaluate how many set buttons need to be created and store them in a variable
         let setButtons = createSetButtons(contentData);
 
-        // ... then return the setlisttemplate along with the set buttons
-        return [setlistTemplate, setButtons];
+        // ... then return the setlist template along with the set buttons
+        return [template, setButtons];
     }
-    return [setlistTemplate, setButtons];
+    return [template, setButtons];
 }
 
 // Credit: the code below that removes spaces within strings was found from: https://stackoverflow.com/a/51321865/15607265
@@ -198,3 +275,8 @@ function createSetButtons(setlist){
     // Return the button container containing the appropriate amount of buttons
     return setButtonContainer;
 }
+
+function clearContentSection () {
+    let contentSection = document.getElementById("content-container");
+    contentSection.innerHTML = "";
+  }
