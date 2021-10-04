@@ -188,7 +188,7 @@ function openForm(type){
     let form = document.createElement("form");
 
     // Give the form it's respective classes
-    form.className = "row justify-content-center align-items-center h-100 w-100";
+    form.className = "row card rounded-corners justify-content-center align-items-center h-100 w-100";
 
     // Give it an id
     form.id = "enlarged-card";
