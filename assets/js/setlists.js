@@ -104,18 +104,35 @@ function createSetlists(setlists){
     // To create a setlist...
 
     setlists.forEach(setlist => {
-        console.log(setlist);
-        let accordion = contentTemplates("setlistAccordion", setlist);
-        console.log(accordion);
+        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordion", setlist);
+
+        displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
     })
 
+}
+
+function displayItems(contentType, contentItems, reference){
+
+    if (contentType === "setlist"){
+
+        console.log(contentType);
+        console.log(contentItems);
+        console.log(contentItems[0]);
+        console.log(contentItems[1]);
+        console.log(reference);
+
+        document.getElementById("setlistAccordion").innerHTML += contentItems[0];
+
+        document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].innerHTML;
+        
+    }
 }
 
 function contentTemplates(request, contentData){
     // This function contains all templates that are used within GigMate
 
     // Initialise a variable to store the template
-    let template;
+    let setlistTemplate;
 
     // If the request is...
     if(request === "setlistAccordion"){
@@ -123,7 +140,7 @@ function contentTemplates(request, contentData){
         let reference = removeSpaces(contentData.setlistName);
 
         // ... then assign the template variable to the setlist template with data & references attached
-        template = 
+        setlistTemplate = 
         `
         <li class="accordion-item">
             <h2 class="accordion-header" id="heading${reference}">
@@ -132,17 +149,21 @@ function contentTemplates(request, contentData){
               </button>
             </h2>
             <div id="collapse${reference}" class="accordion-collapse collapse" aria-labelledby="heading${reference}" data-bs-parent="#setlistAccordion">
-              <div class="accordion-body p-0"></div>
+              <div class="accordion-body p-0">
+                <ul class="list-group list-group-flush">
+                </ul>
+              </div>
             </div>
           </li>
         `;
 
-        let sets = insertSets(contentData);
+        // ... evaluate how many set buttons need to be created and store them in a variable
+        let setButtons = createSetButtons(contentData);
 
-        // ... then return the template variable containing the completed setlist element
-        return template;
+        // ... then return the setlisttemplate along with the set buttons
+        return [setlistTemplate, setButtons];
     }
-    return template;
+    return [setlistTemplate, setButtons];
 }
 
 // Credit: the code below that removes spaces within strings was found from: https://stackoverflow.com/a/51321865/15607265
@@ -151,16 +172,26 @@ function removeSpaces(string){
     return string.replace(/ /g, '');
 }
 
-function insertSets(setlist){
+function createSetButtons(setlist){
 
-    let setListItemTemplate = 
-    `
-    <li class="list-group-item list-group-item-action">
-        <button type="button" class="list-group-btn">Set 1</button>
-    </li>
-    `;
+    let setlistItemTemplate = document.createElement("li");
 
-    if (setlist.hasOwnProperty("set1")){
-        
+    setlistItemTemplate.className = "list-group-item list-group-item-action";
+
+    let setlistSetButtons;
+    
+    if (!("set2" in setlist)) {
+        setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
+    } else if (!("set3" in setlist)) {
+        setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
+        setlistSetButtons += '<button type="button" class="list-group-btn">Set 2</button>';
+    } else {
+        setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
+        setlistSetButtons += '<button type="button" class="list-group-btn">Set 2</button>';
+        setlistSetButtons += '<button type="button" class="list-group-btn">Set 3</button>';
     }
+
+    setlistItemTemplate.innerHTML = setlistSetButtons;
+
+    return setlistItemTemplate;
 }
