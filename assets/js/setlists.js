@@ -118,7 +118,7 @@ function displayItems(contentType, contentItems, reference){
         document.getElementById("setlistAccordion").innerHTML += contentItems[0];
 
         // ...then push the set buttons (contentItems[1]) into the setlist item
-        document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].innerHTML;
+        document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
     }
 }
 

@@ -132,6 +132,20 @@ To return to the original README file, [click here](README.md).
         let contentData = await collectLocalStorage(contentType);
     }
     ```
+<hr>
+
+8. Setlist accordion buttons were being displayed as "[object HTMLLIElement]" instead of the li element HTML content itself.
+    - When the DOM loads in setlists.html, the list of setlists should be displayed as an accordion with buttons for each set within each setlist.
+    - The bug here was that instead of displaying "Set 1", "Set 2" and such, the buttons were displaying "[object HTMLLIElement]".
+    - [This Stack Overflow answer](https://stackoverflow.com/a/44953851/15607265) by [Musa](https://stackoverflow.com/users/1353011/musa) was helpful in letting me know where to look to solve this issue.
+    - I later found out that it was because I was attempting to assign the innerHTML of the containing element with an object, rather than the outerHTML of the object itself.
+    ```
+    *setlists.js*
+
+    // ...then push the set buttons (contentItems[1]) into the setlist item
+        document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
+    ```
+<hr>
 
 
 ## Unfixed Bugs
