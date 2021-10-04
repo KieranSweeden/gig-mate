@@ -112,19 +112,13 @@ function createSetlists(setlists){
 }
 
 function displayItems(contentType, contentItems, reference){
-
+    // If the content type is...
     if (contentType === "setlist"){
-
-        console.log(contentType);
-        console.log(contentItems);
-        console.log(contentItems[0]);
-        console.log(contentItems[1]);
-        console.log(reference);
-
+        // ... setlist, retrieve the setlist accordion & insert the setlist item (contentItems[0]) within the inner HTML of the accordion
         document.getElementById("setlistAccordion").innerHTML += contentItems[0];
 
+        // ...then push the set buttons (contentItems[1]) into the setlist item
         document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].innerHTML;
-        
     }
 }
 
@@ -173,25 +167,34 @@ function removeSpaces(string){
 }
 
 function createSetButtons(setlist){
+    // To create set buttons for a setlist...
+    // ... firstly, we must create an li element, which will contain the buttons
+    let setButtonContainer = document.createElement("li");
 
-    let setlistItemTemplate = document.createElement("li");
+    // ... we'll give the container the appropriate accordion Bootstrap 5 classes
+    setButtonContainer.className = "list-group-item list-group-item-action";
 
-    setlistItemTemplate.className = "list-group-item list-group-item-action";
-
+    // ... then initialise a variable that will store the button elements the particular set needs
     let setlistSetButtons;
     
+    // If the setlist has...
     if (!("set2" in setlist)) {
+        // ... no set 2, this means there is only 1 set so only 1 button is needed
         setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
     } else if (!("set3" in setlist)) {
+        // ... no set 3, this means there are two sets, so two buttons are needed
         setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
         setlistSetButtons += '<button type="button" class="list-group-btn">Set 2</button>';
     } else {
+        // ... all 3 sets, it needs 3 buttons
         setlistSetButtons = '<button type="button" class="list-group-btn">Set 1</button>';
         setlistSetButtons += '<button type="button" class="list-group-btn">Set 2</button>';
         setlistSetButtons += '<button type="button" class="list-group-btn">Set 3</button>';
     }
 
-    setlistItemTemplate.innerHTML = setlistSetButtons;
+    // Insert the buttons within the button container
+    setButtonContainer.innerHTML = setlistSetButtons;
 
-    return setlistItemTemplate;
+    // Return the button container containing the appropriate amount of buttons
+    return setButtonContainer;
 }
