@@ -111,8 +111,6 @@ function displaySetlists(setlists){
     // Get accordion body
     accordionBody = contentTemplates("setlistAccordionBody");
 
-    console.log(accordionBody);
-
     // insert accordion body to content container
     contentContainer.innerHTML = accordionBody;
 
@@ -169,14 +167,56 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
     if(contentType === "setlists" && currentState === "viewing"){
         addButton.addEventListener('click', function(){
-            createNewItem("setlist");
+            createNewItem("newSetlist");
         });
     }
 }
 
 function createNewItem(type){
+    // Before we create a new item, clear the content section
     clearContentSection();
+
+    // Open the form showing the appropriate input options given the type
+    openForm(type);
 }
+
+function openForm(type){
+    // Get the content container
+    let contentContainer = document.getElementById("content-container");
+
+    // Initialise a variable to store the form
+    let form = document.createElement("form");
+
+    // Give the form it's respective classes
+    form.className = "row justify-content-center align-items-center h-100 w-100";
+
+    // Give it an id
+    form.id = "enlarged-card";
+
+    // If the type of form required is a...
+    if(type === "newSetlist"){
+        form.innerHTML = 
+        `
+        <div class="col-12">
+            <h3>Edit Track</h3>
+        </div>
+        <div class="col-12">
+            <label for="track-name">Track:</label>
+            <input id="track-name" type="text" value="" class="rounded-corners">
+        </div>
+        <div class="col-12">
+            <label for="track-artist">Artist:</label>
+            <input id="track-artist" type="text" value="" class="rounded-corners">
+        </div>
+        `;
+
+        console.log(form);
+        // ... new setlist form
+        contentContainer.appendChild(form);
+    }
+}
+
+
 
 
 
@@ -191,19 +231,23 @@ function displayItems(contentType, contentItems, reference){
     }
 }
 
+// This function contains all templates that are used within GigMate
 function contentTemplates(request, contentData){
-    // This function contains all templates that are used within GigMate
-
     // Initialise a variable to store the template
     let template;
 
     // If the request is...
     if (request === "setlistAccordionBody"){
+        //... a section accordion body, create a ul element
         template = document.createElement("ul");
 
+        // then set the class name of the ul element to the bootstrap accordion
         template.className = "accordion";
 
+        // give the ul element a unique id of setlistAccordion
         template.id = "setlistAccordion";
+
+        // then return the HTML
         return template.outerHTML;
     }
     if(request === "setlistAccordionItem"){
@@ -278,5 +322,6 @@ function createSetButtons(setlist){
 
 function clearContentSection () {
     let contentSection = document.getElementById("content-container");
+    contentSection.firstElementChild.className += " animate__animated animate__fadeOutUp";
     contentSection.innerHTML = "";
   }
