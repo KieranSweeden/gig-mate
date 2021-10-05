@@ -172,20 +172,60 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
     if(contentType === "setlists" && currentState === "viewing"){
         addButton.addEventListener('click', function(){
-            createNewItem("newSetlist");
+            openForm("newSetlist");
         });
+    } else if (contentType === "setlists" && currentState === "new"){
+        saveButton.addEventListener('click', function(){
+
+            let newSetlist = createNewItem("setlist");
+
+            let localStorageArrayOfSetlists = getLocalStorageData(contentType);
+
+            localStorageArrayOfSetlists.push(newSetlist);
+
+            pushToLocalStorage(contentType, localStorageArrayOfSetlists);
+
+
+        })
     }
 }
 
 function createNewItem(type){
-    // Before we create a new item, clear the content section
-    clearContentSection();
+    // Initialise an empty object variable
+    let newItem = {};
 
-    // Open the form showing the appropriate input options given the type
-    openForm(type);
+    // If the newItem type provided is...
+    if (type === "setlist"){
+        // ... a setlist, get the form-name and add it as a setlist name property
+        newItem.setlistName = document.getElementById("form-name").value;
+
+        // Get the amount of sets requested by getting the last character of the radio button id
+        let checkedSetButton = document.querySelector(
+            'input[name="setlist-sets"]:checked');
+        
+        // Now we know the amount of sets we need, create them in the empty object
+        if (checkedSetButton.id.slice(checkedSetButton.id.length -1) === "1"){
+            newItem.set1 = [];
+        } else if (checkedSetButton.id.slice(checkedSetButton.id.length -1) === "2"){
+            newItem.set1 = [];
+            newItem.set2 = [];
+        } else if (checkedSetButton.id.slice(checkedSetButton.id.length -1) === "3"){
+            newItem.set1 = [];
+            newItem.set2 = [];
+            newItem.set3 = [];
+        }
+
+        // Return the new setlist object
+        return newItem;
+    }
+
+    // Return the newly created item
+    return newItem;
 }
 
 function openForm(type){
+    // Before we open the form, clear the content section
+    clearContentSection();
     // Get the content container
     let contentContainer = document.getElementById("content-container");
 
@@ -287,8 +327,8 @@ function contentTemplates(request, contentData){
             <h3>New Setlist</h3>
         </div>
         <div class="col-12">
-            <label for="setlist-name">Name:</label>
-            <input id="setlist-name" type="text" value="" class="rounded-corners">
+            <label for="form-name">Name:</label>
+            <input id="form-name" type="text" value="" class="rounded-corners">
         </div>
         <div class="row">
             <label>Amount Of Sets:</label>
