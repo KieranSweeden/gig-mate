@@ -139,6 +139,9 @@ function determineFooterButtons(contentType, currentState, contentData){
         // ... viewing setlists, display the back & add buttons
         btnContainer.innerHTML = insertButton("back");
         btnContainer.innerHTML += insertButton("add");
+    } else if (contentType === "setlists" && currentState === "new"){
+        btnContainer.innerHTML = insertButton("back");
+        btnContainer.innerHTML += insertButton("save");
     }
 
     insertButtonEventListeners(contentType, currentState, contentData)
@@ -153,6 +156,8 @@ function insertButton(type){
         button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>';
     } else if (type === "add"){
         button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
+    } else if (type === "save"){
+        button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
     }
     return button;
 }
@@ -184,36 +189,34 @@ function openForm(type){
     // Get the content container
     let contentContainer = document.getElementById("content-container");
 
+    // Prepare the content container for the form by enlarging it
+    enlargeContainer(contentContainer);
+
     // Initialise a variable to store the form
     let form = document.createElement("form");
 
     // Give the form it's respective classes
-    form.className = "row card rounded-corners justify-content-center align-items-center h-100 w-100";
+    form.className = "d-flex card rounded-corners justify-content-around align-items-center animate__animated animate__fadeInUp";
 
     // Give it an id
-    form.id = "enlarged-card";
+    form.id = "input-form";
 
     // If the type of form required is a...
     if(type === "newSetlist"){
-        form.innerHTML = 
-        `
-        <div class="col-12">
-            <h3>Edit Track</h3>
-        </div>
-        <div class="col-12">
-            <label for="track-name">Track:</label>
-            <input id="track-name" type="text" value="" class="rounded-corners">
-        </div>
-        <div class="col-12">
-            <label for="track-artist">Artist:</label>
-            <input id="track-artist" type="text" value="" class="rounded-corners">
-        </div>
-        `;
+        // ... new setlist, set the inner HTML of the form to the new setlist template
+        form.innerHTML = contentTemplates("newSetlistForm");
 
-        console.log(form);
         // ... new setlist form
         contentContainer.appendChild(form);
     }
+
+    determineFooterButtons("setlists", "new");
+
+}
+
+function enlargeContainer(contentContainer){
+    contentContainer.classList.add("enlarge");
+    contentContainer.parentNode.classList.add("enlarge");
 }
 
 
@@ -249,8 +252,8 @@ function contentTemplates(request, contentData){
 
         // then return the HTML
         return template.outerHTML;
-    }
-    if(request === "setlistAccordionItem"){
+
+    } else if (request === "setlistAccordionItem") {
         // ... a setlist accordion, create a reference of the setlistname without spaces so the accordion can function properly
         let reference = removeSpaces(contentData.setlistName);
 
@@ -277,6 +280,33 @@ function contentTemplates(request, contentData){
 
         // ... then return the setlist template along with the set buttons
         return [template, setButtons];
+    } else if (request === "newSetlistForm") {
+        template = 
+        `
+        <div class="col-12">
+            <h3>New Setlist</h3>
+        </div>
+        <div class="col-12">
+            <label for="setlist-name">Name:</label>
+            <input id="setlist-name" type="text" value="" class="rounded-corners">
+        </div>
+        <div class="row">
+            <label>Amount Of Sets:</label>
+            <div class="col-4">
+                <input class="form-check-input" type="radio" name="setlist-sets" id="setlist-sets-1">
+                <label class="form-check-label" for="setlist-sets-1">1</label>
+            </div>
+            <div class="col-4">
+                <input class="form-check-input" type="radio" name="setlist-sets" id="setlist-sets-2" checked>
+                <label class="form-check-label" for="setlist-sets-1">2</label>
+            </div>
+            <div class="col-4">
+                <input class="form-check-input" type="radio" name="setlist-sets" id="setlist-sets-3">
+                <label class="form-check-label" for="setlist-sets-1">3</label>
+            </div>
+        </div>
+        `;
+        return template;
     }
     return [template, setButtons];
 }

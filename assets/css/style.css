@@ -476,6 +476,18 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     background-color: var(--gigmate-primary);
 }
 
+/* Form Styling */
+
+#input-form {
+    min-width: 18rem;
+    width: 40rem;
+}
+
+#content-container {
+    width: 100%;
+    margin: 0;
+}
+
 
 /* Footer styling */
 
