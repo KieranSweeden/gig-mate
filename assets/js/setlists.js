@@ -144,6 +144,7 @@ function determineFooterButtons(contentType, currentState, contentData){
         btnContainer.innerHTML += insertButton("save");
     }
 
+    // Add event listeners to the buttons displayed on screen
     insertButtonEventListeners(contentType, currentState, contentData)
 }
 
@@ -184,25 +185,74 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get the original local storage array and store it in a variable
             let originalLocalStorageArray = getLocalStorageData(contentType);
 
-            // Push the new setlist item into original array of setlists
-            originalLocalStorageArray.push(newSetlist);
+            let itemIsDuplicate = checkIfDuplicate(newSetlist, originalLocalStorageArray, contentType);
 
-            // Push this new setlist array into local storage
-            pushToLocalStorage(contentType, originalLocalStorageArray);
-
-            // Clear the content section
-            clearContentSection();
-
-            // Reduce the content container size now the form has disappeared
-            adjustContainerSize();
-
-            // Diplay the new array of setlists
-            displaySetlists(originalLocalStorageArray);
-
-            // Change the footer buttons to viewing setlists
-            determineFooterButtons(contentType, "viewing");
+            if(itemIsDuplicate === false){
+                // Push the new setlist item into original array of setlists
+                originalLocalStorageArray.push(newSetlist);
+    
+                // Push this new setlist array into local storage
+                pushToLocalStorage(contentType, originalLocalStorageArray);
+    
+                // Clear the content section
+                clearContentSection();
+    
+                // Reduce the content container size now the form has disappeared
+                adjustContainerSize();
+    
+                // Diplay the new array of setlists
+                displaySetlists(originalLocalStorageArray);
+    
+                // Change the footer buttons to viewing setlists
+                determineFooterButtons(contentType, "viewing");
+            } else if (itemIsDuplicate === true){
+                alertUser(contentType, currentState, newSetlist);
+            }
         })
     }
+}
+
+function alertUser(contentType, currentState, itemInQuestion){
+    // Initialise an alert variable that will store the alert element
+    let alertElement;
+
+    // If we're dealing with...
+    if (contentType === "setlists" && currentState === "new"){
+        // ... a new setlist, grab the alert template
+        let alert = contentTemplates("alert");
+
+        // Get the name input
+        let input = document.getElementById('form-name');
+
+        // Append the alert into the parent element of the input, alerting the user
+        input.parentElement.appendChild(alert);
+
+        // After three seconds, remove the alert
+        setTimeout(() => {
+            input.parentElement.removeChild(alert);
+        }, 3000);
+    }
+}
+
+function checkIfDuplicate(createdItem, originalItems, contentType) {
+    // Create a variable that'll later store a boolean
+    let itemIsDuplicate;
+
+    // If the content type we're dealing with is...
+    if (contentType === "setlists"){
+        // ... setlists, check each setlist name in each stored array
+        originalItems.forEach(storedArray => {
+            // If the names match, set itemIsDuplicate to true
+            if(storedArray.setlistName === createdItem.setlistName){
+                console.log(storedArray);
+                itemIsDuplicate = true;
+            } else {
+                // Else if there is no duplicate, set itemIsDuplicate to false
+                itemIsDuplicate = false;
+            }
+        })
+    }
+    return itemIsDuplicate;
 }
 
 function createNewItem(type){
@@ -360,7 +410,19 @@ function contentTemplates(request, contentData){
         </div>
         `;
         return template;
+    } else if (request === "alert") {
+        template = document.createElement('div');
+
+        template.className = "alert alert-danger";
+
+        template.setAttribute('role', 'alert');
+
+        template.textContent = "Sorry this setlist name already exists, create a new one!";
+    
+        return template;
     }
+
+    // Return the template
     return [template, setButtons];
 }
 
