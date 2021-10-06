@@ -235,23 +235,23 @@ function alertUser(contentType, currentState, itemInQuestion){
 }
 
 function checkIfDuplicate(createdItem, originalItems, contentType) {
-    // Create a variable that'll later store a boolean
-    let itemIsDuplicate;
+    // Create a variable that stores the boolean that dictates whether the created item is a duplicate
+    let itemIsDuplicate = false;
 
     // If the content type we're dealing with is...
     if (contentType === "setlists"){
+
         // ... setlists, check each setlist name in each stored array
         originalItems.forEach(storedArray => {
+
             // If the names match, set itemIsDuplicate to true
             if(storedArray.setlistName === createdItem.setlistName){
-                console.log(storedArray);
                 itemIsDuplicate = true;
-            } else {
-                // Else if there is no duplicate, set itemIsDuplicate to false
-                itemIsDuplicate = false;
             }
         })
     }
+
+    // Return the boolean variable 
     return itemIsDuplicate;
 }
 

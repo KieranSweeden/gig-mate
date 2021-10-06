@@ -147,6 +147,36 @@ To return to the original README file, [click here](README.md).
     ```
 <hr>
 
+9. Code to identify if a newly created setlist object is identical to an existing setlist object in local storage was not working as intended.
+    - When creating a new setlist, the application should first check whether or not the name of the newly created setlist is indentical to one currently in local storage.
+    - The code would work on some occasions, but not all the time, making it unreliable.
+    - I later found out that the code I wrote was tremendously flawed. Using a forEach for the setlist arrays, I noticed that the itemIsDuplicate variable was being updated on each array loop, meaning the state of the last array determined the boolean value of itemIsDuplicate.
+    - Simplifying the code, initialising the itemIsDuplicate value to false and only turning to true when a match was found, solved this issue.
+    ```
+    *setlists.js*
+
+    function checkIfDuplicate(createdItem, originalItems, contentType) {
+    // Create a variable that stores the boolean that dictates whether the created item is a duplicate
+    let itemIsDuplicate = false;
+
+    // If the content type we're dealing with is...
+    if (contentType === "setlists"){
+
+        // ... setlists, check each setlist name in each stored array
+        originalItems.forEach(storedArray => {
+
+            // If the names match, set itemIsDuplicate to true
+            if(storedArray.setlistName === createdItem.setlistName){
+                itemIsDuplicate = true;
+            }
+        })
+    }
+
+    // Return the boolean variable 
+    return itemIsDuplicate;
+}
+    ```
+<hr>
 
 ## Unfixed Bugs
 
