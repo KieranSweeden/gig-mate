@@ -105,7 +105,7 @@ function pushToLocalStorage(contentType, localJSONData) {
 
 function displaySetlists(setlists){
     // To create a setlist...
-    // Get content container
+    // ...Get content container
     let contentContainer = document.getElementById("content-container");
 
     // Get accordion body
@@ -185,7 +185,15 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             pushToLocalStorage(contentType, localStorageArrayOfSetlists);
 
+            clearContentSection();
 
+            adjustContainerSize();
+
+            let newLocalStorageArray = getLocalStorageData(contentType);
+
+            displaySetlists(newLocalStorageArray);
+
+            determineFooterButtons(contentType, "viewing");
         })
     }
 }
@@ -226,11 +234,9 @@ function createNewItem(type){
 function openForm(type){
     // Before we open the form, clear the content section
     clearContentSection();
-    // Get the content container
-    let contentContainer = document.getElementById("content-container");
 
     // Prepare the content container for the form by enlarging it
-    enlargeContainer(contentContainer);
+    adjustContainerSize();
 
     // Initialise a variable to store the form
     let form = document.createElement("form");
@@ -246,21 +252,21 @@ function openForm(type){
         // ... new setlist, set the inner HTML of the form to the new setlist template
         form.innerHTML = contentTemplates("newSetlistForm");
 
+        // ... get parent
+        let contentContainer = document.getElementById("content-container");
+
         // ... new setlist form
         contentContainer.appendChild(form);
     }
-
     determineFooterButtons("setlists", "new");
-
 }
 
-function enlargeContainer(contentContainer){
-    contentContainer.classList.add("enlarge");
-    contentContainer.parentNode.classList.add("enlarge");
+function adjustContainerSize(){
+    let contentContainer = document.getElementById("content-container");
+
+    contentContainer.classList.toggle("enlarge");
+    contentContainer.parentNode.classList.toggle("enlarge");
 }
-
-
-
 
 
 function displayItems(contentType, contentItems, reference){
