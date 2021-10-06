@@ -174,7 +174,7 @@ To return to the original README file, [click here](README.md).
 
     // Return the boolean variable 
     return itemIsDuplicate;
-}
+    }
     ```
 <hr>
 

@@ -138,6 +138,7 @@ function determineFooterButtons(contentType, currentState, contentData){
     if(contentType === "setlists" && currentState === "viewing"){
         // ... viewing setlists, display the back & add buttons
         btnContainer.innerHTML = insertButton("back");
+        btnContainer.innerHTML += insertButton("delete");
         btnContainer.innerHTML += insertButton("add");
     } else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML = insertButton("back");
@@ -159,6 +160,8 @@ function insertButton(type){
         button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
     } else if (type === "save"){
         button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
+    } else if (type === "delete"){
+        button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>';
     }
     return button;
 }
@@ -175,6 +178,9 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         addButton.addEventListener('click', function(){
             openForm("newSetlist");
         });
+        deleteButton.addEventListener('click', function(){
+            openForm("deleteSetlists");
+        })
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
@@ -305,7 +311,7 @@ function openForm(type){
     form.id = "input-form";
 
     // If the type of form required is a...
-    if(type === "newSetlist"){
+    if (type === "newSetlist") {
         // ... new setlist, set the inner HTML of the form to the new setlist template
         form.innerHTML = contentTemplates("newSetlistForm");
 
@@ -314,8 +320,16 @@ function openForm(type){
 
         // ... new setlist form
         contentContainer.appendChild(form);
+
+        // ... display buttons appropriate for new setlists
+        determineFooterButtons("setlists", "new");
+
+    } else if (type === "deleteSetlists") {
+        // ... delete setlist form, set the inner HTML of the form to the delete setlists template
+        form.innerHTML = contentTemplates("deleteSetlistItem");
+
+
     }
-    determineFooterButtons("setlists", "new");
 }
 
 function adjustContainerSize(){
@@ -409,7 +423,15 @@ function contentTemplates(request, contentData){
             </div>
         </div>
         `;
+
         return template;
+
+    } else if (request === "deleteSetlistItem"){
+        template = 
+        `
+
+        `;
+        
     } else if (request === "alert") {
         template = document.createElement('div');
 
