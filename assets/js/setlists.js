@@ -169,30 +169,37 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     let deleteButton = document.getElementById("btn-delete");
     let saveButton = document.getElementById("btn-save");
 
-
     if(contentType === "setlists" && currentState === "viewing"){
+        // If the user is viewing setlists, the add button will simply open a create new setlist form
         addButton.addEventListener('click', function(){
             openForm("newSetlist");
         });
     } else if (contentType === "setlists" && currentState === "new"){
+        // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
 
+            // Create a new setlist item
             let newSetlist = createNewItem("setlist");
 
-            let localStorageArrayOfSetlists = getLocalStorageData(contentType);
+            // Get the original local storage array and store it in a variable
+            let originalLocalStorageArray = getLocalStorageData(contentType);
 
-            localStorageArrayOfSetlists.push(newSetlist);
+            // Push the new setlist item into original array of setlists
+            originalLocalStorageArray.push(newSetlist);
 
-            pushToLocalStorage(contentType, localStorageArrayOfSetlists);
+            // Push this new setlist array into local storage
+            pushToLocalStorage(contentType, originalLocalStorageArray);
 
+            // Clear the content section
             clearContentSection();
 
+            // Reduce the content container size now the form has disappeared
             adjustContainerSize();
 
-            let newLocalStorageArray = getLocalStorageData(contentType);
+            // Diplay the new array of setlists
+            displaySetlists(originalLocalStorageArray);
 
-            displaySetlists(newLocalStorageArray);
-
+            // Change the footer buttons to viewing setlists
             determineFooterButtons(contentType, "viewing");
         })
     }
