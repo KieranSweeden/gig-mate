@@ -129,8 +129,6 @@ function displaySetlists(setlists){
 
 function prepareToDeleteItems(contentType){
 
-    document.activeElement.blur();
-
     // If the content type is...
     if(contentType === "setlists"){
         // ... setlists, get every setlist item
@@ -150,15 +148,14 @@ function prepareToDeleteItems(contentType){
             // remove the arrow
             setlist.firstElementChild.firstElementChild.className = "accordion-button removed collapsed";
 
-            // get checkbox
-            let checkbox = getDeleteCheckBox();
+            // insert a checkbox to main setlist header
+            setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox());
 
-            // insert the checkbox
-            setlist.firstElementChild.firstElementChild.appendChild(checkbox);
-            
+            let setButtons = [...setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
-
-            console.log(setlist)
+            setButtons.forEach(setButton => {
+                setButton.appendChild(getDeleteCheckBox());
+            })
         })
     }
 
