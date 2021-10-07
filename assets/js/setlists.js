@@ -33,7 +33,7 @@ async function startGigMate(contentType) {
     // If the content type is...
     if(contentType = "setlists") {
         // ... setlists, create setlists
-        displaySetlists(contentData);
+        displaySetlists(contentData, "viewing");
     }
 
     // Determing what footer buttons should be present
@@ -104,7 +104,7 @@ function pushToLocalStorage(contentType, localJSONData) {
 }
 
 function displaySetlists(setlists){
-    // To create a setlist...
+    // Display the setlists...
     // ...Get content container
     let contentContainer = document.getElementById("content-container");
 
@@ -125,6 +125,58 @@ function displaySetlists(setlists){
         // ... add event listeners to the respective buttons
 
     })
+}
+
+function prepareToDeleteItems(contentType){
+
+    document.activeElement.blur();
+
+    // If the content type is...
+    if(contentType === "setlists"){
+        // ... setlists, get every setlist item
+        let setlistArray = [...document.getElementsByClassName("accordion-item")];
+
+        // for each setlist...
+        setlistArray.forEach(setlist => {
+            // remove the data-bs-parent attribute so all accordion items can be open
+            setlist.children[1].removeAttribute("data-bs-parent");
+
+            // open all accordion items
+            setlist.children[1].classList.add("show");
+
+            // remove the accordion collapse functionality
+            setlist.firstElementChild.firstElementChild.removeAttribute("data-bs-toggle");
+
+            // remove the arrow
+            setlist.firstElementChild.firstElementChild.className = "accordion-button removed collapsed";
+
+            // get checkbox
+            let checkbox = getDeleteCheckBox();
+
+            // insert the checkbox
+            setlist.firstElementChild.firstElementChild.appendChild(checkbox);
+            
+
+
+            console.log(setlist)
+        })
+    }
+
+}
+
+function getDeleteCheckBox() {
+    // Create an input element
+    let checkbox = document.createElement("input");
+
+    // Give it the Bootstrap 5 checkbox class
+    checkbox.className = "form-check-input";
+
+    // Give it the type of checkbox
+    checkbox.type = "checkbox"
+
+    checkbox.value = '';
+
+    return checkbox;
 }
 
 function determineFooterButtons(contentType, currentState, contentData){
@@ -179,7 +231,9 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             openForm("newSetlist");
         });
         deleteButton.addEventListener('click', function(){
-            openForm("deleteSetlists");
+
+            prepareToDeleteItems("setlists");
+
         })
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
@@ -225,17 +279,17 @@ function alertUser(contentType, currentState, itemInQuestion){
     // If we're dealing with...
     if (contentType === "setlists" && currentState === "new"){
         // ... a new setlist, grab the alert template
-        let alert = contentTemplates("alert");
+        alertElement = contentTemplates("alert");
 
         // Get the name input
         let input = document.getElementById('form-name');
 
         // Append the alert into the parent element of the input, alerting the user
-        input.parentElement.appendChild(alert);
+        input.parentElement.appendChild(alertElement);
 
         // After three seconds, remove the alert
         setTimeout(() => {
-            input.parentElement.removeChild(alert);
+            input.parentElement.removeChild(alertElement);
         }, 3000);
     }
 }
@@ -323,11 +377,6 @@ function openForm(type){
 
         // ... display buttons appropriate for new setlists
         determineFooterButtons("setlists", "new");
-
-    } else if (type === "deleteSetlists") {
-        // ... delete setlist form, set the inner HTML of the form to the delete setlists template
-        form.innerHTML = contentTemplates("deleteSetlistItem");
-
 
     }
 }

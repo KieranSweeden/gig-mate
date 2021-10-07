@@ -280,6 +280,19 @@ header {
     overflow: hidden;
 }
 
+.accordion-button.removed {
+    justify-content: space-between;
+}
+
+.form-check-input {
+    
+}
+
+.accordion-button.removed::after {
+    content: none;
+    background-image: none;
+}
+
 .list-group-item {
     padding: 0;
 }
