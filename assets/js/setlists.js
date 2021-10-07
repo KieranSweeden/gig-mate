@@ -149,19 +149,65 @@ function prepareToDeleteItems(contentType){
             setlist.firstElementChild.firstElementChild.className = "accordion-button removed collapsed";
 
             // insert a checkbox to main setlist header
-            setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox());
+            setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox("setlist"));
 
+            // get all set buttons within that setlist
             let setButtons = [...setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
+            // For each set button, append a checkbox
             setButtons.forEach(setButton => {
                 setButton.appendChild(getDeleteCheckBox());
             })
         })
+
+        addCheckBoxListeners(contentType);
     }
 
 }
 
-function getDeleteCheckBox() {
+function addCheckBoxListeners(contentType){
+
+    // get all checkboxes
+    let checkboxes = [...document.getElementsByClassName("form-check-input")];
+
+    // If the content type is...
+    if(contentType === "setlists") {
+        // ... setlists, add an event listener to each check box on display
+        checkboxes.forEach(function(checkbox){
+            // If the checkbox represents a setlist instead of a singular set...
+            if (checkbox.classList.contains("set-checkbox")){
+                // ... add an event listener where on click, the child sets of a setlist will also be selected or deselected
+                checkbox.addEventListener('click', function(){
+                    // toggle the checked status of the sets within the setlist
+                    toggleChildSets(checkbox);
+                });
+            }
+        })
+    }
+}
+
+function toggleChildSets(checkbox){
+    // Get the container (accordion-item)
+    let container = checkbox.parentElement.parentElement.parentElement;
+
+    // Get the set buttons within the setlist
+    let setButtons = [...container.children[1].firstElementChild.firstElementChild.firstElementChild.children];
+
+    if (!checkbox.getAttribute("checked")){
+        setButtons.forEach(setButton => {
+    
+            setButton.firstElementChild.setAttribute("checked", true);
+        })
+    } else if (checkbox.getAttribute("checked")){
+        setButtons.forEach(setButton => {
+            setButton.firstElementChild.removeAttribute("checked");
+        })
+    }
+
+    // For each set button, add the checked attribute to the checkboxes within it
+}
+
+function getDeleteCheckBox(contentType) {
     // Create an input element
     let checkbox = document.createElement("input");
 
@@ -171,8 +217,14 @@ function getDeleteCheckBox() {
     // Give it the type of checkbox
     checkbox.type = "checkbox"
 
+    // Give it a value of nothing
     checkbox.value = '';
 
+    if (contentType === "setlist") {
+        checkbox.classList.add("set-checkbox")
+    }
+
+    // Return a checkbox when called
     return checkbox;
 }
 
