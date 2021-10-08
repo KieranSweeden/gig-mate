@@ -396,6 +396,7 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
     restartGigMate(contentType);
 }
 
+// Credit: code to retrieve the amount of properties an object contains was taken from: https://stackoverflow.com/a/6700/15607265
 Object.size = function(obj) {
     var size = 0,
       key;
