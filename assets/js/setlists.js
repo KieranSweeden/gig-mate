@@ -129,6 +129,8 @@ function displaySetlists(setlists){
 
 function prepareToDeleteItems(contentType){
 
+    determineFooterButtons("setlists", "deleting");
+
     // If the content type is...
     if(contentType === "setlists"){
         // ... setlists, get every setlist item
@@ -253,6 +255,9 @@ function determineFooterButtons(contentType, currentState, contentData){
     } else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML = insertButton("back");
         btnContainer.innerHTML += insertButton("save");
+    } else if (contentType === "setlists" && currentState === "deleting"){
+        btnContainer.innerHTML = insertButton("back");
+        btnContainer.innerHTML += insertButton("save");
     }
 
     // Add event listeners to the buttons displayed on screen
@@ -284,14 +289,14 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     let saveButton = document.getElementById("btn-save");
 
     if(contentType === "setlists" && currentState === "viewing"){
-        // If the user is viewing setlists, the add button will simply open a create new setlist form
+        // If the user is viewing setlists... 
         addButton.addEventListener('click', function(){
+            // ... the add button will open a create new setlist form
             openForm("newSetlist");
         });
         deleteButton.addEventListener('click', function(){
-
+            // ... the delete button will prepare the items to be deleted
             prepareToDeleteItems("setlists");
-
         })
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
@@ -327,6 +332,81 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                 alertUser(contentType, currentState, newSetlist);
             }
         })
+    } else if (contentType === "setlists" && currentState === "deleting") {
+        saveButton.addEventListener("click", function(){
+            deleteItems(contentType);
+        })
+    }
+}
+
+function deleteItems(contentType){
+
+    // If the content type is...
+    if (contentType === "setlists"){
+        
+        // ... setlists, get the setlist items
+        let setlists = [...document.getElementsByClassName("accordion-item")];
+
+        // Initialise an array that'll store the delete set items
+        let deleteSetItemsArray = [];
+
+        // For each setlist item...
+        setlists.forEach(setlist => {
+
+            // Initialise an object that'll be used to compare and then delete the setlists
+            let deleteSetItem = {};
+
+            // ... get all possible checkboxes
+            let setlistHeaderCheckBox = setlist.firstElementChild.firstElementChild.firstElementChild;
+
+            deleteSetItem.setlistName = setlistHeaderCheckBox.parentElement.textContent;
+            console.log(setlist.children[1].firstElementChild.firstElementChild.firstElementChild);
+
+
+            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 1){
+                let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
+
+                if (set1Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set1 = "";
+                }
+            }
+
+            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 2){
+                let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
+                let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
+
+                if (set1Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set1 = "";
+                }
+
+                if (set2Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set2 = "";
+                }
+
+            }
+            
+            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 3){
+                let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
+                let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
+                let set3Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[2].firstElementChild;
+
+                if (set1Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set1 = "";
+                }
+
+                if (set2Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set2 = "";
+                }
+
+                if (set3Checkbox.hasAttribute("checked")){
+                    deleteSetItem.set3 = "";
+                }
+            }
+
+            deleteSetItemsArray.push(deleteSetItem);
+        })
+
+        console.log(deleteSetItemsArray);
     }
 }
 
@@ -486,9 +566,7 @@ function contentTemplates(request, contentData){
         `
         <li class="accordion-item">
             <h2 class="accordion-header" id="heading${reference}">
-              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${reference}" aria-expanded="false" aria-controls="collapse${reference}">
-                ${contentData.setlistName}
-              </button>
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse${reference}" aria-expanded="false" aria-controls="collapse${reference}">${contentData.setlistName}</button>
             </h2>
             <div id="collapse${reference}" class="accordion-collapse collapse" aria-labelledby="heading${reference}" data-bs-parent="#setlistAccordion">
               <div class="accordion-body p-0">
