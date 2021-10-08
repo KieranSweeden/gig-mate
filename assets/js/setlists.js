@@ -334,21 +334,85 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         })
     } else if (contentType === "setlists" && currentState === "deleting") {
         saveButton.addEventListener("click", function(){
-            deleteItems(contentType);
+            let setsToBeDeleted = getCheckedItems(contentType);
+
+            deleteItems(contentType, setsToBeDeleted, getLocalStorageData("setlists"));
         })
     }
 }
 
-function deleteItems(contentType){
+function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
+    
+    // Initialise an array that'll store a new array to be sent to local storage
+    let newItemArray = [];
+
+    if (contentType === "setlists"){
+
+        // For each setlist in local storage...
+        itemsInStorage.forEach(setlist => {
+            // Look through each item to be deleted
+            itemsToBeDeleted.forEach(itemToDelete => {
+                // If the setlist names of both match, go through this code
+                if (setlist.setlistName === itemToDelete.setlistName){
+                    
+                    // If the item to delete contains a set property, remove that property from the set retrieved from local storage
+                    if(itemToDelete.hasOwnProperty("set1")){
+                        delete setlist.set1;
+                    }
+                    if(itemToDelete.hasOwnProperty("set2")){
+                        delete setlist.set2;
+                    }
+                    if(itemToDelete.hasOwnProperty("set3")){
+                        delete setlist.set3;
+                    }
+                }
+            })
+
+            let fixedSetlist = fixSetlist(setlist);
+
+            newItemArray.push(fixedSetlist);
+
+            
+        })
+    }
+
+    pushToLocalStorage(contentType, newItemArray);
+
+    restartGigMate(contentType);
+}
+
+function fixSetlist(setlist){
+
+    if (setlist.hasOwnProperty("set3") && !setlist.hasOwnProperty("set2")){
+
+        setlist.set2 = setlist.set3;
+        delete setlist.set3;
+    }
+    if (setlist.hasOwnProperty("set3") && setlist.hasOwnProperty("set2") && !setlist.hasOwnProperty("set1")){
+
+        setlist.set1 = setlist.set2;
+        setlist.set2 = setlist.set3;
+        delete setlist.set3;
+    }
+    if (setlist.hasOwnProperty("set2") && !setlist.hasOwnProperty("set1")){
+
+        setlist.set1 = setlist.set2;
+        delete setlist.set2;
+    }
+
+    return setlist;
+}
+
+function getCheckedItems(contentType){
+
+    // Initialise an array that stores the checked items
+    let checkedItems = [];
 
     // If the content type is...
     if (contentType === "setlists"){
         
         // ... setlists, get the setlist items
         let setlists = [...document.getElementsByClassName("accordion-item")];
-
-        // Initialise an array that'll store the delete set items
-        let deleteSetItemsArray = [];
 
         // For each setlist item...
         setlists.forEach(setlist => {
@@ -359,10 +423,10 @@ function deleteItems(contentType){
             // ... get all possible checkboxes
             let setlistHeaderCheckBox = setlist.firstElementChild.firstElementChild.firstElementChild;
 
+            // Set the name of the delete item object of the heading in the accordion
             deleteSetItem.setlistName = setlistHeaderCheckBox.parentElement.textContent;
-            console.log(setlist.children[1].firstElementChild.firstElementChild.firstElementChild);
 
-
+            // If the setlist has one set
             if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 1){
                 let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
 
@@ -371,6 +435,7 @@ function deleteItems(contentType){
                 }
             }
 
+            // If the setlist has two sets
             if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 2){
                 let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
                 let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
@@ -384,7 +449,8 @@ function deleteItems(contentType){
                 }
 
             }
-            
+
+            // If the setlist has three sets
             if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 3){
                 let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
                 let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
@@ -403,11 +469,10 @@ function deleteItems(contentType){
                 }
             }
 
-            deleteSetItemsArray.push(deleteSetItem);
+            checkedItems.push(deleteSetItem);
         })
-
-        console.log(deleteSetItemsArray);
     }
+    return checkedItems;
 }
 
 function alertUser(contentType, currentState, itemInQuestion){
@@ -670,6 +735,11 @@ function createSetButtons(setlist){
 
     // Return the button container containing the appropriate amount of buttons
     return setButtonContainer;
+}
+
+function restartGigMate(contentType){
+    clearContentSection();
+    startGigMate(contentType);
 }
 
 function clearContentSection () {
