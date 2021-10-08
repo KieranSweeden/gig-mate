@@ -302,35 +302,44 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
 
-            // Create a new setlist item
-            let newSetlist = createNewItem("setlist");
+            // Get input element
+            let setNameInput = document.getElementById("form-name");
 
-            // Get the original local storage array and store it in a variable
-            let originalLocalStorageArray = getLocalStorageData(contentType);
+            if (setNameInput.value === "") {
+                alertUser(contentType, currentState, "emptyInput")
 
-            let itemIsDuplicate = checkIfDuplicate(newSetlist, originalLocalStorageArray, contentType);
-
-            if(itemIsDuplicate === false){
-                // Push the new setlist item into original array of setlists
-                originalLocalStorageArray.push(newSetlist);
+            } else {
+                // Create a new setlist item
+                let newSetlist = createNewItem("setlist");
     
-                // Push this new setlist array into local storage
-                pushToLocalStorage(contentType, originalLocalStorageArray);
+                // Get the original local storage array and store it in a variable
+                let originalLocalStorageArray = getLocalStorageData(contentType);
     
-                // Clear the content section
-                clearContentSection();
+                let itemIsDuplicate = checkIfDuplicate(newSetlist, originalLocalStorageArray, contentType);
     
-                // Reduce the content container size now the form has disappeared
-                adjustContainerSize();
-    
-                // Diplay the new array of setlists
-                displaySetlists(originalLocalStorageArray);
-    
-                // Change the footer buttons to viewing setlists
-                determineFooterButtons(contentType, "viewing");
-            } else if (itemIsDuplicate === true){
-                alertUser(contentType, currentState, newSetlist);
+                if(itemIsDuplicate === false){
+                    // Push the new setlist item into original array of setlists
+                    originalLocalStorageArray.push(newSetlist);
+        
+                    // Push this new setlist array into local storage
+                    pushToLocalStorage(contentType, originalLocalStorageArray);
+        
+                    // Clear the content section
+                    clearContentSection();
+        
+                    // Reduce the content container size now the form has disappeared
+                    adjustContainerSize();
+        
+                    // Diplay the new array of setlists
+                    displaySetlists(originalLocalStorageArray);
+        
+                    // Change the footer buttons to viewing setlists
+                    determineFooterButtons(contentType, "viewing");
+                } else if (itemIsDuplicate === true){
+                    alertUser(contentType, currentState, "alreadyExists");
+                }
             }
+
         })
     } else if (contentType === "setlists" && currentState === "deleting") {
         saveButton.addEventListener("click", function(){
@@ -371,8 +380,6 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
             let fixedSetlist = fixSetlist(setlist);
 
             newItemArray.push(fixedSetlist);
-
-            
         })
     }
 
@@ -475,14 +482,15 @@ function getCheckedItems(contentType){
     return checkedItems;
 }
 
-function alertUser(contentType, currentState, itemInQuestion){
+function alertUser(contentType, currentState, issue){
     // Initialise an alert variable that will store the alert element
     let alertElement;
 
     // If we're dealing with...
     if (contentType === "setlists" && currentState === "new"){
+
         // ... a new setlist, grab the alert template
-        alertElement = contentTemplates("alert");
+        alertElement = contentTemplates("alert", '' , issue);
 
         // Get the name input
         let input = document.getElementById('form-name');
@@ -604,7 +612,7 @@ function displayItems(contentType, contentItems, reference){
 }
 
 // This function contains all templates that are used within GigMate
-function contentTemplates(request, contentData){
+function contentTemplates(request, contentData, issue){
     // Initialise a variable to store the template
     let template;
 
@@ -655,7 +663,7 @@ function contentTemplates(request, contentData){
         </div>
         <div class="col-12">
             <label for="form-name">Name:</label>
-            <input id="form-name" type="text" value="" class="rounded-corners">
+            <input id="form-name" type="text" value="" class="rounded-corners" required>
         </div>
         <div class="row">
             <label>Amount Of Sets:</label>
@@ -689,7 +697,12 @@ function contentTemplates(request, contentData){
 
         template.setAttribute('role', 'alert');
 
-        template.textContent = "Sorry this setlist name already exists, create a new one!";
+        if (issue === "alreadyExists") {
+            template.textContent = "Sorry this setlist name already exists, create a new one!";
+        } else if (issue === "emptyInput") {
+            template.textContent = "The name input was empty, please enter a name!";
+        }
+
     
         return template;
     }
