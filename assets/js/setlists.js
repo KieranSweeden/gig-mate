@@ -177,9 +177,19 @@ function addCheckBoxListeners(contentType){
             // If the checkbox represents a setlist instead of a singular set...
             if (checkbox.classList.contains("set-checkbox")){
                 // ... add an event listener where on click, the child sets of a setlist will also be selected or deselected
-                checkbox.addEventListener('click', function(){
+                checkbox.addEventListener('click', function(e){
+                    // Prevent default checkbox click behaviour
+                    e.preventDefault();
+                    checkbox.toggleAttribute("checked");
                     // toggle the checked status of the sets within the setlist
                     toggleChildSets(checkbox);
+                });
+            } else {
+                checkbox.addEventListener('click', function(e){
+                    // Prevent default checkbox click behaviour
+                    e.preventDefault();
+                    // toggle the attribute of checked of this particular checkbox
+                    checkbox.toggleAttribute("checked");
                 });
             }
         })
@@ -187,24 +197,25 @@ function addCheckBoxListeners(contentType){
 }
 
 function toggleChildSets(checkbox){
-    // Get the container (accordion-item)
+    // Get the element containing the setlist and it's sets, in this case it's an accordion-item
     let container = checkbox.parentElement.parentElement.parentElement;
 
     // Get the set buttons within the setlist
     let setButtons = [...container.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
-    if (!checkbox.getAttribute("checked")){
+    // If the setlist header checkbox...
+    if (checkbox.hasAttribute("checked")){
+        // ... is checked, apply the attribute of checked to all sets
         setButtons.forEach(setButton => {
-    
-            setButton.firstElementChild.setAttribute("checked", true);
+            setButton.firstElementChild.setAttribute("checked", '')
         })
-    } else if (checkbox.getAttribute("checked")){
+    } else if (!checkbox.hasAttribute("checked")){
+        // Else if it does not have the attribute of checked
         setButtons.forEach(setButton => {
+            // make sure all sets within the setlist have the attribute of checked removed
             setButton.firstElementChild.removeAttribute("checked");
         })
     }
-
-    // For each set button, add the checked attribute to the checkboxes within it
 }
 
 function getDeleteCheckBox(contentType) {
@@ -217,9 +228,7 @@ function getDeleteCheckBox(contentType) {
     // Give it the type of checkbox
     checkbox.type = "checkbox"
 
-    // Give it a value of nothing
-    checkbox.value = '';
-
+    // Give the checkbox a particular class name depending on the content type
     if (contentType === "setlist") {
         checkbox.classList.add("set-checkbox")
     }
