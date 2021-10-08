@@ -375,11 +375,19 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
                         delete setlist.set3;
                     }
                 }
+
             })
+            
+            let setlistSize = Object.size(setlist);
+                    
+            if (setlistSize === 1){
+                delete itemsInStorage[setlist];
+            } else {
+                let fixedSetlist = fixSetlist(setlist);
+    
+                newItemArray.push(fixedSetlist);
+            }
 
-            let fixedSetlist = fixSetlist(setlist);
-
-            newItemArray.push(fixedSetlist);
         })
     }
 
@@ -387,6 +395,15 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
 
     restartGigMate(contentType);
 }
+
+Object.size = function(obj) {
+    var size = 0,
+      key;
+    for (key in obj) {
+      if (obj.hasOwnProperty(key)) size++;
+    }
+    return size;
+  };
 
 function fixSetlist(setlist){
 
