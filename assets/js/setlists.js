@@ -65,13 +65,13 @@ function checkLocalStorage(contentType) {
     return (localStorage.hasOwnProperty(contentType)) ? true : false;
 }
 
-function getLocalStorageData(contentType) {
+async function getLocalStorageData(contentType) {
     
     let storedData = localStorage.getItem(contentType);
 
     let parsedData = JSON.parse(storedData);
 
-    return parsedData;
+    return await parsedData;
     
     // Parse the stringified JSON recieved from local storage & return it
 
