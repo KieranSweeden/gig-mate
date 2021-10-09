@@ -23,7 +23,6 @@ function determineContentType() {
         contentType = "gigs";
     }
     // Return the content type variable
-    console.log(contentType);
     return contentType;
 }
 
@@ -44,8 +43,6 @@ async function startGigMate(contentType) {
 async function collectLocalStorage(contentType) {
     // Check if there is already data present within local storage
     let hasLocalStorage = checkLocalStorage(contentType);
-
-    console.log(hasLocalStorage);
 
     // Initialise a variable that will store the recieved parsed JSON file data
     let contentData;
@@ -76,7 +73,6 @@ function getLocalStorageData(contentType) {
     
     if(contentType === "setlists") {
         storedData = JSON.parse(localStorage.getItem("setlists"));
-        console.log(storedData);
     }
 
     return storedData;
@@ -90,7 +86,6 @@ async function addInitialisedJSONToLocalStorage(contentType) {
     if (contentType === "setlists") {
         // ...setlists, fetch & store the setlist JSON data
         localJSONData = await getInitialJSONData("assets/json/initSetlists.json");
-        console.log(localJSONData);
     } else if (contentType === "repertoire") {
         // ...repertoire, fetch & store the repertoire JSON data
         localJSONData = await getInitialJSONData("assets/json/initRepertoire.json");
@@ -105,7 +100,6 @@ async function addInitialisedJSONToLocalStorage(contentType) {
 
 async function getInitialJSONData(pathToJSONFile) {
     // Fetch & store the data contained within the JSON file
-    console.log(pathToJSONFile);
     let fileData = await fetch(pathToJSONFile);
 
     // Collect the json within the fileData promise and return it
