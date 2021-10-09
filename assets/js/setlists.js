@@ -88,7 +88,7 @@ async function addInitialisedJSONToLocalStorage(contentType) {
     // If the contentType is...
     if (contentType === "setlists") {
         // ...setlists, fetch & store the setlist JSON data
-        localJSONData = await getInitialJSONData("./assets/json/initSetlists.json");
+        localJSONData = await getInitialJSONData("assets/json/initSetlists.json");
         console.log(localJSONData);
     } else if (contentType === "repertoire") {
         // ...repertoire, fetch & store the repertoire JSON data
