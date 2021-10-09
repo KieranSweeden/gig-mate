@@ -65,7 +65,8 @@ async function collectLocalStorage(contentType) {
 
 function checkLocalStorage(contentType) {
     // Return true if local storage exists, return false if not
-    return (localStorage.hasOwnProperty(contentType)) ? true : false;
+    // return (localStorage.hasOwnProperty(contentType)) ? true : false;
+    return (localStorage.getItem(contentType)) ? true : false;
 }
 
 function getLocalStorageData(contentType) {  
