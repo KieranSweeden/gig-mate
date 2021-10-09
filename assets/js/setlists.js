@@ -15,11 +15,11 @@ function determineContentType() {
     let contentType;
 
     // Assign content type depending on the value within current page variable
-    if (currentPage === "/setlists.html") {
+    if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
         contentType = "setlists";
-    } else if (currentPage === "/repertoire.html") {
+    } else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
         contentType = "repertoire";
-    } else if (currentPage === "/gigs.html") {
+    } else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
         contentType = "gigs";
     }
     // Return the content type variable
