@@ -27,6 +27,9 @@ To return to the original README file, [click here](README.md).
 1. Navbar dropdown appearing behind main content
     - When clicking on the hamburger icon to open the dropdown navbar menu, the menu would appear behind the main content on the page.
     - This was promptly solved by addressing the z-index of the element with the class of "navbar-collapse". Giving this element the z-index value of 1 meant the dropdown would always appear above the content underneath the navbar.
+
+    <br>
+
     ```
     .navbar-collapse {
         z-index: 1;
@@ -39,6 +42,9 @@ To return to the original README file, [click here](README.md).
     - When clicking on the hamburger icon, the dropdown navigation menu would appear and push the navbar upwards, making the navbar appear broken.
     - This was solved by giving the container within the navbar a positional value of fixed with adjustments to centre the navigation, with the parent having a positional value of relative.
     - Although this is appropriate for mobile & tablet screen sizes, it negatively affected the desktop navbar design. To counteract this, I applied these changes within a media query for screen sizes below 992px.
+
+    <br>
+
     ```
     @media (max-width: 992px) {
         .navbar-collapse {
@@ -54,6 +60,9 @@ To return to the original README file, [click here](README.md).
 3. Container not scrolling when using overflow:scroll
     - Despite applying the value of scroll to the property of overflow that's attached to a container filled with content, the container was not scrolling.
     - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/17295219/overflow-scroll-css-is-not-working-in-the-div) and reading [Ionică Bizău](https://stackoverflow.com/users/1420197/ionic%c4%83-biz%c4%83u)'s answer, I recognised this was because the container I was attempting to add a scroll functionality did not have a declared height. After adding a height property & value, this issue was resolved.
+
+    <br>
+
     ```
     .rep-container section {
     height: 72.5vh;
@@ -76,6 +85,9 @@ To return to the original README file, [click here](README.md).
 5. Presence of UI in Safari & Chrome mobile browsers shortening the viewport window
     - As clearly demonstrated in [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by Maciej Trzciński, there's an unfortunate problem in Safari (& Chrome in my experience) on mobile devices, where the browsers calculate the top bar, document window and bottom bar together in their implementation of viewport heights. This created an issue where the window was far larger than expected, which caused elements at the bottom of the window such as the footer, to disappear beneath the browser UI.
     - To fix this, I used the example provided in the article linked above. The fix takes a CSS variable and changes the value of it by obtaining the documentElement value and applying that value to the CSS variable. When applying the CSS variable to a height property within the html & body elements, the window height will adjust to the documentElement value, providing the intented result of having all elements fitting within the page.
+
+    <br>
+
     ```
     *style.css*
 
@@ -99,6 +111,9 @@ To return to the original README file, [click here](README.md).
     - The webpage contains a function which on DOM load, accesses whether local storage is present within the browser. If there is no presence of local storage, the function pushes stringified JSON to the user's local storage.
     - An issue appeared however, where on initial load the browser would take in the stringified JSON but would not display the contents as intended unless the user refreshes the page. The refreshing of the page solves the issue, but this is obviously not acceptable as a user experience.
     - The bug was promptly fixed as I had realised the fillWithLocalStorage function was only working when presence of local storage was found. Applying the function after the addJSONToLocalStorage function promptly fixed the issue.
+
+    <br>
+
     ```
     *repertoire.js*
 
@@ -124,6 +139,9 @@ To return to the original README file, [click here](README.md).
     - When the DOM loads, a bunch of functions are called to retrieve data from local storage, this was doing using async/await.
     - However when attempting to store returned values from an asynchronous function into a variable (called *contentData* in this case), the variable would store a promise instead of the data.
     - After viewing [this Stack Overflow answer](https://stackoverflow.com/a/43422983/15607265) however, I realised that every async function returns a promise object. Adding await before function solved this problem.
+
+    <br>
+
     ```
     *setlists.js"
 
@@ -139,6 +157,9 @@ To return to the original README file, [click here](README.md).
     - The bug here was that instead of displaying "Set 1", "Set 2" and such, the buttons were displaying "[object HTMLLIElement]".
     - [This Stack Overflow answer](https://stackoverflow.com/a/44953851/15607265) by [Musa](https://stackoverflow.com/users/1353011/musa) was helpful in letting me know where to look to solve this issue.
     - I later found out that it was because I was attempting to assign the innerHTML of the containing element with an object, rather than the outerHTML of the object itself.
+
+    <br>
+
     ```
     *setlists.js*
 
@@ -152,6 +173,9 @@ To return to the original README file, [click here](README.md).
     - The code would work on some occasions, but not all the time, making it unreliable.
     - I later found out that the code I wrote was tremendously flawed. Using a forEach for the setlist arrays, I noticed that the itemIsDuplicate variable was being updated on each array loop, meaning the state of the last array determined the boolean value of itemIsDuplicate.
     - Simplifying the code, initialising the itemIsDuplicate value to false and only turning to true when a match was found, solved this issue.
+
+    <br>
+
     ```
     *setlists.js*
 
@@ -174,6 +198,46 @@ To return to the original README file, [click here](README.md).
 
     // Return the boolean variable 
     return itemIsDuplicate;
+    }
+    ```
+<hr>
+
+10. GitHub Pages was not retrieving data from local storage, therefore no setlists were being displayed to the user.
+    - When developing GigMate, the local storage was being retrieved and utilised as intended. However when hosted by GitHub Pages, GigMate was storing & later retrieving undefined key and property values in local storage.
+    - After toying with relative paths and async & await related fixes, I found out it was a URL path issue after inserting console.logs throughout the intial stage of the application. GigMate checks the URL path name to determine what data it'll be working with, as shown below;
+
+    <br>
+
+    ```
+    *setlists.js prior to fix*
+
+    let currentPage = window.document.location.pathname;
+
+    // Initialise an empty variable to contain a content type value
+    let contentType;
+
+    // Assign content type depending on the value within current page variable
+    if (currentPage === "/setlists.html") {
+        contentType = "setlists";
+    } else if (currentPage === "/repertoire.html") {
+        contentType = "repertoire";
+    } else if (currentPage === "/gigs.html") {
+        contentType = "gigs";
+    }
+    ```
+    - When locally working on GigMate this worked as intended, however the pathname changes when being hosted on GitHub pages, which prefixes the original pathname with "/gig-mate". When adding this as an option for each file name (as shown below), GitHub Pages worked as intended.
+
+    <br>
+
+    ```
+    *setlists.js after fix*
+
+    if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
+        contentType = "setlists";
+    } else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
+        contentType = "repertoire";
+    } else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
+        contentType = "gigs";
     }
     ```
 <hr>
