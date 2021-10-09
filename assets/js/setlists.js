@@ -65,18 +65,16 @@ function checkLocalStorage(contentType) {
     return (localStorage.hasOwnProperty(contentType)) ? true : false;
 }
 
-async function getLocalStorageData(contentType) {
-    
-    let storedData = localStorage.getItem(contentType);
-
-    let parsedData = JSON.parse(storedData);
-
-    return await parsedData;
-    
+function getLocalStorageData(contentType) {  
     // Parse the stringified JSON recieved from local storage & return it
 
+    let storedData;
+    
+    if(contentType === "setlists") {
+        storedData = JSON.parse(localStorage.getItem("setlists"));
+    }
 
-    // return JSON.parse(localStorage.getItem(contentType));
+    return storedData;
 }
 
 async function addInitialisedJSONToLocalStorage(contentType) {
