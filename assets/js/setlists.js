@@ -40,7 +40,7 @@ async function startGigMate(contentType) {
     determineFooterButtons(contentType, "viewing", contentData);
 }
 
-async function collectLocalStorage(contentType) {
+function collectLocalStorage(contentType) {
     // Check if there is already data present within local storage
     let hasLocalStorage = checkLocalStorage(contentType);
 
@@ -53,7 +53,7 @@ async function collectLocalStorage(contentType) {
         contentData = getLocalStorageData(contentType);
     } else if (hasLocalStorage === false) {
         // ...no local storage, start GigMate with the appropriate initialised json file
-        await addInitialisedJSONToLocalStorage(contentType);
+        addInitialisedJSONToLocalStorage(contentType);
         // Once the data has been added, retrieve the data from local storage
         contentData = getLocalStorageData(contentType);
     }
