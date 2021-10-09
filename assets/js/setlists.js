@@ -40,7 +40,7 @@ async function startGigMate(contentType) {
     determineFooterButtons(contentType, "viewing", contentData);
 }
 
-function collectLocalStorage(contentType) {
+async function collectLocalStorage(contentType) {
     // Check if there is already data present within local storage
     let hasLocalStorage = checkLocalStorage(contentType);
 
@@ -53,7 +53,7 @@ function collectLocalStorage(contentType) {
         contentData = getLocalStorageData(contentType);
     } else if (hasLocalStorage === false) {
         // ...no local storage, start GigMate with the appropriate initialised json file
-        addInitialisedJSONToLocalStorage(contentType);
+        await addInitialisedJSONToLocalStorage(contentType);
         // Once the data has been added, retrieve the data from local storage
         contentData = getLocalStorageData(contentType);
     }
@@ -84,21 +84,22 @@ async function addInitialisedJSONToLocalStorage(contentType) {
     // If the contentType is...
     if (contentType === "setlists") {
         // ...setlists, fetch & store the setlist JSON data
-        localJSONData = await getJSONData("assets/json/initSetlists.json");
+        localJSONData = await getInitialJSONData("./assets/json/initSetlists.json");
     } else if (contentType === "repertoire") {
         // ...repertoire, fetch & store the repertoire JSON data
-        localJSONData = await getJSONData("assets/json/initRepertoire.json");
+        localJSONData = await getInitialJSONData("assets/json/initRepertoire.json");
     } else if (contentType === "gigs") {
         // ...gigs, fetch & store the gigs JSON data
-        localJSONData = await getJSONData("assets/json/initGigs.json");
+        localJSONData = await getInitialJSONData("assets/json/initGigs.json");
     }
 
     // Push the local JSON data to local storage
     pushToLocalStorage(contentType, localJSONData);
 }
 
-async function getJSONData(pathToJSONFile) {
+async function getInitialJSONData(pathToJSONFile) {
     // Fetch & store the data contained within the JSON file
+    console.log(pathToJSONFile);
     let fileData = await fetch(pathToJSONFile);
 
     // Collect the json within the fileData promise and return it
