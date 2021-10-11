@@ -457,13 +457,14 @@ To get your own local copy of GigMate:
 - Code to remove spaces within a string was taken from [this Stack Overflow answer](https://stackoverflow.com/a/51321865/15607265) by [Kamil Kiełczewski](https://stackoverflow.com/users/860099/kamil-kie%c5%82czewski).
 
 - Code to find out the amount of properties an object contained was taken from [this Stack Overflow answer](https://stackoverflow.com/a/6700/15607265) by [Double-Beep](https://stackoverflow.com/users/10607772/double-beep).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
 
 - The [image of a female writing on a notepad](https://www.pexels.com/photo/ethnic-female-employee-writing-list-in-notepad-5999834/) within index.html was sourced from [Ono Kokusi](https://www.pexels.com/@ono-kosuki) via [Pexels](pexels.com).
 
-- The [image of a man playing guitar]() within index.html was sourced from [Clam Lo](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
+- The [image of a man playing guitar](https://www.pexels.com/photo/photo-of-man-playing-guitar-3469692/) within index.html was sourced from [Clam Lo](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
 
 ## Resources
 

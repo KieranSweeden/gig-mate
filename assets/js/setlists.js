@@ -37,7 +37,7 @@ async function startGigMate(contentType) {
     }
 
     // Determing what footer buttons should be present
-    determineFooterButtons(contentType, "viewing", contentData);
+    determineFooterButtons(contentType, "viewingSetlists", contentData);
 }
 
 async function collectLocalStorage(contentType) {
@@ -123,7 +123,7 @@ function displaySetlists(setlists){
         displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
 
         // ... add event listeners to the respective buttons
-
+        insertButtonEventListeners();
     })
 }
 
@@ -246,19 +246,24 @@ function determineFooterButtons(contentType, currentState, contentData){
     // And we must make sure before making any changes, that it's clear of content
     btnContainer.innerHTML = "";
 
+    // Insert the back button as it's present in all states.
+    btnContainer.innerHTML = insertButton("back");
+
     // If the user is...
-    if(contentType === "setlists" && currentState === "viewing"){
+    if(contentType === "setlists" && currentState === "viewingSetlists"){
         // ... viewing setlists, display the back & add buttons
-        btnContainer.innerHTML = insertButton("back");
         btnContainer.innerHTML += insertButton("delete");
         btnContainer.innerHTML += insertButton("add");
-    } else if (contentType === "setlists" && currentState === "new"){
-        btnContainer.innerHTML = insertButton("back");
+    } else if (contentType === "setlists" && currentState === "viewingSet"){
+        btnContainer.innerHTML += insertButton("edit");
+        btnContainer.innerHTML += insertButton("expand");
+    } 
+    else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "deleting"){
-        btnContainer.innerHTML = insertButton("back");
         btnContainer.innerHTML += insertButton("save");
     }
+
 
     // Add event listeners to the buttons displayed on screen
     insertButtonEventListeners(contentType, currentState, contentData)
@@ -277,6 +282,10 @@ function insertButton(type){
         button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
     } else if (type === "delete"){
         button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>';
+    } else if (type === "edit"){
+        button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i></button>';
+    } else if (type === "expand"){
+        button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i></button>';
     }
     return button;
 }
@@ -287,8 +296,9 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     let addButton = document.getElementById("btn-add");
     let deleteButton = document.getElementById("btn-delete");
     let saveButton = document.getElementById("btn-save");
+    let itemButtons = [...document.getElementsByClassName("list-group-btn")];
 
-    if(contentType === "setlists" && currentState === "viewing"){
+    if(contentType === "setlists" && currentState === "viewingSetlists"){
         // If the user is viewing setlists... 
         addButton.addEventListener('click', function(){
             // ... the add button will open a create new setlist form
@@ -298,6 +308,19 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // ... the delete button will prepare the items to be deleted
             prepareToDeleteItems("setlists");
         })
+        itemButtons.forEach(button => {
+            // Add a click listener for every button in content section
+            button.addEventListener('click', function(){
+                openSetlist(button, contentData);
+            })
+        })
+    } else if (contentType === "setlists" && currentState === "viewingSet")  {
+
+
+
+
+
+
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
@@ -334,7 +357,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                     displaySetlists(originalLocalStorageArray);
         
                     // Change the footer buttons to viewing setlists
-                    determineFooterButtons(contentType, "viewing");
+                    determineFooterButtons(contentType, "viewingSetlists");
                 } else if (itemIsDuplicate === true){
                     alertUser(contentType, currentState, "alreadyExists");
                 }
@@ -350,8 +373,73 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     }
 }
 
-function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
+function openSetlist(setButton, contentData){
+    // Clear the content section
+    clearContentSection();
+
+    // Show appropriate footer buttons
+    determineFooterButtons("setlists", "viewingSet");
+
+    // Get tracks within set
+    let tracks = getSetSongs(setButton);
+
+}
+
+function getSetSongs (setButton){
+    // Get the setlist item
+    let setlistItem = ascendToParent(setButton);
+
+    // Get the name of the setlist
+    let setlistName = getSetlistName(setlistItem);
+
+    // Scan local storage & retrieve setlist tracks
+    let setlistTracks = getSetlistTracks(setlistName, setButton.textContent);
+
     
+}
+
+function getSetlistTracks(nameOfRequestedSetlist, setButton){
+    // Get setlists from local storage
+    let setlists = getLocalStorageData("setlists");
+
+    // Intialise an array that'll store the tracks
+    let setTracks = [];
+
+    // For each setlist in local storage...
+    setlists.forEach(setlist => {
+        // ... if the setlist names match...
+        if (setlist.setlistName === nameOfRequestedSetlist){
+            // Get the particular set
+            switch (setButton){
+                case 'Set 1': 
+                setTracks = setlist.set1;
+                break;
+                case 'Set 2': 
+                setTracks = setlist.set2;
+                break;
+                case 'Set 3': 
+                setTracks = setlist.set3;
+                break;
+            }
+        }
+    })
+
+    // Return the set tracks array
+    return setTracks;
+}
+
+function getSetlistName(setlistItem){
+    return setlistItem.firstElementChild.firstElementChild.textContent;
+}
+
+function ascendToParent(currentPosition){
+    while (currentPosition.className !== "accordion-item"){
+        currentPosition = currentPosition.parentElement;
+    }
+    return currentPosition;
+}
+
+function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
     // Initialise an array that'll store a new array to be sent to local storage
     let newItemArray = [];
 
