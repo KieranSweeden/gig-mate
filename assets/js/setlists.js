@@ -15,11 +15,11 @@ function determineContentType() {
     let contentType;
 
     // Assign content type depending on the value within current page variable
-    if (currentPage === "/setlists.html") {
+    if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
         contentType = "setlists";
-    } else if (currentPage === "/repertoire.html") {
+    } else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
         contentType = "repertoire";
-    } else if (currentPage === "/gigs.html") {
+    } else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
         contentType = "gigs";
     }
     // Return the content type variable
@@ -62,12 +62,20 @@ async function collectLocalStorage(contentType) {
 
 function checkLocalStorage(contentType) {
     // Return true if local storage exists, return false if not
-    return (localStorage.hasOwnProperty(contentType)) ? true : false;
+    // return (localStorage.hasOwnProperty(contentType)) ? true : false;
+    return (localStorage.getItem(contentType)) ? true : false;
 }
 
-function getLocalStorageData(contentType) {
+function getLocalStorageData(contentType) {  
     // Parse the stringified JSON recieved from local storage & return it
-    return JSON.parse(localStorage.getItem(contentType));
+
+    let storedData;
+    
+    if(contentType === "setlists") {
+        storedData = JSON.parse(localStorage.getItem("setlists"));
+    }
+
+    return storedData;
 }
 
 async function addInitialisedJSONToLocalStorage(contentType) {
@@ -77,20 +85,20 @@ async function addInitialisedJSONToLocalStorage(contentType) {
     // If the contentType is...
     if (contentType === "setlists") {
         // ...setlists, fetch & store the setlist JSON data
-        localJSONData = await getJSONData("assets/json/initSetlists.json");
+        localJSONData = await getInitialJSONData("assets/json/initSetlists.json");
     } else if (contentType === "repertoire") {
         // ...repertoire, fetch & store the repertoire JSON data
-        localJSONData = await getJSONData("assets/json/initRepertoire.json");
+        localJSONData = await getInitialJSONData("assets/json/initRepertoire.json");
     } else if (contentType === "gigs") {
         // ...gigs, fetch & store the gigs JSON data
-        localJSONData = await getJSONData("assets/json/initGigs.json");
+        localJSONData = await getInitialJSONData("assets/json/initGigs.json");
     }
 
     // Push the local JSON data to local storage
     pushToLocalStorage(contentType, localJSONData);
 }
 
-async function getJSONData(pathToJSONFile) {
+async function getInitialJSONData(pathToJSONFile) {
     // Fetch & store the data contained within the JSON file
     let fileData = await fetch(pathToJSONFile);
 
