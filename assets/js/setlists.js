@@ -169,10 +169,8 @@ function prepareToDeleteItems(contentType){
                 setButton.appendChild(getDeleteCheckBox());
             })
         })
-
         addCheckBoxListeners(contentType);
     }
-
 }
 
 function addCheckBoxListeners(contentType){
@@ -269,6 +267,8 @@ function determineFooterButtons(contentType, currentState, contentData){
     else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "deleting"){
+        btnContainer.innerHTML += insertButton("save");
+    } else if (contentType === "tracks" && currentState === "edit"){
         btnContainer.innerHTML += insertButton("save");
     }
 
@@ -380,11 +380,15 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             }
 
         })
-    } else if (contentType === "setlists" && currentState === "deleting") {
+    } else if (contentType === "setlists" && currentState === "deleting"){
         saveButton.addEventListener("click", function(){
             let setsToBeDeleted = getCheckedItems(contentType);
 
             deleteItems(contentType, setsToBeDeleted, getLocalStorageData("setlists"));
+        })
+    } else if (contentType === "tracks" && currentState === "edit"){
+        saveButton.addEventListener("click", function(){
+
         })
     }
 }
@@ -392,6 +396,14 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 function openSetlist(setButton, contentData){
     // Clear the content section
     clearContentSection();
+
+    // Get the setlist item
+    let setlistItem = ascendToParent(setButton);
+
+    // Get the name of the setlist
+    let setlistName = getSetlistName(setlistItem);
+
+    updateHeading(setlistName, setButton.textContent);
 
     // Show appropriate footer buttons
     determineFooterButtons("setlists", "viewingSet");
@@ -401,6 +413,48 @@ function openSetlist(setButton, contentData){
 
     // Display each set track
     displayItems("tracks", tracks);
+}
+
+function updateHeading(newHeader, additionalHeader){
+
+    // Get header section
+    let headerSection = document.getElementById("header-section");
+
+    // Create H1 element with id & class for new header
+    let newFirstHeading = document.createElement("h1");
+    newFirstHeading.id = "page-header";
+    newFirstHeading.className = "fs-3 m-0";
+    newFirstHeading.textContent = newHeader;
+
+    // Create H2 element with id & class for new subheader
+    let newSecondHeading = document.createElement("h2");
+    newSecondHeading.id = "page-subheader";
+    newSecondHeading.className = "fs-3 m-0";
+    newSecondHeading.textContent = additionalHeader;
+
+    while (headerSection.firstElementChild) {
+        headerSection.removeChild(headerSection.firstElementChild);
+    }
+
+    if(additionalHeader === undefined){
+        headerSection.appendChild(newFirstHeading);
+        updateHeadingFlex("center", headerSection);
+    } else {
+        headerSection.appendChild(newFirstHeading);
+        headerSection.appendChild(newSecondHeading);
+        updateHeadingFlex("between", headerSection);
+    }
+}
+
+function updateHeadingFlex(flexValue, headerSection){
+
+    if (flexValue === "center"){
+        headerSection.classList.remove("justify-content-between");
+    } else {
+        headerSection.classList.remove("justify-content-center");
+        headerSection.classList.add("justify-content-around");
+    }
+
 
 }
 
@@ -685,7 +739,7 @@ function createNewItem(type){
     return newItem;
 }
 
-function openForm(type){
+function openForm(type, data){
     // Before we open the form, clear the content section
     clearContentSection();
 
@@ -713,9 +767,9 @@ function openForm(type){
         determineFooterButtons("setlists", "new");
     } else if (type === "editTrack"){
 
-        form.innerHTML = contentTemplates("editTrack");
+        form.innerHTML = contentTemplates("editTrack", data);
 
-        determineFooterButtons("setlists", "new");
+        determineFooterButtons("tracks", "edit");
 
     }
 
@@ -804,7 +858,8 @@ function createCard(track) {
 
     // Add event listener
     card.addEventListener("click", function(){
-        openForm("editTrack");
+        openForm("editTrack", track);
+        
     })
 
     // Add a hover state to the card
@@ -928,6 +983,7 @@ function contentTemplates(request, contentData, issue){
 
         return template;
     } else if (request === "trackCard") {
+
         template = 
         `
         <button class="btn-card animate__animated animate__fadeInUp">
@@ -950,45 +1006,47 @@ function contentTemplates(request, contentData, issue){
         </button>`;
 
         return template;
+
     } else if (request === "editTrack") {
+
         template = 
         `
         <div class="col-12">
-            <h3 id="form-title"></h3>
+            <h3>Edit Track</h3>
         </div>
         <div class="col-12">
-            <label for="track-name">Track:</label>
-            <input id="track-name" type="text" value="" class="rounded-corners">
+        <label for="track-name">Track:</label>
+        <input id="track-name" type="text" value="${contentData.name}" class="rounded-corners">
         </div>
         <div class="col-12">
-            <label for="track-artist">Artist:</label>
-            <input id="track-artist" type="text" value="" class="rounded-corners">
+        <label for="track-artist">Artist:</label>
+        <input id="track-artist" type="text" value="${contentData.artist}" class="rounded-corners">
         </div>
         <div class="col-6">
-            <label class="d-block" for="track-key">Key:</label>
-            <select name="keys" id="track-key" class="rounded-corners">
-                <option value="" selected="" hidden=""></option>
-                <option class="key-option" value="A">A</option>
-                <option class="key-option" value="Bb">Bb</option>
-                <option class="key-option" value="B">B</option>
-                <option class="key-option" value="C">C</option>
-                <option class="key-option" value="Db">Db</option>
-                <option class="key-option" value="D">D</option>
-                <option class="key-option" value="Eb">Eb</option>
-                <option class="key-option" value="E">E</option>
-                <option class="key-option" value="F">F</option>
-                <option class="key-option" value="Gb">Gb</option>
-                <option class="key-option" value="G">G</option>
-                <option class="key-option" value="Ab">Ab</option>
-            </select>
+        <label for="track-key">Key:</label>
+        <select name="keys" id="track-key" class="rounded-corners">
+            <option value="${contentData.key}" selected hidden>${contentData.key}</option>
+            <option class="key-option" value="A">A</option>
+            <option class="key-option" value="Bb">Bb</option>
+            <option class="key-option" value="B">B</option>
+            <option class="key-option" value="C">C</option>
+            <option class="key-option" value="Db">Db</option>
+            <option class="key-option" value="D">D</option>
+            <option class="key-option" value="Eb">Eb</option>
+            <option class="key-option" value="E">E</option>
+            <option class="key-option" value="F">F</option>
+            <option class="key-option" value="Gb">Gb</option>
+            <option class="key-option" value="G">G</option>
+            <option class="key-option" value="Ab">Ab</option>
+        </select>
         </div>
         <div class="col-6">
-            <label for="track-tonality">Tonality:</label>
-            <select name="keys" id="track-tonality" class="rounded-corners">
-                <option value="" selected="" hidden=""></option>
-                <option value="Major">Major</option>
-                <option value="Minor">Minor</option>
-            </select>
+        <label for="track-tonality">Key:</label>
+        <select name="keys" id="track-tonality" class="rounded-corners">
+            <option value="${contentData.tonality}" selected hidden>${contentData.tonality}</option>
+            <option value="Major">Major</option>
+            <option value="Minor">Minor</option>
+        </select>
         </div>
         `;
 
