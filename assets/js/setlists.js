@@ -76,6 +76,7 @@ function getLocalStorageData(contentType) {
     }
 
     return storedData;
+    
 }
 
 async function addInitialisedJSONToLocalStorage(contentType) {
@@ -344,6 +345,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get input element
             let setNameInput = document.getElementById("form-name");
 
+            // If empty, ask the user to write a name
             if (setNameInput.value === "") {
                 alertUser(contentType, currentState, "emptyInput")
 
@@ -388,9 +390,60 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         })
     } else if (contentType === "tracks" && currentState === "edit"){
         saveButton.addEventListener("click", function(){
+            // Get the values from the input form
+            let updatedTrackValues = getInputValues(contentType, contentData);
 
+            console.log(updatedTrackValues);
+            
+            // Get the setlist array from local storage
+            let storedSetlistArray = getLocalStorageData("setlists");
+
+            // Get the setlist name the track is currently in
+            let setlistHeading = document.getElementById("page-header");
+
+            // Shorten and lowercase the set the track is within
+            let setHeading = removeSpaces(document.getElementById("page-subheader").textContent.toLowerCase());
+
+            let setArray = [];
+
+            storedSetlistArray.forEach(setlist => {
+                if(setlist.setlistName === setlistHeading.textContent){
+                    console.log(setlist[setHeading][6]);
+                    let trackIndex = setlist[setHeading].findIndex((localStorageTrack => localStorageTrack.name === contentData.name));
+                    console.log(trackIndex);
+                    setlist[setHeading][trackIndex].name = updatedTrackValues.name;
+                    setlist[setHeading][trackIndex].artist = updatedTrackValues.artist;
+                    setlist[setHeading][trackIndex].key = updatedTrackValues.key;
+                    setlist[setHeading][trackIndex].tonality = updatedTrackValues.tonality;
+                }
+            })
+            
+            adjustContainerSize();
+
+            pushToLocalStorage("setlists", storedSetlistArray);
+
+            restartGigMate("setlists");
         })
     }
+}
+
+
+function getInputValues(contentType, contentData){
+
+    
+    if(contentType === "tracks"){
+        
+        let updatedTrackValues = {};
+
+        updatedTrackValues.name = document.getElementById("track-name").value;
+        updatedTrackValues.artist = document.getElementById("track-artist").value;
+        updatedTrackValues.key = document.getElementById("track-key").value;
+        updatedTrackValues.tonality = document.getElementById("track-tonality").value;
+        
+        return updatedTrackValues;
+    }
+
+    return updatedTrackValues;
 }
 
 function openSetlist(setButton, contentData){
@@ -454,8 +507,6 @@ function updateHeadingFlex(flexValue, headerSection){
         headerSection.classList.remove("justify-content-center");
         headerSection.classList.add("justify-content-around");
     }
-
-
 }
 
 function getSetTracks(setButton){
@@ -733,6 +784,8 @@ function createNewItem(type){
 
         // Return the new setlist object
         return newItem;
+    } else if (type === "track"){
+        newItem.name = document.getElementById("");
     }
 
     // Return the newly created item
@@ -769,7 +822,7 @@ function openForm(type, data){
 
         form.innerHTML = contentTemplates("editTrack", data);
 
-        determineFooterButtons("tracks", "edit");
+        determineFooterButtons("tracks", "edit", data);
 
     }
 
