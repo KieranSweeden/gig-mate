@@ -309,7 +309,6 @@ function insertButton(type){
 
 function insertButtonEventListeners(contentType, currentState, contentData){
     // Retrieve all possible buttons
-    let backButton = document.getElementById("btn-back");
     let addButton = document.getElementById("btn-add");
     let deleteButton = document.getElementById("btn-delete");
     let saveButton = document.getElementById("btn-save");
@@ -702,20 +701,26 @@ function openForm(type){
     // Give it an id
     form.id = "input-form";
 
+    // ... get parent
+    let contentContainer = document.getElementById("content-container");
+
     // If the type of form required is a...
-    if (type === "newSetlist") {
+    if (type === "newSetlist"){
         // ... new setlist, set the inner HTML of the form to the new setlist template
         form.innerHTML = contentTemplates("newSetlistForm");
 
-        // ... get parent
-        let contentContainer = document.getElementById("content-container");
-
-        // ... new setlist form
-        contentContainer.appendChild(form);
-
         // ... display buttons appropriate for new setlists
         determineFooterButtons("setlists", "new");
+    } else if (type === "editTrack"){
+
+        form.innerHTML = contentTemplates("editTrack");
+
+        determineFooterButtons("setlists", "new");
+
     }
+
+    // ... new setlist form
+    contentContainer.appendChild(form);
 }
 
 function adjustContainerSize(){
@@ -797,7 +802,12 @@ function createCard(track) {
     </div>
     </button>`;
 
-     // Add a hover state to the card
+    // Add event listener
+    card.addEventListener("click", function(){
+        openForm("editTrack");
+    })
+
+    // Add a hover state to the card
     addIconHover(card.firstElementChild);
 
     return card;
@@ -938,6 +948,49 @@ function contentTemplates(request, contentData, issue){
                 </div>
             </div>
         </button>`;
+
+        return template;
+    } else if (request === "editTrack") {
+        template = 
+        `
+        <div class="col-12">
+            <h3 id="form-title"></h3>
+        </div>
+        <div class="col-12">
+            <label for="track-name">Track:</label>
+            <input id="track-name" type="text" value="" class="rounded-corners">
+        </div>
+        <div class="col-12">
+            <label for="track-artist">Artist:</label>
+            <input id="track-artist" type="text" value="" class="rounded-corners">
+        </div>
+        <div class="col-6">
+            <label class="d-block" for="track-key">Key:</label>
+            <select name="keys" id="track-key" class="rounded-corners">
+                <option value="" selected="" hidden=""></option>
+                <option class="key-option" value="A">A</option>
+                <option class="key-option" value="Bb">Bb</option>
+                <option class="key-option" value="B">B</option>
+                <option class="key-option" value="C">C</option>
+                <option class="key-option" value="Db">Db</option>
+                <option class="key-option" value="D">D</option>
+                <option class="key-option" value="Eb">Eb</option>
+                <option class="key-option" value="E">E</option>
+                <option class="key-option" value="F">F</option>
+                <option class="key-option" value="Gb">Gb</option>
+                <option class="key-option" value="G">G</option>
+                <option class="key-option" value="Ab">Ab</option>
+            </select>
+        </div>
+        <div class="col-6">
+            <label for="track-tonality">Tonality:</label>
+            <select name="keys" id="track-tonality" class="rounded-corners">
+                <option value="" selected="" hidden=""></option>
+                <option value="Major">Major</option>
+                <option value="Minor">Minor</option>
+            </select>
+        </div>
+        `;
 
         return template;
     }

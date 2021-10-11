@@ -89,17 +89,17 @@ function createCard(track) {
     </div>
   </button>`;
 
-// Add the click listener to enlarge to the card
-addCardEnlarge(card, track);
+  // Add the click listener to enlarge to the card
+  addCardEnlarge(card, track);
 
-// Add a hover state to the card
-addIconHover(card.firstElementChild);
+  // Add a hover state to the card
+  addIconHover(card.firstElementChild);
 
-// Retrieve the unordered list element (the container/parent)
-let cardContainer = document.getElementById("list-container");
+  // Retrieve the unordered list element (the container/parent)
+  let cardContainer = document.getElementById("list-container");
 
-// Append card into the container
-cardContainer.appendChild(card);
+  // Append card into the container
+  cardContainer.appendChild(card);
 }
 
 function addCardEnlarge(card, track) {
