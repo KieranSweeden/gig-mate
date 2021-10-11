@@ -272,7 +272,6 @@ function determineFooterButtons(contentType, currentState, contentData){
         btnContainer.innerHTML += insertButton("save");
     }
 
-
     // Add event listeners to the buttons displayed on screen
     insertButtonEventListeners(contentType, currentState, contentData)
 }
@@ -281,20 +280,30 @@ function determineFooterButtons(contentType, currentState, contentData){
 function insertButton(type){
     // Initialise a variable to store the button
     let button;
-    // If the button type is...
-    if(type === "back"){
-        button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>';
-    } else if (type === "add"){
-        button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
-    } else if (type === "save"){
-        button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
-    } else if (type === "delete"){
-        button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>';
-    } else if (type === "edit"){
-        button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i></button>';
-    } else if (type === "expand"){
-        button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i></button>';
+
+    // Set button function based on type
+    switch (type){
+        case "back":
+            button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>';
+        break;
+        case "add":
+            button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
+        break;
+        case "save":
+            button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
+        break;
+        case "delete":
+            button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>';
+        break;
+        case "edit":
+            button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i></button>';
+        break;
+        case "expand":
+            button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i></button>';
+        break;
     }
+
+    // Return the button
     return button;
 }
 
@@ -389,11 +398,14 @@ function openSetlist(setButton, contentData){
     determineFooterButtons("setlists", "viewingSet");
 
     // Get tracks within set
-    let tracks = getSetSongs(setButton);
+    let tracks = getSetTracks(setButton);
+
+    // Display each set track
+    displayItems("tracks", tracks);
 
 }
 
-function getSetSongs (setButton){
+function getSetTracks(setButton){
     // Get the setlist item
     let setlistItem = ascendToParent(setButton);
 
@@ -401,12 +413,13 @@ function getSetSongs (setButton){
     let setlistName = getSetlistName(setlistItem);
 
     // Scan local storage & retrieve setlist tracks
-    let setlistTracks = getSetlistTracks(setlistName, setButton.textContent);
+    let setTracks = getTracks(setlistName, setButton.textContent);
 
-    
+    // Return the set tracks
+    return setTracks;
 }
 
-function getSetlistTracks(nameOfRequestedSetlist, setButton){
+function getTracks(nameOfRequestedSetlist, setButton){
     // Get setlists from local storage
     let setlists = getLocalStorageData("setlists");
 
@@ -474,16 +487,16 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
 
             })
             
+            // Calculate amount of properties (sets) the setlist has
             let setlistSize = Object.size(setlist);
-                    
+            
+            // If setlist only has setlistName property, delete setlist
             if (setlistSize === 1){
                 delete itemsInStorage[setlist];
             } else {
                 let fixedSetlist = fixSetlist(setlist);
-    
                 newItemArray.push(fixedSetlist);
             }
-
         })
     }
 
@@ -702,7 +715,6 @@ function openForm(type){
 
         // ... display buttons appropriate for new setlists
         determineFooterButtons("setlists", "new");
-
     }
 }
 
@@ -722,8 +734,100 @@ function displayItems(contentType, contentItems, reference){
 
         // ...then push the set buttons (contentItems[1]) into the setlist item
         document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
+    } else if (contentType === "tracks"){
+        // Insert & collect an ordered list container
+        let container = insertListContainer("ordered");
+
+        // Init an empty array to collect trackCard items
+        let trackCards = [];
+
+        // For each track...
+        contentItems.forEach(track => {
+            container.appendChild(createCard(track));
+        })
+       
     }
 }
+
+function insertListContainer(type){
+
+    // Init a container
+    let container;
+
+    if (type === "ordered"){
+        container = document.createElement("ol");
+
+        container.id = "list-container";
+
+        container.className = "row p-0 m-0";
+    }
+
+    // Push list container into content container
+    document.getElementById("content-container").appendChild(container);
+
+    // Return container object
+    return container;
+}
+
+function createCard(track) {
+    // Create list element
+    let card = document.createElement("li");
+
+    // Add classes to list element
+    card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1");
+
+    // Add inner HTML within each card
+    card.innerHTML = 
+    `<button class="btn-card animate__animated animate__fadeInUp">
+    <div class="card gig-card rounded-corners">
+        <div class="card-body row">
+        <div class="col-10 gig-venue">
+            <h3 class="card-title">${track.name}</h3>
+        </div>
+        <div class="col-2 text-end">
+            <i class="fas fa-external-link-alt rep-icon"></i>
+        </div>
+        <div class="col-8 gig-artist">
+            <p class="m-0">${track.artist}</p>
+        </div>
+        <div class="col-4 gig-date text-end">
+            <p class="m-0 badge">${track.key} ${track.tonality}</p>
+        </div>
+        </div>
+    </div>
+    </button>`;
+
+     // Add a hover state to the card
+    addIconHover(card.firstElementChild);
+
+    return card;
+}
+
+// Change color of card open icon to represent hovered state
+function addIconHover (card) {
+    // When hovering over the button area, the icon will turn purple
+    card.addEventListener('mouseenter', function(){
+      paintIcon(card)
+    })
+    // When leaving the button area, the icon will revert to grey
+    card.addEventListener('mouseleave', function(){
+      paintIcon(card)
+    })
+}
+
+// Toggle a class to paint the edit icon
+function paintIcon (card) {
+    // Grab the icon within the card
+    let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+    // Check if the icon has a class of icon-hover
+    if (icon.classList.contains("icon-hover")){
+      // If so, remove the class to revert back to the grey color
+      icon.classList.remove("icon-hover")
+    }  else {
+      // If not, add the class to turn the icon color to purple
+      icon.classList.add("icon-hover");
+    }
+  }
 
 // This function contains all templates that are used within GigMate
 function contentTemplates(request, contentData, issue){
@@ -769,6 +873,7 @@ function contentTemplates(request, contentData, issue){
 
         // ... then return the setlist template along with the set buttons
         return [template, setButtons];
+        
     } else if (request === "newSetlistForm") {
         template = 
         `
@@ -798,13 +903,7 @@ function contentTemplates(request, contentData, issue){
 
         return template;
 
-    } else if (request === "deleteSetlistItem"){
-        template = 
-        `
-
-        `;
-        
-    } else if (request === "alert") {
+    }  else if (request === "alert") {
         template = document.createElement('div');
 
         template.className = "alert alert-danger";
@@ -817,7 +916,29 @@ function contentTemplates(request, contentData, issue){
             template.textContent = "The name input was empty, please enter a name!";
         }
 
-    
+        return template;
+    } else if (request === "trackCard") {
+        template = 
+        `
+        <button class="btn-card animate__animated animate__fadeInUp">
+            <div class="card gig-card rounded-corners">
+                <div class="card-body row">
+                    <div class="col-10 gig-venue">
+                        <h3 class="card-title">${track.name}</h3>
+                    </div>
+                    <div class="col-2 text-end">
+                        <i class="fas fa-external-link-alt rep-icon"></i>
+                    </div>
+                    <div class="col-8 gig-artist">
+                        <p class="m-0">${track.artist}</p>
+                    </div>
+                    <div class="col-4 gig-date text-end">
+                        <p class="m-0 badge">${track.key} ${track.tonality}</p>
+                    </div>
+                </div>
+            </div>
+        </button>`;
+
         return template;
     }
 
