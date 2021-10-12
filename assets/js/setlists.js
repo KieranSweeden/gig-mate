@@ -294,6 +294,8 @@ function determineFooterButtons(contentType, currentState, contentData){
         btnContainer.innerHTML = insertButton("add");
         btnContainer.innerHTML += insertButton("delete");
         btnContainer.innerHTML += insertButton("save");
+    } else if (contentType === "setlists" && currentState === "addTracksToSet"){
+        btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "deleting"){
@@ -391,7 +393,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // displaying the repertoire to the user
             displayItems("checkboxTracks", tracksInLocalStorage);
 
-            determineFooterButtons();
+            determineFooterButtons("setlists", "addTracksToSet");
         })
         deleteButton.addEventListener('click', function(){
 
@@ -400,6 +402,45 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         saveButton.addEventListener('click', function(){
             // the save button will save the set in it's displayed order
         })
+    } else if (contentType === "setlists" && currentState === "addTracksToSet"){
+        // If the user is adding tracks to a set...
+        saveButton.addEventListener('click', function(){
+            // ... the save button will add the tracks to the set by
+            // Collecting the tracks checked
+            let checkedTracks = getCheckedItems("tracks");
+
+            // Get names of checked tracks
+            let checkedTrackNames = getNames("trackCard", checkedTracks);
+
+            // Get local storage repertoire
+            let tracksInLocalStorage = getLocalStorageData("repertoire");
+
+            let trackObjectsToAdd = [];
+
+            // For each checked track, get the matching object in local storage
+            checkedTrackNames.forEach(checkedTrack => {
+                tracksInLocalStorage.forEach(track => {
+                    if(track.name === checkedTrack){
+                        trackObjectsToAdd.push(track);
+                    }
+                })
+            })
+
+            let setlistName = document.getElementById("page-header").textContent;
+            let setNumber = document.getElementById("page-subheader").textContent;
+
+            // Get original set tracks from local storage
+            let setlistTracks = getTracks(setlistName, setNumber);
+
+            // Add the checked track objects to setlist tracks array
+            setlistTracks.push(...trackObjectsToAdd);
+
+            // Update local storage with new setlist
+            updateSetInLocalStorage(setlistTracks, setlistName, setNumber);
+
+            editSetlist();
+        })
+
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
@@ -502,11 +543,11 @@ function editSetlist(){
 
     determineFooterButtons("setlists", "editingSet");
 
-    clearContentSection();
-
     let setName = document.getElementById("page-header").textContent;
 
     let setNumber = document.getElementById("page-subheader").textContent;
+    
+    clearContentSection();
 
     let tracks = getTracks(setName, setNumber);
 
@@ -643,6 +684,28 @@ function getTracks(nameOfRequestedSetlist, setName){
     return setTracks;
 }
 
+function updateSetInLocalStorage(newSet, setlistName, setNumber){
+    // Get setlists from local storage
+    let currentSetlistsInLocalStorage = getLocalStorageData("setlists");
+
+    let setlistToChange = currentSetlistsInLocalStorage.filter(setlist => setlist.setlistName === setlistName);
+    setlistToChange = setlistToChange[0];
+
+    switch(setNumber){
+        case "Set 1":
+            setlistToChange.set1 = newSet;
+        break;
+        case "Set 2":
+            setlistToChange.set2 = newSet;
+        break;
+        case "Set 3":
+            setlistToChange.set3 = newSet;
+        break;
+    }
+
+    pushToLocalStorage("setlists", currentSetlistsInLocalStorage);
+}
+
 function getSetlistName(setlistItem){
     return setlistItem.firstElementChild.firstElementChild.textContent;
 }
@@ -652,6 +715,20 @@ function ascendToParent(currentPosition){
         currentPosition = currentPosition.parentElement;
     }
     return currentPosition;
+}
+
+function getNames(elementType, checkboxTracks){
+
+    // Init an array
+    let names = [];
+
+    if(elementType === "trackCard"){
+        checkboxTracks.forEach(checkedTrack => {
+            names.push(checkedTrack.parentElement.parentElement.firstElementChild.firstElementChild.textContent);
+        })
+    }
+
+    return names;
 }
 
 function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
@@ -799,6 +876,14 @@ function getCheckedItems(contentType){
 
             checkedItems.push(deleteSetItem);
         })
+    } else if (contentType === "tracks"){
+        // Get all checkboxes
+        let checkboxes = [...document.getElementsByClassName('form-check-input')];
+
+        // Create a new array with checked checkboxes
+        checkedItems = checkboxes.filter(checkbox => checkbox.hasAttribute("checked"))
+
+
     }
     return checkedItems;
 }
@@ -1021,18 +1106,18 @@ function createCard(track, insertCheckbox) {
         `<button class="btn-card animate__animated animate__fadeInUp">
         <div class="card gig-card rounded-corners">
             <div class="card-body row">
-            <div class="col-10 gig-venue">
-                <h3 class="card-title">${track.name}</h3>
-            </div>
-            <div class="col-2 text-end">
-                <input class="form-check-input set-checkbox" type="checkbox">
-            </div>
-            <div class="col-8 gig-artist">
-                <p class="m-0">${track.artist}</p>
-            </div>
-            <div class="col-4 gig-date text-end">
-                <p class="m-0 badge">${track.key} ${track.tonality}</p>
-            </div>
+                <div class="col-10 gig-venue">
+                    <h3 class="card-title">${track.name}</h3>
+                </div>
+                <div class="col-2 text-end">
+                    <input class="form-check-input set-checkbox" type="checkbox">
+                </div>
+                <div class="col-8 gig-artist">
+                    <p class="m-0">${track.artist}</p>
+                </div>
+                <div class="col-4 gig-date text-end">
+                    <p class="m-0 badge">${track.key} ${track.tonality}</p>
+                </div>
             </div>
         </div>
         </button>`;
