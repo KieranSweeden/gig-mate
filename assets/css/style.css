@@ -285,7 +285,8 @@ header {
 }
 
 .form-check-input:checked {
-    background-color: transparent;
+    background-color: var(--gigmate-primary);
+    border-color: var(--gigmate-primary-shadow);
 }
 
 .form-check-input:focus {

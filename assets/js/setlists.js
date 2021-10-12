@@ -911,8 +911,11 @@ function displayItems(contentType, contentItems, reference){
 
         // For each track...
         contentItems.forEach(track => {
+
             container.appendChild(createCard(track, true));
+            
         })
+        addCheckBoxListeners("setlists");
     }
 }
 
