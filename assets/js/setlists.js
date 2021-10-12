@@ -136,13 +136,15 @@ function displaySetlists(setlists){
     })
 }
 
-function prepareToDeleteItems(contentType){
-
-    determineFooterButtons("setlists", "deleting");
+function prepareToEditMultipleItems(contentType){
 
     // If the content type is...
     if(contentType === "setlists"){
-        // ... setlists, get every setlist item
+
+        // ... setlists, show appropriate buttons
+        determineFooterButtons(contentType, "deleting");
+
+        // and get every setlist item.
         let setlistArray = [...document.getElementsByClassName("accordion-item")];
 
         // for each setlist...
@@ -171,6 +173,28 @@ function prepareToDeleteItems(contentType){
             })
         })
         addCheckBoxListeners(contentType);
+    } else if (contentType === "tracks"){
+        
+        // ... tracks, get every track card
+        let trackArray = [...document.getElementsByClassName("gig-card")];
+
+        trackArray.forEach(trackCard => {
+            // get the edit icon
+            let icon = trackCard.firstElementChild.children[1].firstElementChild;
+
+            // remove the edit icon
+            trackCard.firstElementChild.children[1].removeChild(icon);
+
+            // remove the button event listener
+            trackCard.parentElement.parentElement.removeEventListener('click', openEditTrackForm.bind("editTrack"));
+
+            // insert a checkbox
+            trackCard.firstElementChild.children[1].appendChild(getDeleteCheckBox());
+        })
+
+
+
+        
     }
 }
 
@@ -264,8 +288,11 @@ function determineFooterButtons(contentType, currentState, contentData){
     } else if (contentType === "setlists" && currentState === "viewingSet"){
         btnContainer.innerHTML += insertButton("edit");
         btnContainer.innerHTML += insertButton("expand");
-    } 
-    else if (contentType === "setlists" && currentState === "new"){
+    } else if(contentType === "setlists" && currentState === "editingSet"){
+        btnContainer.innerHTML = insertButton("add");
+        btnContainer.innerHTML += insertButton("delete");
+        btnContainer.innerHTML += insertButton("save");
+    } else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "deleting"){
         btnContainer.innerHTML += insertButton("save");
@@ -313,6 +340,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     let addButton = document.getElementById("btn-add");
     let deleteButton = document.getElementById("btn-delete");
     let saveButton = document.getElementById("btn-save");
+    let editButton = document.getElementById("btn-edit");
+    let expandButton = document.getElementById("btn-expand");
     let itemButtons = [...document.getElementsByClassName("list-group-btn")];
 
     if(contentType === "setlists" && currentState === "viewingSetlists"){
@@ -323,7 +352,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         });
         deleteButton.addEventListener('click', function(){
             // ... the delete button will prepare the items to be deleted
-            prepareToDeleteItems("setlists");
+            prepareToEditMultipleItems("setlists");
         })
         itemButtons.forEach(button => {
             // Add a click listener for every button in content section
@@ -332,11 +361,16 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             })
         })
     } else if (contentType === "setlists" && currentState === "viewingSet")  {
+        // If the user is viewing a set within a setlist...
+        editButton.addEventListener('click', function(){
+            // ... the edit button will prepare set items to be edited
+            editSetlist(contentType, contentData);
+        })
 
-
-
-
-
+        expandButton.addEventListener('click', function(){
+            // ... the expand button will full screen the set
+            fullScreenSet();
+        })
 
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
@@ -404,8 +438,6 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Shorten and lowercase the set the track is within
             let setHeading = removeSpaces(document.getElementById("page-subheader").textContent.toLowerCase());
 
-            let setArray = [];
-
             storedSetlistArray.forEach(setlist => {
                 if(setlist.setlistName === setlistHeading.textContent){
                     console.log(setlist[setHeading][6]);
@@ -427,10 +459,29 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     }
 }
 
+function editSetlist(){
+
+    determineFooterButtons("setlists", "editingSet");
+
+    clearContentSection();
+
+    let setName = document.getElementById("page-header").textContent;
+
+    let setNumber = document.getElementById("page-subheader").textContent;
+
+    let tracks = getTracks(setName, setNumber);
+
+    console.log(tracks)
+
+    // Display each set track
+    displayItems("setTracks", tracks);
+
+    // prepareToEditMultipleItems("tracks");
+    
+}
+
 
 function getInputValues(contentType, contentData){
-
-    
     if(contentType === "tracks"){
         
         let updatedTrackValues = {};
@@ -446,7 +497,7 @@ function getInputValues(contentType, contentData){
     return updatedTrackValues;
 }
 
-function openSetlist(setButton, contentData){
+function openSetlist(setButton){
     // Clear the content section
     clearContentSection();
 
@@ -523,7 +574,7 @@ function getSetTracks(setButton){
     return setTracks;
 }
 
-function getTracks(nameOfRequestedSetlist, setButton){
+function getTracks(nameOfRequestedSetlist, setName){
     // Get setlists from local storage
     let setlists = getLocalStorageData("setlists");
 
@@ -535,7 +586,7 @@ function getTracks(nameOfRequestedSetlist, setButton){
         // ... if the setlist names match...
         if (setlist.setlistName === nameOfRequestedSetlist){
             // Get the particular set
-            switch (setButton){
+            switch (setName){
                 case 'Set 1': 
                 setTracks = setlist.set1;
                 break;
@@ -850,14 +901,18 @@ function displayItems(contentType, contentItems, reference){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
 
-        // Init an empty array to collect trackCard items
-        let trackCards = [];
+        // For each track...
+        contentItems.forEach(track => {
+            container.appendChild(createCard(track, false));
+        })
+    } else if (contentType === "setTracks"){
+        // Insert & collect an ordered list container
+        let container = insertListContainer("ordered");
 
         // For each track...
         contentItems.forEach(track => {
-            container.appendChild(createCard(track));
+            container.appendChild(createCard(track, true));
         })
-       
     }
 }
 
@@ -881,42 +936,64 @@ function insertListContainer(type){
     return container;
 }
 
-function createCard(track) {
+function createCard(track, insertCheckbox) {
     // Create list element
     let card = document.createElement("li");
 
     // Add classes to list element
     card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1");
 
-    // Add inner HTML within each card
-    card.innerHTML = 
-    `<button class="btn-card animate__animated animate__fadeInUp">
-    <div class="card gig-card rounded-corners">
-        <div class="card-body row">
-        <div class="col-10 gig-venue">
-            <h3 class="card-title">${track.name}</h3>
+    if (insertCheckbox === false){
+        // Add inner HTML within each card
+        card.innerHTML = 
+        `<button class="btn-card animate__animated animate__fadeInUp">
+        <div class="card gig-card rounded-corners">
+            <div class="card-body row">
+            <div class="col-10 gig-venue">
+                <h3 class="card-title">${track.name}</h3>
+            </div>
+            <div class="col-2 text-end">
+                <i class="fas fa-external-link-alt rep-icon"></i>
+            </div>
+            <div class="col-8 gig-artist">
+                <p class="m-0">${track.artist}</p>
+            </div>
+            <div class="col-4 gig-date text-end">
+                <p class="m-0 badge">${track.key} ${track.tonality}</p>
+            </div>
+            </div>
         </div>
-        <div class="col-2 text-end">
-            <i class="fas fa-external-link-alt rep-icon"></i>
-        </div>
-        <div class="col-8 gig-artist">
-            <p class="m-0">${track.artist}</p>
-        </div>
-        <div class="col-4 gig-date text-end">
-            <p class="m-0 badge">${track.key} ${track.tonality}</p>
-        </div>
-        </div>
-    </div>
-    </button>`;
+        </button>`;
 
-    // Add event listener
-    card.addEventListener("click", function(){
-        openForm("editTrack", track);
-        
-    })
+        // Add event listener
+        card.addEventListener("click", function(){
+            openForm("editTrack", track);
+        });
 
-    // Add a hover state to the card
-    addIconHover(card.firstElementChild);
+        // Add a hover state to the card
+        addIconHover(card.firstElementChild);
+
+    } else if (insertCheckbox === true){
+        card.innerHTML = 
+        `<button class="btn-card animate__animated animate__fadeInUp">
+        <div class="card gig-card rounded-corners">
+            <div class="card-body row">
+            <div class="col-10 gig-venue">
+                <h3 class="card-title">${track.name}</h3>
+            </div>
+            <div class="col-2 text-end">
+                <input class="form-check-input set-checkbox" type="checkbox">
+            </div>
+            <div class="col-8 gig-artist">
+                <p class="m-0">${track.artist}</p>
+            </div>
+            <div class="col-4 gig-date text-end">
+                <p class="m-0 badge">${track.key} ${track.tonality}</p>
+            </div>
+            </div>
+        </div>
+        </button>`;
+    }
 
     return card;
 }
