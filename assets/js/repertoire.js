@@ -31,7 +31,7 @@ function fillWithLocalStorage(data){
 
   storageArray.sort(sortByName);
 
-    storageArray.forEach(element => {
+  storageArray.forEach(element => {
     createCard(element);
   });
 }

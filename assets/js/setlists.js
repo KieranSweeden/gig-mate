@@ -73,6 +73,8 @@ function getLocalStorageData(contentType) {
     
     if(contentType === "setlists") {
         storedData = JSON.parse(localStorage.getItem("setlists"));
+    } else if (contentType === "repertoire") {
+        storedData = JSON.parse(localStorage.getItem("repertoire"));
     }
 
     return storedData;
@@ -277,7 +279,7 @@ function determineFooterButtons(contentType, currentState, contentData){
     // And we must make sure before making any changes, that it's clear of content
     btnContainer.innerHTML = "";
 
-    // Insert the back button as it's present in all states.
+    // Insert the back button as it's present in most states.
     btnContainer.innerHTML = insertButton("back");
 
     // If the user is...
@@ -372,6 +374,32 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             fullScreenSet();
         })
 
+    }   else if (contentType === "setlists" && currentState === "editingSet"){
+        // If the user is editing a set within a setlist...
+        addButton.addEventListener('click', function(){
+            // ... the add button will display the repertoire
+
+            // clearing the content section
+            clearContentSection();
+
+            // getting the repertoire
+            let tracksInLocalStorage = getLocalStorageData("repertoire");
+
+            // sort the repertoire
+            tracksInLocalStorage.sort(sortByName);
+            
+            // displaying the repertoire to the user
+            displayItems("checkboxTracks", tracksInLocalStorage);
+
+            determineFooterButtons();
+        })
+        deleteButton.addEventListener('click', function(){
+
+
+        })
+        saveButton.addEventListener('click', function(){
+            // the save button will save the set in it's displayed order
+        })
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
         saveButton.addEventListener('click', function(){
@@ -459,6 +487,17 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     }
 }
 
+// Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+function sortByName( a, b ) {
+    if ( a.name < b.name ){
+      return -1;
+    }
+    if ( a.name > b.name ){
+      return 1;
+    }
+    return 0;
+  }
+
 function editSetlist(){
 
     determineFooterButtons("setlists", "editingSet");
@@ -474,7 +513,7 @@ function editSetlist(){
     console.log(tracks)
 
     // Display each set track
-    displayItems("setTracks", tracks);
+    displayItems("checkboxTracks", tracks);
 
     // prepareToEditMultipleItems("tracks");
     
@@ -905,16 +944,17 @@ function displayItems(contentType, contentItems, reference){
         contentItems.forEach(track => {
             container.appendChild(createCard(track, false));
         })
-    } else if (contentType === "setTracks"){
+    } else if (contentType === "checkboxTracks"){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
 
         // For each track...
         contentItems.forEach(track => {
-
+            // ... create a card with the track properties
             container.appendChild(createCard(track, true));
-            
         })
+
+        // Add an event listener to every checkbox
         addCheckBoxListeners("setlists");
     }
 }
