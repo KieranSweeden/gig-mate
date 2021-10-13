@@ -97,9 +97,22 @@ html, body {
     color: var(--gigmate-primary)
 }
 
+.gig-venue {
+    text-align: start;
+}
+
 .card-title {
     font-size: 1.2rem;
     font-weight: bold;
+    display: inline-block;
+}
+
+.gig-artist {
+    text-align: start;
+}
+
+.gig-artist p {
+    display: inline-block;
 }
 
 
