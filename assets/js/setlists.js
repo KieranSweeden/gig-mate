@@ -1057,6 +1057,17 @@ function displayItems(contentType, contentItems, reference){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
 
+        container.addEventListener("dragover", e => {
+            e.preventDefault();
+            const afterElement = getDragAfterElement(container, e.clientY);
+            const draggable = document.querySelector(".dragging");
+            if (afterElement == null) {
+                container.appendChild(draggable);
+            } else {
+                container.insertBefore(draggable, afterElement);
+            }
+        })
+
         // For each track...
         contentItems.forEach(track => {
             // ... create a card with the track properties
@@ -1066,6 +1077,20 @@ function displayItems(contentType, contentItems, reference){
         // Add an event listener to every checkbox
         addCheckBoxListeners("setlists");
     }
+}
+
+function getDragAfterElement(container, mousePosition){
+    let draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
+
+    return draggableElements.reduce((closestElement, child) => {
+        const box = child.getBoundingClientRect();
+        const offset = mousePosition - box.top - box.height / 2;
+        if (offset < 0 && offset > closestElement.offset){
+            return { offset: offset, element: child }
+        } else {
+            return closestElement;
+        }
+    }, { offset: Number.NEGATIVE_INFINITY }).element
 }
 
 function insertListContainer(type){
@@ -1093,7 +1118,7 @@ function createCard(track, insertCheckbox) {
     let card = document.createElement("li");
 
     // Add classes to list element
-    card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1");
+    card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1", "draggable");
 
     if (insertCheckbox === false){
         // Add inner HTML within each card
@@ -1145,9 +1170,22 @@ function createCard(track, insertCheckbox) {
             </div>
         </div>
         </button>`;
+
+        card.setAttribute("draggable", true);
+
+        card.addEventListener("dragstart", dragStart);
+        card.addEventListener("dragend", dragEnd);
     }
 
     return card;
+}
+
+function dragStart(){
+    this.classList.add("dragging");
+}
+
+function dragEnd(){
+    this.classList.remove("dragging");
 }
 
 // Change color of card open icon to represent hovered state
