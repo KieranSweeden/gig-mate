@@ -242,6 +242,21 @@ To return to the original README file, [click here](README.md).
     ```
 <hr>
 
+11. When attempting to scroll through a set on mobile & tablet, a track card would be dragged instead of the container being scrolled.
+    - Instead of scrolling through a set, a track card would be picked up and dragged, resulting in a poor user experience.
+    - The cause of this issue was that the parent containing the track card's width was 100% of the content container. Setting the width of the parent element to min-content fixed this issue, as it's width would be at it's most minimum whilst still displaying all child elements (the track card).
+
+    <br>
+
+    ```
+    *style.css*
+
+    #list-container li {
+    width: min-content;
+    }
+    ```
+<hr>
+
 ## Unfixed Bugs
 
 

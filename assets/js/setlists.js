@@ -1207,10 +1207,10 @@ function createCard(track, insertCheckbox) {
         `<button class="btn-card animate__animated animate__fadeInUp">
         <div class="card gig-card rounded-corners">
             <div class="card-body row">
-                <div class="col-10 gig-venue text-start">
+                <div class="col-8 gig-venue text-start">
                     <h3 class="card-title">${track.name}</h3>
                 </div>
-                <div class="col-2 text-end">
+                <div class="col-4 text-end">
                     <i class="fas fa-arrows-alt-v rep-icon"></i>
                     <input class="form-check-input set-checkbox" type="checkbox">
                 </div>
