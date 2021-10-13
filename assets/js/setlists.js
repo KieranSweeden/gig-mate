@@ -1162,7 +1162,7 @@ function createCard(track, insertCheckbox) {
                     <h3 class="card-title">${track.name}</h3>
                 </div>
                 <div class="col-2 text-end">
-                    <i class="fas fa-external-link-alt rep-icon"></i>
+                    <i class="fas fa-arrows-alt-v rep-icon"></i>
                     <input class="form-check-input set-checkbox" type="checkbox">
                 </div>
                 <div class="col-8 gig-artist">
@@ -1174,6 +1174,9 @@ function createCard(track, insertCheckbox) {
             </div>
         </div>
         </button>`;
+
+        // Add a hover state to the card
+        addIconHover(card.firstElementChild);
 
         card.setAttribute("draggable", true);
 

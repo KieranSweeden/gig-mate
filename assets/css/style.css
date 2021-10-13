@@ -297,6 +297,10 @@ header {
     justify-content: space-between;
 }
 
+.form-check-input {
+    margin-left: 0.5rem;
+}
+
 .form-check-input:checked {
     background-color: var(--gigmate-primary);
     border-color: var(--gigmate-primary-shadow);
