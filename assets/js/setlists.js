@@ -1178,21 +1178,25 @@ function createCard(track, insertCheckbox) {
         // Add a hover state to the card
         addIconHover(card.firstElementChild);
 
+        // Make the card able to be dragged
         card.setAttribute("draggable", true);
 
+        // Add eventlisteners relating to drag and drop
         card.addEventListener("dragstart", dragStart);
-        
         card.addEventListener("dragend", dragEnd);
     }
 
+    // Return the card
     return card;
 }
 
 function dragStart(){
+    // Add the class of dragging when dragging
     this.classList.add("dragging");
 }
 
 function dragEnd(){
+    // Remove the class of dragging when dropped
     this.classList.remove("dragging");
 }
 
