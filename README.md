@@ -458,7 +458,9 @@ To get your own local copy of GigMate:
 
 - Code to find out the amount of properties an object contained was taken from [this Stack Overflow answer](https://stackoverflow.com/a/6700/15607265) by [Double-Beep](https://stackoverflow.com/users/10607772/double-beep).
 
-- Code to 
+- Code to remove elements from an array with another array taken from [this article](https://melvingeorge.me/blog/remove-elements-contained-in-another-array-javascript) by [Melvin George](https://melvingeorge.me/).
+
+- Code to drop an element after a particular element based on mouse position taken from [this YouTube video](https://www.youtube.com/watch?v=jfYWwQrtzzY) by [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
 
 ## Media
 

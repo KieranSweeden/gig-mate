@@ -414,6 +414,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             let setTracks = getTracks(setlistName, setNumber);
 
             // Create a new set which filters out the checked tracks
+            // Credit: code to remove array with another
+            // array taken from https://melvingeorge.me/blog/remove-elements-contained-in-another-array-javascript
             let newSet = setTracks.filter(setTrack => {
                 return !namesToDelete.has(setTrack.name);
             });
