@@ -415,12 +415,13 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get names of checked tracks
             let checkedTrackNames = getNames("trackCard", checkedTracks);
 
-            // Create a new set array of names used to delete from array
-            let namesToDelete = new Set(checkedTrackNames);
-
             // Get the current setlist name & set number
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
+
+            // Create a new set array of names used to delete from array
+            let namesToDelete = new Set(checkedTrackNames);
+
 
             // Get the array of set tracks from local storage
             let setTracks = getTracks(setlistName, setNumber);
@@ -434,6 +435,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // Update local storage with the new set
             updateSetInLocalStorage(newSet, setlistName, setNumber);
+
+            viewSet(setlistName, setNumber);
         })
         saveButton.addEventListener('click', function(){
             // the save button will save the set in it's displayed order by
