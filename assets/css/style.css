@@ -272,6 +272,10 @@ header {
 
 /* Setlists.html styling */
 
+#list-container li {
+    width: min-content;
+}
+
 #content-section .container-lg .row {
     justify-content: center;
 }
