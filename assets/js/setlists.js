@@ -120,7 +120,7 @@ function displaySetlists(setlists){
     let contentContainer = document.getElementById("content-container");
 
     // Get accordion body
-    accordionBody = contentTemplates("setlistAccordionBody");
+    let accordionBody = contentTemplates("setlistAccordionBody");
 
     // insert accordion body to content container
     contentContainer.innerHTML = accordionBody;
@@ -136,6 +136,18 @@ function displaySetlists(setlists){
         // ... add event listeners to the respective buttons
         insertButtonEventListeners();
     })
+}
+
+function viewSet(setlistName, setNumber){
+
+    let tracks = getTracks(setlistName, setNumber);
+
+    clearContentSection();
+
+    // Show appropriate footer buttons
+    determineFooterButtons("setlists", "viewingSet");
+
+    displayItems("tracks", tracks);
 }
 
 function prepareToEditMultipleItems(contentType){
@@ -379,8 +391,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
     }   else if (contentType === "setlists" && currentState === "editingSet"){
         // If the user is editing a set within a setlist...
         addButton.addEventListener('click', function(){
-            // ... the add button will display the repertoire
-
+            // ... the add button will display the repertoire by
             // clearing the content section
             clearContentSection();
 
@@ -393,6 +404,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // displaying the repertoire to the user
             displayItems("checkboxTracks", tracksInLocalStorage);
 
+            // show appropriate footer buttons
             determineFooterButtons("setlists", "addTracksToSet");
         })
         deleteButton.addEventListener('click', function(){
@@ -422,11 +434,39 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // Update local storage with the new set
             updateSetInLocalStorage(newSet, setlistName, setNumber);
-        
-            editSetlist();
         })
         saveButton.addEventListener('click', function(){
-            // the save button will save the set in it's displayed order
+            // the save button will save the set in it's displayed order by
+
+            // Get the tracks within the set
+            let trackCards = [...document.getElementsByClassName("card-title")];
+
+            // Get the names of the set tracks
+            let trackNames = getNames("saveSetCards", trackCards);
+
+            // Init an array that'll be the new set
+            let newSet = [];
+
+            // Get the repertoire
+            let repertoireTracks = getLocalStorageData("repertoire");
+
+            // Get the object in repertoire matching the name
+            trackNames.forEach(trackName => {
+                repertoireTracks.forEach(repertoireTrack => {
+                    // If the names match, push the object into the newSet array
+                    if(trackName === repertoireTrack.name){
+                        newSet.push(repertoireTrack);
+                    }
+                })
+            })
+
+            // Get the current setlist name & set number
+            let setlistName = document.getElementById("page-header").textContent;
+            let setNumber = document.getElementById("page-subheader").textContent;
+
+            updateSetInLocalStorage(newSet, setlistName, setNumber);
+
+            viewSet(setlistName, setNumber);
         })
     } else if (contentType === "setlists" && currentState === "addTracksToSet"){
         // If the user is adding tracks to a set...
@@ -743,14 +783,18 @@ function ascendToParent(currentPosition){
     return currentPosition;
 }
 
-function getNames(elementType, checkboxTracks){
+function getNames(elementType, tracks){
 
     // Init an array
     let names = [];
 
     if(elementType === "trackCard"){
-        checkboxTracks.forEach(checkedTrack => {
+        tracks.forEach(checkedTrack => {
             names.push(checkedTrack.parentElement.parentElement.firstElementChild.firstElementChild.textContent);
+        })
+    } else if (elementType === "saveSetCards"){
+        tracks.forEach(savedTrack => {
+            names.push(savedTrack.textContent);
         })
     }
 
