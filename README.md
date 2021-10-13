@@ -365,6 +365,9 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 - [Animate.css](https://animate.style/)
     - Animate.css was used to prompty attach appropriate animations to elements throughout the application.
 
+- [DragDropTouch](https://github.com/Bernardo-Castilho/dragdroptouch)
+    - The DragDropTouch polyfill was utilised so that the drag and drop functionality would perform on mobile devices as expected by translating touch events into standard Drag and Drop API events.  
+
 ## Applications
 
 - [Balsamiq](https://balsamiq.com/)
