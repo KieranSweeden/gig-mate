@@ -397,7 +397,31 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         })
         deleteButton.addEventListener('click', function(){
 
+            // Collecting the tracks checked
+            let checkedTracks = getCheckedItems("tracks");
 
+            // Get names of checked tracks
+            let checkedTrackNames = getNames("trackCard", checkedTracks);
+
+            // Create a new set array of names used to delete from array
+            let namesToDelete = new Set(checkedTrackNames);
+
+            // Get the current setlist name & set number
+            let setlistName = document.getElementById("page-header").textContent;
+            let setNumber = document.getElementById("page-subheader").textContent;
+
+            // Get the array of set tracks from local storage
+            let setTracks = getTracks(setlistName, setNumber);
+
+            // Create a new set which filters out the checked tracks
+            let newSet = setTracks.filter(setTrack => {
+                return !namesToDelete.has(setTrack.name);
+            });
+
+            // Update local storage with the new set
+            updateSetInLocalStorage(newSet, setlistName, setNumber);
+        
+            editSetlist();
         })
         saveButton.addEventListener('click', function(){
             // the save button will save the set in it's displayed order
