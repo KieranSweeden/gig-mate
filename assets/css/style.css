@@ -504,11 +504,9 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #btn-section .btn-bottom {
     border: none;
-    width: 2.25rem;
-    height: 2.25rem;
     background-color: transparent;
-    border-radius: 50%;
-    font-size: 1.5rem;
+    border-radius: var(--gigmate-border-radius);
+    font-size: 1rem;
     color: var(--gigmate-dark-grey);
     transition: color .25s ease-in-out, background-color .25s ease-in-out;
     text-align: center;
@@ -517,6 +515,11 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     justify-content: center;
     align-items: center;
     text-decoration: none;
+    padding: 0.5rem;
+}
+
+.btn-bottom i {
+    margin-right: 0.5rem;
 }
 
 #btn-section .btn-bottom:hover,

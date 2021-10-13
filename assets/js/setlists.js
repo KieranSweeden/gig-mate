@@ -328,22 +328,22 @@ function insertButton(type){
     // Set button function based on type
     switch (type){
         case "back":
-            button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>';
+            button = '<a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>';
         break;
         case "add":
-            button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>';
+            button = '<button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i>Add</button>';
         break;
         case "save":
-            button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>';
+            button = '<button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>';
         break;
         case "delete":
-            button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>';
+            button = '<button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i>Delete</button>';
         break;
         case "edit":
-            button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i></button>';
+            button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i>Edit</button>';
         break;
         case "expand":
-            button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i></button>';
+            button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i>Live</button>';
         break;
     }
 
