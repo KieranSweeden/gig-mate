@@ -1059,6 +1059,8 @@ function displayItems(contentType, contentItems, reference){
 
         container.addEventListener("dragover", e => {
             e.preventDefault();
+            // Credit: code to get element closest & append
+            // To container taken from https://www.youtube.com/watch?v=jfYWwQrtzzY
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector(".dragging");
             if (afterElement == null) {
@@ -1079,6 +1081,7 @@ function displayItems(contentType, contentItems, reference){
     }
 }
 
+// Credit: code to get element closest to mouse position taken from https://www.youtube.com/watch?v=jfYWwQrtzzY
 function getDragAfterElement(container, mousePosition){
     let draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
 
@@ -1159,6 +1162,7 @@ function createCard(track, insertCheckbox) {
                     <h3 class="card-title">${track.name}</h3>
                 </div>
                 <div class="col-2 text-end">
+                    <i class="fas fa-external-link-alt rep-icon"></i>
                     <input class="form-check-input set-checkbox" type="checkbox">
                 </div>
                 <div class="col-8 gig-artist">
@@ -1174,6 +1178,7 @@ function createCard(track, insertCheckbox) {
         card.setAttribute("draggable", true);
 
         card.addEventListener("dragstart", dragStart);
+        
         card.addEventListener("dragend", dragEnd);
     }
 
