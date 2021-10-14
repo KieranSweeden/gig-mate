@@ -7,12 +7,12 @@
     /* Colour Variables */
     --gigmate-primary: hsla(245, 44%, 49%, 1);
     --gigmate-primary-shadow: hsla(245, 44%, 49%, 0.5);
-    --gigmate-primary-overlay: hsla(245, 44%, 30%, 0.8);
+    --gigmate-primary-hover: hsla(245, 44%, 40%, 1);
     --gigmate-black: hsla(0, 0%, 13%, 1);
     --gigmate-black-shadow: hsla(0, 0%, 50%, 0.2);
     --gigmate-dark-grey: hsla(0, 0%, 40%, 1);
     --gigmate-grey: hsla(0, 0%, 75%, 1);
-    --gigmate-light-grey: rgb(27, 21, 21);
+    --gigmate-light-grey: hsla(0, 0%, 80%, 1);
     --gigmate-off-white: hsla(0, 0%, 96%, 1);
     --gigmate-white: hsla(0, 0%, 98%, 1);
 
@@ -286,7 +286,6 @@ header {
     padding: 0;
     margin: 0;
     border: none;
-    overflow: hidden;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
     border-radius: var(--gigmate-border-radius);
 }
@@ -295,7 +294,17 @@ header {
     list-style: none;
     border: none;
     border-bottom: 5px solid var(--gigmate-primary-white);
-    overflow: hidden;
+    background-color: transparent;
+}
+
+.accordion-item:first-of-type .accordion-button {
+    border-top-left-radius: var(--gigmate-border-radius);
+    border-top-right-radius: var(--gigmate-border-radius);
+}
+
+.accordion-item:last-of-type .accordion-button.collapsed {
+    border-bottom-right-radius: var(--gigmate-border-radius);
+    border-bottom-left-radius: var(--gigmate-border-radius);
 }
 
 .accordion-button.removed {
@@ -309,9 +318,19 @@ header {
     box-shadow: none;
 }
 
-.accordion-button:focus {
+.accordion-button:hover {
+    background-color: var(--gigmate-off-white);
+}
+
+.accordion-button:not(.collapsed):hover {
+    background-color: var(--gigmate-primary-hover);
+}
+
+.accordion-button:focus,
+.accordion-button:focus-visible,
+.accordion-button:focus-within {
     border-color: var(--gigmate-primary-shadow);
-    outline: 0;
+    outline: solid 3px var(--gigmate-dark-grey);
     box-shadow: none;
 }
 
@@ -381,10 +400,34 @@ header {
     align-items: center;
 }
 
+.list-group-btn:hover {
+    background-color: var(--gigmate-off-white);
+}
+
+.list-group-btn::after {
+    content: "\f03a";
+    font-family: "Font Awesome 5 Free";
+    font-weight: 900;
+
+    transform: scale(0);
+
+    transition: transform .25s ease-in-out;
+
+    color: var(--gigmate-dark-grey);
+}
+
+.list-group-btn:hover::after {
+    transform: scale(1);
+}
+
 /* Repertoire.html styling */
 
 .list-track-item {
     display: flex;
+}
+
+#content-container {
+    background-color: transparent;
 }
 
 .content-container {
