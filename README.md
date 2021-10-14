@@ -465,6 +465,8 @@ To get your own local copy of GigMate:
 
 - Code to drop an element after a particular element based on mouse position taken from [this YouTube video](https://www.youtube.com/watch?v=jfYWwQrtzzY) by [Web Dev Simplified](https://www.youtube.com/channel/UCFbNIlppjAuEX4znoulh0Cw).
 
+- Partial amount of code to create a search filter was taken from [this W3Schools article](https://www.w3schools.com/howto/howto_js_filter_lists.asp).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
