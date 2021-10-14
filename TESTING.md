@@ -417,6 +417,58 @@ setTracks.forEach(setTrack => {
 
 <hr>
 
+<details>
+
+<summary><b>When checking a set ready for deletion, the set would open instead of being checked</b></summary>
+
+<br>
+
+- Clicking a set checkbox would open the set and display it's tracks rather than check it's checkbox ready to be deleted. This was due to the button attached to the set button element, which contained an event listener.
+
+- My first attempt of fixing this bug was removing the event listener from the button, however this proved to be impossible given that parameters were being sent to the callback function within the event listener function. This made the function an anonymous function and not a reference, meaning the remove event listener would not work given it requires the exact same reference as the add event listener function. I found this out after looking at [this Medium article](https://medium.com/@DavideRama/removeeventlistener-and-anonymous-functions-ab9dbabd3e7b) by [Davide Rama](https://medium.com/@DavideRama).
+
+- The fix to this issue was to add another parameter to the displaySetlists function, that being the insertingCheckbox. If the parameter is left undefined, it will default to adding the button event listener. If it's anything other than undefined however (such as true), it will avoid adding the event listeners.
+
+<br>
+
+```
+*setlists.js*
+
+function displaySetlists(setlists, insertingCheckbox){
+    // Display the setlists...
+
+    // ...Get content container
+    let contentContainer = document.getElementById("content-container");
+
+    // Get accordion body
+    let accordionBody = contentTemplates("setlistAccordionBody");
+
+    // insert accordion body to content container
+    contentContainer.innerHTML = accordionBody;
+
+    // Insert accordion items
+    setlists.forEach(setlist => {
+        // ... retrieve the accordion template containing content respective to this setlist
+        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
+
+        // ... display the setlist with the template, set buttons & reference
+        displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
+        
+        // If intention is to delete setlists, avoid adding event listeners to buttons
+        if (insertingCheckbox === undefined){
+            // ... add event listeners to the respective set buttons
+            insertButtonEventListeners();
+        }
+    })
+}
+
+
+```
+
+</details>
+
+<hr>
+
 ## Unfixed Bugs
 
 

@@ -114,34 +114,32 @@ function pushToLocalStorage(contentType, localJSONData) {
     localStorage.setItem(contentType, JSON.stringify(localJSONData));
 }
 
-function displaySetlists(setlists, insertCheckbox){
+function displaySetlists(setlists, insertingCheckbox){
     // Display the setlists...
 
-    // If checkboxes are not being inserted...
-    if (insertCheckbox === false){
-        // ...Get content container
-        let contentContainer = document.getElementById("content-container");
+    // ...Get content container
+    let contentContainer = document.getElementById("content-container");
 
-        // Get accordion body
-        let accordionBody = contentTemplates("setlistAccordionBody");
+    // Get accordion body
+    let accordionBody = contentTemplates("setlistAccordionBody");
 
-        // insert accordion body to content container
-        contentContainer.innerHTML = accordionBody;
+    // insert accordion body to content container
+    contentContainer.innerHTML = accordionBody;
 
-        // Insert accordion items
-        setlists.forEach(setlist => {
-            // ... retrieve the accordion template containing content respective to this setlist
-            let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
+    // Insert accordion items
+    setlists.forEach(setlist => {
+        // ... retrieve the accordion template containing content respective to this setlist
+        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
 
-            // ... display the setlist with the template, set buttons & reference
-            displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
-            
+        // ... display the setlist with the template, set buttons & reference
+        displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
+        
+        // If intention is to delete setlists, avoid adding event listeners to buttons
+        if (insertingCheckbox === undefined){
             // ... add event listeners to the respective set buttons
             insertButtonEventListeners();
-        })
-    }  else if (insertCheckbox === true){
-        prepareToEditMultipleItems("setlists");
-    }
+        }
+    })
 }
 
 function viewSet(setlistName, setNumber){
@@ -163,6 +161,10 @@ function prepareToEditMultipleItems(contentType){
 
         // ... setlists, show appropriate buttons
         determineFooterButtons(contentType, "deleting");
+
+        let setlists = getLocalStorageData(contentType);
+
+        displaySetlists(setlists, true);
 
         // Get the setlists
         let setlistArray = [...document.getElementsByClassName("accordion-item")];
@@ -375,9 +377,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         });
         deleteButton.addEventListener('click', function(){
             // ... the delete button will prepare the items to be deleted
-            let setlists = getLocalStorageData(contentType);
-
-            displaySetlists(setlists, true);
+            prepareToEditMultipleItems(contentType);
         })
         itemButtons.forEach(button => {
             // Add a click listener for every button in content section
@@ -389,7 +389,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         // If the user is viewing a set within a setlist...
         editButton.addEventListener('click', function(){
             // ... the edit button will prepare set items to be edited
-            editSetlist(contentType, contentData);
+            editSet();
         })
 
         expandButton.addEventListener('click', function(){
@@ -516,7 +516,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Update local storage with new setlist
             updateSetInLocalStorage(setlistTracks, setlistName, setNumber);
 
-            editSetlist();
+            editSet();
         })
 
     } else if (contentType === "setlists" && currentState === "new"){
@@ -648,7 +648,7 @@ function sortByName( a, b ) {
     return 0;
   }
 
-function editSetlist(){
+function editSet(){
 
     determineFooterButtons("setlists", "editingSet");
 
@@ -663,7 +663,6 @@ function editSetlist(){
     // Display each set track
     displayItems("checkboxTracks", tracks);
 }
-
 
 function getInputValues(contentType, contentData){
     if(contentType === "tracks"){
