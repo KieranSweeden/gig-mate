@@ -13,6 +13,7 @@
     --gigmate-dark-grey: hsla(0, 0%, 40%, 1);
     --gigmate-grey: hsla(0, 0%, 75%, 1);
     --gigmate-light-grey: rgb(27, 21, 21);
+    --gigmate-off-white: hsla(0, 0%, 96%, 1);
     --gigmate-white: hsla(0, 0%, 98%, 1);
 
     /* Utility Variables */
@@ -301,6 +302,40 @@ header {
     justify-content: space-between;
 }
 
+.accordion-button:not(.collapsed) {
+    color: var(--gigmate-white);
+    font-weight: bold;
+    background-color: var(--gigmate-primary);
+    box-shadow: none;
+}
+
+.accordion-button:focus {
+    border-color: var(--gigmate-primary-shadow);
+    outline: 0;
+    box-shadow: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f518";
+    color: hsla(0, 0%, 98%, 1);
+    transform: rotate(360deg);
+
+    /* Remove default bootstrap accordion icon*/
+    background-image: none; 
+}
+
+.accordion-button.collapsed::after {
+    font-family: "Font Awesome 5 Free";
+    content: "\f02d";
+    color: var(--gigmate-dark-grey);
+    font-weight: 900;
+    transition: all .25s ease-in-out;
+    
+    /* Remove default bootstrap accordion icon*/
+    background-image: none;
+}
+
 .form-check-input {
     margin-left: 0.5rem;
 }
@@ -381,7 +416,9 @@ header {
     border-radius: var(--gigmate-border-radius);
     outline: transparent;
     border: transparent;
-    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    box-shadow: 0 0 2.5px 0 var(--gigmate-black-shadow) inset;
+    background-color: var(--gigmate-off-white);
+    transition: outline-offset .15s ease-in-out, outline .15s ease-in-out;
 }
 
 #search-input:focus,
@@ -389,8 +426,9 @@ header {
 #search-input:focus-visible,
 #search-input:focus-within {
     border-color: transparent;
-    outline: transparent;
-    box-shadow: 0 0 0 0.25rem var(--gigmate-primary-shadow);
+    outline: var(--gigmate-primary-shadow) solid .25rem;
+    outline-offset: 0.25rem;
+    box-shadow: 0 0 5px 0 var(--gigmate-black-shadow) inset;
 }
 
 /* Style X that appears in search input after a few key presses */
@@ -439,8 +477,8 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 }
 
 .btn-card:focus-visible {
-    outline-offset: 0.5rem;
-    outline-color: var(--gigmate-black);
+    outline-offset: .2rem;
+    outline: var(--gigmate-primary-shadow) solid .25rem;
 }
 
 .btn-card:active {
