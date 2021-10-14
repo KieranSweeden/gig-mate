@@ -343,7 +343,7 @@ function insertButton(type){
             button = '<button id="btn-edit" class="btn-bottom"><i class="fas fa-edit"></i>Edit</button>';
         break;
         case "expand":
-            button = '<button id="btn-expand" class="btn-bottom"><i class="fas fa-expand"></i>Live</button>';
+            button = '<button id="btn-expand" class="btn-bottom" data-bs-toggle="modal" data-bs-target="#liveModeModal"><i class="fas fa-expand"></i>Live</button>';
         break;
     }
 
@@ -385,7 +385,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
         expandButton.addEventListener('click', function(){
             // ... the expand button will full screen the set
-            fullScreenSet();
+            fillLiveModalWithTracks();
         })
 
     }   else if (contentType === "setlists" && currentState === "editingSet"){
@@ -595,6 +595,22 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             restartGigMate("setlists");
         })
     }
+}
+
+function fillLiveModalWithTracks(){
+    // Get the setlist name & set
+    let setlistHeading = document.getElementById("page-header").textContent;
+    let setlistSubHeading = document.getElementById("page-subheader").textContent;
+
+    let liveModalTitle = document.getElementById("live-mode-title");
+
+    liveModalTitle.textContent = setlistHeading + " - " + setlistSubHeading;
+
+    // Get the tracks by sending the setlist name & set number
+    let setTracks = getTracks(setlistHeading, setlistSubHeading);
+
+    
+
 }
 
 // Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value

@@ -544,6 +544,19 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     margin: 0;
 }
 
+/* Live Mode Box Styling */
+
+#live-mode-container {
+    position: absolute;
+    inset: 0 0 0 0;
+    background-color: var(--gigmate-white);
+    z-index: 5;
+}
+
+.live-mode-track {
+    padding: 1rem;
+}
+
 
 /* Footer styling */
 
