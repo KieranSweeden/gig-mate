@@ -33,7 +33,7 @@ async function startGigMate(contentType) {
     // If the content type is...
     if(contentType = "setlists") {
         // ... setlists, create setlists
-        displaySetlists(contentData, "viewing");
+        displaySetlists(contentData, false);
     }
 
     // Determing what footer buttons should be present
@@ -114,28 +114,34 @@ function pushToLocalStorage(contentType, localJSONData) {
     localStorage.setItem(contentType, JSON.stringify(localJSONData));
 }
 
-function displaySetlists(setlists){
+function displaySetlists(setlists, insertCheckbox){
     // Display the setlists...
-    // ...Get content container
-    let contentContainer = document.getElementById("content-container");
 
-    // Get accordion body
-    let accordionBody = contentTemplates("setlistAccordionBody");
+    // If checkboxes are not being inserted...
+    if (insertCheckbox === false){
+        // ...Get content container
+        let contentContainer = document.getElementById("content-container");
 
-    // insert accordion body to content container
-    contentContainer.innerHTML = accordionBody;
+        // Get accordion body
+        let accordionBody = contentTemplates("setlistAccordionBody");
 
-    // Insert accordion 
-    setlists.forEach(setlist => {
-        // ... retrieve the accordion template containing content respective to this setlist
-        let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
+        // insert accordion body to content container
+        contentContainer.innerHTML = accordionBody;
 
-        // ... display the setlist with the template, set buttons & reference
-        displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
+        // Insert accordion items
+        setlists.forEach(setlist => {
+            // ... retrieve the accordion template containing content respective to this setlist
+            let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
 
-        // ... add event listeners to the respective buttons
-        insertButtonEventListeners();
-    })
+            // ... display the setlist with the template, set buttons & reference
+            displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
+            
+            // ... add event listeners to the respective set buttons
+            insertButtonEventListeners();
+        })
+    }  else if (insertCheckbox === true){
+        prepareToEditMultipleItems("setlists");
+    }
 }
 
 function viewSet(setlistName, setNumber){
@@ -158,11 +164,14 @@ function prepareToEditMultipleItems(contentType){
         // ... setlists, show appropriate buttons
         determineFooterButtons(contentType, "deleting");
 
-        // and get every setlist item.
+        // Get the setlists
         let setlistArray = [...document.getElementsByClassName("accordion-item")];
+
+        console.log(setlistArray);
 
         // for each setlist...
         setlistArray.forEach(setlist => {
+
             // remove the data-bs-parent attribute so all accordion items can be open
             setlist.children[1].removeAttribute("data-bs-parent");
 
@@ -178,15 +187,22 @@ function prepareToEditMultipleItems(contentType){
             // insert a checkbox to main setlist header
             setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox("setlist"));
 
+            console.log(setlist)
+
             // get all set buttons within that setlist
             let setButtons = [...setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
+            console.log(setButtons)
             // For each set button, append a checkbox
             setButtons.forEach(setButton => {
                 setButton.appendChild(getDeleteCheckBox());
             })
+
+
         })
+
         addCheckBoxListeners(contentType);
+
     } else if (contentType === "tracks"){
         
         // ... tracks, get every track card
@@ -205,10 +221,6 @@ function prepareToEditMultipleItems(contentType){
             // insert a checkbox
             trackCard.firstElementChild.children[1].appendChild(getDeleteCheckBox());
         })
-
-
-
-        
     }
 }
 
@@ -368,12 +380,14 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         });
         deleteButton.addEventListener('click', function(){
             // ... the delete button will prepare the items to be deleted
-            prepareToEditMultipleItems("setlists");
+            let setlists = getLocalStorageData(contentType);
+
+            displaySetlists(setlists, true);
         })
         itemButtons.forEach(button => {
             // Add a click listener for every button in content section
             button.addEventListener('click', function(){
-                openSetlist(button, contentData);
+                openSetlist(button);
             })
         })
     } else if (contentType === "setlists" && currentState === "viewingSet")  {
