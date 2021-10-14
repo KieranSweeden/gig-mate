@@ -482,7 +482,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .content-container #content-section {
     height: 80%;
-    overflow: scroll;
+    overflow: auto;
     width: 100vw;
     scroll-behavior: smooth;
 }
