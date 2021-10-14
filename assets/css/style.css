@@ -348,6 +348,10 @@ header {
 
 /* Repertoire.html styling */
 
+.list-track-item {
+    display: flex;
+}
+
 .content-container {
     height: 90%;
     position: relative;

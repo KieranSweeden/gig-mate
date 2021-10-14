@@ -1,10 +1,48 @@
 // When all DOM content is loaded...
 window.addEventListener('DOMContentLoaded', () => {
 
+  // Check the presence of local storage
   checkLocalStorage();
+
+  // Add the filter input listener to the search input
+  addFilterInputListener();
+
   // ... initialise the footer state
   footerState("viewingRepertoire");
 })
+
+function addFilterInputListener(){
+  // Get input search element
+  let searchInput = document.getElementById("search-input");
+
+  // When search input value changes, filter repertoire tracks
+  searchInput.addEventListener("input", filterRepertoireTracks);
+}
+
+function filterRepertoireTracks(){
+
+  // Get inputs
+  let searchInput = document.getElementById("search-input");
+  let filterTyped = searchInput.value.toUpperCase();
+  let trackItems = [...document.getElementsByClassName("btn-card")];
+
+  // Credit: search filter partially 
+  // taken from https://www.w3schools.com/howto/howto_js_filter_lists.asp
+  // For each track item...
+  trackItems.forEach(trackItem => {
+    // ... get the track name
+    let trackName = trackItem.getElementsByClassName("card-title")[0].textContent;
+    // If the track name when uppercased matches the filter...
+    // ...typed by the user...
+    if (trackName.toUpperCase().indexOf(filterTyped) > -1 ) {
+      // ...make sure it's displayed
+      trackItem.parentElement.style.display = "";
+    } else {
+      // ... remove it from the list
+      trackItem.parentElement.style.display = "none";
+    }
+  })
+}
 
 // Check the user's local storage, to determine if initial repertoire is needed
 async function checkLocalStorage() {
@@ -66,7 +104,7 @@ function createCard(track) {
   let card = document.createElement("li");
 
   // Add classes to list element
-  card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1");
+  card.classList.add("list-track-item", "col-12", "justify-content-center", "align-items-center", "my-1");
 
   // Add inner HTML within each card
   card.innerHTML = 
