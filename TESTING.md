@@ -31,276 +31,390 @@ To return to the original README file, [click here](README.md).
 <br>
 
 - When clicking on the hamburger icon to open the dropdown navbar menu, the menu would appear behind the main content on the page.
+
 - This was promptly solved by addressing the z-index of the element with the class of "navbar-collapse". Giving this element the z-index value of 1 meant the dropdown would always appear above the content underneath the navbar.
 
 <br>
 
 ```
+*style.css*
+
 .navbar-collapse {
     z-index: 1;
     background-color: var(--gigmate-white);
 }
 ```
 
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Navbar moving upwards when uncollapsing the dropdown menu</b></summary>
+
+<br>
+
+- When clicking on the hamburger icon, the dropdown navigation menu would appear and push the navbar upwards, making the navbar appear broken.
+
+- This was solved by giving the container within the navbar a positional value of fixed with adjustments to centre the navigation, with the parent having a positional value of relative.
+
+- Although this is appropriate for mobile & tablet screen sizes, it negatively affected the desktop navbar design. To counteract this, I applied these changes within a media query for screen sizes below 992px.
+
+<br>
+
+```
+*style.css*
+
+@media (max-width: 992px) {
+    .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    }
+}
+```
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Container not scrolling when using overflow:scroll</b></summary>
+
+<br>
+
+- Despite applying the value of scroll to the property of overflow that's attached to a container filled with content, the container was not scrolling.
+
+- After viewing [this Stack Overflow post](https://stackoverflow.com/questions/17295219/overflow-scroll-css-is-not-working-in-the-div) and reading [Ionică Bizău](https://stackoverflow.com/users/1420197/ionic%c4%83-biz%c4%83u)'s answer, I recognised this was because the container I was attempting to add a scroll functionality did not have a declared height. After adding a height property & value, this issue was resolved.
+
+<br>
+
+```
+*style.css*
+
+.rep-container section {
+height: 72.5vh;
+overflow: scroll;
+}
+```
 
 </details>
 
 <hr>
 
-2. Navbar moving upwards when uncollapsing the dropdown menu
-    - When clicking on the hamburger icon, the dropdown navigation menu would appear and push the navbar upwards, making the navbar appear broken.
-    - This was solved by giving the container within the navbar a positional value of fixed with adjustments to centre the navigation, with the parent having a positional value of relative.
-    - Although this is appropriate for mobile & tablet screen sizes, it negatively affected the desktop navbar design. To counteract this, I applied these changes within a media query for screen sizes below 992px.
+<details>
 
-    <br>
+<summary><b>Scrollbar moving content within container, resulting in an asymmetrical design</b></summary>
 
-    ```
-    @media (max-width: 992px) {
-        .navbar-collapse {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
+<br>
+
+- Although the scrollbar functionality worked as intended, it took up space within the container which pushed the content to the left, resulting in an asymmetrical design which wasn't intended.
+
+- After viewing [this Stack Overflow post](https://stackoverflow.com/questions/24671317/scrollbar-above-content?rq=1) and reading [Forex](https://stackoverflow.com/users/1384493/forex)'s answer, I realised that instead of scroll, the value of overflow needed to be overlay, which adds scroll functionality and renders the scrollbar above the content rather than within.
+
+<br>
+
+```
+.rep-container section {
+height: 72.5vh;
+overflow: overlay;
+}
+```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Presence of UI in Safari & Chrome mobile browsers shortening the viewport window</b></summary>
+
+<br>
+
+- As clearly demonstrated in [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by Maciej Trzciński, there's an unfortunate problem in Safari (& Chrome in my experience) on mobile devices, where the browsers calculate the top bar, document window and bottom bar together in their implementation of viewport heights. This created an issue where the window was far larger than expected, which caused elements at the bottom of the window such as the footer, to disappear beneath the browser UI.
+
+- To fix this, I used the example provided in the article linked above. The fix takes a CSS variable and changes the value of it by obtaining the documentElement value and applying that value to the CSS variable. When applying the CSS variable to a height property within the html & body elements, the window height will adjust to the documentElement value, providing the intented result of having all elements fitting within the page.
+
+<br>
+
+```
+*style.css*
+
+:root {
+    --app-height: 100%;
+}
+```
+```
+*main.js*
+
+const appHeight = () => {
+const doc = document.documentElement
+doc.style.setProperty('--app-height', `${window.innerHeight}px`)
+}
+window.addEventListener('resize', appHeight);
+appHeight();
+```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>On initial load with no local storage stored, the webpage would store the local JSON files in local storage, however it would not display the intended elements.</b></summary>
+
+<br>
+
+- The webpage contains a function which on DOM load, accesses whether local storage is present within the browser. If there is no presence of local storage, the function pushes stringified JSON to the user's local storage.
+
+- An issue appeared however, where on initial load the browser would take in the stringified JSON but would not display the contents as intended unless the user refreshes the page. The refreshing of the page solves the issue, but this is obviously not acceptable as a user experience.
+
+- The bug was promptly fixed as I had realised the fillWithLocalStorage function was only working when presence of local storage was found. Applying the function after the addJSONToLocalStorage function promptly fixed the issue.
+
+<br>
+
+```
+*repertoire.js*
+
+async function checkLocalStorage() {
+    if (!localStorage.getItem('repertoire')){
+        addJSONToLocalStorage("repertoire");
+    } else {
+        fillWithLocalStorage("repertoire");
+    }
+}
+
+async function addJSONToLocalStorage(data) {
+    if (data === "repertoire") {
+        let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+        localStorage.setItem('repertoire', JSON.stringify(repertoire));
+    }
+    fillWithLocalStorage(data);
+}   
+```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Retrieving local storage data using async/await returns promise instead of the intended data.</b></summary>
+
+<br>
+
+- When the DOM loads, a bunch of functions are called to retrieve data from local storage, this was doing using async/await.
+
+- However when attempting to store returned values from an asynchronous function into a variable (called *contentData* in this case), the variable would store a promise instead of the data.
+
+- After viewing [this Stack Overflow answer](https://stackoverflow.com/a/43422983/15607265) however, I realised that every async function returns a promise object. Adding await before function solved this problem.
+
+<br>
+
+```
+*setlists.js"
+
+async function startGigMate(contentType) {
+    // Firstly, start local storage functionality to determine what data items GigMate will be working with
+    let contentData = await collectLocalStorage(contentType);
+}
+```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Setlist accordion buttons were being displayed as "[object HTMLLIElement]" instead of the li element HTML content itself.</b></summary>
+
+<br>
+
+- When the DOM loads in setlists.html, the list of setlists should be displayed as an accordion with buttons for each set within each setlist.
+
+- The bug here was that instead of displaying "Set 1", "Set 2" and such, the buttons were displaying "[object HTMLLIElement]".
+
+- [This Stack Overflow answer](https://stackoverflow.com/a/44953851/15607265) by [Musa](https://stackoverflow.com/users/1353011/musa) was helpful in letting me know where to look to solve this issue.
+
+- I later found out that it was because I was attempting to assign the innerHTML of the containing element with an object, rather than the outerHTML of the object itself.
+
+<br>
+
+```
+*setlists.js*
+
+// ...then push the set buttons (contentItems[1]) into the setlist item
+    document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
+```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Code to identify if a newly created setlist object is identical to an existing setlist object in local storage was not working as intended.</b></summary>
+
+<br>
+
+- When creating a new setlist, the application should first check whether or not the name of the newly created setlist is indentical to one currently in local storage. The code would work on some occasions, but not all the time, making it unreliable.
+
+- I later found out that the code I wrote was tremendously flawed. Using a forEach for the setlist arrays, I noticed that the itemIsDuplicate variable was being updated on each array loop, meaning the state of the last array determined the boolean value of itemIsDuplicate.
+
+- Simplifying the code, initialising the itemIsDuplicate value to false and only turning to true when a match was found, solved this issue.
+
+<br>
+
+```
+*setlists.js*
+
+function checkIfDuplicate(createdItem, originalItems, contentType) {
+// Create a variable that stores the boolean that dictates whether the created item is a duplicate
+let itemIsDuplicate = false;
+
+// If the content type we're dealing with is...
+if (contentType === "setlists"){
+
+    // ... setlists, check each setlist name in each stored array
+    originalItems.forEach(storedArray => {
+
+        // If the names match, set itemIsDuplicate to true
+        if(storedArray.setlistName === createdItem.setlistName){
+            itemIsDuplicate = true;
         }
-    }
-    ```
+    })
+}
+
+// Return the boolean variable 
+return itemIsDuplicate;
+}
+```
+
+</details>
+
 <hr>
 
-3. Container not scrolling when using overflow:scroll
-    - Despite applying the value of scroll to the property of overflow that's attached to a container filled with content, the container was not scrolling.
-    - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/17295219/overflow-scroll-css-is-not-working-in-the-div) and reading [Ionică Bizău](https://stackoverflow.com/users/1420197/ionic%c4%83-biz%c4%83u)'s answer, I recognised this was because the container I was attempting to add a scroll functionality did not have a declared height. After adding a height property & value, this issue was resolved.
+<details>
 
-    <br>
 
-    ```
-    .rep-container section {
-    height: 72.5vh;
-    overflow: scroll;
-    }
-    ```
+<summary><b>GitHub Pages was not retrieving data from local storage, therefore no setlists were being displayed to the user.</b></summary>
+
+<br>
+
+- When developing GigMate, the local storage was being retrieved and utilised as intended. However when hosted by GitHub Pages, GigMate was storing & later retrieving undefined key and property values in local storage.
+
+- After toying with relative paths and async & await related fixes, I found out it was a URL path issue after inserting console.logs throughout the intial stage of the application. GigMate checks the URL path name to determine what data it'll be working with, as shown below;
+
+<br>
+
+```
+*setlists.js prior to fix*
+
+let currentPage = window.document.location.pathname;
+
+// Initialise an empty variable to contain a content type value
+let contentType;
+
+// Assign content type depending on the value within current page variable
+if (currentPage === "/setlists.html") {
+    contentType = "setlists";
+} else if (currentPage === "/repertoire.html") {
+    contentType = "repertoire";
+} else if (currentPage === "/gigs.html") {
+    contentType = "gigs";
+}
+```
+
+- When locally working on GigMate this worked as intended, however the pathname changes when being hosted on GitHub pages, which prefixes the original pathname with "/gig-mate". When adding this as an option for each file name (as shown below), GitHub Pages worked as intended.
+
+<br>
+
+```
+*setlists.js after fix*
+
+if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
+    contentType = "setlists";
+} else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
+    contentType = "repertoire";
+} else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
+    contentType = "gigs";
+}
+```
+
+</details>
+
 <hr>
 
-4. Scrollbar moving content within container, resulting in an asymmetrical design
-    - Although the scrollbar functionality worked as intended, it took up space within the container which pushed the content to the left, resulting in an asymmetrical design which wasn't intended.
-    - After viewing [this Stack Overflow post](https://stackoverflow.com/questions/24671317/scrollbar-above-content?rq=1) and reading [Forex](https://stackoverflow.com/users/1384493/forex)'s answer, I realised that instead of scroll, the value of overflow needed to be overlay, which adds scroll functionality and renders the scrollbar above the content rather than within.
-    ```
-    .rep-container section {
-    height: 72.5vh;
-    overflow: overlay;
-    }
-    ```
+<details>
+
+<summary><b>When attempting to scroll through a set on mobile & tablet, a track card would be dragged instead of the container being scrolled.</b></summary>
+
+<br>
+
+- Instead of scrolling through a set, a track card would be picked up and dragged, resulting in a poor user experience.
+
+- The cause of this issue was that the parent containing the track card's width was 100% of the content container. Setting the width of the parent element to min-content fixed this issue, as it's width would be at it's most minimum whilst still displaying all child elements (the track card).
+
+<br>
+
+```
+*style.css*
+
+#list-container li {
+width: min-content;
+}
+```
+
+</details>
+
 <hr>
 
-5. Presence of UI in Safari & Chrome mobile browsers shortening the viewport window
-    - As clearly demonstrated in [this article](https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9) by Maciej Trzciński, there's an unfortunate problem in Safari (& Chrome in my experience) on mobile devices, where the browsers calculate the top bar, document window and bottom bar together in their implementation of viewport heights. This created an issue where the window was far larger than expected, which caused elements at the bottom of the window such as the footer, to disappear beneath the browser UI.
-    - To fix this, I used the example provided in the article linked above. The fix takes a CSS variable and changes the value of it by obtaining the documentElement value and applying that value to the CSS variable. When applying the CSS variable to a height property within the html & body elements, the window height will adjust to the documentElement value, providing the intented result of having all elements fitting within the page.
+<details>
 
-    <br>
+<summary><b>Live mode modal being cluttered with numerous tracks from previous sets.</b></summary>
 
-    ```
-    *style.css*
+<br>
 
-    :root {
-        --app-height: 100%;
-    }
-    ```
-    ```
-    *main.js*
+- When launching live mode, if live mode has been launched previously in the same session, the previous set would persist within the body of the modal. This led to the current set being placed underneath the previous set, resulting in a cluttered live mode experience.
 
-    const appHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
-    }
-    window.addEventListener('resize', appHeight);
-    appHeight();
-    ```
-<hr>
+- This was fixed by clearing the ordered list item each time the button was pressed.
 
-6. On initial load with no local storage stored, the webpage would store the local JSON files in local storage, however it would not display the intended elements.
-    - The webpage contains a function which on DOM load, accesses whether local storage is present within the browser. If there is no presence of local storage, the function pushes stringified JSON to the user's local storage.
-    - An issue appeared however, where on initial load the browser would take in the stringified JSON but would not display the contents as intended unless the user refreshes the page. The refreshing of the page solves the issue, but this is obviously not acceptable as a user experience.
-    - The bug was promptly fixed as I had realised the fillWithLocalStorage function was only working when presence of local storage was found. Applying the function after the addJSONToLocalStorage function promptly fixed the issue.
+<br>
 
-    <br>
+```
+*setlists.js*
 
-    ```
-    *repertoire.js*
+function fillLiveModalWithTracks(){
+// Get the setlist name, set number, modal title & list container
+let setlistName = document.getElementById("page-header").textContent;
+let setNumber = document.getElementById("page-subheader").textContent;
+let liveModalTitle = document.getElementById("live-mode-title");
+let liveModalListItemContainer = document.getElementById("live-mode-list");
 
-    async function checkLocalStorage() {
-        if (!localStorage.getItem('repertoire')){
-            addJSONToLocalStorage("repertoire");
-        } else {
-            fillWithLocalStorage("repertoire");
-        }
-    }
+// Set title text to setlist name & set number
+liveModalTitle.textContent = setlistName + " - " + setNumber;
 
-    async function addJSONToLocalStorage(data) {
-        if (data === "repertoire") {
-            let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
-            localStorage.setItem('repertoire', JSON.stringify(repertoire));
-        }
-        fillWithLocalStorage(data);
-    }   
-    ```
-<hr>
+// Make sure the list is clear before inserting tracks
+liveModalListItemContainer.innerHTML = "";
 
-7. Retrieving local storage data using async/await returns promise instead of the intended data.
-    - When the DOM loads, a bunch of functions are called to retrieve data from local storage, this was doing using async/await.
-    - However when attempting to store returned values from an asynchronous function into a variable (called *contentData* in this case), the variable would store a promise instead of the data.
-    - After viewing [this Stack Overflow answer](https://stackoverflow.com/a/43422983/15607265) however, I realised that every async function returns a promise object. Adding await before function solved this problem.
+// Get the tracks by sending the setlist name & set number
+let setTracks = getTracks(setlistName, setNumber);
 
-    <br>
+// For each track...
+setTracks.forEach(setTrack => {
+    // ... create a live mode track
+    let liveModeTrack = createLiveModeTrack(setTrack);
 
-    ```
-    *setlists.js"
+    // ... and insert it into the list container
+    liveModalListItemContainer.innerHTML += liveModeTrack;
+    })
+}  
+```
 
-    async function startGigMate(contentType) {
-        // Firstly, start local storage functionality to determine what data items GigMate will be working with
-        let contentData = await collectLocalStorage(contentType);
-    }
-    ```
-<hr>
+</details>
 
-8. Setlist accordion buttons were being displayed as "[object HTMLLIElement]" instead of the li element HTML content itself.
-    - When the DOM loads in setlists.html, the list of setlists should be displayed as an accordion with buttons for each set within each setlist.
-    - The bug here was that instead of displaying "Set 1", "Set 2" and such, the buttons were displaying "[object HTMLLIElement]".
-    - [This Stack Overflow answer](https://stackoverflow.com/a/44953851/15607265) by [Musa](https://stackoverflow.com/users/1353011/musa) was helpful in letting me know where to look to solve this issue.
-    - I later found out that it was because I was attempting to assign the innerHTML of the containing element with an object, rather than the outerHTML of the object itself.
-
-    <br>
-
-    ```
-    *setlists.js*
-
-    // ...then push the set buttons (contentItems[1]) into the setlist item
-        document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
-    ```
-<hr>
-
-9. Code to identify if a newly created setlist object is identical to an existing setlist object in local storage was not working as intended.
-    - When creating a new setlist, the application should first check whether or not the name of the newly created setlist is indentical to one currently in local storage.
-    - The code would work on some occasions, but not all the time, making it unreliable.
-    - I later found out that the code I wrote was tremendously flawed. Using a forEach for the setlist arrays, I noticed that the itemIsDuplicate variable was being updated on each array loop, meaning the state of the last array determined the boolean value of itemIsDuplicate.
-    - Simplifying the code, initialising the itemIsDuplicate value to false and only turning to true when a match was found, solved this issue.
-
-    <br>
-
-    ```
-    *setlists.js*
-
-    function checkIfDuplicate(createdItem, originalItems, contentType) {
-    // Create a variable that stores the boolean that dictates whether the created item is a duplicate
-    let itemIsDuplicate = false;
-
-    // If the content type we're dealing with is...
-    if (contentType === "setlists"){
-
-        // ... setlists, check each setlist name in each stored array
-        originalItems.forEach(storedArray => {
-
-            // If the names match, set itemIsDuplicate to true
-            if(storedArray.setlistName === createdItem.setlistName){
-                itemIsDuplicate = true;
-            }
-        })
-    }
-
-    // Return the boolean variable 
-    return itemIsDuplicate;
-    }
-    ```
-<hr>
-
-10. GitHub Pages was not retrieving data from local storage, therefore no setlists were being displayed to the user.
-    - When developing GigMate, the local storage was being retrieved and utilised as intended. However when hosted by GitHub Pages, GigMate was storing & later retrieving undefined key and property values in local storage.
-    - After toying with relative paths and async & await related fixes, I found out it was a URL path issue after inserting console.logs throughout the intial stage of the application. GigMate checks the URL path name to determine what data it'll be working with, as shown below;
-
-    <br>
-
-    ```
-    *setlists.js prior to fix*
-
-    let currentPage = window.document.location.pathname;
-
-    // Initialise an empty variable to contain a content type value
-    let contentType;
-
-    // Assign content type depending on the value within current page variable
-    if (currentPage === "/setlists.html") {
-        contentType = "setlists";
-    } else if (currentPage === "/repertoire.html") {
-        contentType = "repertoire";
-    } else if (currentPage === "/gigs.html") {
-        contentType = "gigs";
-    }
-    ```
-    - When locally working on GigMate this worked as intended, however the pathname changes when being hosted on GitHub pages, which prefixes the original pathname with "/gig-mate". When adding this as an option for each file name (as shown below), GitHub Pages worked as intended.
-
-    <br>
-
-    ```
-    *setlists.js after fix*
-
-    if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
-        contentType = "setlists";
-    } else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
-        contentType = "repertoire";
-    } else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
-        contentType = "gigs";
-    }
-    ```
-<hr>
-
-11. When attempting to scroll through a set on mobile & tablet, a track card would be dragged instead of the container being scrolled.
-    - Instead of scrolling through a set, a track card would be picked up and dragged, resulting in a poor user experience.
-    - The cause of this issue was that the parent containing the track card's width was 100% of the content container. Setting the width of the parent element to min-content fixed this issue, as it's width would be at it's most minimum whilst still displaying all child elements (the track card).
-
-    <br>
-
-    ```
-    *style.css*
-
-    #list-container li {
-    width: min-content;
-    }
-    ```
-<hr>
-
-12. Live mode modal being cluttered with numerous tracks from previous sets.
-    - When launching live mode, if live mode has been launched previously in the same session, the previous set would persist within the body of the modal. This led to the current set being placed underneath the previous set, resulting in a cluttered live mode experience.
-    - This was fixed by clearing the ordered list item each time the button was pressed.
-
-    <br>
-
-    ```
-    *setlists.js*
-
-    function fillLiveModalWithTracks(){
-    // Get the setlist name, set number, modal title & list container
-    let setlistName = document.getElementById("page-header").textContent;
-    let setNumber = document.getElementById("page-subheader").textContent;
-    let liveModalTitle = document.getElementById("live-mode-title");
-    let liveModalListItemContainer = document.getElementById("live-mode-list");
-
-    // Set title text to setlist name & set number
-    liveModalTitle.textContent = setlistName + " - " + setNumber;
-
-    // Make sure the list is clear before inserting tracks
-    liveModalListItemContainer.innerHTML = "";
-
-    // Get the tracks by sending the setlist name & set number
-    let setTracks = getTracks(setlistName, setNumber);
-
-    // For each track...
-    setTracks.forEach(setTrack => {
-        // ... create a live mode track
-        let liveModeTrack = createLiveModeTrack(setTrack);
-
-        // ... and insert it into the list container
-        liveModalListItemContainer.innerHTML += liveModeTrack;
-        })
-    }  
-    ```
 <hr>
 
 ## Unfixed Bugs
