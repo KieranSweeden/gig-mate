@@ -167,8 +167,6 @@ function prepareToEditMultipleItems(contentType){
         // Get the setlists
         let setlistArray = [...document.getElementsByClassName("accordion-item")];
 
-        console.log(setlistArray);
-
         // for each setlist...
         setlistArray.forEach(setlist => {
 
@@ -187,12 +185,9 @@ function prepareToEditMultipleItems(contentType){
             // insert a checkbox to main setlist header
             setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox("setlist"));
 
-            console.log(setlist)
-
             // get all set buttons within that setlist
             let setButtons = [...setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
-            console.log(setButtons)
             // For each set button, append a checkbox
             setButtons.forEach(setButton => {
                 setButton.appendChild(getDeleteCheckBox());
@@ -578,8 +573,6 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         saveButton.addEventListener("click", function(){
             // Get the values from the input form
             let updatedTrackValues = getInputValues(contentType, contentData);
-
-            console.log(updatedTrackValues);
             
             // Get the setlist array from local storage
             let storedSetlistArray = getLocalStorageData("setlists");
@@ -592,9 +585,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             storedSetlistArray.forEach(setlist => {
                 if(setlist.setlistName === setlistHeading.textContent){
-                    console.log(setlist[setHeading][6]);
                     let trackIndex = setlist[setHeading].findIndex((localStorageTrack => localStorageTrack.name === contentData.name));
-                    console.log(trackIndex);
                     setlist[setHeading][trackIndex].name = updatedTrackValues.name;
                     setlist[setHeading][trackIndex].artist = updatedTrackValues.artist;
                     setlist[setHeading][trackIndex].key = updatedTrackValues.key;
@@ -668,8 +659,6 @@ function editSetlist(){
     clearContentSection();
 
     let tracks = getTracks(setName, setNumber);
-
-    console.log(tracks)
 
     // Display each set track
     displayItems("checkboxTracks", tracks);
