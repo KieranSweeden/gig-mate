@@ -233,12 +233,12 @@ header {
 #main-container .card:hover,
 #main-container .card:focus,
 #main-container .card:focus-visible,
-#main-container .card:focus-within       {
-    transform: scale(102.5%, 102.5%);
+#main-container .card:focus-within {
+    transform: scale(1.025, 1.025);
 }
 
 #main-container .card:active {
-    transform: scale(100%, 100%);
+    transform: scale(1, 1);
 }
 
 #main-container .card a {
@@ -401,7 +401,8 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .content-container #content-section {
     height: 80%;
-    overflow: overlay;
+    overflow: scroll;
+    width: 100vw;
     scroll-behavior: smooth;
 }
 
@@ -434,7 +435,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .btn-card:hover, 
 .btn-card:focus {
-    transform: scale(102.5%, 102.5%);
+    transform: scale(1.025, 1.025);
 }
 
 .btn-card:focus-visible {
@@ -443,7 +444,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 }
 
 .btn-card:active {
-    transform: scale(100%, 100%);
+    transform: scale(1, 1);
 }
 
 .card {
