@@ -631,7 +631,8 @@ function createLiveModeTrack(trackObject){
     return liveModeTrack;
 }
 
-// Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+// Credit: code for sorting an array of objects by property values
+// taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 function sortByName( a, b ) {
     if ( a.name < b.name ){
       return -1;
@@ -658,9 +659,6 @@ function editSetlist(){
 
     // Display each set track
     displayItems("checkboxTracks", tracks);
-
-    // prepareToEditMultipleItems("tracks");
-    
 }
 
 

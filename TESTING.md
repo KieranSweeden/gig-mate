@@ -257,6 +257,43 @@ To return to the original README file, [click here](README.md).
     ```
 <hr>
 
+12. Live mode modal being cluttered with numerous tracks from previous sets.
+    - When launching live mode, if live mode has been launched previously in the same session, the previous set would persist within the body of the modal. This led to the current set being placed underneath the previous set, resulting in a cluttered live mode experience.
+    - This was fixed by clearing the ordered list item each time the button was pressed.
+
+    <br>
+
+    ```
+    *setlists.js*
+
+    function fillLiveModalWithTracks(){
+    // Get the setlist name, set number, modal title & list container
+    let setlistName = document.getElementById("page-header").textContent;
+    let setNumber = document.getElementById("page-subheader").textContent;
+    let liveModalTitle = document.getElementById("live-mode-title");
+    let liveModalListItemContainer = document.getElementById("live-mode-list");
+
+    // Set title text to setlist name & set number
+    liveModalTitle.textContent = setlistName + " - " + setNumber;
+
+    // Make sure the list is clear before inserting tracks
+    liveModalListItemContainer.innerHTML = "";
+
+    // Get the tracks by sending the setlist name & set number
+    let setTracks = getTracks(setlistName, setNumber);
+
+    // For each track...
+    setTracks.forEach(setTrack => {
+        // ... create a live mode track
+        let liveModeTrack = createLiveModeTrack(setTrack);
+
+        // ... and insert it into the list container
+        liveModalListItemContainer.innerHTML += liveModeTrack;
+        })
+    }  
+    ```
+<hr>
+
 ## Unfixed Bugs
 
 
