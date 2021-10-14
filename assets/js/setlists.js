@@ -598,33 +598,36 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 }
 
 function fillLiveModalWithTracks(){
-    // Get the setlist name & set
-    let setlistHeading = document.getElementById("page-header").textContent;
-    let setlistSubHeading = document.getElementById("page-subheader").textContent;
-
+    // Get the setlist name, set number, modal title & list container
+    let setlistName = document.getElementById("page-header").textContent;
+    let setNumber = document.getElementById("page-subheader").textContent;
     let liveModalTitle = document.getElementById("live-mode-title");
-
-    liveModalTitle.textContent = setlistHeading + " - " + setlistSubHeading;
-
     let liveModalListItemContainer = document.getElementById("live-mode-list");
 
-    // Get the tracks by sending the setlist name & set number
-    let setTracks = getTracks(setlistHeading, setlistSubHeading);
+    // Set title text to setlist name & set number
+    liveModalTitle.textContent = setlistName + " - " + setNumber;
 
+    // Make sure the list is clear before inserting tracks
+    liveModalListItemContainer.innerHTML = "";
+
+    // Get the tracks by sending the setlist name & set number
+    let setTracks = getTracks(setlistName, setNumber);
+
+    // For each track...
     setTracks.forEach(setTrack => {
+        // ... create a live mode track
         let liveModeTrack = createLiveModeTrack(setTrack);
 
+        // ... and insert it into the list container
         liveModalListItemContainer.innerHTML += liveModeTrack;
     })
-
-    
-
 }
 
 function createLiveModeTrack(trackObject){
-    
+    // Get the template with track object data attached within
     let liveModeTrack = contentTemplates("liveModeTrack", trackObject);
 
+    // Return the track as a live mode track
     return liveModeTrack;
 }
 
