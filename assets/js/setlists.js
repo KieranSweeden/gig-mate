@@ -606,11 +606,26 @@ function fillLiveModalWithTracks(){
 
     liveModalTitle.textContent = setlistHeading + " - " + setlistSubHeading;
 
+    let liveModalListItemContainer = document.getElementById("live-mode-list");
+
     // Get the tracks by sending the setlist name & set number
     let setTracks = getTracks(setlistHeading, setlistSubHeading);
 
+    setTracks.forEach(setTrack => {
+        let liveModeTrack = createLiveModeTrack(setTrack);
+
+        liveModalListItemContainer.innerHTML += liveModeTrack;
+    })
+
     
 
+}
+
+function createLiveModeTrack(trackObject){
+    
+    let liveModeTrack = contentTemplates("liveModeTrack", trackObject);
+
+    return liveModeTrack;
 }
 
 // Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
@@ -1445,6 +1460,26 @@ function contentTemplates(request, contentData, issue){
             <option value="Minor">Minor</option>
         </select>
         </div>
+        `;
+
+        return template;
+    } else if (request === "liveModeTrack"){
+
+        // Create a variable that holds both the key & tonality
+        let keyInFull = contentData.key + " " + contentData.tonality;
+        
+        template = 
+        `
+        <li class="live-mode-track list-group-item">
+              <div class="live-track-content row">
+                <div class="col">
+                  <h5 class="live-track-title d-inline-block m-0">${contentData.name}</h5>
+                </div>
+                <div class="col-4">
+                  <h5 class="live-track-key m-0">${keyInFull}</h5>
+                </div>
+              </div>
+            </li>
         `;
 
         return template;
