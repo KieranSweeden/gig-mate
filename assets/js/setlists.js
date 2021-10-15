@@ -705,7 +705,7 @@ function openSetlist(setButton){
 function updateHeading(newHeader, additionalHeader){
 
     // Get header section
-    let headerSection = document.getElementById("header-section");
+    let headerContainer = document.getElementById("header-section").firstElementChild;
 
     // Create H1 element with id & class for new header
     let newFirstHeading = document.createElement("h1");
@@ -719,17 +719,17 @@ function updateHeading(newHeader, additionalHeader){
     newSecondHeading.className = "fs-3 m-0";
     newSecondHeading.textContent = additionalHeader;
 
-    while (headerSection.firstElementChild) {
-        headerSection.removeChild(headerSection.firstElementChild);
+    while (headerContainer.firstElementChild) {
+        headerContainer.removeChild(headerContainer.firstElementChild);
     }
 
     if(additionalHeader === undefined){
-        headerSection.appendChild(newFirstHeading);
-        updateHeadingFlex("center", headerSection);
+        headerContainer.appendChild(newFirstHeading);
+        updateHeadingFlex("center", headerContainer);
     } else {
-        headerSection.appendChild(newFirstHeading);
-        headerSection.appendChild(newSecondHeading);
-        updateHeadingFlex("between", headerSection);
+        headerContainer.appendChild(newFirstHeading);
+        headerContainer.appendChild(newSecondHeading);
+        updateHeadingFlex("between", headerContainer);
     }
 }
 
@@ -739,7 +739,7 @@ function updateHeadingFlex(flexValue, headerSection){
         headerSection.classList.remove("justify-content-between");
     } else {
         headerSection.classList.remove("justify-content-center");
-        headerSection.classList.add("justify-content-around");
+        headerSection.classList.add("justify-content-between");
     }
 }
 
