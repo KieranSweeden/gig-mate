@@ -1,4 +1,4 @@
-# <img src="assets/images/icons/gigmate-icon.png" height="20"> GigMate
+# <img src="assets/images/icons/gigmate-icon.png" height="22"> GigMate
 
 ![Image of GigMate shown on multiple screens](documentation/general/gigmate-responsive.png)
 
