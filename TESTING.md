@@ -516,13 +516,15 @@ As a professional musician using GigMate, I want the ability to:
 
 7. Create a new setlist and set the amount of sets it has.
 
-<img src="">
+    - Could not display/record multiple screen instances at once, as each instance would add a new setlist and the last two instances would display an alert message as the setlist already exists (from the first instance).
+
+<img src="documentation/user-stories/user-stories-create-new-set.gif">
 
 <hr>
 
 8. Delete a setlist completely or the sets within it.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-deleting-setlist-and-set.gif">
 
 <hr>
 
@@ -534,25 +536,25 @@ As a professional musician using GigMate, I want the ability to:
 
 10. Alter the order of the tracks within a set using Drag & Drop.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-alter-set-order.gif">
 
 <hr>
 
 11. Add a single track or multiple tracks to a set.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-add-track-set.gif">
 
 <hr>
 
 12. Delete a single track or multiple tracks from a set.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-delete-tracks-set.gif">
 
 <hr>
 
 13. View the set full screen so I can use GigMate for live use.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-view-full-screen.gif">
 
 <hr>
 
