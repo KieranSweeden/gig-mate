@@ -582,4 +582,17 @@ As a professional musician using GigMate, I want the ability to:
 
 # Performance Testing
 
+- Index.html lighthouse performance score:
+
+    <img src="documentation/performance/index.html-performance.jpg" width="500">
+
+- Setlists.html lighthouse performance score:
+
+    <img src="documentation/performance/setlists.html-performance.jpg" width="500">
+
+- Repertoire.html lighthouse performance score:
+
+    <img src="documentation/performance/repertoire.html-performance.jpg" width="500">
+
+
 [Return to Contents 🡡](#contents)
