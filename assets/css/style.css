@@ -307,6 +307,10 @@ header {
     border-bottom-left-radius: var(--gigmate-border-radius);
 }
 
+.accordion-header button {
+    font-size: 1.2rem;
+}
+
 .accordion-button.removed {
     justify-content: space-between;
 }
@@ -385,7 +389,10 @@ header {
 
 .list-group-item {
     padding: 0;
-    
+}
+
+.list-group-item button {
+    font-size: 1.1rem;
 }
 
 .list-group-btn {
