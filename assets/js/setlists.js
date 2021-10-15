@@ -411,7 +411,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             tracksInLocalStorage.sort(sortByName);
             
             // displaying the repertoire to the user
-            displayItems("checkboxTracks", tracksInLocalStorage);
+            displayItems("addTracks", tracksInLocalStorage);
 
             // show appropriate footer buttons
             determineFooterButtons("setlists", "addTracksToSet");
@@ -1136,6 +1136,19 @@ function displayItems(contentType, contentItems, reference){
         contentItems.forEach(track => {
             container.appendChild(createCard(track, false));
         })
+    } else if (contentType === "addTracks"){
+        // Insert & collect an ordered list container
+        let container = insertListContainer("ordered");
+
+        // For each track...
+        contentItems.forEach(track => {
+            // ... create a card with the track properties
+            container.appendChild(createCard(track, true, false));
+        })
+
+        // Add an event listener to every checkbox
+        addCheckBoxListeners("setlists");
+
     } else if (contentType === "checkboxTracks"){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
@@ -1156,7 +1169,7 @@ function displayItems(contentType, contentItems, reference){
         // For each track...
         contentItems.forEach(track => {
             // ... create a card with the track properties
-            container.appendChild(createCard(track, true));
+            container.appendChild(createCard(track, true, true));
         })
 
         // Add an event listener to every checkbox
@@ -1199,7 +1212,7 @@ function insertListContainer(type){
     return container;
 }
 
-function createCard(track, insertCheckbox) {
+function createCard(track, insertCheckbox, insertHover) {
     // Create list element
     let card = document.createElement("li");
 
@@ -1236,7 +1249,7 @@ function createCard(track, insertCheckbox) {
         // Add a hover state to the card
         addIconHover(card.firstElementChild);
 
-    } else if (insertCheckbox === true){
+    } else if (insertCheckbox === true && insertHover === true){
         card.innerHTML = 
         `<button class="btn-card animate__animated animate__fadeInUp">
         <div class="card gig-card rounded-corners">
@@ -1267,6 +1280,26 @@ function createCard(track, insertCheckbox) {
         // Add eventlisteners relating to drag and drop
         card.addEventListener("dragstart", dragStart);
         card.addEventListener("dragend", dragEnd);
+    } else if (insertCheckbox === true && insertHover === false){
+        card.innerHTML = 
+        `<button class="btn-card animate__animated animate__fadeInUp">
+        <div class="card gig-card rounded-corners">
+            <div class="card-body row">
+                <div class="col-8 gig-venue text-start">
+                    <h3 class="card-title">${track.name}</h3>
+                </div>
+                <div class="col-4 text-end">
+                    <input class="form-check-input set-checkbox" type="checkbox">
+                </div>
+                <div class="col-8 gig-artist">
+                    <p class="m-0">${track.artist}</p>
+                </div>
+                <div class="col-4 gig-date text-end">
+                    <p class="m-0 badge">${track.key} ${track.tonality}</p>
+                </div>
+            </div>
+        </div>
+        </button>`;
     }
 
     // Return the card
