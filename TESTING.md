@@ -480,31 +480,31 @@ User story testing was performed manually, serving the purpose of documenting ho
 As a professional musician using GigMate, I want the ability to:
 1. View my repertoire of tracks.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-viewing-repertoire.gif">
 
 <hr>
 
 2. Add a new track to my repertoire of tracks.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-adding-track-repertoire.gif">
 
 <hr>
 
 3. Filter through my repertoire of tracks.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-filter-tracks-repertoire.gif">
 
 <hr>
 
 4. Edit a track within my repertoire.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-edit-track-repertoire.gif">
 
 <hr>
 
 5. Delete a track from my repertoire.
 
-<img src="">
+<img src="documentation/user-stories/user-stories-deleting-track-repertoire.gif">
 
 <hr>
 
