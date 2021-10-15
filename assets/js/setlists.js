@@ -192,6 +192,7 @@ function prepareToEditMultipleItems(contentType){
 
             // For each set button, append a checkbox
             setButtons.forEach(setButton => {
+                setButton.classList.add("remove-hover");
                 setButton.appendChild(getDeleteCheckBox());
             })
 
