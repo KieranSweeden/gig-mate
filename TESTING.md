@@ -480,29 +480,93 @@ User story testing was performed manually, serving the purpose of documenting ho
 As a professional musician using GigMate, I want the ability to:
 1. View my repertoire of tracks.
 
-
+<img src="">
 
 <hr>
 
 2. Add a new track to my repertoire of tracks.
+
+<img src="">
+
+<hr>
+
 3. Filter through my repertoire of tracks.
+
+<img src="">
+
+<hr>
+
 4. Edit a track within my repertoire.
+
+<img src="">
+
+<hr>
+
 5. Delete a track from my repertoire.
+
+<img src="">
+
+<hr>
+
 6. View my list of setlists.
 
-<img src="documentation/user-stories/user-stories-viewing-setlists.jpg">
+<img src="documentation/user-stories/user-stories-viewing-setlists.gif">
 
 <hr>
 
 7. Create a new setlist and set the amount of sets it has.
+
+<img src="">
+
+<hr>
+
 8. Delete a setlist completely or the sets within it.
+
+<img src="">
+
+<hr>
+
 9. Edit a track within a set, that's independent from the respective track within the repertoire.
+
+<img src="">
+
+<hr>
+
 10. Alter the order of the tracks within a set using Drag & Drop.
+
+<img src="">
+
+<hr>
+
 11. Add a single track or multiple tracks to a set.
+
+<img src="">
+
+<hr>
+
 12. Delete a single track or multiple tracks from a set.
+
+<img src="">
+
+<hr>
+
 13. View the set full screen so I can use GigMate for live use.
+
+<img src="">
+
+<hr>
+
 14. Use GigMate on multiple devices and the functionality is consistent on all devices.
+
+<img src="">
+
+<hr>
+
 15. Have dark mode functionality when using the application for live use.
+
+<img src="">
+
+<hr>
 
 [Return to Contents 🡡](#contents)
 
