@@ -98,6 +98,21 @@ html, body {
     color: var(--gigmate-primary)
 }
 
+.btn-close {
+    background: none;
+    font-size: 1.5rem;
+    line-height: 0.9;
+    border-radius: var(--gigmate-border-radius);
+}
+
+.btn-close:focus,
+.btn-close:hover,
+.btn-close:focus-visible,
+.btn-close:focus-within {
+    color: var(--gigmate-white);
+    background-color: var(--gigmate-primary);
+}
+
 .gig-venue {
     text-align: start;
 }
@@ -207,6 +222,10 @@ html, body {
     max-width: 30rem;
     display: flex;
     align-items: center;
+}
+
+#header-section.with-search {
+    height: 17.5%;
 }
 
 /* Index.html */
@@ -658,6 +677,12 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #live-mode-header {
     border-bottom: 5px solid var(--gigmate-primary);
+    padding: .75rem .25rem;
+}
+
+#live-mode-header .container-lg {
+    display: flex;
+    align-items: center;
 }
 
 .gigmate-logo {
