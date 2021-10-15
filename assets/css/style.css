@@ -652,8 +652,32 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     z-index: 5;
 }
 
+.modal-content {
+    background-color: var(--gigmate-off-white);
+}
+
+#live-mode-header {
+    border-bottom: 5px solid var(--gigmate-primary);
+}
+
+.gigmate-logo {
+    margin-right: .25rem;
+}
+
+#live-mode-list {
+    border-radius: var(--gigmate-border-radius);
+}
+
 .live-mode-track {
     padding: 1rem;
+}
+
+.live-track-title {
+    font-weight: bold;
+}
+
+.live-track-key {
+    font-style: italic;
 }
 
 
