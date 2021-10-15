@@ -407,6 +407,10 @@ html, body {
     background-color: var(--gigmate-primary);
 }
 
+.accordion-button {
+    z-index: 5;
+}
+
 .accordion-button.removed::after {
     content: none;
     background-image: none;
@@ -430,6 +434,7 @@ html, body {
     display: inline-flex;
     justify-content: space-between;
     align-items: center;
+    z-index: 1;
 }
 
 .list-group-btn:hover {
