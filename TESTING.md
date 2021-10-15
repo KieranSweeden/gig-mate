@@ -578,6 +578,20 @@ As a professional musician using GigMate, I want the ability to:
 
 # Validation Testing
 
+- Index.html validation results
+
+- Setlists.html validation results
+
+- Repertoire.html validation results
+
+- Style.css validation results
+
+    <img src="documentation/validations/style.css-validator.jpg" width="500">
+
+- Setlists.js validation results
+
+- Repertoire.js validation results
+
 [Return to Contents 🡡](#contents)
 
 # Performance Testing
