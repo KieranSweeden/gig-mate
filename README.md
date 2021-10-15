@@ -1,10 +1,12 @@
-# GigMate
+# <img src="assets/images/icons/gigmate-icon.png" height="20"> GigMate
 
-![image]
+![Image of GigMate shown on multiple screens](documentation/general/gigmate-responsive.png)
 
-This project was developed for the Interactive Front End Development module within the Diploma in Web Application Development course provided by Code Institute.
+GigMate is an interactive and responsive web application that allows professional & gigging musicians to store the tracks they've learned, insert them within ordered setlists they've created and view them in full screen for live use.
 
-![link to view GitHub page deployment]
+GigMate was developed for the Interactive Front End Development module within the Diploma in Web Application Development course provided by Code Institute.
+
+View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/).
 
 # Contents
 
