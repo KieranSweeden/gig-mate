@@ -113,7 +113,7 @@ Although collaborative functionality would improve the usefulness of the applica
 
 Live view mode is integral in making the application useful in a live environment. In it's simplest form, this feature should be integrated in the MVP of GigMate. However possible functionality for live view mode, is allowing the user to set how many tracks they'd like to see at once on screen at a time. If time is available, this feature should be integrated.
 
-Drag n Drop is an interface that users are familiar with, making it easy to learn and it also looks elegant due to it's simplicity, which falls directly in line with the project's goals. It should therefore be included in the MVP of GigMate.
+Drag n Drop is an interface that users are familiar with, making it easy to learn and it also looks elegant due to it's simplicity, which falls directly in line with the project's goals. It should therefore be included within the MVP of GigMate.
 
 [Return to Contents 🡡](#contents)
 
@@ -359,7 +359,7 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 
 - HTML5
 - CSS3
-- JavaScipt
+- JavaScript
 
 ## Frameworks & Libraries
 
@@ -380,6 +380,9 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 
 ## Applications
 
+- [GitPod](https://www.gitpod.io/)
+    - GitPod was used as an IDE for GigMate, all development took place on this application.
+
 - [Balsamiq](https://balsamiq.com/)
     - The Balsamiq application was utilised to create wireframes for the main html pages featured within the application.
 
@@ -388,6 +391,21 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 
 - [Shape Divider](https://www.shapedivider.app/)
     - The Shape Divider App was utilised to generate a wave SVG image, to use as a background for GigMate
+
+- [Am I Responsive?](http://ami.responsivedesign.is/)
+    - Am I Responsive was used to create the intro image at the top of this README file.
+
+- [The W3C Markup Validator Service](https://validator.w3.org/)
+    - The W3C Markup Validator was utilised at the later stages of development to confirm that GigMate contained valid HTML code.
+
+- [The W3C CSS Validator Service](https://jigsaw.w3.org/css-validator/)
+    - The W3C CSS Validator was utlised at the later stages of development to confirm that GigMate contained valid CSS code.
+
+- [JSLint](https://www.jslint.com/)
+    - JSLint was utilised to validate that GigMate contained valid & working JavaScript code.
+
+- [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
+    - Chrome Dev Tools was utilised for debugging, testing the site on various screen sizes and checking performance and SEO scores using Lighthouse.
 
 [Return to Contents 🡡](#contents)
 
