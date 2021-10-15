@@ -471,10 +471,38 @@ function displaySetlists(setlists, insertingCheckbox){
 
 ## Unfixed Bugs
 
-
 [Return to Contents 🡡](#contents)
 
 # User Stories Testing
+
+User story testing was performed manually, serving the purpose of documenting how a user will navigate the site and checking that interactive elements are working as intended.
+
+As a professional musician using GigMate, I want the ability to:
+1. View my repertoire of tracks.
+
+
+
+<hr>
+
+2. Add a new track to my repertoire of tracks.
+3. Filter through my repertoire of tracks.
+4. Edit a track within my repertoire.
+5. Delete a track from my repertoire.
+6. View my list of setlists.
+
+<img src="documentation/user-stories/user-stories-viewing-setlists.jpg">
+
+<hr>
+
+7. Create a new setlist and set the amount of sets it has.
+8. Delete a setlist completely or the sets within it.
+9. Edit a track within a set, that's independent from the respective track within the repertoire.
+10. Alter the order of the tracks within a set using Drag & Drop.
+11. Add a single track or multiple tracks to a set.
+12. Delete a single track or multiple tracks from a set.
+13. View the set full screen so I can use GigMate for live use.
+14. Use GigMate on multiple devices and the functionality is consistent on all devices.
+15. Have dark mode functionality when using the application for live use.
 
 [Return to Contents 🡡](#contents)
 
