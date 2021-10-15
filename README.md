@@ -48,22 +48,30 @@ View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/)
 
 ### Project Goals
 
-The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring their personal repertoire of songs, for use on stage and at home.
+The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring their personal setlists & repertoire of songs, for use on stage and at home.
 
-GigMate is targeting music professionals as a target audience, who are often performing in various bands and entertainment agencies. Being involved with various acts can often bring organisational challenges related to scheduling, attire and various nuances regarding particular tracks in the setlist.
+GigMate is targeting music professionals as a target audience, who are often performing in various bands and entertainment agencies. Being involved with various acts can often bring organisational challenges as songs are often performed in various keys.
 
-GigMate's sole purpose is to contain all the information relating to various gigs in one place, saving the user from deep diving into various messaging threads and asking fellow band members, which will lead to unprofessional impressions from their peers. This aids in not only providing the user with peace of mind, but also helps the user in maintaining a professional presence amongst their peers, which'll likely bring more work in the future.
+GigMate's sole purpose is to help music professionals in organising their repertoire into various setlists & sets of their own creation. The ease of accessing their personal repertoire and sets for their gigs will provide the user with confidence and peace of mind, which will also translate in maintaining a professional presence amongst their peers, bringing more potential work in the future.
 
 ### User Stories
 
-As a professional musician, I want GigMate to:
-- Provide me with a template document-like structure, that I can easily edit for each gig respectively.
-- Work well on multiple screens, so I can view/edit gig information at home on desktop, on the go on mobile and whilst performing on tablet/mobile.
-- Save the edits I make, so they'll always be there when I re-visit them on that particular device.
-- Give me the ability to write notes relating to a particular song.
-- Display my gigs immediately when opening the application.
-- Display my setlist for live use, making full use of the screen on my device.
-- Have dark mode functionality, making it easier to read in dark environments.
+As a professional musician using GigMate, I want the ability to:
+- View my repertoire of tracks.
+- Add a new track to my repertoire of tracks.
+- Filter through my repertoire of tracks.
+- Edit a track within my repertoire.
+- Delete a track from my repertoire.
+- View my list of setlists.
+- Create a new setlist and set the amount of sets it has.
+- Delete a setlist completely or the sets within it.
+- Edit a track within a set, that's independent from the respective track within the repertoire.
+- Alter the order of the tracks within a set using Drag & Drop.
+- Add a single track or multiple tracks to a set.
+- Delete a single track or multiple tracks from a set.
+- View the set full screen so I can use GigMate for live use.
+- Use GigMate on multiple devices and the functionality is consistent on all devices.
+- Have dark mode functionality when using the application for live use.
 
 [Return to Contents 🡡](#contents)
 
