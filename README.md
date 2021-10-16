@@ -495,6 +495,8 @@ To get your own local copy of GigMate:
 
 - Partial amount of code to create a search filter was taken from [this W3Schools article](https://www.w3schools.com/howto/howto_js_filter_lists.asp).
 
+- The dragdroptouch.js polyfill file is completely taken from [this GitHub Repository](https://github.com/Bernardo-Castilho/dragdroptouch). All credit goes to [Bernado Castilho](https://github.com/Bernardo-Castilho) for this polyfill, which translates touch gestures on touch screens to mouse events, making drag and drop available for mobile devices.
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
@@ -505,7 +507,7 @@ To get your own local copy of GigMate:
 
 ## Resources
 
-Here contains a list of websites that I found tremendously resourceful during the development of GigMate:
+Here contains a list of resources that I found tremendously resourceful during the development of GigMate:
 - [Stack Overflow](https://stackoverflow.com/)
 - [MDN Web Docs](https://developer.mozilla.org/en-US/)
 - This ["how to get all of an element's siblings with vanilla JS"](https://gomakethings.com/how-to-get-all-of-an-elements-siblings-with-vanilla-js/) post was inspirational for my own use case in retrieving a card's sibling in GigMate.
