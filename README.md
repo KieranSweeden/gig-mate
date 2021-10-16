@@ -389,6 +389,7 @@ Functional features contained within repertoire.html include:
 
 Design features that are saved for future releases of GigMate include:
 
+- A gigs page, displaying user created gigs that present it's own respective information such as a date, venue, band name etc.
 - A progress bar when creating a new item, being a way to inform the user that they need to fill every field before submitting.
 - Dark mode option for the entirety of the web application.
 
@@ -396,7 +397,9 @@ Design features that are saved for future releases of GigMate include:
 
 Functional features that are saved for future releases of GigMate include:
 
-- 
+- Gigs functionality, where the user can add, edit and delete gigs. Each gig will contain data specific to that gig along with setlists that the user will attach to the gig themselves.
+- User accounts to store information so the user can use GigMate on multiple platforms and reach their personal GigMate data.
+- Collaborative functionality so users can build setlists and send them to one another.
 
 [Return to Contents 🡡](#contents)
 
