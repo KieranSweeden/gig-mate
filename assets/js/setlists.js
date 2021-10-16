@@ -88,13 +88,10 @@ async function addInitialisedJSONToLocalStorage(contentType) {
     // If the contentType is...
     if (contentType === "setlists") {
         // ...setlists, fetch & store the setlist JSON data
-        localJSONData = await getInitialJSONData("assets/json/initSetlists.json");
+        localJSONData = await getInitialJSONData("assets/json/init-setlists.json");
     } else if (contentType === "repertoire") {
         // ...repertoire, fetch & store the repertoire JSON data
-        localJSONData = await getInitialJSONData("assets/json/initRepertoire.json");
-    } else if (contentType === "gigs") {
-        // ...gigs, fetch & store the gigs JSON data
-        localJSONData = await getInitialJSONData("assets/json/initGigs.json");
+        localJSONData = await getInitialJSONData("assets/json/init-repertoire.json");
     }
 
     // Push the local JSON data to local storage
