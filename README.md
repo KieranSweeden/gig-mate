@@ -50,7 +50,7 @@ View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/)
 
 The primary goal of GigMate, is to provide it's users with an elegant and simple way of organising & structuring their personal setlists & repertoire of songs, for use on stage and at home.
 
-GigMate is targeting music professionals as a target audience, who are often performing in various bands and entertainment agencies. Being involved with various acts can often bring organisational challenges as songs are often performed in various keys.
+GigMate is targeting music professionals as a target audience, who are often performing in various bands and entertainment agencies. Being involved with various acts can often bring organisational challenges as songs are often performed in various keys and setlists are often changed to suit the occasion.
 
 GigMate's sole purpose is to help music professionals in organising their repertoire into various setlists & sets of their own creation. The ease of accessing their personal repertoire and sets for their gigs will provide the user with confidence and peace of mind, which will also translate in maintaining a professional presence amongst their peers, bringing more potential work in the future.
 
@@ -82,34 +82,31 @@ Potential features to include in the Minimal Viable Product (MVP) of GigMate inc
 | Features                                                     	| Importance 	| Viability/Feasability 	|
 |--------------------------------------------------------------	|------------	|-----------------------	|
 | Responsive design                                            	| 5          	| 5                     	|
-| Dark mode                                                    	| 3          	| 4                     	|
+| Dark mode for live use                                        | 4          	| 4                     	|
 | User accounts used to store information                      	| 4          	| 1                     	|
 | Local storage                                                	| 5          	| 3                     	|
-| Progress bar for completion of all input fields for each gig 	| 3          	| 3                     	|
 | Required input fields                                        	| 5          	| 5                     	|
-| Edit states for each respective track & setlist              	| 5          	| 4                     	|
-| Grey state for gigs in past/White state for upcoming gigs    	| 3          	| 4                     	|
+| Edit state for each respective track, setlist & set           | 5          	| 4                     	|
+| Gig page containing gig info & attach setlists to gig dates   | 3             | 2                         |
 | Collaborative functionality                                  	| 3          	| 1                     	|
 | Live view mode                                               	| 5          	| 4                     	|
 | Drag n Drop API functionality                                	| 4          	| 4                     	|
 
-Responsive design is important to give the user flexibility in deciding what device suits their needs, making it more applicable and useful for all potential users within the niche target audience.
+Responsive design would allow the user flexibility in deciding what device they can use GigMate on. The availablity of GigMate in being operable on multiple devices allows it to meet the full potential of reaching it's target audience being professional musicians. With this in mind, it's important this feature is present within the MVP of GigMate.
 
-Given a large portion of the application's usefulness is situated in a live environment, having the option to view the application in a dark mode would be important to it's users.
+Given a large portion of the application's usefulness is situated in a live environment, having the option to view the application in a dark mode would be important to it's users, therefore it should be within the MVP of GigMate.
 
-User accounts would be tremendously useful not only for the user in their information being available across multiple devices but also potential goals relating to the business such gathering data from it's users, recognising trends and using that data as a way to dictate future feature releases. However the knowledge to integrate such a feature is not available at this moment in time, therefore it will pushed back as a future release.
+User accounts would be tremendously useful not only for the user in their information being available across multiple devices but also potential goals relating to the business such gathering data from it's users, recognising trends and using that data as a way to dictate future feature releases. However the knowledge to integrate such a feature is not available at this moment in time, therefore it will pushed back as a feature for the future of GigMate.
 
-Local storage is integral to the applications functionality, in remembering the data the user has input within the application and settings such as dark mode. Although I'm not too familiar with the web API, it's importance is paramount, it will therefore be integrated into GigMate in it's MVP stage.
+Local storage is integral to the applications functionality, in remembering the data the user has input within the application and settings such as dark mode. Although knowledge of the web API is minimal, it's importance is paramount. For this reason it will therefore be learned & integrated into GigMate in it's MVP state.
 
-Although a progress bar is not important in a functional sense, it would incentivise and inform the user to complete all input fields within a gig such as the date, dress code, band members etc. Given this feature would not be too difficult to implement and falls directly in line with the user's goals, it should be included in the MVP of GigMate.
+Required fields would incentivise the user to complete all necessary information regarding a gig. This would reduce the likelihood of errors appearing within GigMate due to human error and for this reason alone, this should be integrated within the MVP of GigMate.
 
-Like the progress bar, required fields would incentivise the user to complete all necessary information regarding a gig. This should be integrated within the MVP of GigMate.
+An edit state is at the core of the functionality GigMate provides. Adding, editing and deleting tracks, sets and setlists is what makes GigMate useful to the target audience. For this reason, it's integral that this core functionality is present within GigMate in it's MVP state.
 
-An edit state for setlists and individual tracks is vital and important to the user. It should display buttons such as edit, clear etc. A clear all fields button would also be useful, given a situation has a occured where the user has replaced the previous gig with another one for that date and would save the user time in deleting the previous information. This feature is important as it includes much of the core functionality and usefulness of GigMate, therefore it should be included in the MVP stage.
+Having a gigs page presenting user-created gigs to the user would be a wonderful feature, as it goes hand in hand with GigMate's goal of allowing the user to organise themselves in their professional music workplace. Gigs will be presented to the user similarly to setlists, however a date, location, notes and other useful data will be attached to the gig along with the setlist for the respective gig. The tracks, set and setlist functionality must be present within GigMate before the implementation of gigs however and for this reason, it may be difficult implementing this feature before the release of the MVP of GigMate. With this in mind, GigMate should be planned with a gigs page and functionality in mind as it would be a tremendously useful feature, however it may be implemented within a future release of GigMate due to time constraints.
 
-A simple interface that's immediate in communicating something to the user is important, greyed out gigs that have a date attached to them that's in the past, should be greyed out to immediately inform the user that they're in the past. This also highlights the upcoming gigs that are not greyed out. Given it's a simple and elegant way in communicating to the user of a gig's date, it should be included in the MVP of GigMate.
-
-Although collaborative functionality would improve the usefulness of the application, the knowledge to integrate this feature is not yet known and also this features targets groups of musicians rather than the individual musicians themselves. Therefore it will be withheld for a future release of GigMate.
+Although collaborative functionality would improve the usefulness of the application tremendously, the knowledge to integrate this feature is not yet known and also this features targets groups of musicians rather than the individual musicians themselves. Therefore it will be withheld for a future release of GigMate.
 
 Live view mode is integral in making the application useful in a live environment. In it's simplest form, this feature should be integrated in the MVP of GigMate. However possible functionality for live view mode, is allowing the user to set how many tracks they'd like to see at once on screen at a time. If time is available, this feature should be integrated.
 
@@ -147,7 +144,7 @@ Despite the positives of using the nested list architecture for GigMate, it does
 </details>
 
 <details>
-<summary>gigs.html</summary>
+<summary>gigs.html (planned, but not currently present within GigMate)</summary>
 
 ![Gig list for mobile screen sizes](documentation/wireframes/mobile/gigs.html-gig-list-mobile.png)
 
@@ -203,7 +200,7 @@ Despite the positives of using the nested list architecture for GigMate, it does
 </details>
 
 <details>
-<summary>gigs.html</summary>
+<summary>gigs.html (planned, but not currently present within GigMate)</summary>
 
 ![Gig list for tablet screen sizes](documentation/wireframes/tablet/gigs.html-gig-list-tablet.png)
 
@@ -259,7 +256,7 @@ Despite the positives of using the nested list architecture for GigMate, it does
 </details>
 
 <details>
-<summary>gigs.html</summary>
+<summary>gigs.html (planned, but not currently present within GigMate)</summary>
 
 ![Gig list for desktop screen sizes](documentation/wireframes/desktop/gigs.html-list-desktop.png)
 
@@ -343,13 +340,63 @@ The icon represents a setlist whilst also incorporating GigMate's focus in simpl
 
 # Features
 
-[Return to Contents 🡡](#contents)
+Within this section, we'll be covering what features are currently present within GigMate and also what features are to be held for a future update release of GigMate.
 
 ## Current Features
+
+### Design
+
+Each page within GigMate features:
+
+- Responsive design that adapts it's contents depending of the user's screen size.
+- The GigMate logo at the top left of the screen, that's also a button that directs the user to the home screen if they wish to do so.
+- Links to the relevant social media platforms within the navigation bar.
+- Hover states for buttons on desktop that provide a responsive and fun feel to the application.
+- Headers and navbar active states that inform the user as to what page they're currently on.
+- Accessible colour contrasts for text that follow WCEG 2.1 standards.
+
+The setlists.html & repertoire.html pages feature:
+
+- A collapsable hamburger nav bar that houses the navbar elements within it for mobile and tablet screens.
+- A footer section that houses all the buttons to edit elements within GigMate.
+- A back button that takes the user to the previous page within their browser.
+
+### Functionality
+
+Functional features contained within setlists.html include:
+
+- Add a new setlist functionality, that presents a form where the user can give the new setlist a name & amounst of sets.
+- New setlist error messages for when the setlist name input is empty or the name already exists.
+- Delete a set within a setlist or a whole setlist functionality.
+- Add a track or tracks to a set within a setlist from the user's repertoire.
+- Delete a track or tracks from a set within a setlist.
+- Edit a track in a set within a setlist that's independent from the respective track within the repertoire.
+- Move a track within a set using drag and drop.
+- View a full screen presentation of a setlist's set.
+
+Functional features contained within repertoire.html include:
+
+- Add a new track to the user's repertoire.
+- Delete a track from the user's repertoire.
+- Edit a track within the user's repertoire.
+- Promptly find a track within the user's repertoire using the search input filter.
 
 [Return to Contents 🡡](#contents)
 
 ## Future Features
+
+### Design
+
+Design features that are saved for future releases of GigMate include:
+
+- A progress bar when creating a new item, being a way to inform the user that they need to fill every field before submitting.
+- Dark mode option for the entirety of the web application.
+
+### Functionality
+
+Functional features that are saved for future releases of GigMate include:
+
+- 
 
 [Return to Contents 🡡](#contents)
 
