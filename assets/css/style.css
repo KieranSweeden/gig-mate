@@ -507,6 +507,10 @@ html, body {
     height: 10%;
 }
 
+#page-header {
+    font-size: 1.75rem;
+}
+
 #search-input {
     width: 500px;
     max-width: 80%;
@@ -524,7 +528,7 @@ html, body {
 #search-input:focus-within {
     border-color: transparent;
     outline: var(--gigmate-primary-shadow) solid .25rem;
-    outline-offset: 0.25rem;
+    outline-offset: 0.05rem;
     box-shadow: 0 0 5px 0 var(--gigmate-black-shadow) inset;
 }
 
@@ -590,6 +594,18 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 .card-title {
     margin: 0;
+}
+
+@media (max-width: 576px){
+
+    #page-header {
+        font-size: 1.25rem;
+    }
+
+    .card-title {
+        font-size: 1rem;
+    }
+
 }
 
 .gig-card {
