@@ -209,14 +209,40 @@ function getFormValues(type){
   if (type === "newTrack"){
     let newTrackValues = {};
 
-    newTrackValues.name = document.getElementById('track-name').value;
-    newTrackValues.artist = document.getElementById('track-artist').value;
+    newTrackValues.name = capitaliseEachWord(document.getElementById('track-name').value);
+    newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
     newTrackValues.key = document.getElementById('track-key').value;
     newTrackValues.tonality = document.getElementById('track-tonality').value;
 
     return newTrackValues;
   }
   return newTrackValues;
+}
+
+// Credit: code the capitalize the first letter within a string was taken from https://stackoverflow.com/a/1026087/15607265
+function capitaliseFirstLetter(name) {
+  // Change the letter at index 0 to uppercase and return the word
+  return name.charAt(0).toUpperCase() + name.slice(1);
+}
+
+function capitaliseEachWord(name){
+  // Split the words up into an array
+  let nameWords = name.split(" ");
+
+  // Intialise an array that'll store the words when capitalised
+  let capitalisedWords = [];
+
+  // For each word... 
+  nameWords.forEach(word => {
+    // ...capitalise it and store it in the capitalised variable
+    capitalisedWords.push(capitaliseFirstLetter(word));
+  })
+
+  // Turn the array into a string with the capitalised words joined with spaces.
+  capitalisedWords = capitalisedWords.join(" ");
+
+  // Return the words in capitalised form
+  return capitalisedWords;
 }
 
 function removeAllListItems(list){

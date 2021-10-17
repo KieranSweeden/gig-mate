@@ -1049,9 +1049,9 @@ function checkIfDuplicate(createdItem, originalItems, contentType) {
 }
 
 // Credit: code the capitalize the first letter within a string was taken from https://stackoverflow.com/a/1026087/15607265
-function capitaliseFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-  }
+function capitaliseFirstLetter(name) {
+    return name.charAt(0).toUpperCase() + name.slice(1);
+}
 
 function createNewItem(type){
     // Initialise an empty object variable
@@ -1449,7 +1449,7 @@ function contentTemplates(request, contentData, issue){
             template.textContent = "Sorry this name contains invalid characters (!* etc.), please only use letters!";
         }
         return template;
-        
+
     } else if (request === "editTrack") {
 
         template = 
