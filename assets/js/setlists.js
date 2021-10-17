@@ -708,13 +708,11 @@ function updateHeading(newHeader, additionalHeader){
     // Create H1 element with id & class for new header
     let newFirstHeading = document.createElement("h1");
     newFirstHeading.id = "page-header";
-    newFirstHeading.className = "fs-3 m-0";
     newFirstHeading.textContent = newHeader;
 
     // Create H2 element with id & class for new subheader
     let newSecondHeading = document.createElement("h2");
     newSecondHeading.id = "page-subheader";
-    newSecondHeading.className = "fs-3 m-0";
     newSecondHeading.textContent = additionalHeader;
 
     while (headerContainer.firstElementChild) {

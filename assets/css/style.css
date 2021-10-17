@@ -507,8 +507,15 @@ html, body {
     height: 10%;
 }
 
-#page-header {
+#page-header,
+#page-subheader {
     font-size: 1.75rem;
+    margin: 0;
+}
+
+/* Add margin for header with search underneath */
+#page-header[data-has-search="true"] {
+    margin: .5rem;
 }
 
 #search-input {
@@ -598,14 +605,14 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 @media (max-width: 576px){
 
-    #page-header {
+    #page-header,
+    #page-subheader {
         font-size: 1.25rem;
     }
 
     .card-title {
         font-size: 1rem;
     }
-
 }
 
 .gig-card {
