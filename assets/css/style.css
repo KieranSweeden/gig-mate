@@ -46,7 +46,7 @@ html, body {
     background-color: var(--gigmate-grey);
 }
 
-/* Utility Styles */
+/* Utility Styles -------------------------------------------------------- */
 
 .bg-purple {
     background-color: var(--gigmate-primary);
@@ -129,6 +129,19 @@ html, body {
     display: inline-block;
 }
 
+/* Flex Utility Styles */
+
+.flex-and-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-and-align-end {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
 
 
 /* Navbar Styles */
@@ -234,11 +247,17 @@ html, body {
     overflow: hidden;
 }
 
-#main-container .card {
+#section-btn-container {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+}
+
+#section-btn-container .card {
     width: 50%;
     min-width: 250px;
-    height: 20%;
-    margin: 1rem;
+    height: 25%;
+    margin: 2rem;
     border-radius: var(--gigmate-border-radius);
     overflow: hidden;
     position: relative;
@@ -247,30 +266,30 @@ html, body {
     border: none;
 }
 
-#main-container .card::before {
+#section-btn-container .card::before {
     content: '';
     position: absolute;
     inset: 0 0;
     background-color: hsla(0, 0%, 13%, 0.5);
 }
 
-#main-container .card:hover,
-#main-container .card:focus,
-#main-container .card:focus-visible,
-#main-container .card:focus-within {
+#section-btn-container .card:hover,
+#section-btn-container .card:focus,
+#section-btn-container .card:focus-visible,
+#section-btn-container .card:focus-within {
     transform: scale(1.025, 1.025);
 }
 
-#main-container .card:active {
+#section-btn-container .card:active {
     transform: scale(1, 1);
 }
 
-#main-container .card a {
+#section-btn-container .card a {
     height: 100%;
     width: 100%;
 }
 
-#main-container .card a h2 {
+#section-btn-container .card a h2 {
     font-size: 1rem;
     font-weight: 700;
     color: var(--gigmate-white);
@@ -281,12 +300,12 @@ html, body {
     z-index: 2;
 }
 
-#main-container .card.opposite a h2 {
+#section-btn-container .card.opposite a h2 {
     left: auto;
     right: 25px;
 }
 
-#main-container .card a img {
+#section-btn-container .card a img {
     height: 100%;
     width: 100%;
     object-fit: cover;
