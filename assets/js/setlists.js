@@ -514,6 +514,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get input element
             let setNameInput = document.getElementById("form-name");
 
+            // Check name is all letters and store the status in a variable
             let nameIsAllLetters = checkNameIsAllLetters(setNameInput.value);
 
             // If empty, ask the user to write a name
@@ -1447,8 +1448,8 @@ function contentTemplates(request, contentData, issue){
         } else if (issue === "notAllLetters") {
             template.textContent = "Sorry this name contains invalid characters (!* etc.), please only use letters!";
         }
-
         return template;
+        
     } else if (request === "editTrack") {
 
         template = 

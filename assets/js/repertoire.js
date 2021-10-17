@@ -216,8 +216,6 @@ function getFormValues(type){
 
     return newTrackValues;
   }
-
-  console.log(newTrackValues);
   return newTrackValues;
 }
 
@@ -351,7 +349,7 @@ function styleLargeCard(card, track) {
       </select>
     </div>
     <div class="col-6">
-      <label for="track-tonality">Key:</label>
+      <label for="track-tonality">Tonality:</label>
       <select name="keys" id="track-tonality" class="rounded-corners">
           <option value="${track.tonality}" selected hidden>${track.tonality}</option>
           <option value="Major">Major</option>
@@ -414,7 +412,6 @@ function footerState(currentState, card, track) {
 
 function addButtonListeners(currentState, card, track){
   // Retrieve all possible buttons
-  let backBtn = document.getElementById("btn-back");
   let addBtn = document.getElementById("btn-add");
   let deleteBtn = document.getElementById("btn-delete");
   let saveBtn = document.getElementById("btn-save");
@@ -452,16 +449,12 @@ function addDeleteBtnListener(deleteBtn, card, track, currentState) {
 }
 
 function deleteObject(card, track){
-  console.log(card);
-  console.log(track);
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
   let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
-
-  console.log(trackIndex);
 
   repertoireArray.splice(trackIndex, 1);
 
@@ -488,16 +481,79 @@ function addSaveBtnListener(saveBtn, card, track, currentState){
       else if(currentState === "addingTrack"){
         // Get input values
         let formValues = getFormValues("newTrack");
-        // Push input values to local storage
-        pushToLocalStorage("track", formValues);
-        // Clear content section
-        clearContentSection();
-        // Fill with repertoire
-        checkLocalStorage();
-        // Revert buttons to viewing repertoire state
-        footerState("viewingRepertoire");
+
+        // Get tracks from local storage
+        let localStorageTracks = getJSONFromLocalStorage("repertoire");
+
+        let itemIsDuplicate = false;
+
+        localStorageTracks.forEach(localStorageTrack => {
+          if(formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist){
+            
+            itemIsDuplicate = true;
+          }
+        });
+
+        if (itemIsDuplicate === true){
+
+          alertUser("addingTrack", "alreadyExists");
+
+        } else if (itemIsDuplicate === false){
+
+          // Push input values to local storage
+          pushToLocalStorage("track", formValues);
+          // Clear content section
+          clearContentSection();
+          // Fill with repertoire
+          checkLocalStorage();
+          // Revert buttons to viewing repertoire state
+          footerState("viewingRepertoire");
+        }
       }
   });
+}
+
+function alertUser(currentState, issue){
+  // Initialise an alert variable that will store the alert element
+  let alertElement;
+
+  // If we're dealing with...
+  if (currentState === "addingTrack" && issue === "alreadyExists"){
+
+      // ... a new setlist, grab the alert template
+      alertElement = contentTemplates("alert", issue);
+
+      // Get the name input
+      let input = document.getElementById('track-name');
+
+      // Append the alert into the parent element of the input, alerting the user
+      input.parentElement.parentElement.appendChild(alertElement);
+
+      // After three seconds, remove the alert
+      setTimeout(() => {
+          input.parentElement.parentElement.removeChild(alertElement);
+      }, 5000);
+  }
+}
+
+function contentTemplates(request, issue){
+  // Initialise a variable to store the template
+  let template;
+
+  if (request === "alert") {
+
+    template = document.createElement('div');
+
+    template.className = "alert alert-danger";
+
+    template.setAttribute('role', 'alert');
+
+      if (issue === "alreadyExists") {
+        template.textContent = "Sorry this setlist name already exists, create a new one!";
+      } 
+
+    return template;
+  }
 }
 
 function pushToLocalStorage(type, data){
