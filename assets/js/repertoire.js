@@ -55,7 +55,7 @@ async function checkLocalStorage() {
 
 async function addJSONToLocalStorage(data) {
   if (data === "repertoire") {
-    let repertoire = await fetchInitialJSON('assets/json/initRepertoire.json');
+    let repertoire = await fetchInitialJSON('assets/json/init-repertoire.json');
   
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
