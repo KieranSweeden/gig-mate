@@ -549,6 +549,8 @@ To get your own local copy of GigMate:
 
 - Code to capitalise the first letter of a string was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript) by [Steve Harrison](https://stackoverflow.com/users/48492/steve-harrison).
 
+- Code to ensure names are only letters was taken from [this Stack Overflow answer](https://stackoverflow.com/a/5196710/15607265) by [chrisp7575](https://stackoverflow.com/users/644858/chrisp7575).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).

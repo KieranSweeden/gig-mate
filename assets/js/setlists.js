@@ -514,9 +514,14 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get input element
             let setNameInput = document.getElementById("form-name");
 
+            let nameIsAllLetters = checkNameIsAllLetters(setNameInput.value);
+
             // If empty, ask the user to write a name
-            if (setNameInput.value === "") {
+            if (setNameInput.value === ""){
                 alertUser(contentType, currentState, "emptyInput");
+
+            } else if (nameIsAllLetters === false){
+                alertUser(contentType, currentState, "notAllLetters")
 
             } else {
                 // Create a new setlist item
@@ -590,6 +595,18 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             restartGigMate("setlists");
         });
+    }
+}
+
+// Credit: code to check all letters taken from https://stackoverflow.com/a/5196710/15607265 
+function checkNameIsAllLetters(nameEntered){
+    // Initialise a variable that holds a regular expression
+   let allowedLetters = /^[A-Za-z]+$/;
+   if(String(nameEntered).match(allowedLetters)){
+       return true;
+    }
+   else {
+     return false;
     }
 }
 
@@ -1427,6 +1444,8 @@ function contentTemplates(request, contentData, issue){
             template.textContent = "Sorry this setlist name already exists, create a new one!";
         } else if (issue === "emptyInput") {
             template.textContent = "The name input was empty, please enter a name!";
+        } else if (issue === "notAllLetters") {
+            template.textContent = "Sorry this name contains invalid characters (!* etc.), please only use letters!";
         }
 
         return template;
