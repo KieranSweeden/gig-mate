@@ -827,7 +827,7 @@ function getNames(elementType, tracks){
     return names;
 }
 
-function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
+async function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
     // Initialise an array that'll store a new array to be sent to local storage
     let newItemArray = [];
 
@@ -837,7 +837,7 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
         itemsInStorage.forEach(setlist => {
             // Look through each item to be deleted
             itemsToBeDeleted.forEach(itemToDelete => {
-                // If the setlist names of both match, go through this code
+                // If the setlist names of both match...
                 if (setlist.setlistName === itemToDelete.setlistName){
                     
                     // If the item to delete contains a set property, remove that property from the set retrieved from local storage
@@ -871,6 +871,7 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
 
     restartGigMate(contentType);
 }
+
 
 // Credit: code to retrieve the amount of properties an object contains was taken from: https://stackoverflow.com/a/6700/15607265
 Object.size = function(obj) {
@@ -1029,6 +1030,11 @@ function checkIfDuplicate(createdItem, originalItems, contentType) {
     return itemIsDuplicate;
 }
 
+// Credit: code the capitalize the first letter within a string was taken from https://stackoverflow.com/a/1026087/15607265
+function capitaliseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+  }
+
 function createNewItem(type){
     // Initialise an empty object variable
     let newItem = {};
@@ -1036,7 +1042,7 @@ function createNewItem(type){
     // If the newItem type provided is...
     if (type === "setlist"){
         // ... a setlist, get the form-name and add it as a setlist name property
-        newItem.setlistName = document.getElementById("form-name").value;
+        newItem.setlistName = capitaliseFirstLetter(document.getElementById("form-name").value);
 
         // Get the amount of sets requested by getting the last character of the radio button id
         let checkedSetButton = document.querySelector(
@@ -1086,17 +1092,17 @@ function openForm(type, data){
 
     // If the type of form required is a...
     if (type === "newSetlist"){
-        // ... new setlist, set the inner HTML of the form to the new setlist template
+        // ...new setlist, set the inner HTML of the form to the new setlist template
         form.innerHTML = contentTemplates("newSetlistForm");
 
-        // ... display buttons appropriate for new setlists
+        // display buttons appropriate for new setlists
         determineFooterButtons("setlists", "new");
+
     } else if (type === "editTrack"){
 
         form.innerHTML = contentTemplates("editTrack", data);
 
         determineFooterButtons("tracks", "edit", data);
-
     }
 
     // ... new setlist form

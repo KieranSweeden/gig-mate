@@ -547,6 +547,8 @@ To get your own local copy of GigMate:
 
 - The dragdroptouch.js polyfill file is completely taken from [this GitHub Repository](https://github.com/Bernardo-Castilho/dragdroptouch). All credit goes to [Bernado Castilho](https://github.com/Bernardo-Castilho) for this polyfill, which translates touch gestures on touch screens to mouse events, making drag and drop available for mobile devices.
 
+- Code to capitalise the first letter of a string was taken from [this Stack Overflow answer](https://stackoverflow.com/questions/1026069/how-do-i-make-the-first-letter-of-a-string-uppercase-in-javascript) by [Steve Harrison](https://stackoverflow.com/users/48492/steve-harrison).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
