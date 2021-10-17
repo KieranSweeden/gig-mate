@@ -262,7 +262,7 @@ html, body {
     overflow: hidden;
     position: relative;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
-    transition: transform 0.15s ease-in-out;
+    transition: transform 0.25s ease-in-out;
     border: none;
 }
 
