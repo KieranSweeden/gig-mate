@@ -26,7 +26,7 @@ To return to the original README file, [click here](README.md).
 
 <details>
 
-<summary><b>Navbar dropdown appearing behind main content</b></summary>
+<summary><b>Navbar dropdown appearing behind main content.</b></summary>
 
 <br>
 
@@ -51,7 +51,7 @@ To return to the original README file, [click here](README.md).
 
 <details>
 
-<summary><b>Navbar moving upwards when uncollapsing the dropdown menu</b></summary>
+<summary><b>Navbar moving upwards when uncollapsing the dropdown menu.</b></summary>
 
 <br>
 
@@ -81,7 +81,7 @@ To return to the original README file, [click here](README.md).
 
 <details>
 
-<summary><b>Container not scrolling when using overflow:scroll</b></summary>
+<summary><b>Container not scrolling when using overflow:scroll.</b></summary>
 
 <br>
 
@@ -106,7 +106,7 @@ overflow: scroll;
 
 <details>
 
-<summary><b>Scrollbar moving content within container, resulting in an asymmetrical design</b></summary>
+<summary><b>Scrollbar moving content within container, resulting in an asymmetrical design.</b></summary>
 
 <br>
 
@@ -129,7 +129,7 @@ overflow: overlay;
 
 <details>
 
-<summary><b>Presence of UI in Safari & Chrome mobile browsers shortening the viewport window</b></summary>
+<summary><b>Presence of UI in Safari & Chrome mobile browsers shortening the viewport window.</b></summary>
 
 <br>
 
@@ -419,7 +419,7 @@ setTracks.forEach(setTrack => {
 
 <details>
 
-<summary><b>When checking a set ready for deletion, the set would open instead of being checked</b></summary>
+<summary><b>When checking a set ready for deletion, the set would open instead of being checked.</b></summary>
 
 <br>
 
@@ -464,6 +464,37 @@ function displaySetlists(setlists, insertingCheckbox){
 
 
 ```
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>A console error declaring that a variable containing null could not be operated on with a for each loop.</b></summary>
+
+<br>
+
+- When attempting to save a set in it's current order and state, it would refuse to do so and present a console error stating that a for each loop could not be operated on a variable of null.
+
+- To save the set in it's current order, it requires use of the user's repertoire found from local storage. This is where the issue originated from. Using the user's repertoire in local storage requires the user to open repertoire.html first. So if the user doesn't visit the repertoire.html page and immediately attempts to edit tracks in sets within setlists.html, it would crash as there is no repertoire stored within local storage.
+
+- To fix this, a function taken from repertoire.js that inserts the initial repertoire json file was inserted within setlists.js. This meant that no matter what, the user had a repertoire present in local storage and the editing functionality would work as intended.
+
+```
+*setlists.js*
+
+async function checkPresenceOfRepertoire(){
+    // If repertoire does not exist in local storage...
+    if(!localStorage.getItem('repertoire')){
+        // push the initial repertoire file to local storage
+        pushToLocalStorage("repertoire", await getInitialJSONData("assets/json/init-repertoire.json"));
+    }
+}
+
+```
+
+
 
 </details>
 
