@@ -1433,31 +1433,6 @@ function contentTemplates(request, contentData, issue){
         }
 
         return template;
-    } else if (request === "trackCard") {
-
-        template = 
-        `
-        <button class="btn-card animate__animated animate__fadeInUp">
-            <div class="card gig-card rounded-corners">
-                <div class="card-body row">
-                    <div class="col-10 gig-venue">
-                        <h3 class="card-title">${track.name}</h3>
-                    </div>
-                    <div class="col-2 text-end">
-                        <i class="fas fa-external-link-alt rep-icon"></i>
-                    </div>
-                    <div class="col-8 gig-artist">
-                        <p class="m-0">${track.artist}</p>
-                    </div>
-                    <div class="col-4 gig-date text-end">
-                        <p class="m-0 badge">${track.key} ${track.tonality}</p>
-                    </div>
-                </div>
-            </div>
-        </button>`;
-
-        return template;
-
     } else if (request === "editTrack") {
 
         template = 
