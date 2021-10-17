@@ -1,11 +1,11 @@
 // When DOM content is loaded...
-window.addEventListener('DOMContentLoaded', () => {
+window.addEventListener('DOMContentLoaded', function() {
     // Determine what content the page will be dealing with and store the type within a variable
     let contentType = determineContentType();
 
     // Knowing the type of content it'll be dealing with, start the application with the contentType as a parameter
     startGigMate(contentType);
-})
+});
 
 function determineContentType() {
     // To determine what content type this page will be dealing with, grab the current pathname
@@ -31,7 +31,7 @@ async function startGigMate(contentType) {
     let contentData = await collectLocalStorage(contentType);
 
     // If the content type is...
-    if(contentType = "setlists") {
+    if(contentType === "setlists") {
         // ... setlists, create setlists
         displaySetlists(contentData, false);
     }
@@ -136,7 +136,7 @@ function displaySetlists(setlists, insertingCheckbox){
             // ... add event listeners to the respective set buttons
             insertButtonEventListeners();
         }
-    })
+    });
 }
 
 function viewSet(setlistName, setNumber){
@@ -191,10 +191,8 @@ function prepareToEditMultipleItems(contentType){
             setButtons.forEach(setButton => {
                 setButton.classList.add("remove-hover");
                 setButton.appendChild(getDeleteCheckBox());
-            })
-
-
-        })
+            });
+        });
 
         addCheckBoxListeners(contentType);
 
@@ -210,12 +208,9 @@ function prepareToEditMultipleItems(contentType){
             // remove the edit icon
             trackCard.firstElementChild.children[1].removeChild(icon);
 
-            // remove the button event listener
-            trackCard.parentElement.parentElement.removeEventListener('click', openEditTrackForm.bind("editTrack"));
-
             // insert a checkbox
             trackCard.firstElementChild.children[1].appendChild(getDeleteCheckBox());
-        })
+        });
     }
 }
 
@@ -246,7 +241,7 @@ function addCheckBoxListeners(contentType){
                     checkbox.toggleAttribute("checked");
                 });
             }
-        })
+        });
     }
 }
 
@@ -261,14 +256,14 @@ function toggleChildSets(checkbox){
     if (checkbox.hasAttribute("checked")){
         // ... is checked, apply the attribute of checked to all sets
         setButtons.forEach(setButton => {
-            setButton.firstElementChild.setAttribute("checked", '')
-        })
+            setButton.firstElementChild.setAttribute("checked", '');
+        });
     } else if (!checkbox.hasAttribute("checked")){
         // Else if it does not have the attribute of checked
         setButtons.forEach(setButton => {
             // make sure all sets within the setlist have the attribute of checked removed
             setButton.firstElementChild.removeAttribute("checked");
-        })
+        });
     }
 }
 
@@ -280,11 +275,11 @@ function getDeleteCheckBox(contentType) {
     checkbox.className = "form-check-input";
 
     // Give it the type of checkbox
-    checkbox.type = "checkbox"
+    checkbox.type = "checkbox";
 
     // Give the checkbox a particular class name depending on the content type
     if (contentType === "setlist") {
-        checkbox.classList.add("set-checkbox")
+        checkbox.classList.add("set-checkbox");
     }
 
     // Return a checkbox when called
@@ -324,7 +319,7 @@ function determineFooterButtons(contentType, currentState, contentData){
     }
 
     // Add event listeners to the buttons displayed on screen
-    insertButtonEventListeners(contentType, currentState, contentData)
+    insertButtonEventListeners(contentType, currentState, contentData);
 }
 
 
@@ -376,24 +371,25 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         deleteButton.addEventListener('click', function(){
             // ... the delete button will prepare the items to be deleted
             prepareToEditMultipleItems(contentType);
-        })
+        });
         itemButtons.forEach(button => {
             // Add a click listener for every button in content section
             button.addEventListener('click', function(){
                 openSetlist(button);
-            })
-        })
-    } else if (contentType === "setlists" && currentState === "viewingSet")  {
+            });
+        });
+
+    } else if (contentType === "setlists" && currentState === "viewingSet"){
         // If the user is viewing a set within a setlist...
         editButton.addEventListener('click', function(){
             // ... the edit button will prepare set items to be edited
             editSet();
-        })
+        });
 
         expandButton.addEventListener('click', function(){
             // ... the expand button will full screen the set
             fillLiveModalWithTracks();
-        })
+        });
 
     }   else if (contentType === "setlists" && currentState === "editingSet"){
         // If the user is editing a set within a setlist...
@@ -413,7 +409,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // show appropriate footer buttons
             determineFooterButtons("setlists", "addTracksToSet");
-        })
+        });
+
         deleteButton.addEventListener('click', function(){
 
             // Collecting the tracks checked
@@ -444,7 +441,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             updateSetInLocalStorage(newSet, setlistName, setNumber);
 
             viewSet(setlistName, setNumber);
-        })
+        });
+
         saveButton.addEventListener('click', function(){
             // the save button will save the set in it's displayed order by
 
@@ -467,8 +465,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                     if(trackName === repertoireTrack.name){
                         newSet.push(repertoireTrack);
                     }
-                })
-            })
+                });
+            });
 
             // Get the current setlist name & set number
             let setlistName = document.getElementById("page-header").textContent;
@@ -477,7 +475,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             updateSetInLocalStorage(newSet, setlistName, setNumber);
 
             viewSet(setlistName, setNumber);
-        })
+        });
+
     } else if (contentType === "setlists" && currentState === "addTracksToSet"){
         // If the user is adding tracks to a set...
         saveButton.addEventListener('click', function(){
@@ -499,8 +498,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                     if(track.name === checkedTrack){
                         trackObjectsToAdd.push(track);
                     }
-                })
-            })
+                });
+            });
 
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
@@ -515,7 +514,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             updateSetInLocalStorage(setlistTracks, setlistName, setNumber);
 
             editSet();
-        })
+        });
 
     } else if (contentType === "setlists" && currentState === "new"){
         // If the user is creating a new setlist, the save button will save the setlist info to local storage and redirect them to viewing setlists
@@ -526,7 +525,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // If empty, ask the user to write a name
             if (setNameInput.value === "") {
-                alertUser(contentType, currentState, "emptyInput")
+                alertUser(contentType, currentState, "emptyInput");
 
             } else {
                 // Create a new setlist item
@@ -555,18 +554,21 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         
                     // Change the footer buttons to viewing setlists
                     determineFooterButtons(contentType, "viewingSetlists");
+
                 } else if (itemIsDuplicate === true){
+
                     alertUser(contentType, currentState, "alreadyExists");
                 }
             }
+        });
 
-        })
     } else if (contentType === "setlists" && currentState === "deleting"){
         saveButton.addEventListener("click", function(){
             let setsToBeDeleted = getCheckedItems(contentType);
 
             deleteItems(contentType, setsToBeDeleted, getLocalStorageData("setlists"));
-        })
+        });
+
     } else if (contentType === "tracks" && currentState === "edit"){
         saveButton.addEventListener("click", function(){
             // Get the values from the input form
@@ -589,14 +591,14 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                     setlist[setHeading][trackIndex].key = updatedTrackValues.key;
                     setlist[setHeading][trackIndex].tonality = updatedTrackValues.tonality;
                 }
-            })
+            });
             
             adjustContainerSize();
 
             pushToLocalStorage("setlists", storedSetlistArray);
 
             restartGigMate("setlists");
-        })
+        });
     }
 }
 
@@ -623,7 +625,7 @@ function fillLiveModalWithTracks(){
 
         // ... and insert it into the list container
         liveModalListItemContainer.innerHTML += liveModeTrack;
-    })
+    });
 }
 
 function createLiveModeTrack(trackObject){
@@ -662,17 +664,17 @@ function editSet(){
     displayItems("checkboxTracks", tracks);
 }
 
-function getInputValues(contentType, contentData){
+function getInputValues(contentType){
+
+    let updatedTrackValues = {};
+
     if(contentType === "tracks"){
-        
-        let updatedTrackValues = {};
 
         updatedTrackValues.name = document.getElementById("track-name").value;
         updatedTrackValues.artist = document.getElementById("track-artist").value;
         updatedTrackValues.key = document.getElementById("track-key").value;
         updatedTrackValues.tonality = document.getElementById("track-tonality").value;
-        
-        return updatedTrackValues;
+    
     }
 
     return updatedTrackValues;
@@ -777,7 +779,7 @@ function getTracks(nameOfRequestedSetlist, setName){
                 break;
             }
         }
-    })
+    });
 
     // Return the set tracks array
     return setTracks;
@@ -824,11 +826,11 @@ function getNames(elementType, tracks){
     if(elementType === "trackCard"){
         tracks.forEach(checkedTrack => {
             names.push(checkedTrack.parentElement.parentElement.firstElementChild.firstElementChild.textContent);
-        })
+        });
     } else if (elementType === "saveSetCards"){
         tracks.forEach(savedTrack => {
             names.push(savedTrack.textContent);
-        })
+        });
     }
 
     return names;
@@ -859,7 +861,7 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
                     }
                 }
 
-            })
+            });
             
             // Calculate amount of properties (sets) the setlist has
             let setlistSize = Object.size(setlist);
@@ -871,7 +873,7 @@ function deleteItems(contentType, itemsToBeDeleted, itemsInStorage){
                 let fixedSetlist = fixSetlist(setlist);
                 newItemArray.push(fixedSetlist);
             }
-        })
+        });
     }
 
     pushToLocalStorage(contentType, newItemArray);
@@ -978,16 +980,17 @@ function getCheckedItems(contentType){
             }
 
             checkedItems.push(deleteSetItem);
-        })
+        });
+
     } else if (contentType === "tracks"){
         // Get all checkboxes
         let checkboxes = [...document.getElementsByClassName('form-check-input')];
 
         // Create a new array with checked checkboxes
-        checkedItems = checkboxes.filter(checkbox => checkbox.hasAttribute("checked"))
-
+        checkedItems = checkboxes.filter(checkbox => checkbox.hasAttribute("checked"));
 
     }
+
     return checkedItems;
 }
 
@@ -1028,7 +1031,7 @@ function checkIfDuplicate(createdItem, originalItems, contentType) {
             if(storedArray.setlistName === createdItem.setlistName){
                 itemIsDuplicate = true;
             }
-        })
+        });
     }
 
     // Return the boolean variable 
@@ -1062,6 +1065,7 @@ function createNewItem(type){
 
         // Return the new setlist object
         return newItem;
+
     } else if (type === "track"){
         newItem.name = document.getElementById("");
     }
@@ -1124,6 +1128,7 @@ function displayItems(contentType, contentItems, reference){
 
         // ...then push the set buttons (contentItems[1]) into the setlist item
         document.getElementById(`collapse${reference}`).firstElementChild.firstElementChild.innerHTML = contentItems[1].outerHTML;
+
     } else if (contentType === "tracks"){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
@@ -1131,7 +1136,8 @@ function displayItems(contentType, contentItems, reference){
         // For each track...
         contentItems.forEach(track => {
             container.appendChild(createCard(track, false));
-        })
+        });
+
     } else if (contentType === "addTracks"){
         // Insert & collect an ordered list container
         let container = insertListContainer("ordered");
@@ -1140,7 +1146,7 @@ function displayItems(contentType, contentItems, reference){
         contentItems.forEach(track => {
             // ... create a card with the track properties
             container.appendChild(createCard(track, true, false));
-        })
+        });
 
         // Add an event listener to every checkbox
         addCheckBoxListeners("setlists");
@@ -1160,13 +1166,13 @@ function displayItems(contentType, contentItems, reference){
             } else {
                 container.insertBefore(draggable, afterElement);
             }
-        })
+        });
 
         // For each track...
         contentItems.forEach(track => {
             // ... create a card with the track properties
             container.appendChild(createCard(track, true, true));
-        })
+        });
 
         // Add an event listener to every checkbox
         addCheckBoxListeners("setlists");
@@ -1181,11 +1187,11 @@ function getDragAfterElement(container, mousePosition){
         const box = child.getBoundingClientRect();
         const offset = mousePosition - box.top - box.height / 2;
         if (offset < 0 && offset > closestElement.offset){
-            return { offset: offset, element: child }
+            return { offset: offset, element: child };
         } else {
             return closestElement;
         }
-    }, { offset: Number.NEGATIVE_INFINITY }).element
+    }, { offset: Number.NEGATIVE_INFINITY }).element;
 }
 
 function insertListContainer(type){
@@ -1316,12 +1322,13 @@ function dragEnd(){
 function addIconHover (card) {
     // When hovering over the button area, the icon will turn purple
     card.addEventListener('mouseenter', function(){
-      paintIcon(card)
-    })
+      paintIcon(card);
+    });
+
     // When leaving the button area, the icon will revert to grey
     card.addEventListener('mouseleave', function(){
-      paintIcon(card)
-    })
+      paintIcon(card);
+    });
 }
 
 // Toggle a class to paint the edit icon
@@ -1331,7 +1338,7 @@ function paintIcon (card) {
     // Check if the icon has a class of icon-hover
     if (icon.classList.contains("icon-hover")){
       // If so, remove the class to revert back to the grey color
-      icon.classList.remove("icon-hover")
+      icon.classList.remove("icon-hover");
     }  else {
       // If not, add the class to turn the icon color to purple
       icon.classList.add("icon-hover");
