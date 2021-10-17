@@ -698,8 +698,10 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 /* Form Styling */
 
 #input-form {
-    min-width: 18rem;
-    width: 40rem;
+    max-width: 25rem;
+    max-height: 25rem;
+    margin: auto 0;
+    padding: 0;
 }
 
 #content-container {
