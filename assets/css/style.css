@@ -698,11 +698,37 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 /* Form Styling */
 
 #input-form {
-    max-width: 25rem;
-    max-height: 25rem;
+    width: 25rem;
+    height: 25rem;
     margin: auto 0;
-    padding: 0;
+    padding: 5rem 1rem;
+    position: relative;
+    display: flex;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    border: none;
+    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
+
+#input-form .col-12 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+}
+
+#input-form .col-12:last-child {
+    justify-content: space-around;
+}
+
+
+@media (max-width: 576px) {
+    #input-form {
+        height: 80%;
+    }
+}
+
 
 #content-container {
     width: 100%;

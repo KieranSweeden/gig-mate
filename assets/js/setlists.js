@@ -1081,7 +1081,7 @@ function openForm(type, data){
     let form = document.createElement("form");
 
     // Give the form it's respective classes
-    form.className = "d-flex card rounded-corners justify-content-around align-items-center animate__animated animate__fadeInUp";
+    form.className = "rounded-corners row animate__animated animate__fadeInUp";
 
     // Give it an id
     form.id = "input-form";
@@ -1466,7 +1466,7 @@ function contentTemplates(request, contentData, issue){
         <label for="track-artist">Artist:</label>
         <input id="track-artist" type="text" value="${contentData.artist}" class="rounded-corners">
         </div>
-        <div class="col-6">
+        <div class="col-12">
         <label for="track-key">Key:</label>
         <select name="keys" id="track-key" class="rounded-corners">
             <option value="${contentData.key}" selected hidden>${contentData.key}</option>
@@ -1483,9 +1483,7 @@ function contentTemplates(request, contentData, issue){
             <option class="key-option" value="G">G</option>
             <option class="key-option" value="Ab">Ab</option>
         </select>
-        </div>
-        <div class="col-6">
-        <label for="track-tonality">Key:</label>
+        <label for="track-tonality">Tonality:</label>
         <select name="keys" id="track-tonality" class="rounded-corners">
             <option value="${contentData.tonality}" selected hidden>${contentData.tonality}</option>
             <option value="Major">Major</option>
