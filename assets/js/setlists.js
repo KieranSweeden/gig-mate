@@ -3,6 +3,9 @@ window.addEventListener('DOMContentLoaded', function() {
     // Determine what content the page will be dealing with and store the type within a variable
     let contentType = determineContentType();
 
+    // Check a repertoire exists, if not, add the initialised one
+    checkPresenceOfRepertoire();
+
     // Knowing the type of content it'll be dealing with, start the application with the contentType as a parameter
     startGigMate(contentType);
 });
@@ -109,6 +112,14 @@ async function getInitialJSONData(pathToJSONFile) {
 function pushToLocalStorage(contentType, localJSONData) {
     // Push the contentType(key) & localJSONData(value) to local storage
     localStorage.setItem(contentType, JSON.stringify(localJSONData));
+}
+
+async function checkPresenceOfRepertoire(){
+    // If repertoire does not exist in local storage...
+    if(!localStorage.getItem('repertoire')){
+        // push the initial repertoire file to local storage
+        pushToLocalStorage("repertoire", await getInitialJSONData("assets/json/init-repertoire.json"));
+    }
 }
 
 function displaySetlists(setlists, insertingCheckbox){
@@ -265,6 +276,7 @@ function toggleChildSets(checkbox){
             setButton.firstElementChild.removeAttribute("checked");
         });
     }
+
 }
 
 function getDeleteCheckBox(contentType) {
@@ -425,7 +437,6 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // Create a new set array of names used to delete from array
             let namesToDelete = new Set(checkedTrackNames);
-
 
             // Get the array of set tracks from local storage
             let setTracks = getTracks(setlistName, setNumber);
@@ -1261,7 +1272,7 @@ function createCard(track, insertCheckbox, insertHover) {
                 </div>
                 <div class="col-4 text-end">
                     <i class="fas fa-arrows-alt-v rep-icon"></i>
-                    <input class="form-check-input set-checkbox" type="checkbox">
+                    <input class="form-check-input track-checkbox" type="checkbox">
                 </div>
                 <div class="col-8 gig-artist">
                     <p class="m-0">${track.artist}</p>
