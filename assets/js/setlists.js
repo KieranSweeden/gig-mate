@@ -1,33 +1,12 @@
 // When DOM content is loaded...
 window.addEventListener('DOMContentLoaded', function() {
-    // Determine what content the page will be dealing with and store the type within a variable
-    let contentType = determineContentType();
 
     // Check a repertoire exists, if not, add the initialised one
     checkPresenceOfRepertoire();
 
     // Knowing the type of content it'll be dealing with, start the application with the contentType as a parameter
-    startGigMate(contentType);
+    startGigMate("setlists");
 });
-
-function determineContentType() {
-    // To determine what content type this page will be dealing with, grab the current pathname
-    let currentPage = window.document.location.pathname;
-
-    // Initialise an empty variable to contain a content type value
-    let contentType;
-
-    // Assign content type depending on the value within current page variable
-    if (currentPage === "/setlists.html" || currentPage === "/gig-mate/setlists.html") {
-        contentType = "setlists";
-    } else if (currentPage === "/repertoire.html" || currentPage === "/gig-mate/repertoire.html") {
-        contentType = "repertoire";
-    } else if (currentPage === "/gigs.html" || currentPage === "/gig-mate/gigs.html") {
-        contentType = "gigs";
-    }
-    // Return the content type variable
-    return contentType;
-}
 
 async function startGigMate(contentType) {
     // Firstly, start local storage functionality to determine what data items GigMate will be working with
@@ -44,7 +23,8 @@ async function startGigMate(contentType) {
 }
 
 async function collectLocalStorage(contentType) {
-    // Check if there is already data present within local storage
+    // To collect local storage...
+    // Firstly check if there is already data present within local storage using the contentTyp
     let hasLocalStorage = checkLocalStorage(contentType);
 
     // Initialise a variable that will store the recieved parsed JSON file data
