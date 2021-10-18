@@ -120,7 +120,7 @@ function createCard(track) {
         <div class="col-8 text-start">
           <p class="card-track-artist m-0">${track.artist}</p>
         </div>
-        <div class="col-4 gig-date text-end">
+        <div class="col-4 text-end">
           <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
         </div>
       </div>
@@ -447,7 +447,7 @@ function addButtonListeners(currentState, card, track){
   if (currentState === "viewingRepertoire") {
     addAddBtnListener(addBtn);
   } else if (currentState === "editingTrack") {
-    addSaveBtnListener(saveBtn, card, track, currentState);
+    addSaveBtnListener(saveBtn, currentState);
     addDeleteBtnListener(deleteBtn, card, track, currentState);
   } else if (currentState === "addingTrack") {
     addSaveBtnListener(saveBtn, currentState);
@@ -495,7 +495,6 @@ function addSaveBtnListener(saveBtn, currentState){
   // Add a click event to the save button
   saveBtn.addEventListener("click", function(){
       if(currentState === "editingTrack"){
-        console.log("editing")
         // Get input values
         getInputValues();
         // Remove enlarge classes
@@ -510,7 +509,7 @@ function addSaveBtnListener(saveBtn, currentState){
       } 
       
       else if(currentState === "addingTrack"){
-        console.log("adding")
+
         // Get input values
         let formValues = getFormValues("newTrack");
 
@@ -560,8 +559,6 @@ function alertUser(currentState, issue){
 
       // Append the alert into the parent element of the input, alerting the user
       input.parentElement.parentElement.appendChild(alertElement);
-
-      console.log(input)
 
       // After three seconds, remove the alert
       setTimeout(() => {

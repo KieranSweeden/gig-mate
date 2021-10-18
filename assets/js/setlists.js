@@ -1240,22 +1240,22 @@ function createCard(track, insertCheckbox, insertHover) {
         // Add inner HTML within each card
         card.innerHTML = 
         `<button class="btn-card animate__animated animate__fadeInUp">
-        <div class="card gig-card rounded-corners">
-            <div class="card-body row">
-            <div class="col-10 gig-venue">
-                <h3 class="card-title">${track.name}</h3>
+            <div class="card track-card rounded-corners">
+                <div class="card-body row">
+                    <div class="col-10 text-start">
+                        <h3 class="card-track-name">${track.name}</h3>
+                    </div>
+                    <div class="col-2 text-end">
+                        <i class="track-icon fas fa-external-link-alt"></i>
+                    </div>
+                    <div class="col-8 text-start">
+                        <p class="card-track-artist m-0">${track.artist}</p>
+                    </div>
+                    <div class="col-4 gig-date text-end">
+                        <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
+                    </div>
+                </div>
             </div>
-            <div class="col-2 text-end">
-                <i class="fas fa-external-link-alt rep-icon"></i>
-            </div>
-            <div class="col-8 gig-artist">
-                <p class="m-0">${track.artist}</p>
-            </div>
-            <div class="col-4 gig-date text-end">
-                <p class="m-0 badge">${track.key} ${track.tonality}</p>
-            </div>
-            </div>
-        </div>
         </button>`;
 
         // Add event listener
@@ -1269,20 +1269,20 @@ function createCard(track, insertCheckbox, insertHover) {
     } else if (insertCheckbox === true && insertHover === true){
         card.innerHTML = 
         `<button class="btn-card animate__animated animate__fadeInUp">
-        <div class="card gig-card rounded-corners">
+        <div class="card track-card rounded-corners">
             <div class="card-body row">
-                <div class="col-8 gig-venue text-start">
-                    <h3 class="card-title">${track.name}</h3>
+                <div class="col-8 text-start">
+                    <h3 class="card-track-name">${track.name}</h3>
                 </div>
                 <div class="col-4 text-end">
                     <i class="fas fa-arrows-alt-v rep-icon"></i>
                     <input class="form-check-input track-checkbox" type="checkbox">
                 </div>
-                <div class="col-8 gig-artist">
-                    <p class="m-0">${track.artist}</p>
+                <div class="col-8 text-start">
+                    <p class="card-track-artist m-0">${track.artist}</p>
                 </div>
-                <div class="col-4 gig-date text-end">
-                    <p class="m-0 badge">${track.key} ${track.tonality}</p>
+                <div class="col-4 text-end">
+                    <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
                 </div>
             </div>
         </div>
@@ -1300,19 +1300,19 @@ function createCard(track, insertCheckbox, insertHover) {
     } else if (insertCheckbox === true && insertHover === false){
         card.innerHTML = 
         `<button class="btn-card animate__animated animate__fadeInUp">
-        <div class="card gig-card rounded-corners">
+        <div class="card track-card rounded-corners">
             <div class="card-body row">
-                <div class="col-8 gig-venue text-start">
-                    <h3 class="card-title">${track.name}</h3>
+                <div class="col-8 text-start">
+                    <h3 class="card-track-name">${track.name}</h3>
                 </div>
                 <div class="col-4 text-end">
                     <input class="form-check-input set-checkbox" type="checkbox">
                 </div>
-                <div class="col-8 gig-artist">
-                    <p class="m-0">${track.artist}</p>
+                <div class="col-8 text-start">
+                    <p class="card-track-artist m-0">${track.artist}</p>
                 </div>
-                <div class="col-4 gig-date text-end">
-                    <p class="m-0 badge">${track.key} ${track.tonality}</p>
+                <div class="col-4 text-end">
+                    <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
                 </div>
             </div>
         </div>
