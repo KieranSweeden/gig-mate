@@ -371,6 +371,7 @@ input.rounded-corners {
     border: none;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
     border-radius: var(--gigmate-border-radius);
+    overflow: hidden;
 }
 
 .accordion-item {
@@ -385,10 +386,10 @@ input.rounded-corners {
     border-top-right-radius: var(--gigmate-border-radius);
 }
 
-.accordion-item:last-of-type .accordion-button.collapsed {
+/* .accordion-item:last-of-type .accordion-button.collapsed {
     border-bottom-right-radius: var(--gigmate-border-radius);
     border-bottom-left-radius: var(--gigmate-border-radius);
-}
+} */
 
 .accordion-header button {
     font-size: 1.2rem;
