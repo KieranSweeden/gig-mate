@@ -707,7 +707,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     width: 75%;
 }
 
-#input-form .col-12:last-child {
+#input-form .col-12.col-track-key {
     justify-content: space-around;
 }
 
@@ -716,6 +716,10 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     #input-form {
         height: 20rem;
         width: 20rem;
+        padding: 2.5rem .5rem 5rem .5rem;
+    }
+    #input-form .col-12 {
+        width: 100%;
     }
 }
 

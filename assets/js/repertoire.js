@@ -197,16 +197,19 @@ function createNewTrack() {
 
 function getFormValues(type){
 
+  let newTrackValues = {};
+
   if (type === "newTrack"){
-    let newTrackValues = {};
 
     newTrackValues.name = capitaliseEachWord(document.getElementById('track-name').value);
     newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
     newTrackValues.key = document.getElementById('track-key').value;
     newTrackValues.tonality = document.getElementById('track-tonality').value;
 
-    return newTrackValues;
+    console.log(newTrackValues)
   }
+
+  console.log(newTrackValues);
   return newTrackValues;
 }
 
@@ -263,7 +266,7 @@ function openForm(type, parent, track){
               <label for="track-artist">Artist:</label>
               <input id="track-artist" type="text" value="" class="rounded-corners">
             </div>
-            <div class="col-12">
+            <div class="col-12 col-track-key">
               <label class="d-block" for="track-key">Key:</label>
               <select name="keys" id="track-key" class="rounded-corners">
                   <option value="" selected="" hidden=""></option>
@@ -505,32 +508,48 @@ function addSaveBtnListener(saveBtn, currentState){
         // Get input values
         let formValues = getFormValues("newTrack");
 
-        // Get tracks from local storage
-        let localStorageTracks = getJSONFromLocalStorage("repertoire");
+        console.log(formValues)
 
-        let itemIsDuplicate = false;
+        let emptyInput = false;
 
-        localStorageTracks.forEach(localStorageTrack => {
-          if(formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist){
-            
-            itemIsDuplicate = true;
+        for (const [key, valueEntered] of Object.entries(formValues)){
+          if (valueEntered === ""){
+            emptyInput = true;
           }
-        });
+        }
 
-        if (itemIsDuplicate === true){
+        if (emptyInput === true){
 
-          alertUser("addingTrack", "alreadyExists");
+          alertUser("addingTrack", "emptyInputs");
 
-        } else if (itemIsDuplicate === false){
-
-          // Push input values to local storage
-          pushToLocalStorage("track", formValues);
-          // Clear content section
-          clearContentSection();
-          // Fill with repertoire
-          checkLocalStorage();
-          // Revert buttons to viewing repertoire state
-          footerState("viewingRepertoire");
+        } else {
+          // Get tracks from local storage
+          let localStorageTracks = getJSONFromLocalStorage("repertoire");
+  
+          let itemIsDuplicate = false;
+  
+          localStorageTracks.forEach(localStorageTrack => {
+            if(formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist){
+              
+              itemIsDuplicate = true;
+            }
+          });
+  
+          if (itemIsDuplicate === true){
+  
+            alertUser("addingTrack", "alreadyExists");
+  
+          } else if (itemIsDuplicate === false){
+  
+            // Push input values to local storage
+            pushToLocalStorage("track", formValues);
+            // Clear content section
+            clearContentSection();
+            // Fill with repertoire
+            checkLocalStorage();
+            // Revert buttons to viewing repertoire state
+            footerState("viewingRepertoire");
+          }
         }
       }
   });
@@ -541,7 +560,7 @@ function alertUser(currentState, issue){
   let alertElement;
 
   // If we're dealing with...
-  if (currentState === "addingTrack" && issue === "alreadyExists"){
+  if (currentState === "addingTrack"){
 
       // ... a new setlist, grab the alert template
       alertElement = contentTemplates("alert", issue);
@@ -572,8 +591,10 @@ function contentTemplates(request, issue){
     template.setAttribute('role', 'alert');
 
       if (issue === "alreadyExists") {
-        template.textContent = "Sorry this setlist name already exists, create a new one!";
-      } 
+        template.textContent = "This track name already exists, create a new one.";
+      } else if (issue === "emptyInputs") {
+        template.textContent = "Please fill in all input fields.";
+      }
 
     return template;
   }
