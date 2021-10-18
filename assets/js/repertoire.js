@@ -152,6 +152,8 @@ function editTrack(){
   // Get the container element
   let container = document.getElementById("list-container");
 
+  toggleSearchInputDisplay();
+
   clearContentSection();
   
   // Open the form element
@@ -191,6 +193,8 @@ function createNewTrack() {
   let cardContainer = document.getElementById('list-container');
   // ... clear the content section
   clearContentSection();
+  // remove the search input
+  toggleSearchInputDisplay();
   // ... present a form that allows the user to create a new track
   openForm("newTrack", cardContainer);
 }
@@ -470,6 +474,8 @@ function addSaveBtnListener(saveBtn, currentState){
         clearContentSection();
         // Fill with repertoire
         checkLocalStorage();
+        // Insert search filter
+        toggleSearchInputDisplay();
         // Revert buttons to viewing repertoire state
         footerState("viewingRepertoire");
       } 
@@ -633,3 +639,25 @@ function addAddBtnListener(addBtn){
   addBtn.addEventListener('click', createNewTrack);
 }
 
+function toggleSearchInputDisplay(){
+  // Initialise variables
+  let searchInput, headerSection, contentSection;
+
+  // Grab search input, header section & content section
+  searchInput = document.getElementById("search-input");
+  headerSection = document.getElementById("header-section");
+  contentSection = document.getElementById("content-section");
+
+
+  if(searchInput.style.display === "none"){
+    // If the search input is not present, add it & adjust section heights
+    searchInput.style.display = "block";
+    headerSection.style.height = "17.5%";
+    contentSection.style.height = "72.5%";
+  } else {
+    // If the search input is present, remove it & adjust section heights
+    searchInput.style.display = "none";
+    headerSection.style.height = "10%";
+    contentSection.style.height = "80%";
+  }
+}
