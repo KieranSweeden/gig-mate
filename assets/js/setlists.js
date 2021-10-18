@@ -1273,7 +1273,7 @@ function createCard(track, insertCheckbox, insertHover) {
                     <div class="col-8 text-start">
                         <p class="card-track-artist m-0">${track.artist}</p>
                     </div>
-                    <div class="col-4 gig-date text-end">
+                    <div class="col-4 text-end">
                         <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
                     </div>
                 </div>
@@ -1487,7 +1487,7 @@ function contentTemplates(request, contentData, issue){
         <label for="track-artist">Artist:</label>
         <input id="track-artist" type="text" value="${contentData.artist}" class="rounded-corners">
         </div>
-        <div class="col-12">
+        <div class="col-12 col-track-key">
         <label for="track-key">Key:</label>
         <select name="keys" id="track-key" class="rounded-corners">
             <option value="${contentData.key}" selected hidden>${contentData.key}</option>
