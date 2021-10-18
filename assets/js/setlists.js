@@ -523,6 +523,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Check name is all letters and store the status in a variable
             let nameIsAllLetters = checkNameIsAllLetters(setNameInput.value);
 
+            console.log(nameIsAllLetters)
+
             // If empty, ask the user to write a name
             if (setNameInput.value === ""){
                 alertUser(contentType, currentState, "emptyInput");
@@ -608,7 +610,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 // Credit: code to check all letters taken from https://stackoverflow.com/a/5196710/15607265 
 function checkNameIsAllLetters(nameEntered){
     // Initialise a variable that holds a regular expression
-   let allowedLetters = /^[A-Za-z]+$/;
+   let allowedLetters = /^[a-zA-Z\s]*$/;
    if(String(nameEntered).match(allowedLetters)){
        return true;
     }
