@@ -11,7 +11,7 @@ window.addEventListener('DOMContentLoaded', () => {
   footerState("viewingRepertoire");
 })
 
-function addFilterInputListener(){
+function addFilterInputListener() {
   // Get input search element
   let searchInput = document.getElementById("search-input");
 
@@ -19,7 +19,7 @@ function addFilterInputListener(){
   searchInput.addEventListener("input", filterRepertoireTracks);
 }
 
-function filterRepertoireTracks(){
+function filterRepertoireTracks() {
 
   // Get inputs
   let searchInput = document.getElementById("search-input");
@@ -34,7 +34,7 @@ function filterRepertoireTracks(){
     let trackName = trackItem.getElementsByClassName("card-track-name")[0].textContent;
     // If the track name when uppercased matches the filter...
     // ...typed by the user...
-    if (trackName.toUpperCase().indexOf(filterTyped) > -1 ) {
+    if (trackName.toUpperCase().indexOf(filterTyped) > -1) {
       // ...make sure it's displayed
       trackItem.style.display = "";
     } else {
@@ -46,7 +46,7 @@ function filterRepertoireTracks(){
 
 // Check the user's local storage, to determine if initial repertoire is needed
 async function checkLocalStorage() {
-  if (!localStorage.getItem('repertoire')){
+  if (!localStorage.getItem('repertoire')) {
     addJSONToLocalStorage("repertoire");
   } else {
     fillWithLocalStorage("repertoire");
@@ -56,13 +56,13 @@ async function checkLocalStorage() {
 async function addJSONToLocalStorage(data) {
   if (data === "repertoire") {
     let repertoire = await fetchInitialJSON('assets/json/init-repertoire.json');
-  
+
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
   fillWithLocalStorage(data);
 }
 
-function fillWithLocalStorage(data){
+function fillWithLocalStorage(data) {
   let storageData = localStorage.getItem(data);
 
   let storageArray = JSON.parse(storageData);
@@ -75,18 +75,18 @@ function fillWithLocalStorage(data){
 }
 
 // Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
-function sortByName( a, b ) {
-  if ( a.name < b.name ){
+function sortByName(a, b) {
+  if (a.name < b.name) {
     return -1;
   }
-  if ( a.name > b.name ){
+  if (a.name > b.name) {
     return 1;
   }
   return 0;
 }
 
 function getJSONFromLocalStorage(data) {
-  if (data === "repertoire") { 
+  if (data === "repertoire") {
     return JSON.parse(localStorage.getItem('repertoire'));
   }
 }
@@ -107,8 +107,8 @@ function createCard(track) {
   card.classList.add("list-track-item", "col-12", "justify-content-center", "align-items-center", "my-1");
 
   // Add inner HTML within each card
-  card.innerHTML = 
-  `<button class="btn-card animate__animated animate__fadeInUp">
+  card.innerHTML =
+    `<button class="btn-card animate__animated animate__fadeInUp">
     <div class="card track-card rounded-corners">
       <div class="card-body row">
         <div class="col-10 text-start">
@@ -145,7 +145,7 @@ function addCardEnlarge(card, track) {
   card.firstElementChild.addEventListener('click', editTrack);
 }
 
-function editTrack(){
+function editTrack() {
   // Retrieve track data from card & store it in an object
   let track = getTrackDataFromTrackCard(this);
 
@@ -157,12 +157,12 @@ function editTrack(){
   toggleContainerScroll();
 
   clearContentSection();
-  
+
   // Open the form element
   openForm("editTrack", container, track);
 }
 
-function getTrackDataFromTrackCard(trackCard){
+function getTrackDataFromTrackCard(trackCard) {
   // Initialise an object to store the clicked track information
   let track = {};
 
@@ -175,7 +175,7 @@ function getTrackDataFromTrackCard(trackCard){
 
   // Assign track full key with two array values, 1st being the key letter, 2nd being tonality
   trackFullKey = seperateKeyFromTonality(trackCard.getElementsByClassName("card-track-key-tonality")[0].textContent);
-  
+
   // Assign respective key info to track object
   track.key = trackFullKey[0];
   track.tonality = trackFullKey[1];
@@ -184,7 +184,7 @@ function getTrackDataFromTrackCard(trackCard){
   return track;
 }
 
-function seperateKeyFromTonality(trackFullKey){
+function seperateKeyFromTonality(trackFullKey) {
   // Seperate the full key given and return it as an array
   return trackFullKey.split(" ");
 }
@@ -203,11 +203,11 @@ function createNewTrack() {
   openForm("newTrack", cardContainer);
 }
 
-function getFormValues(type){
+function getFormValues(type) {
 
   let newTrackValues = {};
 
-  if (type === "newTrack"){
+  if (type === "newTrack") {
 
     newTrackValues.name = capitaliseEachWord(document.getElementById('track-name').value);
     newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
@@ -218,13 +218,13 @@ function getFormValues(type){
   return newTrackValues;
 }
 
-function removeAllListItems(list){
+function removeAllListItems(list) {
   list.forEach(listItem => {
     listItem.remove();
   })
 }
 
-function openForm(type, parent, track){
+function openForm(type, parent, track) {
   let newForm = document.createElement('li');
 
   newForm.className = "col-12 d-flex justify-content-center align-items-center my-1";
@@ -280,14 +280,14 @@ function openForm(type, parent, track){
   keySelect = document.getElementById("track-key");
   tonalitySelect = document.getElementById("track-tonality");
 
-  if (type === "newTrack"){
+  if (type === "newTrack") {
     formHeader.textContent = "New Track";
     nameInput.placeholder = "Enter track name...";
     artistInput.placeholder = "Enter track artist...";
 
     footerState("addingTrack");
 
-  } else if (type === "editTrack"){
+  } else if (type === "editTrack") {
     formHeader.textContent = "Edit " + track.name;
     nameInput.value = track.name;
     artistInput.value = track.artist;
@@ -299,16 +299,16 @@ function openForm(type, parent, track){
 }
 
 function enlargeCard(card, track) {
-    // Retrieve the card's container & row parents
-    let cardContainer = card.parentNode.parentNode;
-    let cardRow = card.parentNode;
+  // Retrieve the card's container & row parents
+  let cardContainer = card.parentNode.parentNode;
+  let cardRow = card.parentNode;
 
-    // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
-    cardContainer.classList.add("enlarge");
-    cardRow.classList.add("enlarge");
-    card.firstElementChild.classList.add("enlarge");
+  // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
+  cardContainer.classList.add("enlarge");
+  cardRow.classList.add("enlarge");
+  card.firstElementChild.classList.add("enlarge");
 
-    styleLargeCard(card, track);
+  styleLargeCard(card, track);
 }
 
 function styleLargeCard(card, track) {
@@ -361,49 +361,49 @@ function styleLargeCard(card, track) {
 
 
 // Change color of card open icon to represent hovered state
-function addIconHover (card) {
+function addIconHover(card) {
   // When hovering over the button area, the icon will turn purple
-  card.addEventListener('mouseenter', function(){
+  card.addEventListener('mouseenter', function () {
     paintIcon(card)
   })
   // When leaving the button area, the icon will revert to grey
-  card.addEventListener('mouseleave', function(){
+  card.addEventListener('mouseleave', function () {
     paintIcon(card)
   })
 }
 
 // Toggle a class to paint the edit icon
-function paintIcon (card) {
+function paintIcon(card) {
   // Grab the icon within the card
   let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
   // Check if the icon has a class of icon-hover
-  if (icon.classList.contains("icon-hover")){
+  if (icon.classList.contains("icon-hover")) {
     // If so, remove the class to revert back to the grey color
     icon.classList.remove("icon-hover")
-  }  else {
+  } else {
     // If not, add the class to turn the icon color to purple
     icon.classList.add("icon-hover");
   }
 }
 
 // Change the buttons within the footer
-function footerState(currentState, card, track){
+function footerState(currentState, card, track) {
   // Retrieve the footer container
   let btnContainer = document.getElementById("btn-footer-container");
   // Clear the contents within the footer container
   btnContainer.innerHTML = "";
   // If the user is...
-  if (currentState === "viewingRepertoire"){
+  if (currentState === "viewingRepertoire") {
     // ...viewing the track repertoire, display the back & add buttons
     btnContainer.innerHTML = `
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>
     <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i>Add</button>`;
-  } else if (currentState === "editingTrack"){
+  } else if (currentState === "editingTrack") {
     // ...editing or adding a track, display the back & tick buttons
     btnContainer.innerHTML = `
     <button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i>Delete</button>
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>`;
-  } else if (currentState === "addingTrack"){
+  } else if (currentState === "addingTrack") {
     btnContainer.innerHTML = `
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>`;
@@ -411,7 +411,7 @@ function footerState(currentState, card, track){
   addButtonListeners(currentState, card, track);
 }
 
-function addButtonListeners(currentState, card, track){
+function addButtonListeners(currentState, card, track) {
   // Retrieve all possible buttons
   let addBtn = document.getElementById("btn-add");
   let deleteBtn = document.getElementById("btn-delete");
@@ -428,13 +428,13 @@ function addButtonListeners(currentState, card, track){
   }
 }
 
-function clearContentSection () {
+function clearContentSection() {
   let contentSection = document.getElementById("list-container");
   contentSection.innerHTML = "";
 }
 
 function addDeleteBtnListener(deleteBtn) {
-  deleteBtn.addEventListener("click", function(){
+  deleteBtn.addEventListener("click", function () {
 
     deleteObject();
 
@@ -454,13 +454,13 @@ function addDeleteBtnListener(deleteBtn) {
   });
 }
 
-function deleteObject(){
+function deleteObject() {
 
   let formHeader = removeFirstWord(document.getElementById("form-title").textContent);
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
-      
+
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
   let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader));
 
@@ -469,113 +469,111 @@ function deleteObject(){
   updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
 }
 
-function addSaveBtnListener(saveBtn, currentState){
+function addSaveBtnListener(saveBtn, currentState) {
   // Add a click event to the save button
-  saveBtn.addEventListener("click", function(){
-      if(currentState === "editingTrack"){
-        // Get input values
-        getInputValues();
-        // Remove enlarge classes
-        document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
-        document.getElementById("list-container").classList.remove("enlarge");
-        // Clear the content section
-        clearContentSection();
-        // Fill with repertoire
-        checkLocalStorage();
-        // Insert search filter
-        toggleSearchInputDisplay();
-        // Make container scrollable
-        toggleContainerScroll();
-        // Revert buttons to viewing repertoire state
-        footerState("viewingRepertoire");
-      } 
-      
-      else if(currentState === "addingTrack"){
+  saveBtn.addEventListener("click", function () {
+    if (currentState === "editingTrack") {
+      // Get input values
+      getInputValues();
+      // Remove enlarge classes
+      document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
+      document.getElementById("list-container").classList.remove("enlarge");
+      // Clear the content section
+      clearContentSection();
+      // Fill with repertoire
+      checkLocalStorage();
+      // Insert search filter
+      toggleSearchInputDisplay();
+      // Make container scrollable
+      toggleContainerScroll();
+      // Revert buttons to viewing repertoire state
+      footerState("viewingRepertoire");
+    } else if (currentState === "addingTrack") {
 
-        // Get input values
-        let formValues = getFormValues("newTrack");
+      // Get input values
+      let formValues = getFormValues("newTrack");
 
-        let emptyInput = false;
-        let inputIsAllLetters = true;
+      let emptyInput = false;
+      let inputIsAllLetters = true;
 
-        for (const [key, valueEntered] of Object.entries(formValues)){
-          if (valueEntered === ""){
-            emptyInput = true;
-          }
-          if (!checkNameIsAllLetters(valueEntered)){
-            inputIsAllLetters = false;
-          }
+      for (const [key, valueEntered] of Object.entries(formValues)) {
+        if (valueEntered === "") {
+          emptyInput = true;
         }
-
-        if (emptyInput === true){
-
-          alertUser("addingTrack", "emptyInputs");
-
-        } else if (!inputIsAllLetters) {
-
-          alertUser("addingTrack", "illegalCharacters");
-
-        } else {
-          // Get tracks from local storage
-          let localStorageTracks = getJSONFromLocalStorage("repertoire");
-  
-          let itemIsDuplicate = false;
-  
-          localStorageTracks.forEach(localStorageTrack => {
-            if(formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist){
-              
-              itemIsDuplicate = true;
-            }
-          });
-  
-          if (itemIsDuplicate === true){
-  
-            alertUser("addingTrack", "alreadyExists");
-  
-          } else if (itemIsDuplicate === false){
-  
-            // Push input values to local storage
-            pushToLocalStorage("track", formValues);
-            // Clear content section
-            clearContentSection();
-            // Add search filter
-            toggleSearchInputDisplay();
-            // Make container scrollable
-            toggleContainerScroll();
-            // Fill with repertoire
-            checkLocalStorage();
-            // Revert buttons to viewing repertoire state
-            footerState("viewingRepertoire");
-          }
+        if (!checkNameIsAllLetters(valueEntered)) {
+          inputIsAllLetters = false;
         }
       }
+
+      if (emptyInput === true) {
+
+        alertUser("addingTrack", "emptyInputs");
+
+      } else if (!inputIsAllLetters) {
+
+        alertUser("addingTrack", "illegalCharacters");
+
+      } else {
+        // Get tracks from local storage
+        let localStorageTracks = getJSONFromLocalStorage("repertoire");
+
+        let itemIsDuplicate = false;
+
+        localStorageTracks.forEach(localStorageTrack => {
+          if (formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist) {
+
+            itemIsDuplicate = true;
+          }
+        });
+
+        if (itemIsDuplicate === true) {
+
+          alertUser("addingTrack", "alreadyExists");
+
+        } else if (itemIsDuplicate === false) {
+
+          // Push input values to local storage
+          pushToLocalStorage("track", formValues);
+          // Clear content section
+          clearContentSection();
+          // Add search filter
+          toggleSearchInputDisplay();
+          // Make container scrollable
+          toggleContainerScroll();
+          // Fill with repertoire
+          checkLocalStorage();
+          // Revert buttons to viewing repertoire state
+          footerState("viewingRepertoire");
+        }
+      }
+    }
   });
 }
 
-function alertUser(currentState, issue){
+function alertUser(currentState, issue) {
   // Initialise an alert variable that will store the alert element
   let alertElement;
 
   // If we're dealing with...
-  if (currentState === "addingTrack"){
+  if (currentState === "addingTrack") {
 
-      // ... a new setlist, grab the alert template
-      alertElement = contentTemplates("alert", issue);
+    // ... a new setlist, grab the alert template
+    alertElement = contentTemplates("alert", issue);
 
-      // Get the name input
-      let input = document.getElementById('track-name');
+    // Get the name input
+    let input = document.getElementById('track-name');
 
-      // Append the alert into the parent element of the input, alerting the user
-      input.parentElement.parentElement.appendChild(alertElement);
+    // Append the alert into the parent element of the input, alerting the user
+    input.parentElement.parentElement.appendChild(alertElement);
 
-      // After three seconds, remove the alert
-      setTimeout(() => {
-          input.parentElement.parentElement.removeChild(alertElement);
-      }, 5000);
+    // After three seconds, remove the alert
+    setTimeout(() => {
+      input.parentElement.parentElement.removeChild(alertElement);
+    }, 5000);
   }
 }
 
-function contentTemplates(request, issue){
+function contentTemplates(request, issue) {
   // Initialise a variable to store the template
   let template;
 
@@ -587,22 +585,22 @@ function contentTemplates(request, issue){
 
     template.setAttribute('role', 'alert');
 
-      if (issue === "alreadyExists") {
-        template.textContent = "This track name already exists, create a new one.";
-      } else if (issue === "emptyInputs") {
-        template.textContent = "Please fill in all input fields.";
-      } else if (issue === "illegalCharacters"){
-        template.textContent = "Please only use letters when creating a track."
-      }
+    if (issue === "alreadyExists") {
+      template.textContent = "This track name already exists, create a new one.";
+    } else if (issue === "emptyInputs") {
+      template.textContent = "Please fill in all input fields.";
+    } else if (issue === "illegalCharacters") {
+      template.textContent = "Please only use letters when creating a track."
+    }
 
     return template;
   }
 }
 
-function pushToLocalStorage(type, data){
+function pushToLocalStorage(type, data) {
 
   // If the data type is track data...
-  if(type === "track"){
+  if (type === "track") {
     // ... get the repertoire stored in local storage
     let repertoireArray = getJSONFromLocalStorage("repertoire");
     // ... create a new array from the stored repertoire array
@@ -626,7 +624,7 @@ function getInputValues() {
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
-      
+
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
   let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader || localStorageTrack.artist === artistInput));
 
@@ -640,7 +638,7 @@ function getInputValues() {
   updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
 }
 
-function removeFirstWord(sentence){
+function removeFirstWord(sentence) {
   // Splice the sentence into an array, chop the first index/word and return as a joined string
   return sentence.split(" ").splice(1).join(" ");
 }
@@ -649,11 +647,11 @@ function updateLocalStorage(key, data) {
   localStorage.setItem(key, data);
 }
 
-function addAddBtnListener(addBtn){
+function addAddBtnListener(addBtn) {
   addBtn.addEventListener('click', createNewTrack);
 }
 
-function toggleSearchInputDisplay(){
+function toggleSearchInputDisplay() {
   // Initialise variables
   let searchInput, headerSection, contentSection;
 
@@ -663,7 +661,7 @@ function toggleSearchInputDisplay(){
   contentSection = document.getElementById("content-section");
 
 
-  if(searchInput.style.display === "none"){
+  if (searchInput.style.display === "none") {
     // If the search input is not present, add it & adjust section heights
     searchInput.style.display = "block";
     headerSection.style.height = "17.5%";

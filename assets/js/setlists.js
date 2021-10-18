@@ -71,7 +71,7 @@ function getLocalStorageData(contentType) {
 function checkDarkMode() {
     let darkModeStatus = getLocalStorageData("darkMode");;
 
-    if(darkModeStatus === undefined){
+    if (darkModeStatus === undefined) {
         pushToLocalStorage("darkMode", "off");
     } else if (darkModeStatus === "on") {
         document.documentElement.setAttribute("data-theme", "dark");
@@ -618,8 +618,8 @@ function addDarkModeSwitchListener() {
     let darkModeSwitch = document.getElementById("dark-mode-switch");
 
     // When changed/clicked, toggle dark mode
-    darkModeSwitch.addEventListener("change", function(){
-        if(this.checked){
+    darkModeSwitch.addEventListener("change", function () {
+        if (this.checked) {
             document.documentElement.setAttribute("data-theme", "dark");
             pushToLocalStorage("darkMode", "on");
         } else {

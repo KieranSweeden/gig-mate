@@ -20,7 +20,7 @@
     --gigmate-border-radius: 10px;
 }
 
-html[data-theme = "light"]{
+html[data-theme="light"] {
     --modal-header-bg: hsla(0, 0%, 98%, 1);
     --modal-body-bg: hsla(0, 0%, 96%, 1);
     --modal-heading: hsla(0, 0%, 13%, 1);
@@ -28,7 +28,7 @@ html[data-theme = "light"]{
     --modal-item-bg: hsla(0, 0%, 98%, 1);
 }
 
-html[data-theme = "dark"]{
+html[data-theme="dark"] {
     --modal-header-bg: hsla(0, 0%, 20%, 1);
     --modal-body-bg: hsla(0, 0%, 13%, 1);
     --modal-heading: hsla(0, 0%, 96%, 1);

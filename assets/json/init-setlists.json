@@ -1,8 +1,6 @@
-[
-    {
+[{
         "setlistName": "Soul And Pop",
-        "set1": [
-            {
+        "set1": [{
                 "name": "Treasure",
                 "artist": "Bruno Mars",
                 "key": "D",
@@ -63,8 +61,7 @@
                 "tonality": "Major"
             }
         ],
-        "set2": [
-            {
+        "set2": [{
                 "name": "Dance With Somebody",
                 "artist": "Whitney Houston",
                 "key": "Gb",
@@ -128,8 +125,7 @@
     },
     {
         "setlistName": "Pop And Rock",
-        "set1": [
-            {
+        "set1": [{
                 "name": "Treasure",
                 "artist": "Bruno Mars",
                 "key": "D",
@@ -190,8 +186,7 @@
                 "tonality": "Major"
             }
         ],
-        "set2": [
-            {
+        "set2": [{
                 "name": "Message In A Bottle",
                 "artist": "The Police",
                 "key": "Db",
