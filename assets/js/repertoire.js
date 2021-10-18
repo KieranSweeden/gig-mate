@@ -450,7 +450,7 @@ function addButtonListeners(currentState, card, track){
     addSaveBtnListener(saveBtn, card, track, currentState);
     addDeleteBtnListener(deleteBtn, card, track, currentState);
   } else if (currentState === "addingTrack") {
-    addSaveBtnListener(saveBtn, card, track, currentState);
+    addSaveBtnListener(saveBtn, currentState);
   }
 }
 
@@ -459,8 +459,9 @@ function clearContentSection () {
   contentSection.innerHTML = "";
 }
 
-function addDeleteBtnListener(deleteBtn, card, track, currentState) {
+function addDeleteBtnListener(deleteBtn) {
   deleteBtn.addEventListener("click", function(){
+
     deleteObject();
 
     // Remove enlarge classes
@@ -494,6 +495,7 @@ function addSaveBtnListener(saveBtn, currentState){
   // Add a click event to the save button
   saveBtn.addEventListener("click", function(){
       if(currentState === "editingTrack"){
+        console.log("editing")
         // Get input values
         getInputValues();
         // Remove enlarge classes
@@ -508,6 +510,7 @@ function addSaveBtnListener(saveBtn, currentState){
       } 
       
       else if(currentState === "addingTrack"){
+        console.log("adding")
         // Get input values
         let formValues = getFormValues("newTrack");
 
@@ -557,6 +560,8 @@ function alertUser(currentState, issue){
 
       // Append the alert into the parent element of the input, alerting the user
       input.parentElement.parentElement.appendChild(alertElement);
+
+      console.log(input)
 
       // After three seconds, remove the alert
       setTimeout(() => {
