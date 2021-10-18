@@ -461,7 +461,7 @@ function clearContentSection () {
 
 function addDeleteBtnListener(deleteBtn, card, track, currentState) {
   deleteBtn.addEventListener("click", function(){
-    deleteObject(card, track, currentState)
+    deleteObject();
 
     // Remove enlarge classes
     document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
@@ -475,20 +475,22 @@ function addDeleteBtnListener(deleteBtn, card, track, currentState) {
   });
 }
 
-function deleteObject(card, track){
+function deleteObject(){
+
+  let formHeader = removeFirstWord(document.getElementById("form-title").textContent);
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
-  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
+  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader));
 
   repertoireArray.splice(trackIndex, 1);
 
   updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
 }
 
-function addSaveBtnListener(saveBtn, card, track, currentState){
+function addSaveBtnListener(saveBtn, currentState){
   // Add a click event to the save button
   saveBtn.addEventListener("click", function(){
       if(currentState === "editingTrack"){
