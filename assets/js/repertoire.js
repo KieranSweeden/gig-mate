@@ -210,32 +210,6 @@ function getFormValues(type){
   return newTrackValues;
 }
 
-// Credit: code the capitalize the first letter within a string was taken from https://stackoverflow.com/a/1026087/15607265
-function capitaliseFirstLetter(name) {
-  // Change the letter at index 0 to uppercase and return the word
-  return name.charAt(0).toUpperCase() + name.slice(1);
-}
-
-function capitaliseEachWord(name){
-  // Split the words up into an array
-  let nameWords = name.split(" ");
-
-  // Intialise an array that'll store the words when capitalised
-  let capitalisedWords = [];
-
-  // For each word... 
-  nameWords.forEach(word => {
-    // ...capitalise it and store it in the capitalised variable
-    capitalisedWords.push(capitaliseFirstLetter(word));
-  })
-
-  // Turn the array into a string with the capitalised words joined with spaces.
-  capitalisedWords = capitalisedWords.join(" ");
-
-  // Return the words in capitalised form
-  return capitalisedWords;
-}
-
 function removeAllListItems(list){
   list.forEach(listItem => {
     listItem.remove();
@@ -624,9 +598,9 @@ function getInputValues() {
 
   // Retrieve the values contained within the form elements
   let formHeader, nameInput, artistInput, keySelect, tonalitySelect;
-  formHeader = removeFirstWord(document.getElementById("form-title").textContent);
-  nameInput = document.getElementById("track-name").value;
-  artistInput = document.getElementById("track-artist").value;
+  formHeader = document.getElementById("form-title").textContent;
+  nameInput = capitaliseEachWord(document.getElementById("track-name").value);
+  artistInput = capitaliseEachWord(document.getElementById("track-artist").value);
   keySelect = document.getElementById("track-key").value;
   tonalitySelect = document.getElementById("track-tonality").value;
 
@@ -634,7 +608,7 @@ function getInputValues() {
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
-  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader));
+  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader || localStorageTrack.artist === artistInput));
 
   // Update the matching track within the array's values with the ones passed in through the form
   repertoireArray[trackIndex].name = nameInput;
