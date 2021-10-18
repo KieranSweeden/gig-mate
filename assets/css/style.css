@@ -531,7 +531,7 @@ html, body {
     left: 0;
     z-index: 1;
     background-color: var(--gigmate-white);
-    box-shadow: 1px 2px 3px rgba(0,0,0,.1);
+    box-shadow: 0 0 10px 5px rgba(0,0,0,.1);
 }
 
 .content-container > .with-search {
@@ -654,8 +654,10 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #btn-section {
     height: 10%;
-    box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
+    box-shadow: 0 -10px 10px 5px rgba(0,0,0,.1);
     background-color: var(--gigmate-white);
+    z-index: 1;
+    isolation: isolate;
 }
 
 #btn-section .btn-bottom {
