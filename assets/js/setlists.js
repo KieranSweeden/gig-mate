@@ -1023,15 +1023,15 @@ function alertUser(contentType, currentState, issue){
         alertElement = contentTemplates("alert", '' , issue);
 
         // Get the name input
-        let input = document.getElementById('form-name');
+        let form = document.getElementById('input-form');
 
         // Append the alert into the parent element of the input, alerting the user
-        input.parentElement.appendChild(alertElement);
+        form.appendChild(alertElement);
 
         // After three seconds, remove the alert
         setTimeout(() => {
-            input.parentElement.removeChild(alertElement);
-        }, 3000);
+            form.removeChild(alertElement);
+        }, 5000);
     }
 }
 
@@ -1450,11 +1450,11 @@ function contentTemplates(request, contentData, issue){
         template.setAttribute('role', 'alert');
 
         if (issue === "alreadyExists") {
-            template.textContent = "Sorry this setlist name already exists, create a new one!";
+            template.textContent = "This setlist name already exists, create a new one.";
         } else if (issue === "emptyInput") {
-            template.textContent = "The name input was empty, please enter a name!";
+            template.textContent = "The name input was empty, please enter a name.";
         } else if (issue === "notAllLetters") {
-            template.textContent = "Sorry this name contains invalid characters (!* etc.), please only use letters!";
+            template.textContent = "This name contains invalid characters, please only use letters.";
         }
         return template;
 
