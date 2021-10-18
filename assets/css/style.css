@@ -20,7 +20,8 @@
     --gigmate-border-radius: 10px;
 }
 
-html, body {
+html,
+body {
     font-family: 'Manrope', sans-serif;
     background-color: var(--gigmate-white);
     overflow: hidden;
@@ -37,7 +38,7 @@ html, body {
 ::-webkit-scrollbar-track {
     background-color: var(--gigmate-white);
 }
-  
+
 ::-webkit-scrollbar-thumb {
     background-color: var(--gigmate-grey);
 }
@@ -67,8 +68,10 @@ input.rounded-corners {
 .list-container {
     overflow: scroll;
     overflow-x: hidden;
-    -ms-overflow-style: none;  /* IE and Edge */
-    scrollbar-width: none;  /* Firefox */
+    -ms-overflow-style: none;
+    /* IE and Edge */
+    scrollbar-width: none;
+    /* Firefox */
     height: 80%;
     box-shadow: 0 0 50px 0 #fafafa inset;
 }
@@ -202,7 +205,7 @@ input.rounded-corners {
 }
 
 .navbar-brand {
-    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out;
+    transition: color .15s ease-in-out, background-color .15s ease-in-out, border-color .15s ease-in-out;
 }
 
 .navbar-brand:hover {
@@ -233,7 +236,8 @@ input.rounded-corners {
     }
 }
 
-.nav-link:focus, .nav-link:hover {
+.nav-link:focus,
+.nav-link:hover {
     color: var(--gigmate-white);
     background-color: var(--gigmate-primary);
 }
@@ -425,7 +429,7 @@ input.rounded-corners {
     transform: rotate(360deg);
 
     /* Remove default bootstrap accordion icon*/
-    background-image: none; 
+    background-image: none;
 }
 
 .accordion-button.collapsed::after {
@@ -434,7 +438,7 @@ input.rounded-corners {
     color: var(--gigmate-dark-grey);
     font-weight: 900;
     transition: all .25s ease-in-out;
-    
+
     /* Remove default bootstrap accordion icon*/
     background-image: none;
 }
@@ -534,14 +538,14 @@ input.rounded-corners {
     left: 0;
     z-index: 1;
     background-color: var(--gigmate-white);
-    box-shadow: 0 0 10px 5px rgba(0,0,0,.1);
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .1);
 }
 
-.content-container > .with-search {
+.content-container>.with-search {
     height: 17.5%;
 }
 
-.content-container > .without-search {
+.content-container>.without-search {
     height: 10%;
 }
 
@@ -581,7 +585,9 @@ input.rounded-corners {
 input[type="search"]::-webkit-search-decoration,
 input[type="search"]::-webkit-search-cancel-button,
 input[type="search"]::-webkit-search-results-button,
-input[type="search"]::-webkit-search-results-decoration { background-color: var(--gigmate-primary); }
+input[type="search"]::-webkit-search-results-decoration {
+    background-color: var(--gigmate-primary);
+}
 
 #content-section {
     height: 80%;
@@ -617,7 +623,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     max-height: 300px;
 }
 
-.btn-card:hover, 
+.btn-card:hover,
 .btn-card:focus {
     transform: scale(1.025, 1.025);
 }
@@ -641,7 +647,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     margin: 0;
 }
 
-@media (max-width: 576px){
+@media (max-width: 576px) {
 
     #page-header,
     #page-subheader {
@@ -657,7 +663,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #btn-section {
     height: 10%;
-    box-shadow: 0 -10px 10px 5px rgba(0,0,0,.1);
+    box-shadow: 0 -10px 10px 5px rgba(0, 0, 0, .1);
     background-color: var(--gigmate-white);
     z-index: 1;
     isolation: isolate;
@@ -723,6 +729,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
         width: 20rem;
         padding: 2.5rem .5rem 5rem .5rem;
     }
+
     #input-form .col-12 {
         width: 100%;
     }
@@ -766,7 +773,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
 
 #live-mode-header {
     border-bottom: 5px solid var(--gigmate-primary);
-    padding: .75rem .25rem;
+    padding: 1.5rem .25rem;
 }
 
 #live-mode-header .container-lg {
@@ -794,6 +801,77 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     font-style: italic;
 }
 
+/* Switch styling */
+
+#switch-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+}
+
+#switch-section p {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+/* Credit: code for custom switch taken from https://www.w3schools.com/howto/howto_css_switch.asp */
+/* The switch - the box around the slider */
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 3.5rem;
+    height: 1.75rem;
+    margin-right: .5rem;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+/* The slider */
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: var(--gigmate-light-grey);
+    border-radius: var(--gigmate-border-radius);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 1.25rem;
+    width: 1.25rem;
+    left: 4px;
+    bottom: 4px;
+    background-color: var(--gigmate-white);
+    border-radius: var(--gigmate-border-radius);
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked+.slider {
+    background-color: var(--gigmate-primary);
+}
+
+input:focus+.slider {
+    box-shadow: 0 0 1px var(--gigmate-primary);
+}
+
+input:checked+.slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
 
 /* Footer styling */
 

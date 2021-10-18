@@ -554,13 +554,13 @@ To get your own local copy of GigMate:
 
 - Code to ensure names are only letters was taken from [this Stack Overflow answer](https://stackoverflow.com/a/5196710/15607265) by [chrisp7575](https://stackoverflow.com/users/644858/chrisp7575).
 
+- Code to create a custom switch toggle taken from [this W3Schools tutorial](https://www.w3schools.com/howto/howto_css_switch.asp).
+
 ## Media
 
 - The [image containing sheet music](https://www.pexels.com/photo/chords-sheet-on-piano-tiles-210764/) within index.html was sourced from [Pixabay](https://www.pexels.com/@pixabay) via [Pexels](pexels.com).
 
 - The [image of a female writing on a notepad](https://www.pexels.com/photo/ethnic-female-employee-writing-list-in-notepad-5999834/) within index.html was sourced from [Ono Kokusi](https://www.pexels.com/@ono-kosuki) via [Pexels](pexels.com).
-
-- The [image of a man playing guitar](https://www.pexels.com/photo/photo-of-man-playing-guitar-3469692/) within index.html was sourced from [Clam Lo](https://www.pexels.com/@clam-lo-1782448) via [Pexels](pexels.com).
 
 ## Resources
 
