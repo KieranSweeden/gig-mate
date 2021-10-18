@@ -251,10 +251,7 @@ function openForm(type, parent, track){
   parent.parentNode.classList.add('enlarge');
 
   newForm.innerHTML = `
-    <button class="btn-card animate__animated animate__fadeInUp enlarge">
-      <div class="card gig-card rounded-corners">
-        <div class="card-body d-flex justify-content-center align-items-center">
-          <form id="enlarged-card" class="row justify-content-center align-items-center h-100 w-100">
+          <form id="input-form" class="row rounded-corners animate__animated animate__fadeInUp"">
             <div class="col-12">
               <h3 id="form-title"></h3>
             </div>
@@ -266,7 +263,7 @@ function openForm(type, parent, track){
               <label for="track-artist">Artist:</label>
               <input id="track-artist" type="text" value="" class="rounded-corners">
             </div>
-            <div class="col-6">
+            <div class="col-12">
               <label class="d-block" for="track-key">Key:</label>
               <select name="keys" id="track-key" class="rounded-corners">
                   <option value="" selected="" hidden=""></option>
@@ -283,8 +280,6 @@ function openForm(type, parent, track){
                   <option class="key-option" value="G">G</option>
                   <option class="key-option" value="Ab">Ab</option>
               </select>
-            </div>
-            <div class="col-6">
               <label for="track-tonality">Tonality:</label>
               <select name="keys" id="track-tonality" class="rounded-corners">
                   <option value="" selected="" hidden=""></option>
@@ -292,10 +287,7 @@ function openForm(type, parent, track){
                   <option value="Minor">Minor</option>
               </select>
             </div>
-          </form>
-        </div>
-      </div>
-    </button>`;
+          </form>`;
 
   parent.appendChild(newForm);
 
