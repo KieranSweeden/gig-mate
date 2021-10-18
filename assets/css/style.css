@@ -58,6 +58,12 @@ html, body {
     text-align: center;
 }
 
+input.rounded-corners {
+    padding: 0 .5rem;
+    margin: 0 .15rem;
+    text-align: left;
+}
+
 .list-container {
     overflow: scroll;
     overflow-x: hidden;
