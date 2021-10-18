@@ -205,11 +205,8 @@ function getFormValues(type){
     newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
     newTrackValues.key = document.getElementById('track-key').value;
     newTrackValues.tonality = document.getElementById('track-tonality').value;
-
-    console.log(newTrackValues)
   }
 
-  console.log(newTrackValues);
   return newTrackValues;
 }
 
@@ -508,19 +505,25 @@ function addSaveBtnListener(saveBtn, currentState){
         // Get input values
         let formValues = getFormValues("newTrack");
 
-        console.log(formValues)
-
         let emptyInput = false;
+        let inputIsAllLetters = true;
 
         for (const [key, valueEntered] of Object.entries(formValues)){
           if (valueEntered === ""){
             emptyInput = true;
+          }
+          if (!checkNameIsAllLetters(valueEntered)){
+            inputIsAllLetters = false;
           }
         }
 
         if (emptyInput === true){
 
           alertUser("addingTrack", "emptyInputs");
+
+        } else if (!inputIsAllLetters) {
+
+          alertUser("addingTrack", "illegalCharacters");
 
         } else {
           // Get tracks from local storage
@@ -594,6 +597,8 @@ function contentTemplates(request, issue){
         template.textContent = "This track name already exists, create a new one.";
       } else if (issue === "emptyInputs") {
         template.textContent = "Please fill in all input fields.";
+      } else if (issue === "illegalCharacters"){
+        template.textContent = "Please only use letters when creating a track."
       }
 
     return template;

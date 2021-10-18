@@ -399,7 +399,9 @@ Functional features that are saved for future releases of GigMate include:
 
 - Gigs functionality, where the user can add, edit and delete gigs. Each gig will contain data specific to that gig along with setlists that the user will attach to the gig themselves.
 - User accounts to store information so the user can use GigMate on multiple platforms and reach their personal GigMate data.
+- Add BPM data to each track.
 - Collaborative functionality so users can build setlists and send them to one another.
+- Apply to all functionality, where a change to a track can be optionally applied to other instances of the track within sets and the repertoire.
 
 [Return to Contents 🡡](#contents)
 

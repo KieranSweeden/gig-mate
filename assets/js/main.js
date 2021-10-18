@@ -51,3 +51,15 @@ function seperateKeyFromTonality(trackFullKey){
     // Seperate the full key given and return it as an array
     return trackFullKey.split(" ");
 }
+
+// Credit: code to check all letters taken from https://stackoverflow.com/a/5196710/15607265 
+function checkNameIsAllLetters(nameEntered){
+    // Initialise a variable that holds a regular expression
+   let allowedLetters = /^[a-zA-Z\s]*$/;
+   if(String(nameEntered).match(allowedLetters)){
+       return true;
+    }
+   else {
+     return false;
+    }
+}
