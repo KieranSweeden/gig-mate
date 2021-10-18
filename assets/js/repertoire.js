@@ -413,24 +413,26 @@ function paintIcon (card) {
 }
 
 // Change the buttons within the footer
-function footerState(currentState, card, track) {
+function footerState(currentState, card, track){
   // Retrieve the footer container
   let btnContainer = document.getElementById("btn-footer-container");
   // Clear the contents within the footer container
   btnContainer.innerHTML = "";
   // If the user is...
-  if (currentState === "viewingRepertoire") {
+  if (currentState === "viewingRepertoire"){
     // ...viewing the track repertoire, display the back & add buttons
     btnContainer.innerHTML = `
-    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i></a>
-    <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i></button>
-    `;
-  } else if (currentState === "editingTrack" || currentState === "addingTrack") {
+    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>
+    <button id="btn-add" class="btn-bottom"><i class="fas fa-plus"></i>Add</button>`;
+  } else if (currentState === "editingTrack"){
     // ...editing or adding a track, display the back & tick buttons
     btnContainer.innerHTML = `
-    <button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i></button>
-    <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i></button>
-    `;
+    <button id="btn-delete" class="btn-bottom"><i class="fas fa-trash-alt"></i>Delete</button>
+    <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>`;
+  } else if (currentState === "addingTrack"){
+    btnContainer.innerHTML = `
+    <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>
+    <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>`;
   }
   addButtonListeners(currentState, card, track);
 }
