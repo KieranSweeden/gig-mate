@@ -220,9 +220,15 @@ function addCheckBoxListeners(contentType){
                 checkbox.addEventListener('click', function(e){
                     // Prevent default checkbox click behaviour
                     e.preventDefault();
+
+                    // Apply the checked attribute
                     checkbox.toggleAttribute("checked");
-                    // toggle the checked status of the sets within the setlist
-                    toggleChildSets(checkbox);
+
+                    // If the checkbox is within an accordion & not a track card
+                    if(checkbox.parentElement.parentElement.className !== "card-body row"){
+                        // toggle the checked status of the sets within the setlist
+                        toggleChildSets(checkbox);
+                    }
                 });
             } else {
                 checkbox.addEventListener('click', function(e){
