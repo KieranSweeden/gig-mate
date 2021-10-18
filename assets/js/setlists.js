@@ -132,11 +132,7 @@ function displaySetlists(setlists, insertingCheckbox){
 
 function viewSet(setlistName, setNumber){
 
-    console.log(setlistName, setNumber)
-
     let tracks = getTracks(setlistName, setNumber);
-
-    console.log(tracks)
     
     clearContentSection();
 
