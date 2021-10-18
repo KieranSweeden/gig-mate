@@ -46,3 +46,8 @@ function determineContentHeight () {
         contentSection.style.height = '72.5%';
     }
 }
+
+function seperateKeyFromTonality(trackFullKey){
+    // Seperate the full key given and return it as an array
+    return trackFullKey.split(" ");
+}

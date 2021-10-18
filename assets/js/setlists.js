@@ -444,28 +444,16 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // the save button will save the set in it's displayed order by
 
             // Get the tracks within the set
-            let trackCards = [...document.getElementsByClassName("card-title")];
+            let trackCards = [...document.getElementsByClassName("track-card")];
 
-            // Get the names of the set tracks
-            let trackNames = getNames("saveSetCards", trackCards);
-
-            // Init an array that'll be the new set
+            // Init an array that'll be the new set to replace the original
             let newSet = [];
 
-            // Get the repertoire
-            let repertoireTracks = getLocalStorageData("repertoire");
+            trackCards.forEach(trackCard => {
+                newSet.push(createTrackObject(trackCard));
+            })
 
-            // Get the object in repertoire matching the name
-            trackNames.forEach(trackName => {
-                repertoireTracks.forEach(repertoireTrack => {
-                    // If the names match, push the object into the newSet array
-                    if(trackName === repertoireTrack.name){
-                        newSet.push(repertoireTrack);
-                    }
-                });
-            });
-
-            // Get the current setlist name & set number
+            // Get the setlist name from the header
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
 
@@ -522,8 +510,6 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             // Check name is all letters and store the status in a variable
             let nameIsAllLetters = checkNameIsAllLetters(setNameInput.value);
-
-            console.log(nameIsAllLetters)
 
             // If empty, ask the user to write a name
             if (setNameInput.value === ""){
@@ -802,6 +788,22 @@ function getTracks(nameOfRequestedSetlist, setName){
     return setTracks;
 }
 
+function createTrackObject(trackCard){
+    let track = {};
+
+    track.name = trackCard.getElementsByClassName("card-track-name")[0].textContent;
+    track.artist = trackCard.getElementsByClassName("card-track-artist")[0].textContent;
+    
+    let trackFullKey;
+
+    trackFullKey = seperateKeyFromTonality(trackCard.getElementsByClassName("card-track-key-tonality")[0].textContent);
+
+    track.key = trackFullKey[0];
+    track.tonality = trackFullKey[1];
+
+    return track;
+}
+
 function updateSetInLocalStorage(newSet, setlistName, setNumber){
     // Get setlists from local storage
     let currentSetlistsInLocalStorage = getLocalStorageData("setlists");
@@ -840,13 +842,14 @@ function getNames(elementType, tracks){
     // Init an array
     let names = [];
 
+
     if(elementType === "trackCard"){
         tracks.forEach(checkedTrack => {
             names.push(checkedTrack.parentElement.parentElement.firstElementChild.firstElementChild.textContent);
         });
     } else if (elementType === "saveSetCards"){
         tracks.forEach(savedTrack => {
-            names.push(savedTrack.textContent);
+            names.push(savedTrack.getElementsByClassName("card-track-name")[0].textContent);
         });
     }
 
