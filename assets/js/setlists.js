@@ -1,7 +1,7 @@
 // When DOM content is loaded...
-window.addEventListener('DOMContentLoaded', function () {
+window.addEventListener("DOMContentLoaded", function () {
 
-    // Check a repertoire exists, if not, add the initialised one
+    // Check a repertoire exists in local storage, if not add the initialised JSON
     checkPresenceOfRepertoire();
 
     // Check if dark mode is enabled
@@ -21,13 +21,13 @@ async function startGigMate(contentType) {
         displaySetlists(contentData, false);
     }
 
-    // Determing what footer buttons should be present
+    // Set the footer buttons to viewing setlists on initial load
     determineFooterButtons(contentType, "viewingSetlists", contentData);
 }
 
 async function collectLocalStorage(contentType) {
     // To collect local storage...
-    // Firstly check if there is already data present within local storage using the contentTyp
+    // Firstly check if there is already data present within local storage using the contentType provided
     let hasLocalStorage = checkLocalStorage(contentType);
 
     // Initialise a variable that will store the recieved parsed JSON file data
@@ -38,25 +38,25 @@ async function collectLocalStorage(contentType) {
         // ...local storage, retrieve the data from local storage
         contentData = getLocalStorageData(contentType);
     } else if (hasLocalStorage === false) {
-        // ...no local storage, start GigMate with the appropriate initialised json file
+        // ...no local storage, add the initialised JSON file to local storage
         await addInitialisedJSONToLocalStorage(contentType);
         // Once the data has been added, retrieve the data from local storage
         contentData = getLocalStorageData(contentType);
     }
+    // Return the content data from local storage
     return contentData;
 }
 
 function checkLocalStorage(contentType) {
     // Return true if local storage exists, return false if not
-    // return (localStorage.hasOwnProperty(contentType)) ? true : false;
     return (localStorage.getItem(contentType)) ? true : false;
 }
 
 function getLocalStorageData(contentType) {
-    // Parse the stringified JSON recieved from local storage & return it
-
+    // Init a variable that'll store the received data from local storage
     let storedData;
 
+    // Depending on the content type, store the recieved item(s) from local storage
     if (contentType === "setlists") {
         storedData = JSON.parse(localStorage.getItem("setlists"));
     } else if (contentType === "repertoire") {
@@ -65,34 +65,41 @@ function getLocalStorageData(contentType) {
         storedData = JSON.parse(localStorage.getItem("darkMode"));
     }
 
+    // Return the recieved items from local storage
     return storedData;
 }
 
 function checkDarkMode() {
+    // Init a variable that'll store the current dark mode setting in local storage
     let darkModeStatus = getLocalStorageData("darkMode");;
 
     if (darkModeStatus === undefined) {
+        /* If undefined, it's likely going to be an initial load of GigMate,
+        so push an intial key value item to local storage for dark mode */
         pushToLocalStorage("darkMode", "off");
     } else if (darkModeStatus === "on") {
+        /* If dark mode has been set to on, set the data-theme HTML attribute
+        to dark to change element colours to dark colours */
         document.documentElement.setAttribute("data-theme", "dark");
+        // Set the switch on initial load to the on position
         document.getElementById("dark-mode-switch").checked = true;
     }
 }
 
 async function addInitialisedJSONToLocalStorage(contentType) {
-    // Initialise a variable to store the local JSON file data
+    // Init a variable that'll store the local JSON file data
     let localJSONData;
 
     // If the contentType is...
     if (contentType === "setlists") {
-        // ...setlists, fetch & store the setlist JSON data
+        // ...setlists, fetch & store the setlists from the init setlists JSON file
         localJSONData = await getInitialJSONData("assets/json/init-setlists.json");
     } else if (contentType === "repertoire") {
-        // ...repertoire, fetch & store the repertoire JSON data
+        // ...repertoire, fetch & store the repertoire tracks from the init setlists JSON file
         localJSONData = await getInitialJSONData("assets/json/init-repertoire.json");
     }
 
-    // Push the local JSON data to local storage
+    // Push the JSON data received from local JSON files to local storage
     pushToLocalStorage(contentType, localJSONData);
 }
 
@@ -104,40 +111,38 @@ async function getInitialJSONData(pathToJSONFile) {
     return fileData.json();
 }
 
-function pushToLocalStorage(contentType, localJSONData) {
-    // Push the contentType(key) & localJSONData(value) to local storage
-    localStorage.setItem(contentType, JSON.stringify(localJSONData));
+function pushToLocalStorage(contentType, contentData) {
+    // Push the given content type (key) & content data (value) to local storage
+    localStorage.setItem(contentType, JSON.stringify(contentData));
 }
 
 async function checkPresenceOfRepertoire() {
     // If repertoire does not exist in local storage...
-    if (!localStorage.getItem('repertoire')) {
-        // push the initial repertoire file to local storage
+    if (!localStorage.getItem("repertoire")) {
+        // push the initial repertoire tracks from the init repertoire JSON file to local storage
         pushToLocalStorage("repertoire", await getInitialJSONData("assets/json/init-repertoire.json"));
     }
 }
 
 function displaySetlists(setlists, insertingCheckbox) {
-    // Display the setlists...
-
-    // ...Get content container
+    // Get the content container
     let contentContainer = document.getElementById("content-container");
 
-    // Get accordion body
+    // Get the accordion body element
     let accordionBody = contentTemplates("setlistAccordionBody");
 
-    // insert accordion body to content container
+    // Insert the accordion body element within the content container
     contentContainer.innerHTML = accordionBody;
 
-    // Insert accordion items
+    // For each setlist within the setlist array provided...
     setlists.forEach(setlist => {
-        // ... retrieve the accordion template containing content respective to this setlist
+        // ... build an accordion item with a setlist header & set buttons using the setlist data
         let [setlistTemplate, setButtons] = contentTemplates("setlistAccordionItem", setlist);
 
-        // ... display the setlist with the template, set buttons & reference
+        // ... display the accordion item containing the respective setlist data
         displayItems("setlist", [setlistTemplate, setButtons], removeSpaces(setlist.setlistName));
 
-        // If intention is to delete setlists, avoid adding event listeners to buttons
+        // If the intention is to simply display and not delete the items...
         if (insertingCheckbox === undefined) {
             // ... add event listeners to the respective set buttons
             insertButtonEventListeners();
@@ -147,13 +152,16 @@ function displaySetlists(setlists, insertingCheckbox) {
 
 function viewSet(setlistName, setNumber) {
 
+    // Init a variable that'll hold the tracks given using the setlist name & set number
     let tracks = getTracks(setlistName, setNumber);
 
+    // Clear the contents within the content container
     clearContentSection();
 
-    // Show appropriate footer buttons
+    // Present the buttons for viewing sets
     determineFooterButtons("setlists", "viewingSet");
 
+    // Display the set using the tracks previously retrieved
     displayItems("tracks", tracks);
 }
 
@@ -162,72 +170,61 @@ function prepareToEditMultipleItems(contentType) {
     // If the content type is...
     if (contentType === "setlists") {
 
-        // ... setlists, show appropriate buttons
+        // Setlists, show the buttons for deleting setlists
         determineFooterButtons(contentType, "deleting");
 
+        // Store the setlists in local storage within a variable
         let setlists = getLocalStorageData(contentType);
 
+        // Display the setlists with insertCheckbox set to true
         displaySetlists(setlists, true);
 
-        // Get the setlists
+        // Get the setlist accordion items currently displayed
         let setlistArray = [...document.getElementsByClassName("accordion-item")];
 
-        // for each setlist...
+        // For each setlist accordion item displayed...
         setlistArray.forEach(setlist => {
 
-            // remove the data-bs-parent attribute so all accordion items can be open
+            // Remove the bootstrap data-bs-parent attribute so all accordion items can be opened
             setlist.children[1].removeAttribute("data-bs-parent");
 
-            // open all accordion items
+            // Open all accordion items
             setlist.children[1].classList.add("show");
 
-            // remove the accordion collapse functionality
+            // Remove the accordion collapse functionality so accordions are statically open
             setlist.firstElementChild.firstElementChild.removeAttribute("data-bs-toggle");
 
-            // remove the arrow
+            // Remove the icon beside each accordion header
             setlist.firstElementChild.firstElementChild.className = "accordion-button removed collapsed";
 
-            // insert a checkbox to main setlist header
+            // Insert a checkbox that'll replace the icon
             setlist.firstElementChild.firstElementChild.appendChild(getDeleteCheckBox("setlist"));
 
-            // get all set buttons within that setlist
+            // Get all set buttons within that particular setlist
             let setButtons = [...setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children];
 
             // For each set button, append a checkbox
             setButtons.forEach(setButton => {
+                // Add class that removes hover functionality
                 setButton.classList.add("remove-hover");
+                // Add a delete checkbox for a set (not a setlist)
                 setButton.appendChild(getDeleteCheckBox());
             });
         });
 
+        // Apply checkbox listeners to recently appended checkboxes
         addCheckBoxListeners(contentType);
-
-    } else if (contentType === "tracks") {
-
-        // ... tracks, get every track card
-        let trackArray = [...document.getElementsByClassName("gig-card")];
-
-        trackArray.forEach(trackCard => {
-            // get the edit icon
-            let icon = trackCard.firstElementChild.children[1].firstElementChild;
-
-            // remove the edit icon
-            trackCard.firstElementChild.children[1].removeChild(icon);
-
-            // insert a checkbox
-            trackCard.firstElementChild.children[1].appendChild(getDeleteCheckBox());
-        });
-    }
+    } 
 }
 
 function addCheckBoxListeners(contentType) {
 
-    // get all checkboxes
+    // Get all checkboxes currently onscreen
     let checkboxes = [...document.getElementsByClassName("form-check-input")];
 
     // If the content type is...
     if (contentType === "setlists") {
-        // ... setlists, add an event listener to each check box on display
+        // Setlists, add an event listener to each check box on display
         checkboxes.forEach(function (checkbox) {
             // If the checkbox represents a setlist instead of a singular set...
             if (checkbox.classList.contains("set-checkbox")) {
@@ -236,20 +233,21 @@ function addCheckBoxListeners(contentType) {
                     // Prevent default checkbox click behaviour
                     e.preventDefault();
 
-                    // Apply the checked attribute
+                    // Toggle the checked attribute when clicked
                     checkbox.toggleAttribute("checked");
 
-                    // If the checkbox is within an accordion & not a track card
+                    // If the checkbox is within an accordion meaning it's not a track card
                     if (checkbox.parentElement.parentElement.className !== "card-body row") {
-                        // toggle the checked status of the sets within the setlist
+                        // Toggle the checked status of the sets within the setlist
                         toggleChildSets(checkbox);
                     }
                 });
             } else {
+                // Else if it's a checkbox representing a singular set
                 checkbox.addEventListener('click', function (e) {
                     // Prevent default checkbox click behaviour
                     e.preventDefault();
-                    // toggle the attribute of checked of this particular checkbox
+                    // Toggle the attribute of checked of this particular checkbox
                     checkbox.toggleAttribute("checked");
                 });
             }
@@ -258,26 +256,25 @@ function addCheckBoxListeners(contentType) {
 }
 
 function toggleChildSets(checkbox) {
-    // Get the element containing the setlist and it's sets, in this case it's an accordion-item
-    let container = checkbox.parentElement.parentElement.parentElement;
+    // Get the accordion item containing the setlist and it's sets
+    let container = ascendToParent(checkbox, "accordion-item");
 
-    // Get the set buttons within the setlist
-    let setButtons = [...container.children[1].firstElementChild.firstElementChild.firstElementChild.children];
+    // Grab the set buttons within the setlist
+    let setButtons = [...container.getElementsByClassName("list-group-btn remove-hover")];
 
     // If the setlist header checkbox...
     if (checkbox.hasAttribute("checked")) {
-        // ... is checked, apply the attribute of checked to all sets
+        // ... is checked, apply the attribute of checked to all set checkboxes
         setButtons.forEach(setButton => {
             setButton.firstElementChild.setAttribute("checked", '');
         });
     } else if (!checkbox.hasAttribute("checked")) {
         // Else if it does not have the attribute of checked
         setButtons.forEach(setButton => {
-            // make sure all sets within the setlist have the attribute of checked removed
+            // Make sure all sets within the setlist have the attribute of checked removed
             setButton.firstElementChild.removeAttribute("checked");
         });
     }
-
 }
 
 function getDeleteCheckBox(contentType) {
@@ -295,7 +292,7 @@ function getDeleteCheckBox(contentType) {
         checkbox.classList.add("set-checkbox");
     }
 
-    // Return a checkbox when called
+    // Return a checkbox to function called
     return checkbox;
 }
 
@@ -303,7 +300,7 @@ function determineFooterButtons(contentType, currentState, contentData) {
     // Before we touch any buttons, we must first retrieve the container
     let btnContainer = document.getElementById("btn-footer-container");
 
-    // And we must make sure before making any changes, that it's clear of content
+    // And we must make sure before making any changes, that it's clear of any content
     btnContainer.innerHTML = "";
 
     // Insert the back button as it's present in most states.
@@ -378,11 +375,11 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
     if (contentType === "setlists" && currentState === "viewingSetlists") {
         // If the user is viewing setlists... 
         addButton.addEventListener('click', function () {
-            // ... the add button will open a create new setlist form
+            // The add button will open a create new setlist form
             openForm("newSetlist");
         });
         editButton.addEventListener('click', function () {
-            // ... the delete button will prepare the items to be deleted
+            // The edit button will prepare the items to be deleted
             prepareToEditMultipleItems(contentType);
         });
         itemButtons.forEach(button => {
@@ -395,54 +392,61 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
     } else if (contentType === "setlists" && currentState === "viewingSet") {
         // If the user is viewing a set within a setlist...
         editButton.addEventListener('click', function () {
-            // ... the edit button will prepare set items to be edited
-            editSet();
+            /* The edit button will prepare set items to be edited by
+            getting the setlist name & set number */
+            let setlistName = document.getElementById("page-header").textContent;
+            let setNumber = document.getElementById("page-subheader").textContent;
+
+            /* And calling the edit set function sending the setlist
+            name and set number */
+            editSet(setlistName, setNumber);
         });
 
         expandButton.addEventListener('click', function () {
-            // ... the expand button will full screen the set
+            // The expand button will full screen the set
             fillLiveModalWithTracks();
-
+            // The dark mode switch will be given it's event listener
             addDarkModeSwitchListener();
         });
 
     } else if (contentType === "setlists" && currentState === "editingSet") {
         // If the user is editing a set within a setlist...
         addButton.addEventListener('click', function () {
-            // ... the add button will display the repertoire by
-            // clearing the content section
+            /* The add button will display the repertoire
+            by clearing the content section */
             clearContentSection();
 
-            // getting the repertoire
+            // Getting the repertoire tracks from local storage
             let tracksInLocalStorage = getLocalStorageData("repertoire");
 
-            // sort the repertoire
+            // Sorting the tracks by track name from A-Z
             tracksInLocalStorage.sort(sortByName);
 
-            // displaying the repertoire to the user
+            // Displaying the tracks as track cards to the user
             displayItems("addTracks", tracksInLocalStorage);
 
-            // show appropriate footer buttons
+            // Show the footer buttons for saving the tracks
             determineFooterButtons("setlists", "addTracksToSet");
         });
 
         deleteButton.addEventListener('click', function () {
-
-            // Collecting the tracks checked
+            /* The delete button will the tracks checked by
+            Collecting the tracks checked */
             let checkedTracks = getCheckedItems("tracks");
 
-            // Get names of checked tracks
+            // Getting the names of tracks that have checked checkboxes
             let checkedTrackNames = getNames("trackCard", checkedTracks);
 
             // Get the current setlist name & set number
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
-
-            // Create a new set array of names used to delete from array
-            let namesToDelete = new Set(checkedTrackNames);
-
+            
             // Get the array of set tracks from local storage
             let setTracks = getTracks(setlistName, setNumber);
+
+            /* Create a new set array of names that'll be used to
+            delete from the array created from local storage */
+            let namesToDelete = new Set(checkedTrackNames);
 
             // Create a new set which filters out the checked tracks
             // Credit: code to remove array with another
@@ -451,21 +455,23 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
                 return !namesToDelete.has(setTrack.name);
             });
 
-            // Update local storage with the new set
+            // Update local storage with the new set created
             updateSetInLocalStorage(newSet, setlistName, setNumber);
 
+            // Revert back to viewing the set after editing
             viewSet(setlistName, setNumber);
         });
 
         saveButton.addEventListener('click', function () {
-            // the save button will save the set in it's displayed order by
-
-            // Get the tracks within the set
+            /* The save button will save the set in it's displayed order by
+            getting the tracks currently displayed within the set */
             let trackCards = [...document.getElementsByClassName("track-card")];
 
             // Init an array that'll be the new set to replace the original
             let newSet = [];
 
+            /* Create objects with each track card displayed and push that
+            object into the new set to be pushed to local storage */
             trackCards.forEach(trackCard => {
                 newSet.push(createTrackObject(trackCard));
             })
@@ -474,27 +480,30 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
 
+            // Push the new set into local storage
             updateSetInLocalStorage(newSet, setlistName, setNumber);
 
+            // Revert back to viewing the set after saving
             viewSet(setlistName, setNumber);
         });
 
     } else if (contentType === "setlists" && currentState === "addTracksToSet") {
         // If the user is adding tracks to a set...
         saveButton.addEventListener('click', function () {
-            // ... the save button will add the tracks to the set by
-            // Collecting the tracks checked
+            /* The save button will add the tracks to the set by
+            collecting the tracks checked */
             let checkedTracks = getCheckedItems("tracks");
 
-            // Get names of checked tracks
+            // Getting the names of tracks that have been checked
             let checkedTrackNames = getNames("trackCard", checkedTracks);
 
-            // Get local storage repertoire
+            // Getting the repertoire tracks from local storage
             let tracksInLocalStorage = getLocalStorageData("repertoire");
 
+            // Initialising an array to store the track objects to add
             let trackObjectsToAdd = [];
 
-            // For each checked track, get the matching object in local storage
+            // For each checked track, get the matching track object in local storage
             checkedTrackNames.forEach(checkedTrack => {
                 tracksInLocalStorage.forEach(track => {
                     if (track.name === checkedTrack) {
@@ -503,19 +512,21 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
                 });
             });
 
+            // Getting the setlist name & set number
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
 
-            // Get original set tracks from local storage
+            // Getting the original set tracks from local storage
             let setlistTracks = getTracks(setlistName, setNumber);
 
-            // Add the checked track objects to setlist tracks array
+            // Adding the checked track objects to setlist tracks array
             setlistTracks.push(...trackObjectsToAdd);
 
             // Update local storage with new setlist
             updateSetInLocalStorage(setlistTracks, setlistName, setNumber);
 
-            editSet();
+            // Revert to editing the set state using the setlist name & set number
+            editSet(setlistName, setNumber);
         });
 
     } else if (contentType === "setlists" && currentState === "new") {
@@ -697,17 +708,13 @@ function sortByName(a, b) {
     return 0;
 }
 
-function editSet() {
+function editSet(setlistName, setNumber) {
 
     determineFooterButtons("setlists", "editingSet");
 
-    let setName = document.getElementById("page-header").textContent;
-
-    let setNumber = document.getElementById("page-subheader").textContent;
-
     clearContentSection();
 
-    let tracks = getTracks(setName, setNumber);
+    let tracks = getTracks(setlistName, setNumber);
 
     // Display each set track
     displayItems("checkboxTracks", tracks);
@@ -734,7 +741,7 @@ function openSetlist(setButton) {
     clearContentSection();
 
     // Get the setlist item
-    let setlistItem = ascendToParent(setButton);
+    let setlistItem = ascendToParent(setButton, "accordion-item");
 
     // Get the name of the setlist
     let setlistName = getSetlistName(setlistItem);
@@ -781,10 +788,12 @@ function updateHeading(newHeader, additionalHeader) {
 }
 
 function updateHeadingFlex(flexValue, headerSection) {
-
+    // If there is only a header...
     if (flexValue === "center") {
+        // Remove the justify content between value so the header is centered
         headerSection.classList.remove("justify-content-between");
     } else {
+        // Else if there's also a subheader, add the between value
         headerSection.classList.remove("justify-content-center");
         headerSection.classList.add("justify-content-between");
     }
@@ -792,7 +801,7 @@ function updateHeadingFlex(flexValue, headerSection) {
 
 function getSetTracks(setButton) {
     // Get the setlist item
-    let setlistItem = ascendToParent(setButton);
+    let setlistItem = ascendToParent(setButton, "accordion-item");
 
     // Get the name of the setlist
     let setlistName = getSetlistName(setlistItem);
@@ -876,8 +885,8 @@ function getSetlistName(setlistItem) {
     return setlistItem.firstElementChild.firstElementChild.textContent;
 }
 
-function ascendToParent(currentPosition) {
-    while (currentPosition.className !== "accordion-item") {
+function ascendToParent(currentPosition, targetPosition) {
+    while (currentPosition.className !== targetPosition) {
         currentPosition = currentPosition.parentElement;
     }
     return currentPosition;

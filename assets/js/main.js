@@ -96,9 +96,7 @@ function toggleContainerScroll() {
     // Toggle the scroll of the container when function is called
     if (container.style.overflowY === "scroll") {
         container.style.overflowY = "hidden";
-        console.log("hidden")
     } else if (container.style.overflowY === "hidden") {
         container.style.overflowY = "scroll";
-        console.log("scroll")
     }
 }
