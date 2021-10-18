@@ -494,13 +494,27 @@ async function checkPresenceOfRepertoire(){
 
 ```
 
-
-
 </details>
 
 <hr>
 
 ## Unfixed Bugs
+
+Here are a list of current bugs that are currently known within GigMate and will be squashed when possible.
+
+<details>
+
+<summary><b>Duplicate tracks update one another within the repertoire</b></summary>
+
+<br>
+
+- When a track is created with the exact same name as another, alterations made to one will affect the other.
+
+- It's unlikely a user would input the same track twice, however it is absolutely possible. Therefore this bug will be squashed when time is available.
+
+</details>
+
+<hr>
 
 [Return to Contents 🡡](#contents)
 
