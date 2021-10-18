@@ -111,22 +111,57 @@ html, body {
     background-color: var(--gigmate-primary);
 }
 
-.gig-venue {
-    text-align: start;
+/* Track Card Styling */
+
+.track-card {
+    padding: 1rem 1rem;
 }
 
-.card-title {
+.card .card-body {
+    padding: 0;
+}
+
+.card .card-body button {
+    border: none;
+    color: var(--gigmate-grey);
+    background-color: transparent;
+    transition: color .15s ease-in-out;
+}
+
+.card .card-body button:hover,
+.card .card-body button:focus,
+.card .card-body button:focus-visible,
+.card .card-body button:focus-within,
+.card .card-body button:active {
+    color: var(--gigmate-primary);
+}
+
+.card-track-name {
     font-size: 1.2rem;
     font-weight: bold;
     display: inline-block;
-}
-
-.gig-artist {
+    color: var(--gigmate-black);
     text-align: start;
+    margin: 0;
 }
 
-.gig-artist p {
-    display: inline-block;
+.track-icon {
+    color: var(--gigmate-black-shadow);
+    transition: color .15s ease-in-out;
+}
+
+.icon-hover {
+    color: var(--gigmate-primary);
+}
+
+.card-track-artist {
+    color: var(--gigmate-dark-grey);
+    font-style: italic;
+}
+
+.card-track-key-tonality {
+    background-color: var(--gigmate-primary);
+    width: 4rem;
 }
 
 /* Flex Utility Styles */
@@ -615,53 +650,7 @@ input[type="search"]::-webkit-search-results-decoration { background-color: var(
     }
 }
 
-.gig-card {
-    padding: 1rem 1rem;
-}
-
-.gig-card .gig-venue h3 {
-    color: var(--gigmate-black);
-    text-align: start;
-}
-
-.gig-card .gig-artist p {
-    color: var(--gigmate-dark-grey);
-    font-style: italic;
-    text-align: start;
-}
-
-.gig-card .gig-date p {
-    background-color: var(--gigmate-primary);
-    width: 4rem;
-}
-
-.card .card-body {
-    padding: 0;
-}
-
-.card .card-body button {
-    border: none;
-    color: var(--gigmate-grey);
-    background-color: transparent;
-    transition: color .15s ease-in-out;
-}
-
-.card .card-body button:hover,
-.card .card-body button:focus,
-.card .card-body button:focus-visible,
-.card .card-body button:focus-within,
-.card .card-body button:active {
-    color: var(--gigmate-primary);
-}
-
-.rep-icon {
-    color: var(--gigmate-black-shadow);
-    transition: color .15s ease-in-out;
-}
-
-.icon-hover {
-    color: var(--gigmate-primary);
-}
+/* Button section styling */
 
 #btn-section {
     height: 10%;

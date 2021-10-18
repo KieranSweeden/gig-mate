@@ -109,19 +109,19 @@ function createCard(track) {
   // Add inner HTML within each card
   card.innerHTML = 
   `<button class="btn-card animate__animated animate__fadeInUp">
-    <div class="card gig-card rounded-corners">
+    <div class="card track-card rounded-corners">
       <div class="card-body row">
-        <div class="col-10 gig-venue">
-          <h3 class="card-title">${track.name}</h3>
+        <div class="col-10 text-start">
+          <h3 class="card-track-name">${track.name}</h3>
         </div>
         <div class="col-2 text-end">
-          <i class="fas fa-external-link-alt rep-icon"></i>
+          <i class="track-icon fas fa-external-link-alt"></i>
         </div>
-        <div class="col-8 gig-artist">
-          <p class="m-0">${track.artist}</p>
+        <div class="col-8 text-start">
+          <p class="card-track-artist m-0">${track.artist}</p>
         </div>
         <div class="col-4 gig-date text-end">
-          <p class="m-0 badge">${track.key} ${track.tonality}</p>
+          <p class="card-track-key-tonality m-0 badge">${track.key} ${track.tonality}</p>
         </div>
       </div>
     </div>
@@ -142,66 +142,57 @@ function createCard(track) {
 
 function addCardEnlarge(card, track) {
   // When the card is clicked, trigger the necessary functions to enlarge it, filling the content section
-  card.firstElementChild.addEventListener('click', function(){
-    openCard(card, track);
-  }, { once: true });
+  card.firstElementChild.addEventListener('click', editTrack);
 }
 
-function openCard(card, track) {
-    // To open the card, we must first remove it's siblings to provide screen space
-    removeSiblingCards(card);
-    // When the siblings are removed, enlarge the card, it's row & container
-    enlargeCard(card, track);
-    // Change the footer state to editing track
-    footerState("editingTrack", card, track);
+function editTrack(){
+  // Retrieve track data from card & store it in an object
+  let track = getTrackDataFromTrackCard(this);
+
+  // Get the container element
+  let container = document.getElementById("list-container");
+
+  clearContentSection();
+  
+  // Open the form element
+  openForm("editTrack", container, track);
 }
 
-function removeSiblingCards(card) {
-  // Store siblings of the clicked card in a variable
-  let siblings = getCardSiblings(card);
+function getTrackDataFromTrackCard(trackCard){
+  // Initialise an object to store the clicked track information
+  let track = {};
 
-  // Remove siblings from the page 
-  siblings.forEach(sibling => {
-      sibling.remove();
-  })
+  // Grab the track name & artist
+  track.name = trackCard.getElementsByClassName("card-track-name")[0].textContent;
+  track.artist = trackCard.getElementsByClassName("card-track-artist")[0].textContent;
+
+  // Initialise a variable to store the full key (i.e Eb Major)
+  let trackFullKey;
+
+  // Assign track full key with two array values, 1st being the key letter, 2nd being tonality
+  trackFullKey = seperateKeyFromTonality(trackCard.getElementsByClassName("card-track-key-tonality")[0].textContent);
+  
+  // Assign respective key info to track object
+  track.key = trackFullKey[0];
+  track.tonality = trackFullKey[1];
+
+  // Return the track object
+  return track;
 }
 
-function getCardSiblings(card) {
-  // An empty array ready to contain siblings
-  let cardSiblings = [];
-  // Retrieve the first sibling
-  let sibling = card.parentNode.firstChild;
-
-  // Loop through & push each sibling
-  while (sibling) {
-      // If sibling is an element (nodeType = 1) & is not the original element
-      if (sibling.nodeType === 1 && sibling !== card) {
-          // Push this element to the siblings array
-          cardSiblings.push(sibling);
-      }
-  // Continue to the next sibling
-  sibling = sibling.nextSibling;
-  }
-// Return the card siblings array
-return cardSiblings;
+function seperateKeyFromTonality(trackFullKey){
+  // Seperate the full key given and return it as an array
+  return trackFullKey.split(" ");
 }
 
 function createNewTrack() {
   // To create a new track we need to...
   // ... get the container of the cards & the cards themselves
   let cardContainer = document.getElementById('list-container');
-  let cards = [...cardContainer.children];
-  // ... remove all cards within the container
-  removeAllListItems(cards);
-  // ... open up a form that allows the user to create a new track
+  // ... clear the content section
+  clearContentSection();
+  // ... present a form that allows the user to create a new track
   openForm("newTrack", cardContainer);
-  // ... when the values are entered and the user presses save, a new object is created using the values given within the form
-  
-  // ... we then retrieve the current repertoire stored in local storage in object form
-  
-  // ... push the new object track into the array retrieved from local storage
-  
-  // ... push the array with a new track contained within to local storage
 }
 
 function getFormValues(type){
@@ -251,7 +242,7 @@ function removeAllListItems(list){
   })
 }
 
-function openForm(type, parent){
+function openForm(type, parent, track){
   let newForm = document.createElement('li');
 
   newForm.className = "col-12 d-flex justify-content-center align-items-center my-1";
@@ -304,26 +295,34 @@ function openForm(type, parent){
           </form>
         </div>
       </div>
-    </button>
-  `;
+    </button>`;
 
   parent.appendChild(newForm);
 
+  let formHeader, nameInput, artistInput, keySelect, tonalitySelect;
+  formHeader = document.getElementById("form-title");
+  nameInput = document.getElementById("track-name");
+  artistInput = document.getElementById("track-artist");
+  keySelect = document.getElementById("track-key");
+  tonalitySelect = document.getElementById("track-tonality");
+
   if (type === "newTrack"){
-    document.getElementById('form-title').textContent = 'New Track';
-    document.getElementById('track-name').placeholder = 'Enter track name...';
-    document.getElementById('track-artist').placeholder = 'Enter track artist...';
+    formHeader.textContent = "New Track";
+    nameInput.placeholder = "Enter track name...";
+    artistInput.placeholder = "Enter track artist...";
+
+    footerState("addingTrack");
+
+  } else if (type === "editTrack"){
+    formHeader.textContent = "Edit " + track.name;
+    nameInput.value = track.name;
+    artistInput.value = track.artist;
+    keySelect.value = track.key;
+    tonalitySelect.value = track.tonality;
+
+    footerState("editingTrack");
   }
-
-
-  footerState("addingTrack");
 }
-
-
-
-
-
-
 
 function enlargeCard(card, track) {
     // Retrieve the card's container & row parents
@@ -492,7 +491,7 @@ function addSaveBtnListener(saveBtn, card, track, currentState){
   saveBtn.addEventListener("click", function(){
       if(currentState === "editingTrack"){
         // Get input values
-        getInputValues(card, track);
+        getInputValues();
         // Remove enlarge classes
         document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
         document.getElementById("list-container").classList.remove("enlarge");
@@ -597,29 +596,35 @@ function pushToLocalStorage(type, data){
   }
 }
 
-function getInputValues(card, track) {
+function getInputValues() {
 
   // Retrieve the values contained within the form elements
-  let cardForm = card.firstElementChild.firstElementChild.firstElementChild.firstElementChild;
-  let newTrackName = cardForm.children[1].children[1].value;
-  let newTrackArtist = cardForm.children[2].children[1].value;
-  let newTrackKey = cardForm.children[3].children[1].value;
-  let newTrackTonality = cardForm.children[4].children[1].value;
+  let formHeader, nameInput, artistInput, keySelect, tonalitySelect;
+  formHeader = removeFirstWord(document.getElementById("form-title").textContent);
+  nameInput = document.getElementById("track-name").value;
+  artistInput = document.getElementById("track-artist").value;
+  keySelect = document.getElementById("track-key").value;
+  tonalitySelect = document.getElementById("track-tonality").value;
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
       
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
-  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === track.name));
+  let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader));
 
   // Update the matching track within the array's values with the ones passed in through the form
-  repertoireArray[trackIndex].name = newTrackName;
-  repertoireArray[trackIndex].artist = newTrackArtist;
-  repertoireArray[trackIndex].key = newTrackKey;
-  repertoireArray[trackIndex].tonality = newTrackTonality;
+  repertoireArray[trackIndex].name = nameInput;
+  repertoireArray[trackIndex].artist = artistInput;
+  repertoireArray[trackIndex].key = keySelect;
+  repertoireArray[trackIndex].tonality = tonalitySelect;
 
   // Update local storage with the new array containing the updated track information
   updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
+}
+
+function removeFirstWord(sentence){
+  // Splice the sentence into an array, chop the first index/word and return as a joined string
+  return sentence.split(" ").splice(1).join(" ");
 }
 
 function updateLocalStorage(key, data) {
