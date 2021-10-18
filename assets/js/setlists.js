@@ -132,8 +132,12 @@ function displaySetlists(setlists, insertingCheckbox){
 
 function viewSet(setlistName, setNumber){
 
+    console.log(setlistName, setNumber)
+
     let tracks = getTracks(setlistName, setNumber);
 
+    console.log(tracks)
+    
     clearContentSection();
 
     // Show appropriate footer buttons
@@ -568,14 +572,15 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // Get the setlist array from local storage
             let storedSetlistArray = getLocalStorageData("setlists");
 
-            // Get the setlist name the track is currently in
-            let setlistHeading = document.getElementById("page-header");
+            // Get the setlist name & set number the track is currently in
+            let setlistHeading = document.getElementById("page-header").textContent;
+            let setNumber = document.getElementById("page-subheader").textContent;
 
             // Shorten and lowercase the set the track is within
             let setHeading = removeSpaces(document.getElementById("page-subheader").textContent.toLowerCase());
 
             storedSetlistArray.forEach(setlist => {
-                if(setlist.setlistName === setlistHeading.textContent){
+                if(setlist.setlistName === setlistHeading){
                     let trackIndex = setlist[setHeading].findIndex((localStorageTrack => localStorageTrack.name === contentData.name));
                     setlist[setHeading][trackIndex].name = updatedTrackValues.name;
                     setlist[setHeading][trackIndex].artist = updatedTrackValues.artist;
@@ -583,12 +588,10 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                     setlist[setHeading][trackIndex].tonality = updatedTrackValues.tonality;
                 }
             });
-            
-            adjustContainerSize();
 
             pushToLocalStorage("setlists", storedSetlistArray);
 
-            restartGigMate("setlists");
+            viewSet(setlistHeading, setNumber);
         });
     }
 }
@@ -841,7 +844,6 @@ function getNames(elementType, tracks){
 
     // Init an array
     let names = [];
-
 
     if(elementType === "trackCard"){
         tracks.forEach(checkedTrack => {
