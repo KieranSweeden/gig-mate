@@ -20,6 +20,22 @@
     --gigmate-border-radius: 10px;
 }
 
+html[data-theme = "light"]{
+    --modal-header-bg: hsla(0, 0%, 98%, 1);
+    --modal-body-bg: hsla(0, 0%, 96%, 1);
+    --modal-heading: hsla(0, 0%, 13%, 1);
+    --modal-text: hsla(0, 0%, 13%, 1);
+    --modal-item-bg: hsla(0, 0%, 98%, 1);
+}
+
+html[data-theme = "dark"]{
+    --modal-header-bg: hsla(0, 0%, 20%, 1);
+    --modal-body-bg: hsla(0, 0%, 13%, 1);
+    --modal-heading: hsla(0, 0%, 96%, 1);
+    --modal-text: hsla(0, 0%, 96%, 1);
+    --modal-item-bg: hsla(0, 0%, 20%, 1);
+}
+
 html,
 body {
     font-family: 'Manrope', sans-serif;
@@ -110,6 +126,7 @@ input.rounded-corners {
     font-size: 1.5rem;
     line-height: 0.9;
     border-radius: var(--gigmate-border-radius);
+    color: var(--modal-text);
 }
 
 .btn-close:focus,
@@ -760,6 +777,10 @@ input[type="search"]::-webkit-search-results-decoration {
 
 /* Live Mode Box Styling */
 
+.modal-content {
+    background-color: var(--modal-body-bg);
+}
+
 #live-mode-container {
     position: absolute;
     inset: 0 0 0 0;
@@ -767,13 +788,10 @@ input[type="search"]::-webkit-search-results-decoration {
     z-index: 5;
 }
 
-.modal-content {
-    background-color: var(--gigmate-off-white);
-}
-
 #live-mode-header {
     border-bottom: 5px solid var(--gigmate-primary);
     padding: 1.5rem .25rem;
+    background-color: var(--modal-header-bg);
 }
 
 #live-mode-header .container-lg {
@@ -781,8 +799,16 @@ input[type="search"]::-webkit-search-results-decoration {
     align-items: center;
 }
 
+#live-mode-body {
+    background-color: var(--modal-body-bg);
+}
+
 .gigmate-logo {
     margin-right: .25rem;
+}
+
+#live-mode-title {
+    color: var(--modal-heading);
 }
 
 #live-mode-list {
@@ -791,14 +817,17 @@ input[type="search"]::-webkit-search-results-decoration {
 
 .live-mode-track {
     padding: 1rem;
+    background-color: var(--modal-item-bg);
 }
 
 .live-track-title {
     font-weight: bold;
+    color: var(--modal-text);
 }
 
 .live-track-key {
     font-style: italic;
+    color: var(--modal-text);
 }
 
 /* Switch styling */
@@ -813,6 +842,7 @@ input[type="search"]::-webkit-search-results-decoration {
 #switch-section p {
     margin: 0;
     font-size: 1.1rem;
+    color: var(--modal-text);
 }
 
 /* Credit: code for custom switch taken from https://www.w3schools.com/howto/howto_css_switch.asp */
