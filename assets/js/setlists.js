@@ -589,11 +589,24 @@ function insertButtonEventListeners(contentType, currentState, contentData){
                 }
             });
 
+            toggleEnlargeContainerClass();
+
             pushToLocalStorage("setlists", storedSetlistArray);
 
             viewSet(setlistHeading, setNumber);
         });
     }
+}
+
+function toggleEnlargeContainerClass(){
+    // Grab the containers
+    let wrapper, contentContainer;
+    wrapper = document.getElementById("content-section").firstElementChild;
+    contentContainer = document.getElementById("content-container");
+
+    // Toggle the containers enlarge class when function is called
+    wrapper.classList.toggle("enlarge");
+    contentContainer.classList.toggle("enlarge");
 }
 
 // Credit: code to check all letters taken from https://stackoverflow.com/a/5196710/15607265 
