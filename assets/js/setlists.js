@@ -297,7 +297,7 @@ function determineFooterButtons(contentType, currentState, contentData){
     // If the user is...
     if(contentType === "setlists" && currentState === "viewingSetlists"){
         // ... viewing setlists, display the back & add buttons
-        btnContainer.innerHTML += insertButton("delete");
+        btnContainer.innerHTML += insertButton("edit");
         btnContainer.innerHTML += insertButton("add");
     } else if (contentType === "setlists" && currentState === "viewingSet"){
         btnContainer.innerHTML += insertButton("edit");
@@ -311,7 +311,7 @@ function determineFooterButtons(contentType, currentState, contentData){
     } else if (contentType === "setlists" && currentState === "new"){
         btnContainer.innerHTML += insertButton("save");
     } else if (contentType === "setlists" && currentState === "deleting"){
-        btnContainer.innerHTML += insertButton("save");
+        btnContainer.innerHTML += insertButton("delete");
     } else if (contentType === "tracks" && currentState === "edit"){
         btnContainer.innerHTML += insertButton("save");
     }
@@ -366,7 +366,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
             // ... the add button will open a create new setlist form
             openForm("newSetlist");
         });
-        deleteButton.addEventListener('click', function(){
+        editButton.addEventListener('click', function(){
             // ... the delete button will prepare the items to be deleted
             prepareToEditMultipleItems(contentType);
         });
@@ -554,7 +554,7 @@ function insertButtonEventListeners(contentType, currentState, contentData){
         });
 
     } else if (contentType === "setlists" && currentState === "deleting"){
-        saveButton.addEventListener("click", function(){
+        deleteButton.addEventListener("click", function(){
             let setsToBeDeleted = getCheckedItems(contentType);
 
             deleteItems(contentType, setsToBeDeleted, getLocalStorageData("setlists"));
