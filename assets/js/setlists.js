@@ -587,6 +587,8 @@ function insertButtonEventListeners(contentType, currentState, contentData){
 
             toggleEnlargeContainerClass();
 
+            toggleContainerScroll();
+
             pushToLocalStorage("setlists", storedSetlistArray);
 
             viewSet(setlistHeading, setNumber);
@@ -1127,9 +1129,6 @@ function openForm(type, data){
     // Give it an id
     form.id = "input-form";
 
-    // ... get parent
-    let contentContainer = document.getElementById("content-container");
-
     // If the type of form required is a...
     if (type === "newSetlist"){
         // ...new setlist, set the inner HTML of the form to the new setlist template
@@ -1144,6 +1143,11 @@ function openForm(type, data){
 
         determineFooterButtons("tracks", "edit", data);
     }
+
+    // ... get parent
+    let contentContainer = document.getElementById("content-container");
+
+    toggleContainerScroll();
 
     // ... new setlist form
     contentContainer.appendChild(form);

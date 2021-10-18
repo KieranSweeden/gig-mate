@@ -154,6 +154,8 @@ function editTrack(){
 
   toggleSearchInputDisplay();
 
+  toggleContainerScroll();
+
   clearContentSection();
   
   // Open the form element
@@ -195,6 +197,8 @@ function createNewTrack() {
   clearContentSection();
   // remove the search input
   toggleSearchInputDisplay();
+  // remove scroll property
+  toggleContainerScroll();
   // ... present a form that allows the user to create a new track
   openForm("newTrack", cardContainer);
 }
@@ -441,6 +445,8 @@ function addDeleteBtnListener(deleteBtn) {
     clearContentSection();
     // Insert the search filter
     toggleSearchInputDisplay();
+    // Make container scrollable
+    toggleContainerScroll();
     // Fill with repertoire
     checkLocalStorage();
     // Revert buttons to viewing repertoire state
@@ -478,6 +484,8 @@ function addSaveBtnListener(saveBtn, currentState){
         checkLocalStorage();
         // Insert search filter
         toggleSearchInputDisplay();
+        // Make container scrollable
+        toggleContainerScroll();
         // Revert buttons to viewing repertoire state
         footerState("viewingRepertoire");
       } 
@@ -530,6 +538,10 @@ function addSaveBtnListener(saveBtn, currentState){
             pushToLocalStorage("track", formValues);
             // Clear content section
             clearContentSection();
+            // Add search filter
+            toggleSearchInputDisplay();
+            // Make container scrollable
+            toggleContainerScroll();
             // Fill with repertoire
             checkLocalStorage();
             // Revert buttons to viewing repertoire state

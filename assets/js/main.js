@@ -70,22 +70,36 @@ function capitaliseFirstLetter(name) {
     return name.charAt(0).toUpperCase() + name.slice(1);
   }
   
-  function capitaliseEachWord(name){
+function capitaliseEachWord(name){
     // Split the words up into an array
     let nameWords = name.split(" ");
-  
+
     // Intialise an array that'll store the words when capitalised
     let capitalisedWords = [];
-  
+
     // For each word... 
     nameWords.forEach(word => {
-      // ...capitalise it and store it in the capitalised variable
-      capitalisedWords.push(capitaliseFirstLetter(word));
+        // ...capitalise it and store it in the capitalised variable
+        capitalisedWords.push(capitaliseFirstLetter(word));
     })
-  
+
     // Turn the array into a string with the capitalised words joined with spaces.
     capitalisedWords = capitalisedWords.join(" ");
-  
+
     // Return the words in capitalised form
     return capitalisedWords;
-  }
+}
+
+function toggleContainerScroll(){
+    // Get the container
+    let container = document.getElementById("content-section");
+
+    // Toggle the scroll of the container when function is called
+    if (container.style.overflowY === "scroll"){
+        container.style.overflowY = "hidden";
+        console.log("hidden")
+    } else if (container.style.overflowY === "hidden") {
+        container.style.overflowY = "scroll";
+        console.log("scroll")
+    }
+}
