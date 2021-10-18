@@ -1297,7 +1297,7 @@ function createCard(track, insertCheckbox, insertHover) {
                     <h3 class="card-track-name">${track.name}</h3>
                 </div>
                 <div class="col-4 text-end">
-                    <i class="fas fa-arrows-alt-v rep-icon"></i>
+                    <i class="fas fa-arrows-alt-v track-icon"></i>
                     <input class="form-check-input track-checkbox" type="checkbox">
                 </div>
                 <div class="col-8 text-start">
