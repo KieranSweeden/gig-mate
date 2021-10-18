@@ -26,15 +26,12 @@ function filterRepertoireTracks(){
   let filterTyped = searchInput.value.toUpperCase();
   let trackItems = [...document.getElementsByClassName("list-track-item")];
 
-  console.log(trackItems)
-
   // Credit: search filter partially 
   // taken from https://www.w3schools.com/howto/howto_js_filter_lists.asp
   // For each track item...
   trackItems.forEach(trackItem => {
     // ... get the track name
     let trackName = trackItem.getElementsByClassName("card-track-name")[0].textContent;
-    console.log(trackName)
     // If the track name when uppercased matches the filter...
     // ...typed by the user...
     if (trackName.toUpperCase().indexOf(filterTyped) > -1 ) {
