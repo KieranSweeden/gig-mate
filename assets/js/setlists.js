@@ -1073,13 +1073,13 @@ function getCheckedItems(contentType) {
             let deleteSetItem = {};
 
             // ... get all possible checkboxes
-            let setlistHeaderCheckBox = setlist.firstElementChild.firstElementChild.firstElementChild;
+            let setlistHeaderCheckBox = setlist.getElementsByClassName("form-check-input set-checkbox")[0];
 
             // Set the name of the delete item object of the heading in the accordion
             deleteSetItem.setlistName = setlistHeaderCheckBox.parentElement.textContent;
 
             // If the setlist has one set
-            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 1) {
+            if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 1) {
                 let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
 
                 if (set1Checkbox.hasAttribute("checked")) {
@@ -1088,9 +1088,9 @@ function getCheckedItems(contentType) {
             }
 
             // If the setlist has two sets
-            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 2) {
-                let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
-                let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
+            if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 2) {
+                let set1Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[0].firstElementChild;
+                let set2Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[1].firstElementChild;
 
                 if (set1Checkbox.hasAttribute("checked")) {
                     deleteSetItem.set1 = "";
@@ -1103,10 +1103,10 @@ function getCheckedItems(contentType) {
             }
 
             // If the setlist has three sets
-            if (setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children.length === 3) {
-                let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
-                let set2Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[1].firstElementChild;
-                let set3Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[2].firstElementChild;
+            if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 3) {
+                let set1Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[0].firstElementChild;
+                let set2Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[1].firstElementChild;
+                let set3Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[2].firstElementChild;
 
                 if (set1Checkbox.hasAttribute("checked")) {
                     deleteSetItem.set1 = "";
