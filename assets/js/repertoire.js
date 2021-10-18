@@ -24,22 +24,25 @@ function filterRepertoireTracks(){
   // Get inputs
   let searchInput = document.getElementById("search-input");
   let filterTyped = searchInput.value.toUpperCase();
-  let trackItems = [...document.getElementsByClassName("btn-card")];
+  let trackItems = [...document.getElementsByClassName("list-track-item")];
+
+  console.log(trackItems)
 
   // Credit: search filter partially 
   // taken from https://www.w3schools.com/howto/howto_js_filter_lists.asp
   // For each track item...
   trackItems.forEach(trackItem => {
     // ... get the track name
-    let trackName = trackItem.getElementsByClassName("card-title")[0].textContent;
+    let trackName = trackItem.getElementsByClassName("card-track-name")[0].textContent;
+    console.log(trackName)
     // If the track name when uppercased matches the filter...
     // ...typed by the user...
     if (trackName.toUpperCase().indexOf(filterTyped) > -1 ) {
       // ...make sure it's displayed
-      trackItem.parentElement.style.display = "";
+      trackItem.style.display = "";
     } else {
       // ... remove it from the list
-      trackItem.parentElement.style.display = "none";
+      trackItem.style.display = "none";
     }
   })
 }
@@ -439,6 +442,8 @@ function addDeleteBtnListener(deleteBtn) {
     document.getElementById("list-container").classList.remove("enlarge");
     // Clear the content section
     clearContentSection();
+    // Insert the search filter
+    toggleSearchInputDisplay();
     // Fill with repertoire
     checkLocalStorage();
     // Revert buttons to viewing repertoire state
