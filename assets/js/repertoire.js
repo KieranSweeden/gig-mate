@@ -111,7 +111,7 @@ function createCard(track) {
     <div class="card track-card rounded-corners">
       <div class="card-body row">
         <div class="col-10 text-start">
-          <h3 class="card-track-name">${track.name}</h3>
+          <h2 class="card-track-name">${track.name}</h2>
         </div>
         <div class="col-2 text-end">
           <i class="track-icon fas fa-external-link-alt"></i>
@@ -237,7 +237,7 @@ function openForm(type, parent, track) {
   newForm.innerHTML = `
     <form id="input-form" class="row rounded-corners animate__animated animate__fadeInUp"">
       <div class="col-12">
-        <h3 id="form-title"></h3>
+        <h2 id="form-title"></h2>
       </div>
       <div class="col-12">
         <label for="track-name">Track:</label>
