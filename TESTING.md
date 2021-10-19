@@ -504,13 +504,11 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 <details>
 
-<summary><b>Duplicate tracks update one another within the repertoire</b></summary>
+<summary><b>Editing a track that has a duplicate within the same set effects both instances of that track</b></summary>
 
 <br>
 
-- When a track is created with the exact same name as another, alterations made to one will affect the other.
-
-- It's unlikely a user would input the same track twice, however it is absolutely possible. Therefore this bug will be squashed when time is available.
+- If the user decides to have two instances of a track within a set, a bug can arise where editing one instance of the track will affect both instances. So deleting an instance or editing the key/artist will result in both being affected by the change.
 
 </details>
 
