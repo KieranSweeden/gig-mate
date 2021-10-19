@@ -847,6 +847,12 @@ input[type="search"]::-webkit-search-results-decoration {
     color: var(--modal-text);
 }
 
+#track-key,
+#track-tonality {
+    color: var(--gigmate-black);
+    background-color: var(--gigmate-white);
+}
+
 /* Switch styling */
 
 #switch-section {
