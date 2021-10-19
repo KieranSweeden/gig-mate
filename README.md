@@ -70,7 +70,7 @@ As a professional musician using GigMate, I want the ability to:
 - Add a single track or multiple tracks to a set.
 - Delete a single track or multiple tracks from a set.
 - View the set full screen so I can use GigMate for live use.
-- Use GigMate on multiple devices and the functionality is consistent on all devices.
+- Easily use GigMate on multiple devices as the design is consistent on a variety of screen sizes.
 - Have dark mode functionality when using the application for live use.
 
 [Return to Contents 🡡](#contents)

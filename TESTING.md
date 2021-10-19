@@ -525,37 +525,37 @@ User story testing was performed manually, serving the purpose of documenting ho
 As a professional musician using GigMate, I want the ability to:
 1. View my repertoire of tracks.
 
-<img src="documentation/user-stories/user-stories-viewing-repertoire.gif">
+<img src="documentation/user-stories/viewing-repertoire-tracks.gif">
 
 <hr>
 
 2. Add a new track to my repertoire of tracks.
 
-<img src="documentation/user-stories/user-stories-adding-track-repertoire.gif">
+<img src="documentation/user-stories/adding-track-repertoire.gif">
 
 <hr>
 
 3. Filter through my repertoire of tracks.
 
-<img src="documentation/user-stories/user-stories-filter-tracks-repertoire.gif">
+<img src="documentation/user-stories/filtering-tracks-repertoire.gif">
 
 <hr>
 
 4. Edit a track within my repertoire.
 
-<img src="documentation/user-stories/user-stories-edit-track-repertoire.gif">
+<img src="documentation/user-stories/editing-track-repertoire.gif">
 
 <hr>
 
 5. Delete a track from my repertoire.
 
-<img src="documentation/user-stories/user-stories-deleting-track-repertoire.gif">
+<img src="documentation/user-stories/deleting-track-repertoire.gif">
 
 <hr>
 
 6. View my list of setlists.
 
-<img src="documentation/user-stories/user-stories-viewing-setlists.gif">
+<img src="documentation/user-stories/viewing-setlists.gif">
 
 <hr>
 
@@ -563,55 +563,55 @@ As a professional musician using GigMate, I want the ability to:
 
     - Could not display/record multiple screen instances at once, as each instance would add a new setlist and the last two instances would display an alert message as the setlist already exists (from the first instance).
 
-<img src="documentation/user-stories/user-stories-create-new-set.gif">
+<img src="documentation/user-stories/creating-setlist-and-sets.gif">
 
 <hr>
 
 8. Delete a setlist completely or the sets within it.
 
-<img src="documentation/user-stories/user-stories-deleting-setlist-and-set.gif">
+<img src="documentation/user-stories/deleting-set-and-setlist.gif">
 
 <hr>
 
 9. Edit a track within a set, that's independent from the respective track within the repertoire.
 
-<img src="">
+<img src="documentation/user-stories/edit-track-in-set-independent-from-repertoire.gif">
 
 <hr>
 
 10. Alter the order of the tracks within a set using Drag & Drop.
 
-<img src="documentation/user-stories/user-stories-alter-set-order.gif">
+<img src="documentation/user-stories/alter-order-setlist-drag-n-drop.gif">
 
 <hr>
 
 11. Add a single track or multiple tracks to a set.
 
-<img src="documentation/user-stories/user-stories-add-track-set.gif">
+<img src="documentation/user-stories/adding-tracks-to-setlist.gif">
 
 <hr>
 
 12. Delete a single track or multiple tracks from a set.
 
-<img src="documentation/user-stories/user-stories-delete-tracks-set.gif">
+<img src="documentation/user-stories/deleting-track-or-tracks-from-set.gif">
 
 <hr>
 
 13. View the set full screen so I can use GigMate for live use.
 
-<img src="documentation/user-stories/user-stories-view-full-screen.gif">
+<img src="documentation/user-stories/view-set-full-screen.gif">
 
 <hr>
 
-14. Use GigMate on multiple devices and the functionality is consistent on all devices.
+14. Easily use GigMate on multiple devices as the design is consistent on a variety of screen sizes.
 
-<img src="">
+<img src="documentation/user-stories/functionality-design-consistent-screen-sizes.gif">
 
 <hr>
 
 15. Have dark mode functionality when using the application for live use.
 
-<img src="">
+<img src="documentation/user-stories/view-live-dark-mode.gif">
 
 <hr>
 
