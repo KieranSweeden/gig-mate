@@ -508,7 +508,7 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 <br>
 
-- If the user decides to have two instances of a track within a set, a bug can arise where editing one instance of the track will affect both instances. So deleting an instance or editing the key/artist will result in both being affected by the change.
+- If the user decides to have two instances of a track within a set, a bug can arise where editing one instance of the track will affect both instances. So deleting an instance or editing the key/artist of one, will result in both being affected by the change.
 
 </details>
 
@@ -732,7 +732,7 @@ GigMate was tested using the following devices:
 
 <details>
 
-<summary><b>- Repertoire.js validation results</b></summary>
+<summary><b>Repertoire.js validation results</b></summary>
 
 <img src="documentation/validations/repertoire-js-validator.jpg">
 
