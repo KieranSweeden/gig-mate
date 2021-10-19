@@ -248,8 +248,12 @@ input.rounded-corners {
 }
 
 @media (max-width: 992px) {
-    .nav-link {
+    .nav-link:not(.icon) {
         text-indent: 1rem;
+    }
+    .nav-link.icon {
+        width: 2rem;
+        text-align: center;
     }
 }
 
@@ -331,8 +335,14 @@ input.rounded-corners {
 #section-btn-container .card::before {
     content: '';
     position: absolute;
-    inset: 0 0;
     background-color: hsla(0, 0%, 13%, 0.5);
+    inset: 0 0;
+
+    /* For browsers not supporting inset */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #section-btn-container .card:hover,
@@ -723,6 +733,7 @@ input[type="search"]::-webkit-search-results-decoration {
     word-wrap: break-word;
     background-color: #fff;
     background-clip: border-box;
+    -webkit-background-clip: border-box;
     border: none;
     box-shadow: 0 0 10px 0 var(--gigmate-black-shadow);
 }
@@ -785,6 +796,12 @@ input[type="search"]::-webkit-search-results-decoration {
     inset: 0 0 0 0;
     background-color: var(--gigmate-white);
     z-index: 5;
+
+    /* For browsers not supporting inset */
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
 }
 
 #live-mode-header {

@@ -528,6 +528,16 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 </details>
 
+<hr>
+
+<details>
+
+<summary><b>Microsoft Edge Bootsrap layout is perfectly functional, but different when viewport wdth exceeds 1200px.</b></summary>
+
+- When the viewport width exceeds 1200px, track cards are presented to the user vertically however in rows of two. GigMate still works as intended. Drag and drop works, however it makes less visual sense given not all track cards are presented vertically.
+
+</details>
+
 [Return to Contents 🡡](#contents)
 
 # User Stories Testing
