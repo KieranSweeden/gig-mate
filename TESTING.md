@@ -510,11 +510,11 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 <details>
 
-<summary><b>Editing a track that has a duplicate within the same set effects both instances of that track.</b></summary>
+<summary><b>Editing/deleting a track that has a duplicate within the same set or repertoire affects both instances of that track.</b></summary>
 
 <br>
 
-- If the user decides to have two instances of a track within a set, a bug can arise where editing one instance of the track will affect both instances. So deleting an instance or editing the key/artist of one, will result in both being affected by the change.
+- If the user decides to have two instances of a track within a set or their repertoire, a bug can arise where editing one instance of the track will affect both instances. So deleting an instance or editing the key/artist of one, will result in both being affected by the change. This is not a track in a set being edited and affecting the same track in repertoire. Only if the track duplicates are within the same array such as a set or repertoire.
 
 </details>
 
