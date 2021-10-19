@@ -458,8 +458,8 @@ Functional features that are saved for future releases of GigMate include:
 - [The W3C CSS Validator Service](https://jigsaw.w3.org/css-validator/)
     - The W3C CSS Validator was utlised at the later stages of development to confirm that GigMate contained valid CSS code.
 
-- [JSLint](https://www.jslint.com/)
-    - JSLint was utilised to validate that GigMate contained valid & working JavaScript code.
+- [JSHint](https://jshint.com/)
+    - JSHint was utilised to validate that GigMate contained valid & working JavaScript code.
 
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
     - Chrome Dev Tools was utilised for debugging, testing the site on various screen sizes and checking performance and SEO scores using Lighthouse.
