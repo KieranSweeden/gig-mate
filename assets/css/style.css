@@ -255,6 +255,9 @@ input.rounded-corners {
         width: 2rem;
         text-align: center;
     }
+    .nav-item {
+        margin: 0.25rem;
+    }
 }
 
 .nav-link:focus,
@@ -411,11 +414,6 @@ input.rounded-corners {
     border-bottom: 5px solid var(--gigmate-primary-white);
     background-color: transparent;
 }
-
-/* .accordion-item:first-of-type .accordion-button {
-    border-top-left-radius: var(--gigmate-border-radius);
-    border-top-right-radius: var(--gigmate-border-radius);
-} */
 
 .accordion-header button {
     font-size: 1.2rem;

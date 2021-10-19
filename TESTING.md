@@ -732,6 +732,18 @@ As a professional musician using GigMate, I want the ability to:
 
 # Manual Testing
 
+A vigorous test of to check all links and general workflow tasks within GigMate were working as intended on various platforms. Each task was carried out on each platform to ensure the user experience was stable and consistent on various popular platform. 
+
+The worksheet that was used to carry out in this manual testing can be found [here](https://docs.google.com/spreadsheets/d/1IIdL8TAHo5sx051EKLY9HEUdgin6Xfc5-eDBo242xZI/edit?usp=sharing).
+
+During this process, various small bugs were found and prompty squashed. Examples of which include:
+
+- When attempting to scroll through setlists after creating a new one, the scroll behaviour would freeze. This meant that setlists were hidden behind the footer and could not be scrolled into view. This was promptly fixed using the toggleContainerScroll() function;
+- The hover background for the icons in the navbar was in an awkward palce when clicked/hovered. This was because a text-indent applied to the text elements was also being applied to the icons. Seperating the two by adding another class to the icon solved this problem.
+- Select input elements were the color blue, due to the default's provided by the mobile browser. Ensuring the elements are coloured by CSS solved this minor issue.
+- The navbar collapse element was a bit vertically squashed. Finding this out during the testing was important, as later adding some margin provided the much needed space.
+
+
 ## Software
 
 GigMate was tested on the following browsers:
