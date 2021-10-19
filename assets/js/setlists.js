@@ -571,6 +571,9 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
                     // Clear the content section
                     clearContentSection();
 
+                    // Make sure container scroll is turned back on
+                    toggleContainerScroll();
+
                     // Reduce the content container size now the form has disappeared
                     toggleEnlargeContainerClass();
 

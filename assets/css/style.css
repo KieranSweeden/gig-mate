@@ -520,6 +520,7 @@ input.rounded-corners {
     justify-content: space-between;
     align-items: center;
     z-index: 1;
+    color: var(--gigmate-black);
 }
 
 .list-group-btn:hover {
