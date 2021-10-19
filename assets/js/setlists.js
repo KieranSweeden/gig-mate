@@ -71,7 +71,7 @@ function getLocalStorageData(contentType) {
 
 function checkDarkMode() {
     // Init a variable that'll store the current dark mode setting in local storage
-    let darkModeStatus = getLocalStorageData("darkMode");;
+    let darkModeStatus = getLocalStorageData("darkMode");
 
     if (darkModeStatus === undefined) {
         /* If undefined, it's likely going to be an initial load of GigMate,
@@ -214,7 +214,7 @@ function prepareToEditMultipleItems(contentType) {
 
         // Apply checkbox listeners to recently appended checkboxes
         addCheckBoxListeners(contentType);
-    } 
+    }
 }
 
 function addCheckBoxListeners(contentType) {
@@ -440,7 +440,7 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
             // Get the current setlist name & set number
             let setlistName = document.getElementById("page-header").textContent;
             let setNumber = document.getElementById("page-subheader").textContent;
-            
+
             // Get the array of set tracks from local storage
             let setTracks = getTracksFromLocalStorage(setlistName, setNumber);
 
@@ -474,7 +474,7 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
             object into the new set to be pushed to local storage */
             trackCards.forEach(trackCard => {
                 newSet.push(createTrackObject(trackCard));
-            })
+            });
 
             // Get the setlist name from the header
             let setlistName = document.getElementById("page-header").textContent;
@@ -547,7 +547,7 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
             } else if (nameIsAllLetters === false) {
                 /* Else if the name inserted is not all letters & spaces,
                 alert the user to remove illegal characters */
-                alertUser(contentType, currentState, "notAllLetters")
+                alertUser(contentType, currentState, "notAllLetters");
             } else {
                 /* If the name input has passed the tests and is legal,
                 create a new setlist item */
@@ -1109,7 +1109,7 @@ function getCheckedItems(contentType) {
                     // Add a set1 property to the delete set item object
                     deleteSetItem.set1 = "";
                 }
-                
+
                 // If set 2 was checked by the user...
                 if (set2Checkbox.hasAttribute("checked")) {
                     // Add a set2 property to the delete set item object
@@ -1215,7 +1215,7 @@ function createNewItem(type) {
         }
         // Return the new setlist object
         return newItem;
-    } 
+    }
     // Return the newly created item
     return newItem;
 }

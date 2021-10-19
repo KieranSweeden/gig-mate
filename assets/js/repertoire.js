@@ -9,7 +9,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // ... initialise the footer state
   footerState("viewingRepertoire");
-})
+});
 
 function addFilterInputListener() {
   // Get input search element
@@ -527,7 +527,7 @@ function contentTemplates(request, issue) {
     } else if (issue === "emptyInputs") {
       template.textContent = "Please fill in all input fields.";
     } else if (issue === "illegalCharacters") {
-      template.textContent = "Please only use letters when creating a track."
+      template.textContent = "Please only use letters when creating a track.";
     }
 
     // Return the template to the function calling

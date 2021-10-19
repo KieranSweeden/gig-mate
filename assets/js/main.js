@@ -9,7 +9,7 @@ window.addEventListener("DOMContentLoaded", () => {
 
     // Apply the user's last browser page to the back button
     determineBackButton();
-})
+});
 
 // Replaces the href within the back button with the URL of the previous page
 function determineBackButton() {
@@ -30,9 +30,10 @@ function determineBackButton() {
 
 // Credit: code to adjust viewport height for Safari & Chrome mobile browsers. Fix found from: https://dev.to/maciejtrzcinski/100vh-problem-with-ios-safari-3ge9
 const appHeight = () => {
-    const doc = document.documentElement
-    doc.style.setProperty('--app-height', `${window.innerHeight}px`)
-}
+    const doc = document.documentElement;
+    doc.style.setProperty('--app-height', `${window.innerHeight}px`);
+};
+
 window.addEventListener('resize', appHeight);
 
 
@@ -82,7 +83,7 @@ function capitaliseEachWord(name) {
     nameWords.forEach(word => {
         // ...capitalise it and store it in the capitalised variable
         capitalisedWords.push(capitaliseFirstLetter(word));
-    })
+    });
 
     // Turn the array into a string with the capitalised words joined with spaces.
     capitalisedWords = capitalisedWords.join(" ");
@@ -106,10 +107,10 @@ function toggleContainerScroll() {
 // Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
 function sortByName(a, b) {
     if (a.name < b.name) {
-      return -1;
+        return -1;
     }
     if (a.name > b.name) {
-      return 1;
+        return 1;
     }
     return 0;
 }
