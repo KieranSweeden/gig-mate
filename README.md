@@ -530,8 +530,6 @@ To get your own local copy of GigMate:
 9. Press enter.
 10. You should now have a local clone of GigMate within your current working directory.
 
-
-
 [Return to Contents 🡡](#contents)
 
 # Credits
