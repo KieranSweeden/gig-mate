@@ -670,9 +670,15 @@ GigMate was tested using the following devices:
 
 # Validation Testing
 
+Within his section are the validator results for all the relevant files within this repository.
+
 <details>
 
 <summary><b>Index.html validation results</b></summary>
+
+<br>
+
+- Index.html passed with no errors or warnings.
 
 <img src="documentation/validations/index-page-validator.jpg">
 
@@ -684,6 +690,10 @@ GigMate was tested using the following devices:
 
 <summary><b>Setlists.html validation results</b></summary>
 
+<br>
+
+- Setlists.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts objects that contain headers.
+
 <img src="documentation/validations/setlists-page-validator.jpg">
 
 </details>
@@ -693,6 +703,10 @@ GigMate was tested using the following devices:
 <details>
 
 <summary><b>Repertoire.html validation results</b></summary>
+
+<br>
+
+- Repertoire.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts objects that contain headers.
 
 <img src="documentation/validations/repertoire-page-validator.jpg">
 
@@ -704,6 +718,10 @@ GigMate was tested using the following devices:
 
 <summary><b>Style.css validation results</b></summary>
 
+<br>
+
+- Style.css passed with no errors or warnings.
+
 <img src="documentation/validations/stylesheet-validator.jpg">
 
 </details>
@@ -713,6 +731,10 @@ GigMate was tested using the following devices:
 <details>
 
 <summary><b>Utility.js validation results</b></summary>
+
+<br>
+
+- Utility.js contained no warnings or errors. The unused variables are functions that are used within the application.
 
 <img src="documentation/validations/utility-js-validator.jpg">
 
@@ -724,6 +746,10 @@ GigMate was tested using the following devices:
 
 <summary><b>Setlists.js validation results</b></summary>
 
+<br>
+
+- Setlists.js only contained warnings surrounding asynchronous JavaScript. The undefined variables are functions that are used within the application.
+
 <img src="documentation/validations/setlists-js-validator.jpg">
 
 </details>
@@ -733,6 +759,12 @@ GigMate was tested using the following devices:
 <details>
 
 <summary><b>Repertoire.js validation results</b></summary>
+
+<br>
+
+- Repertoire.js only contains warning surrounding asynchronous JavaScript. The undefined variables are functions that are used within the application.
+
+- The unused variable isn't specifically read, but is particularly used to skip straight to a value within a key/value pairing. I was unaware of another alternative within the time constriants.
 
 <img src="documentation/validations/repertoire-js-validator.jpg">
 
