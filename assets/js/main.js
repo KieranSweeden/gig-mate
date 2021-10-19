@@ -1,9 +1,13 @@
 window.addEventListener("DOMContentLoaded", () => {
-
+    // On initialisation...
+    /* Adjust the overall height to compensate for mobile browsers
+    dealing with viewport units */
     appHeight();
 
+    // Determing the content height based on the presence of a search filter
     determineContentHeight();
 
+    // Apply the user's last browser page to the back button
     determineBackButton();
 })
 
@@ -31,17 +35,15 @@ const appHeight = () => {
 }
 window.addEventListener('resize', appHeight);
 
-/**
- * Determine content section height based on presence of search input in header
- */
-function determineContentHeight() {
 
-    // get search input element, header section & content section
+function determineContentHeight() {
+    /* To determine the height of the content...
+    get search input element, header section & content section */
     let searchInput = document.getElementById('search-input');
     let headerHasSearchInput = document.getElementById('header-section').contains(searchInput);
     let contentSection = document.getElementById('content-section');
 
-    // if the search element is present, adjust the height of the content section
+    // If the search element is present, adjust the height of the content section
     if (headerHasSearchInput) {
         contentSection.style.height = '72.5%';
     }
