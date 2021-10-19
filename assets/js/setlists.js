@@ -572,7 +572,7 @@ function insertButtonEventListeners(contentType, currentState, contentData) {
                     clearContentSection();
 
                     // Reduce the content container size now the form has disappeared
-                    adjustContainerSize();
+                    toggleEnlargeContainerClass();
 
                     // Diplay the new array of setlists
                     displaySetlists(originalLocalStorageArray);
