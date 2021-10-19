@@ -650,6 +650,24 @@ As a professional musician using GigMate, I want the ability to:
 
 # Manual Testing
 
+## Software
+
+GigMate was tested on the following browsers:
+
+- Google Chrome (Desktop & Mobile)
+- Mozilla Firefox (Desktop & Mobile)
+- Microsoft Edge (Desktop)
+- Safari (Mobile)
+- Opera (Mobile)
+
+## Hardware
+
+GigMate was tested using the following devices:
+
+- Dell XPS 15
+- Apple iPhone 7
+- Apple iPhone X
+
 [Return to Contents 🡡](#contents)
 
 # Validation Testing
