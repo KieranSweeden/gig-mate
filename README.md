@@ -42,6 +42,8 @@ View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/)
     - [Media](#Media)
     - [Resources](#Resources)
 
+7. [Acknowledgements](#Acknowledgements)
+
 # UX
 
 ## Strategy
@@ -460,6 +462,12 @@ Functional features that are saved for future releases of GigMate include:
 - [Chrome Dev Tools](https://developer.chrome.com/docs/devtools/)
     - Chrome Dev Tools was utilised for debugging, testing the site on various screen sizes and checking performance and SEO scores using Lighthouse.
 
+- [Responsive Viewer](https://chrome.google.com/webstore/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb)
+    - The Responsive Viewer browser extension was used to present the application running in multiple screen sizes shown in the user stories of [TESTING.md](TESTING.md).
+
+- [Nimbus Screenshot & Screen Video Recorder](https://chrome.google.com/webstore/detail/nimbus-screenshot-screen/bpconcjcammlapcogcnnelfmaeghhagj?hl=en)
+    - The Nimbus browser extension was utilised in recording the browser window, so GIF's could then be made for [TESTING.md](TESTING.md).
+
 [Return to Contents 🡡](#contents)
 
 # Testing
@@ -570,4 +578,13 @@ Here contains a list of resources that I found tremendously resourceful during t
 - This ["how to get all of an element's siblings with vanilla JS"](https://gomakethings.com/how-to-get-all-of-an-elements-siblings-with-vanilla-js/) post was inspirational for my own use case in retrieving a card's sibling in GigMate.
 
 [Return to Contents 🡡](#contents)
+
+# Acknowledgements
+
+Within this section I'd just like to give:
+
+- A giant thank you to my course mentor Sammy Dartnall, for your encouragement, excitement, guidance and support.
+- A big thanks to [MDN Web Docs](https://developer.mozilla.org/en-US/) for being a lifesaver on way too many occasions.
+- My tremendous gratitude to the Code Institute slack community for their help & guidance.
+- A thank you to the Code Institute student support team who have graciously helped when needed.
 
