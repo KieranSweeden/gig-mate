@@ -471,7 +471,7 @@ body {
     width: 100%;
     object-fit: cover;
     z-index: 1;
-    mix-blend-mode: multiply;
+    filter: brightness(0.4);
 }
 
 #main-footer {
