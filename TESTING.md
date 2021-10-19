@@ -506,7 +506,7 @@ async function checkPresenceOfRepertoire(){
 
 ## Unfixed Bugs
 
-Here are a list of current bugs that are currently known within GigMate and will be squashed when possible.
+Here are a list of current bugs that are currently known within GigMate and will be squashed when possible:
 
 <details>
 
@@ -750,9 +750,8 @@ GigMate was tested on the following browsers:
 
 - Google Chrome (Desktop & Mobile)
 - Mozilla Firefox (Desktop & Mobile)
-- Microsoft Edge (Desktop)
+- Microsoft Edge (Desktop & Mobile)
 - Safari (Mobile)
-- Opera (Mobile)
 
 ## Hardware
 
