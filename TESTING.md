@@ -510,7 +510,7 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 <details>
 
-<summary><b>Editing a track that has a duplicate within the same set effects both instances of that track</b></summary>
+<summary><b>Editing a track that has a duplicate within the same set effects both instances of that track.</b></summary>
 
 <br>
 
@@ -519,6 +519,14 @@ Here are a list of current bugs that are currently known within GigMate and will
 </details>
 
 <hr>
+
+<details>
+
+<summary><b>Checkboxes infrequently stay on purple color.</b></summary>
+
+- Sometimes when checking and unchecking a checkbox, it remains with a purple background. I believe this to be a Boostrap qwuirk but it needs to be investigated further.
+
+</details>
 
 [Return to Contents 🡡](#contents)
 
