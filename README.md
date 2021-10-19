@@ -1,6 +1,6 @@
 # <img src="assets/images/icons/gigmate-icon.png" height="22"> GigMate
 
-![Image of GigMate shown on multiple screens](documentation/general/gigmate-responsive.png)
+![Image of GigMate shown on multiple screens](documentation/general/responsive-intro-gigmate.jpg)
 
 GigMate is an interactive and responsive web application that allows professional & gigging musicians to store the tracks they've learned, insert them within ordered setlists they've created and view them in full screen for live use.
 
