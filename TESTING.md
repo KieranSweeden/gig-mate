@@ -675,12 +675,13 @@ GigMate was tested using the following devices:
 # User Testing
 
 GigMate was briefly tested in a working environment by myself and by others I work with. Prior to a gig, I asked them to build a set in GigMate with the songs for the evening. The feedback I was given was enlightening and will be considered when updating GigMate further. This included:
-    - Sticking to one browser on one device is restricting. Having a user account that holds your tracks and setlist data would arguably make the application tremendously useful.
-    - Dark mode for live mode as it's a little difficult to see with lights on stage (this was prior to dark mode being implemented for the release).
-    - Option for handwriting style font would be more visually appealing.
-    - Support for sharp keys as thinking in certain flat keys isn't optimal for some horn players.
-    - Attach notes to tracks so users can attach YouTube video links to tracks etc.
-    - Actions needed to delete tracks within the repertoire are different for tracks in setlists which can be confusing.
+
+- Sticking to one browser on one device is restricting. Having a user account that holds your tracks and setlist data would arguably make the application tremendously useful.
+- Dark mode for live mode as it's a little difficult to see with lights on stage (this was prior to dark mode being implemented for the release).
+- Option for handwriting style font would be more visually appealing.
+- Support for sharp keys as thinking in certain flat keys isn't optimal for some horn players.
+- Attach notes to tracks so users can attach YouTube video links to tracks etc.
+- Actions needed to delete tracks within the repertoire are different for tracks in setlists which can be confusing.
 
 The feedback given was wonderfully constructive. GigMate is absolutely in it's early stages and the criticism indicated that clearly, however the criticism was paired with eagerness from my peers, as they were invested in the project and saw the potential in using it often within a professional music environment. With this in mind, I believe the goal to reach the particular target audience of professional musicians has been met.
 
