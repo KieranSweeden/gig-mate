@@ -1080,47 +1080,62 @@ function getCheckedItems(contentType) {
 
             // If the setlist has one set
             if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 1) {
+                // Get checkbox
                 let set1Checkbox = setlist.children[1].firstElementChild.firstElementChild.firstElementChild.children[0].firstElementChild;
 
+                // If set 1 was checked by the user...
                 if (set1Checkbox.hasAttribute("checked")) {
+                    // Add a set1 property to the delete set item object
                     deleteSetItem.set1 = "";
                 }
             }
 
             // If the setlist has two sets
             if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 2) {
+                // Get checkboxes
                 let set1Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[0].firstElementChild;
                 let set2Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[1].firstElementChild;
 
+                // If set 1 was checked by the user...
                 if (set1Checkbox.hasAttribute("checked")) {
+                    // Add a set1 property to the delete set item object
                     deleteSetItem.set1 = "";
                 }
 
+                // If set 2 was checked by the user...
                 if (set2Checkbox.hasAttribute("checked")) {
+                    // Add a set2 property to the delete set item object
                     deleteSetItem.set2 = "";
                 }
-
             }
 
             // If the setlist has three sets
             if (setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children.length === 3) {
+                // Get checkboxes
                 let set1Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[0].firstElementChild;
                 let set2Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[1].firstElementChild;
                 let set3Checkbox = setlist.getElementsByClassName("list-group-item list-group-item-action")[0].children[2].firstElementChild;
 
+                // If set 1 was checked by the user...
                 if (set1Checkbox.hasAttribute("checked")) {
+                    // Add a set1 property to the delete set item object
                     deleteSetItem.set1 = "";
                 }
-
+                
+                // If set 2 was checked by the user...
                 if (set2Checkbox.hasAttribute("checked")) {
+                    // Add a set2 property to the delete set item object
                     deleteSetItem.set2 = "";
                 }
 
+                // If set 3 was checked by the user...
                 if (set3Checkbox.hasAttribute("checked")) {
+                    // Add a set3 property to the delete set item object
                     deleteSetItem.set3 = "";
                 }
             }
 
+            // Push the delete set item object into the checked items array
             checkedItems.push(deleteSetItem);
         });
 
@@ -1133,6 +1148,7 @@ function getCheckedItems(contentType) {
 
     }
 
+    // Return the checked items array to the function calling it
     return checkedItems;
 }
 
@@ -1140,10 +1156,10 @@ function alertUser(contentType, currentState, issue) {
     // Initialise an alert variable that will store the alert element
     let alertElement;
 
-    // If we're dealing with...
+    // If the content type is...
     if (contentType === "setlists" && currentState === "new") {
 
-        // ... a new setlist, grab the alert template
+        // A new setlist, grab the alert template
         alertElement = contentTemplates("alert", '', issue);
 
         // Get the name input
@@ -1166,7 +1182,7 @@ function checkIfDuplicate(createdItem, originalItems, contentType) {
     // If the content type we're dealing with is...
     if (contentType === "setlists") {
 
-        // ... setlists, check each setlist name in each stored array
+        // Setlists, check each setlist name in each stored array
         originalItems.forEach(storedArray => {
 
             // If the names match, set itemIsDuplicate to true
@@ -1209,14 +1225,9 @@ function createNewItem(type) {
             newItem.set2 = [];
             newItem.set3 = [];
         }
-
         // Return the new setlist object
         return newItem;
-
-    } else if (type === "track") {
-        newItem.name = document.getElementById("");
-    }
-
+    } 
     // Return the newly created item
     return newItem;
 }
@@ -1226,7 +1237,7 @@ function openForm(type, data) {
     clearContentSection();
 
     // Prepare the content container for the form by enlarging it
-    adjustContainerSize();
+    toggleEnlargeContainerClass();
 
     // Initialise a variable to store the form
     let form = document.createElement("form");
@@ -1237,37 +1248,31 @@ function openForm(type, data) {
     // Give it an id
     form.id = "input-form";
 
-    // If the type of form required is a...
+    // If the type of form required is...
     if (type === "newSetlist") {
-        // ...new setlist, set the inner HTML of the form to the new setlist template
+        // A new setlist form, set the inner HTML of the form to the new setlist template
         form.innerHTML = contentTemplates("newSetlistForm");
 
-        // display buttons appropriate for new setlists
+        // Display the footer button to save a new setlist
         determineFooterButtons("setlists", "new");
 
     } else if (type === "editTrack") {
-
+        // An edit track form, set the inner HTML of the form to the new setlist template    
         form.innerHTML = contentTemplates("editTrack", data);
 
+        // Display the footer buttons to edit tracks
         determineFooterButtons("tracks", "edit", data);
     }
 
-    // ... get parent
+    // Get the content container 
     let contentContainer = document.getElementById("content-container");
 
+    // Make sure container scroll is turned off to reduce glitchy visuals
     toggleContainerScroll();
 
-    // ... new setlist form
+    // Append the newly created form into the content container
     contentContainer.appendChild(form);
 }
-
-function adjustContainerSize() {
-    let contentContainer = document.getElementById("content-container");
-
-    contentContainer.classList.toggle("enlarge");
-    contentContainer.parentNode.classList.toggle("enlarge");
-}
-
 
 function displayItems(contentType, contentItems, reference) {
     // If the content type is...
@@ -1280,7 +1285,7 @@ function displayItems(contentType, contentItems, reference) {
 
     } else if (contentType === "tracks") {
         // Insert & collect an ordered list container
-        let container = insertListContainer("ordered");
+        let container = insertListContainer();
 
         // For each track...
         contentItems.forEach(track => {
@@ -1289,7 +1294,7 @@ function displayItems(contentType, contentItems, reference) {
 
     } else if (contentType === "addTracks") {
         // Insert & collect an ordered list container
-        let container = insertListContainer("ordered");
+        let container = insertListContainer();
 
         // For each track...
         contentItems.forEach(track => {
@@ -1302,17 +1307,22 @@ function displayItems(contentType, contentItems, reference) {
 
     } else if (contentType === "checkboxTracks") {
         // Insert & collect an ordered list container
-        let container = insertListContainer("ordered");
+        let container = insertListContainer();
 
+        // Make the container able to dropped within
         container.addEventListener("dragover", e => {
             e.preventDefault();
             // Credit: code to get element closest & append
             // To container taken from https://www.youtube.com/watch?v=jfYWwQrtzzY
+            // Get element underneath mouse position
             const afterElement = getDragAfterElement(container, e.clientY);
             const draggable = document.querySelector(".dragging");
             if (afterElement == null) {
+                // If nothing exists, insert the dragged item anyway
                 container.appendChild(draggable);
             } else {
+                /* Else insert the item before the item underneath
+                the mouse position */
                 container.insertBefore(draggable, afterElement);
             }
         });
@@ -1332,6 +1342,7 @@ function displayItems(contentType, contentItems, reference) {
 function getDragAfterElement(container, mousePosition) {
     let draggableElements = [...container.querySelectorAll(".draggable:not(.dragging)")];
 
+    // Return the closest element
     return draggableElements.reduce((closestElement, child) => {
         const box = child.getBoundingClientRect();
         const offset = mousePosition - box.top - box.height / 2;
@@ -1348,18 +1359,15 @@ function getDragAfterElement(container, mousePosition) {
     }).element;
 }
 
-function insertListContainer(type) {
+function insertListContainer() {
+    // Initialise a container variable
+    let container = document.createElement("ol");
 
-    // Init a container
-    let container;
+    // Give it the unique id of list container
+    container.id = "list-container";
 
-    if (type === "ordered") {
-        container = document.createElement("ol");
-
-        container.id = "list-container";
-
-        container.className = "row p-0 m-0";
-    }
+    // Give it the necessary bootstrap classes
+    container.className = "row p-0 m-0";
 
     // Push list container into content container
     document.getElementById("content-container").appendChild(container);
@@ -1376,7 +1384,7 @@ function createCard(track, insertCheckbox, insertHover) {
     card.classList.add("col-12", "d-flex", "justify-content-center", "align-items-center", "my-1", "draggable");
 
     if (insertCheckbox === false) {
-        // Add inner HTML within each card
+        // If a checkbox is not needed, append the following HTML
         card.innerHTML =
             `<button class="btn-card animate__animated animate__fadeInUp">
             <div class="card track-card rounded-corners">
@@ -1397,7 +1405,7 @@ function createCard(track, insertCheckbox, insertHover) {
             </div>
         </button>`;
 
-        // Add event listener
+        // Add event listener to the card so it can be opened & edited
         card.addEventListener("click", function () {
             openForm("editTrack", track);
         });
@@ -1406,6 +1414,8 @@ function createCard(track, insertCheckbox, insertHover) {
         addIconHover(card.firstElementChild);
 
     } else if (insertCheckbox === true && insertHover === true) {
+        /* Else if a checkbox is needed & hover is enabled,
+        add the following HTML - this is a draggable card */
         card.innerHTML =
             `<button class="btn-card animate__animated animate__fadeInUp">
         <div class="card track-card rounded-corners">
@@ -1437,6 +1447,8 @@ function createCard(track, insertCheckbox, insertHover) {
         card.addEventListener("dragstart", dragStart);
         card.addEventListener("dragend", dragEnd);
     } else if (insertCheckbox === true && insertHover === false) {
+        /* Else if a checkbox is needed & hover is not enabled,
+        add the following HTML - this is a card ready for deletion */
         card.innerHTML =
             `<button class="btn-card animate__animated animate__fadeInUp">
         <div class="card track-card rounded-corners">
@@ -1519,10 +1531,12 @@ function contentTemplates(request, contentData, issue) {
         return template.outerHTML;
 
     } else if (request === "setlistAccordionItem") {
-        // ... a setlist accordion, create a reference of the setlistname without spaces so the accordion can function properly
+        /* A setlist accordion, create a reference of the setlistname without
+        spaces so the accordion can function properly */
         let reference = removeSpaces(contentData.setlistName);
 
-        // ... then assign the template variable to the setlist template with data & references attached
+        /* Then assign the template variable to the setlist template
+        with data & references attached */
         template =
             `
         <li class="accordion-item">
@@ -1538,13 +1552,15 @@ function contentTemplates(request, contentData, issue) {
           </li>
         `;
 
-        // ... evaluate how many set buttons need to be created and store them in a variable
+        // Evaluate how many set buttons need to be created and store them in a variable
         let setButtons = createSetButtons(contentData);
 
-        // ... then return the setlist template along with the set buttons
+        // Then return the setlist template along with the set buttons
         return [template, setButtons];
 
     } else if (request === "newSetlistForm") {
+        /* If a new setlist form, insert the following HTML into
+        the template variable */
         template =
             `
         <div class="col-12">
@@ -1574,12 +1590,17 @@ function contentTemplates(request, contentData, issue) {
         return template;
 
     } else if (request === "alert") {
+        /* If the request is an alert
+        assign the template as a new element */
         template = document.createElement('div');
 
+        // Give it the Bootstrap 5 classes
         template.className = "alert alert-danger";
 
+        // Set the role of the element to alert
         template.setAttribute('role', 'alert');
 
+        // Depending on the issue provided, insert the following text
         if (issue === "alreadyExists") {
             template.textContent = "This setlist name already exists, create a new one.";
         } else if (issue === "emptyInput") {
@@ -1590,7 +1611,8 @@ function contentTemplates(request, contentData, issue) {
         return template;
 
     } else if (request === "editTrack") {
-
+        /* If a form to edit a track is requested,
+        assign template the following HTML */
         template =
             `
         <div class="col-12">
@@ -1632,10 +1654,12 @@ function contentTemplates(request, contentData, issue) {
 
         return template;
     } else if (request === "liveModeTrack") {
-
-        // Create a variable that holds both the key & tonality
+        /* If a live mode track item is requested,
+        create a variable that holds both the key & tonality */
         let keyInFull = contentData.key + " " + contentData.tonality;
 
+        /* Assign the template variable the following HTML 
+        with track data inserted */
         template =
             `
         <li class="live-mode-track list-group-item">
@@ -1653,7 +1677,7 @@ function contentTemplates(request, contentData, issue) {
         return template;
     }
 
-    // Return the template
+    // Return the template and set buttons
     return [template, setButtons];
 }
 
@@ -1697,7 +1721,9 @@ function createSetButtons(setlist) {
 }
 
 function restartGigMate(contentType) {
+    // To restart GigMate, clear the content container
     clearContentSection();
+    // Start GigMate from fresh
     startGigMate(contentType);
 }
 
