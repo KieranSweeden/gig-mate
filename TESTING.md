@@ -1,10 +1,12 @@
-# GigMate Testing
+# <img src="assets/images/icons/gigmate-icon.png" height="22"> GigMate Testing
 
-This markdown file documents the development process of GigMate.
+This markdown file documents the testing process during the development of GigMate.
+
+![Image of GigMate shown on multiple screens](documentation/general/responsive-intro-gigmate.jpg)
 
 To return to the original README file, [click here](README.md).
 
-![link to view GitHub page deployment]
+View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/).
 
 # Contents
 
