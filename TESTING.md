@@ -522,8 +522,13 @@ Here are a list of current bugs that are currently known within GigMate and will
 
 User story testing was performed manually, serving the purpose of documenting how a user will navigate the site and checking that interactive elements are working as intended.
 
+>Please note: The reason for some screen captures not having multiple screens is that the web browser extension used to achieve this ([Responsive Viewer](https://chrome.google.com/webstore/detail/responsive-viewer/inmopeiepgfljkpkidclfgbgbmfcennb)) hosts multiple instances of GigMate. For this reason, when creating a new track for example, 3 instances of the track are made and it causes GigMate to be confused. For this reason, Responsive Viewer has been used when possible and avoided when causing mutliple instance issues.
+
 As a professional musician using GigMate, I want the ability to:
+
 1. View my repertoire of tracks.
+
+<br>
 
 <img src="documentation/user-stories/viewing-repertoire-tracks.gif">
 
@@ -531,11 +536,15 @@ As a professional musician using GigMate, I want the ability to:
 
 2. Add a new track to my repertoire of tracks.
 
+<br>
+
 <img src="documentation/user-stories/adding-track-repertoire.gif">
 
 <hr>
 
 3. Filter through my repertoire of tracks.
+
+<br>
 
 <img src="documentation/user-stories/filtering-tracks-repertoire.gif">
 
@@ -543,11 +552,15 @@ As a professional musician using GigMate, I want the ability to:
 
 4. Edit a track within my repertoire.
 
+<br>
+
 <img src="documentation/user-stories/editing-track-repertoire.gif">
 
 <hr>
 
 5. Delete a track from my repertoire.
+
+<br>
 
 <img src="documentation/user-stories/deleting-track-repertoire.gif">
 
@@ -555,13 +568,15 @@ As a professional musician using GigMate, I want the ability to:
 
 6. View my list of setlists.
 
+<br>
+
 <img src="documentation/user-stories/viewing-setlists.gif">
 
 <hr>
 
 7. Create a new setlist and set the amount of sets it has.
 
-    - Could not display/record multiple screen instances at once, as each instance would add a new setlist and the last two instances would display an alert message as the setlist already exists (from the first instance).
+<br>
 
 <img src="documentation/user-stories/creating-setlist-and-sets.gif">
 
@@ -569,11 +584,15 @@ As a professional musician using GigMate, I want the ability to:
 
 8. Delete a setlist completely or the sets within it.
 
+<br>
+
 <img src="documentation/user-stories/deleting-set-and-setlist.gif">
 
 <hr>
 
 9. Edit a track within a set, that's independent from the respective track within the repertoire.
+
+<br>
 
 <img src="documentation/user-stories/edit-track-in-set-independent-from-repertoire.gif">
 
@@ -581,11 +600,15 @@ As a professional musician using GigMate, I want the ability to:
 
 10. Alter the order of the tracks within a set using Drag & Drop.
 
+<br>
+
 <img src="documentation/user-stories/alter-order-setlist-drag-n-drop.gif">
 
 <hr>
 
 11. Add a single track or multiple tracks to a set.
+
+<br>
 
 <img src="documentation/user-stories/adding-tracks-to-setlist.gif">
 
@@ -593,11 +616,15 @@ As a professional musician using GigMate, I want the ability to:
 
 12. Delete a single track or multiple tracks from a set.
 
+<br>
+
 <img src="documentation/user-stories/deleting-track-or-tracks-from-set.gif">
 
 <hr>
 
 13. View the set full screen so I can use GigMate for live use.
+
+<br>
 
 <img src="documentation/user-stories/view-set-full-screen.gif">
 
@@ -605,11 +632,15 @@ As a professional musician using GigMate, I want the ability to:
 
 14. Easily use GigMate on multiple devices as the design is consistent on a variety of screen sizes.
 
+<br>
+
 <img src="documentation/user-stories/functionality-design-consistent-screen-sizes.gif">
 
 <hr>
 
 15. Have dark mode functionality when using the application for live use.
+
+<br>
 
 <img src="documentation/user-stories/view-live-dark-mode.gif">
 
