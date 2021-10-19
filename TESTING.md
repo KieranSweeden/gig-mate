@@ -672,19 +672,73 @@ GigMate was tested using the following devices:
 
 # Validation Testing
 
-- Index.html validation results
+<details>
 
-- Setlists.html validation results
+<summary><b>Index.html validation results</b></summary>
 
-- Repertoire.html validation results
+<img src="documentation/validations/index-page-validator.jpg">
 
-- Style.css validation results
+</details>
 
-    <img src="documentation/validations/style.css-validator.jpg" width="500">
+<hr>
 
-- Setlists.js validation results
+<details>
 
-- Repertoire.js validation results
+<summary><b>Setlists.html validation results</b></summary>
+
+<img src="documentation/validations/setlists-page-validator.jpg">
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Repertoire.html validation results</b></summary>
+
+<img src="documentation/validations/repertoire-page-validator.jpg">
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Style.css validation results</b></summary>
+
+<img src="documentation/validations/stylesheet-validator.jpg">
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Utility.js validation results</b></summary>
+
+<img src="documentation/validations/utility-js-validator.jpg">
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>Setlists.js validation results</b></summary>
+
+<img src="documentation/validations/setlists-js-validator.jpg">
+
+</details>
+
+<hr>
+
+<details>
+
+<summary><b>- Repertoire.js validation results</b></summary>
+
+<img src="documentation/validations/repertoire-js-validator.jpg">
+
+</details>
 
 [Return to Contents 🡡](#contents)
 
