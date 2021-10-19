@@ -564,6 +564,9 @@ function getInputValues() {
   keySelect = document.getElementById("track-key").value;
   tonalitySelect = document.getElementById("track-tonality").value;
 
+  // Remove the edit from the header
+  formHeader = removeFirstWord(formHeader);
+
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
   let repertoireArray = getJSONFromLocalStorage("repertoire");
 
