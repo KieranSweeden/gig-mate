@@ -30,19 +30,21 @@ View the deployment of GigMate [here](https://kieransweeden.github.io/gig-mate/)
 
 4. [Testing](#Testing)
 
-5. [Deployment](#Deployment)
+5. [Full Development Cycle](#Full-Development-Cycle)
+
+6. [Deployment](#Deployment)
     - [Deploying via GitHub Pages](#Deploying-via-GitHub-Pages)
     - [Forking the Repository](#Forking-the-Repository)
     - [Cloning the Repository](#Cloning-the-Repository)
         - [Using GitPod](#Using-GitPod)
         - [Using a Local IDE](#Using-a-Local-IDE)
 
-6. [Credits](#Credits)
+7. [Credits](#Credits)
     - [Code](#Code)
     - [Media](#Media)
     - [Resources](#Resources)
 
-7. [Acknowledgements](#Acknowledgements)
+8. [Acknowledgements](#Acknowledgements)
 
 # UX
 
@@ -473,6 +475,22 @@ Functional features that are saved for future releases of GigMate include:
 # Testing
 
 To view the testing procedures undertook for this project, click [here](TESTING.md).
+
+[Return to Contents 🡡](#contents)
+
+# Full Development Cycle
+
+Reflecting on the development cycle of the project, approximately half-way through I knew the development of GigMate could be better.
+
+Prior to starting and reading through the assessment handbook, I was left with the impression that presenting my understanding of conditional statements were of upmost importance. With this in mind, I decided to go about writing a large JavaScript file that would contain various conditional statements and could be used for each HTML file. The various conditional statements would largely be based on the content type, such as tracks or setlists etc.
+
+After a few weeks progressing in this direction, I began to see problems and at this time I had also read more about best practises regarding JavaScript. The main best practise being keep the file size of your JavaScript files down, so that the browser doesn't have to deal with code it doesn't need. Filling it with "if contentType === ..." and such simply added more lines of unnecessary code. Unfortunately remnants of these unneccessary conditional statements are scattered throughout the JavaScript files, largely due to me prioritising other matters within the project given that the functionality still worked.
+
+If I were to start a new project, I would not continue in this way. I would seperate the JavaScript files further so the files are more concise, readable and easier to maintain. I would also be more specific with my function name choices. Although I feel this improved towards the later end of the project, there's still room to improve.
+
+A CSS methodology like BEM would prove to be useful moving forward also, so naming conventions are easy to read and maintainable for myself and other developers.
+
+Having said this, I am proud of the work that's presented given it's my first deep dive into JavaScript. I'll absolutely be looking to GigMate moving forward.
 
 [Return to Contents 🡡](#contents)
 
