@@ -409,6 +409,9 @@ function addSaveBtnListener(saveBtn, currentState) {
       clearContentSection();
       // Fill with repertoire
       checkLocalStorage();
+      // Remove enlarge classes
+      document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
+      document.getElementById("list-container").classList.remove("enlarge");
       // Insert search filter
       toggleSearchInputDisplay();
       // Make container scrollable
@@ -469,6 +472,9 @@ function addSaveBtnListener(saveBtn, currentState) {
           pushToLocalStorage("track", formValues);
           // Clear content section
           clearContentSection();
+          // Remove enlarge classes
+          document.getElementById("content-section").firstElementChild.classList.remove("enlarge");
+          document.getElementById("list-container").classList.remove("enlarge");
           // Add search filter
           toggleSearchInputDisplay();
           // Make container scrollable
