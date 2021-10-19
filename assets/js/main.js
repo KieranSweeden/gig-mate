@@ -100,3 +100,41 @@ function toggleContainerScroll() {
         container.style.overflowY = "scroll";
     }
 }
+
+// Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
+function sortByName(a, b) {
+    if (a.name < b.name) {
+      return -1;
+    }
+    if (a.name > b.name) {
+      return 1;
+    }
+    return 0;
+}
+
+// Change color of card open icon to represent hovered state
+function addIconHover(card) {
+    // When hovering over the button area, the icon will turn purple
+    card.addEventListener('mouseenter', function () {
+        paintIcon(card);
+    });
+
+    // When leaving the button area, the icon will revert to grey
+    card.addEventListener('mouseleave', function () {
+        paintIcon(card);
+    });
+}
+
+// Toggle a class to paint the edit icon
+function paintIcon(card) {
+    // Grab the icon within the card
+    let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
+    // Check if the icon has a class of icon-hover
+    if (icon.classList.contains("icon-hover")) {
+        // If so, remove the class to revert back to the grey color
+        icon.classList.remove("icon-hover");
+    } else {
+        // If not, add the class to turn the icon color to purple
+        icon.classList.add("icon-hover");
+    }
+}

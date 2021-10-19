@@ -724,18 +724,6 @@ function createLiveModeTrack(trackObject) {
     return liveModeTrack;
 }
 
-// Credit: code for sorting an array of objects by property values
-// taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
-function sortByName(a, b) {
-    if (a.name < b.name) {
-        return -1;
-    }
-    if (a.name > b.name) {
-        return 1;
-    }
-    return 0;
-}
-
 function editSet(setlistName, setNumber) {
     /* To initialise an editing state for sets
     set the footer buttons to ones ready for editing sets */
@@ -1681,12 +1669,6 @@ function contentTemplates(request, contentData, issue) {
     return [template, setButtons];
 }
 
-// Credit: the code below that removes spaces within strings was found from: https://stackoverflow.com/a/51321865/15607265
-function removeSpaces(string) {
-    // Return the received string without spaces
-    return string.replace(/ /g, '');
-}
-
 function createSetButtons(setlist) {
     // To create set buttons for a setlist...
     // ... firstly, we must create an li element, which will contain the buttons
@@ -1718,6 +1700,12 @@ function createSetButtons(setlist) {
 
     // Return the button container containing the appropriate amount of buttons
     return setButtonContainer;
+}
+
+// Credit: the code below that removes spaces within strings was found from: https://stackoverflow.com/a/51321865/15607265
+function removeSpaces(string) {
+    // Return the received string without spaces
+    return string.replace(/ /g, '');
 }
 
 function restartGigMate(contentType) {

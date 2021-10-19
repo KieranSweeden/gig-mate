@@ -20,8 +20,7 @@ function addFilterInputListener() {
 }
 
 function filterRepertoireTracks() {
-
-  // Get inputs
+  // Get text entered by the user
   let searchInput = document.getElementById("search-input");
   let filterTyped = searchInput.value.toUpperCase();
   let trackItems = [...document.getElementsByClassName("list-track-item")];
@@ -41,57 +40,57 @@ function filterRepertoireTracks() {
       // ... remove it from the list
       trackItem.style.display = "none";
     }
-  })
+  });
 }
 
 // Check the user's local storage, to determine if initial repertoire is needed
 async function checkLocalStorage() {
   if (!localStorage.getItem('repertoire')) {
+    // If local storage does not exist, add the initial JSON
     addJSONToLocalStorage("repertoire");
   } else {
+    // If local storage does exist, fill the container with tracks from local storage
     fillWithLocalStorage("repertoire");
   }
 }
 
-async function addJSONToLocalStorage(data) {
-  if (data === "repertoire") {
+async function addJSONToLocalStorage(contentType) {
+  if (contentType === "repertoire") {
+    // If contentType type is repertoire (i.e tracks) get the initialing JSON file
     let repertoire = await fetchInitialJSON('assets/json/init-repertoire.json');
 
+    // Push the track from the JSON file to local storage
     localStorage.setItem('repertoire', JSON.stringify(repertoire));
   }
-  fillWithLocalStorage(data);
+  // Fill the container with tracks from local storage
+  fillWithLocalStorage(contentType);
 }
 
-function fillWithLocalStorage(data) {
-  let storageData = localStorage.getItem(data);
+function fillWithLocalStorage(contentType) {
+  /* Using the content type provided
+  get the data associated with that content type */
+  let storageData = localStorage.getItem(contentType);
 
+  // Convert the stringified data into object we can use
   let storageArray = JSON.parse(storageData);
 
+  // Sort the array items by name from A-Z
   storageArray.sort(sortByName);
 
+  // For each item in the array, create a card
   storageArray.forEach(element => {
     createCard(element);
   });
 }
 
-// Credit: code for sorting an array of objects by property values taken from https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value
-function sortByName(a, b) {
-  if (a.name < b.name) {
-    return -1;
-  }
-  if (a.name > b.name) {
-    return 1;
-  }
-  return 0;
-}
-
-function getJSONFromLocalStorage(data) {
-  if (data === "repertoire") {
+function getJSONFromLocalStorage(contentType) {
+  // If the content type is repertoire...
+  if (contentType === "repertoire") {
+    // Return the repertoire from local storage
     return JSON.parse(localStorage.getItem('repertoire'));
   }
 }
 
-// A utility function that can be used to fetch local JSON files
 async function fetchInitialJSON(url) {
   // Fetch the JSON with a provided URL and store the promise reponse within a variable
   let response = await fetch(url);
@@ -140,7 +139,7 @@ function createCard(track) {
   cardContainer.appendChild(card);
 }
 
-function addCardEnlarge(card, track) {
+function addCardEnlarge(card) {
   // When the card is clicked, trigger the necessary functions to enlarge it, filling the content section
   card.firstElementChild.addEventListener('click', editTrack);
 }
@@ -152,13 +151,16 @@ function editTrack() {
   // Get the container element
   let container = document.getElementById("list-container");
 
+  // Remove the search input from the screen
   toggleSearchInputDisplay();
 
+  // Disable scroll for the content container
   toggleContainerScroll();
 
+  // Clear the content section
   clearContentSection();
 
-  // Open the form element
+  // Open the form element with track data attached
   openForm("editTrack", container, track);
 }
 
@@ -203,76 +205,78 @@ function createNewTrack() {
   openForm("newTrack", cardContainer);
 }
 
-function getFormValues(type) {
-
+function getFormValues() {
+  /* Initialise a new track object that will
+  contain the values given by the user */
   let newTrackValues = {};
 
-  if (type === "newTrack") {
+  // Attach the track values given to the new track object
+  newTrackValues.name = capitaliseEachWord(document.getElementById('track-name').value);
+  newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
+  newTrackValues.key = document.getElementById('track-key').value;
+  newTrackValues.tonality = document.getElementById('track-tonality').value;
 
-    newTrackValues.name = capitaliseEachWord(document.getElementById('track-name').value);
-    newTrackValues.artist = capitaliseEachWord(document.getElementById('track-artist').value);
-    newTrackValues.key = document.getElementById('track-key').value;
-    newTrackValues.tonality = document.getElementById('track-tonality').value;
-  }
-
+  // Return the new track object
   return newTrackValues;
 }
 
-function removeAllListItems(list) {
-  list.forEach(listItem => {
-    listItem.remove();
-  })
-}
-
 function openForm(type, parent, track) {
+  /* To create a new form create a new 
+  list element to go in the unordered list container */
   let newForm = document.createElement('li');
 
+  // Give it the necessary bootstrap classes
   newForm.className = "col-12 d-flex justify-content-center align-items-center my-1";
 
+  /* Add the following classes to the parent elements
+  to allow the form to enlarge */
   parent.classList.add('enlarge');
   parent.parentNode.classList.add('enlarge');
 
+  // Set the innerHTML of the form to the following
   newForm.innerHTML = `
-          <form id="input-form" class="row rounded-corners animate__animated animate__fadeInUp"">
-            <div class="col-12">
-              <h3 id="form-title"></h3>
-            </div>
-            <div class="col-12">
-              <label for="track-name">Track:</label>
-              <input id="track-name" type="text" value="" class="rounded-corners">
-            </div>
-            <div class="col-12">
-              <label for="track-artist">Artist:</label>
-              <input id="track-artist" type="text" value="" class="rounded-corners">
-            </div>
-            <div class="col-12 col-track-key">
-              <label class="d-block" for="track-key">Key:</label>
-              <select name="keys" id="track-key" class="rounded-corners">
-                  <option value="" selected="" hidden=""></option>
-                  <option class="key-option" value="A">A</option>
-                  <option class="key-option" value="Bb">Bb</option>
-                  <option class="key-option" value="B">B</option>
-                  <option class="key-option" value="C">C</option>
-                  <option class="key-option" value="Db">Db</option>
-                  <option class="key-option" value="D">D</option>
-                  <option class="key-option" value="Eb">Eb</option>
-                  <option class="key-option" value="E">E</option>
-                  <option class="key-option" value="F">F</option>
-                  <option class="key-option" value="Gb">Gb</option>
-                  <option class="key-option" value="G">G</option>
-                  <option class="key-option" value="Ab">Ab</option>
-              </select>
-              <label for="track-tonality">Tonality:</label>
-              <select name="keys" id="track-tonality" class="rounded-corners">
-                  <option value="" selected="" hidden=""></option>
-                  <option value="Major">Major</option>
-                  <option value="Minor">Minor</option>
-              </select>
-            </div>
-          </form>`;
+    <form id="input-form" class="row rounded-corners animate__animated animate__fadeInUp"">
+      <div class="col-12">
+        <h3 id="form-title"></h3>
+      </div>
+      <div class="col-12">
+        <label for="track-name">Track:</label>
+        <input id="track-name" type="text" value="" class="rounded-corners">
+      </div>
+      <div class="col-12">
+        <label for="track-artist">Artist:</label>
+        <input id="track-artist" type="text" value="" class="rounded-corners">
+      </div>
+      <div class="col-12 col-track-key">
+        <label class="d-block" for="track-key">Key:</label>
+        <select name="keys" id="track-key" class="rounded-corners">
+            <option value="" selected="" hidden=""></option>
+            <option class="key-option" value="A">A</option>
+            <option class="key-option" value="Bb">Bb</option>
+            <option class="key-option" value="B">B</option>
+            <option class="key-option" value="C">C</option>
+            <option class="key-option" value="Db">Db</option>
+            <option class="key-option" value="D">D</option>
+            <option class="key-option" value="Eb">Eb</option>
+            <option class="key-option" value="E">E</option>
+            <option class="key-option" value="F">F</option>
+            <option class="key-option" value="Gb">Gb</option>
+            <option class="key-option" value="G">G</option>
+            <option class="key-option" value="Ab">Ab</option>
+        </select>
+        <label for="track-tonality">Tonality:</label>
+        <select name="keys" id="track-tonality" class="rounded-corners">
+            <option value="" selected="" hidden=""></option>
+            <option value="Major">Major</option>
+            <option value="Minor">Minor</option>
+        </select>
+      </div>
+    </form>`;
 
+  // Append the form into the parent container
   parent.appendChild(newForm);
 
+  // Get the header and input elements
   let formHeader, nameInput, artistInput, keySelect, tonalitySelect;
   formHeader = document.getElementById("form-title");
   nameInput = document.getElementById("track-name");
@@ -281,108 +285,26 @@ function openForm(type, parent, track) {
   tonalitySelect = document.getElementById("track-tonality");
 
   if (type === "newTrack") {
+    /* If the type is creating a new track set the placeholders 
+    and text content to encourage the user to create a new track */
     formHeader.textContent = "New Track";
     nameInput.placeholder = "Enter track name...";
     artistInput.placeholder = "Enter track artist...";
 
+    // Update the footer state to add buttons for adding a new track
     footerState("addingTrack");
 
   } else if (type === "editTrack") {
+    /* If the type is updating a track already within the repertoire,
+    set the input values and text content to the track data */
     formHeader.textContent = "Edit " + track.name;
     nameInput.value = track.name;
     artistInput.value = track.artist;
     keySelect.value = track.key;
     tonalitySelect.value = track.tonality;
 
+    // Update the footer state to add buttons for editing a current track
     footerState("editingTrack");
-  }
-}
-
-function enlargeCard(card, track) {
-  // Retrieve the card's container & row parents
-  let cardContainer = card.parentNode.parentNode;
-  let cardRow = card.parentNode;
-
-  // Now the siblings are removed, increase the height of the card, it's row and container with the enlarge class
-  cardContainer.classList.add("enlarge");
-  cardRow.classList.add("enlarge");
-  card.firstElementChild.classList.add("enlarge");
-
-  styleLargeCard(card, track);
-}
-
-function styleLargeCard(card, track) {
-  let cardBody = card.firstElementChild.firstElementChild.firstElementChild;
-
-  cardBody.className = 'card-body d-flex justify-content-center align-items-center';
-
-  cardBody.innerHTML = `
-  <form id="enlarged-card" class="row justify-content-center align-items-center h-100 w-100">
-    <div class="col-12">
-      <h3>Edit Track</h3>
-    </div>
-    <div class="col-12">
-      <label for="track-name">Track:</label>
-      <input id="track-name" type="text" value="${track.name}" class="rounded-corners">
-    </div>
-    <div class="col-12">
-      <label for="track-artist">Artist:</label>
-      <input id="track-artist" type="text" value="${track.artist}" class="rounded-corners">
-    </div>
-    <div class="col-6">
-      <label for="track-key">Key:</label>
-      <select name="keys" id="track-key" class="rounded-corners">
-          <option value="${track.key}" selected hidden>${track.key}</option>
-          <option class="key-option" value="A">A</option>
-          <option class="key-option" value="Bb">Bb</option>
-          <option class="key-option" value="B">B</option>
-          <option class="key-option" value="C">C</option>
-          <option class="key-option" value="Db">Db</option>
-          <option class="key-option" value="D">D</option>
-          <option class="key-option" value="Eb">Eb</option>
-          <option class="key-option" value="E">E</option>
-          <option class="key-option" value="F">F</option>
-          <option class="key-option" value="Gb">Gb</option>
-          <option class="key-option" value="G">G</option>
-          <option class="key-option" value="Ab">Ab</option>
-      </select>
-    </div>
-    <div class="col-6">
-      <label for="track-tonality">Tonality:</label>
-      <select name="keys" id="track-tonality" class="rounded-corners">
-          <option value="${track.tonality}" selected hidden>${track.tonality}</option>
-          <option value="Major">Major</option>
-          <option value="Minor">Minor</option>
-      </select>
-    </div>
-  </form>
-  `;
-}
-
-
-// Change color of card open icon to represent hovered state
-function addIconHover(card) {
-  // When hovering over the button area, the icon will turn purple
-  card.addEventListener('mouseenter', function () {
-    paintIcon(card)
-  })
-  // When leaving the button area, the icon will revert to grey
-  card.addEventListener('mouseleave', function () {
-    paintIcon(card)
-  })
-}
-
-// Toggle a class to paint the edit icon
-function paintIcon(card) {
-  // Grab the icon within the card
-  let icon = card.firstElementChild.firstElementChild.children[1].firstElementChild;
-  // Check if the icon has a class of icon-hover
-  if (icon.classList.contains("icon-hover")) {
-    // If so, remove the class to revert back to the grey color
-    icon.classList.remove("icon-hover")
-  } else {
-    // If not, add the class to turn the icon color to purple
-    icon.classList.add("icon-hover");
   }
 }
 
@@ -408,6 +330,7 @@ function footerState(currentState, card, track) {
     <a id="btn-back" class="btn-bottom" href=""><i class="fas fa-arrow-left"></i>Back</a>
     <button id="btn-save" class="btn-bottom"><i class="fas fa-check"></i>Save</button>`;
   }
+  // Add event listeners to the buttons recently inserted
   addButtonListeners(currentState, card, track);
 }
 
@@ -417,7 +340,7 @@ function addButtonListeners(currentState, card, track) {
   let deleteBtn = document.getElementById("btn-delete");
   let saveBtn = document.getElementById("btn-save");
 
-
+  // Depending on the current state, add the following event listeners
   if (currentState === "viewingRepertoire") {
     addAddBtnListener(addBtn);
   } else if (currentState === "editingTrack") {
@@ -429,7 +352,9 @@ function addButtonListeners(currentState, card, track) {
 }
 
 function clearContentSection() {
+  // Get the content section
   let contentSection = document.getElementById("list-container");
+  // Clear it's inner HTML
   contentSection.innerHTML = "";
 }
 
@@ -455,7 +380,7 @@ function addDeleteBtnListener(deleteBtn) {
 }
 
 function deleteObject() {
-
+  // Get the form header, remove the word "edit" so it's just the track name
   let formHeader = removeFirstWord(document.getElementById("form-title").textContent);
 
   // Retrieve the repertoire array of objects (tracks) within local storage and store in a variable
@@ -464,8 +389,10 @@ function deleteObject() {
   // Find the index of the track in local storage that has the same name as the track opened, store that index in a variable
   let trackIndex = repertoireArray.findIndex((localStorageTrack => localStorageTrack.name === formHeader));
 
+  // Remove the targeted track using the index previously retrieved
   repertoireArray.splice(trackIndex, 1);
 
+  // Update local storage with the new array
   updateLocalStorage("repertoire", JSON.stringify(repertoireArray));
 }
 
@@ -490,49 +417,55 @@ function addSaveBtnListener(saveBtn, currentState) {
       footerState("viewingRepertoire");
     } else if (currentState === "addingTrack") {
 
-      // Get input values
-      let formValues = getFormValues("newTrack");
+      // Get input values and store them as an object
+      let formValues = getFormValues();
 
+      // Initialise variables with respective true & false values
       let emptyInput = false;
       let inputIsAllLetters = true;
 
+      // For each property within the form object received
       for (const [key, valueEntered] of Object.entries(formValues)) {
         if (valueEntered === "") {
+          // If any of them contain nothing, set emptyInput to true
           emptyInput = true;
         }
         if (!checkNameIsAllLetters(valueEntered)) {
+          // If any of them contain any illegal characters, set inputIsAllLetters to false
           inputIsAllLetters = false;
         }
       }
 
       if (emptyInput === true) {
-
+        // If emptyInput is true, alert the user of the empty inputs
         alertUser("addingTrack", "emptyInputs");
 
       } else if (!inputIsAllLetters) {
-
+        // If there were illegal characters, alert the user to enter only letters
         alertUser("addingTrack", "illegalCharacters");
 
       } else {
-        // Get tracks from local storage
+        // If it passed the input tests, get tracks from local storage
         let localStorageTracks = getJSONFromLocalStorage("repertoire");
 
+        // Initialise a variable that stores whether a duplicate track has been made
         let itemIsDuplicate = false;
 
         localStorageTracks.forEach(localStorageTrack => {
           if (formValues.name === localStorageTrack.name && formValues.artist === localStorageTrack.artist) {
-
+            // If a duplicate has been form, set itemIsDuplicate to true
             itemIsDuplicate = true;
           }
         });
 
         if (itemIsDuplicate === true) {
-
+          /* If the inserted item is a duplicate, alert the user
+          to create a new track */
           alertUser("addingTrack", "alreadyExists");
 
         } else if (itemIsDuplicate === false) {
-
-          // Push input values to local storage
+          /* If the data is not a duplicate and therefore valid
+          push input values to local storage */
           pushToLocalStorage("track", formValues);
           // Clear content section
           clearContentSection();
@@ -577,14 +510,18 @@ function contentTemplates(request, issue) {
   // Initialise a variable to store the template
   let template;
 
-  if (request === "alert") {
 
+  if (request === "alert") {
+    // If the request is an alert, create a div element
     template = document.createElement('div');
 
+    // Assign it the necessary bootstrap alert classes
     template.className = "alert alert-danger";
 
+    // Set it's role to alert for accessibility
     template.setAttribute('role', 'alert');
 
+    // Depending on the issue, insert the following text
     if (issue === "alreadyExists") {
       template.textContent = "This track name already exists, create a new one.";
     } else if (issue === "emptyInputs") {
@@ -593,12 +530,12 @@ function contentTemplates(request, issue) {
       template.textContent = "Please only use letters when creating a track."
     }
 
+    // Return the template to the function calling
     return template;
   }
 }
 
 function pushToLocalStorage(type, data) {
-
   // If the data type is track data...
   if (type === "track") {
     // ... get the repertoire stored in local storage
@@ -613,7 +550,6 @@ function pushToLocalStorage(type, data) {
 }
 
 function getInputValues() {
-
   // Retrieve the values contained within the form elements
   let formHeader, nameInput, artistInput, keySelect, tonalitySelect;
   formHeader = document.getElementById("form-title").textContent;
@@ -644,10 +580,12 @@ function removeFirstWord(sentence) {
 }
 
 function updateLocalStorage(key, data) {
+  // Update local storage with given key and data values
   localStorage.setItem(key, data);
 }
 
 function addAddBtnListener(addBtn) {
+  // Add event listener to add button that creates a new track
   addBtn.addEventListener('click', createNewTrack);
 }
 
@@ -659,7 +597,6 @@ function toggleSearchInputDisplay() {
   searchInput = document.getElementById("search-input");
   headerSection = document.getElementById("header-section");
   contentSection = document.getElementById("content-section");
-
 
   if (searchInput.style.display === "none") {
     // If the search input is not present, add it & adjust section heights
