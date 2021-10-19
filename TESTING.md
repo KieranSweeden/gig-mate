@@ -15,6 +15,8 @@ To return to the original README file, [click here](README.md).
 2. [User Stories Testing](#User-Stories-Testing)
 
 3. [Manual Testing](#Manual-Testing)
+    - [Software](#Software)
+    - [Hardware](#Hardware)
 
 4. [Validation Testing](#Validation-Testing)
 
@@ -692,7 +694,7 @@ Within his section are the validator results for all the relevant files within t
 
 <br>
 
-- Setlists.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts objects that contain headers.
+- Setlists.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts elements that contain headers.
 
 <img src="documentation/validations/setlists-page-validator.jpg">
 
@@ -706,7 +708,7 @@ Within his section are the validator results for all the relevant files within t
 
 <br>
 
-- Repertoire.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts objects that contain headers.
+- Repertoire.html contained one warning surrounding the lack of headers. This is fixed on load when JavaScript inserts elements that contain headers.
 
 <img src="documentation/validations/repertoire-page-validator.jpg">
 
